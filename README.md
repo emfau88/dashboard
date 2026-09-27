@@ -2,16 +2,21 @@
 
 Static, mobile-first dashboard for game projects, portal submissions, portal research and performance snapshots.
 
+**Live dashboard:** [emfau88.github.io/dashboard](https://emfau88.github.io/dashboard/)
+
 ## Why this structure
 
 - `index.html` = presentation and rendering logic.
 - `data.json` = the information you maintain.
+- Public GitHub repository, branch, commit and workflow data is loaded automatically and cached briefly in the browser.
 - No framework, build process or database.
 - Works on GitHub Pages or any static host.
 
 ## Update routine
 
 Most maintenance should happen only in `data.json`.
+
+GitHub activity does not need to be copied into the dashboard. For each portal upload, only pin the uploaded commit once as `deployedCommit` or `submittedCommit`; the dashboard compares that immutable commit with the current configured branch.
 
 ### Record a new submission
 

@@ -15,6 +15,11 @@
       "releaseReadiness": 78,
       "qualityScore": 63,
       "repo": "https://github.com/emfau88/hexwars",
+      "github": {
+        "repo": "emfau88/hexwars",
+        "developmentBranch": "main",
+        "pagesUrl": "https://emfau88.github.io/hexwars/"
+      },
       "nextAction": "Submit to GameMonetize, then GamePix",
       "issues": ["Doomstack solution still incomplete", "Special-tile readability", "Maps 9–10 locked"],
       "platforms": {
@@ -27,11 +32,15 @@
           "rating": 2.8,
           "ratingScale": 5,
           "ratingApprox": true,
+          "sourceBranch": "main",
+          "deployedCommit": "29ff12d6897db9b994b97be980efb0037e54d476",
           "notes": "Received an early homepage push. Later reappeared in New & Updated after an update; user observed another traffic bump."
         },
         "y8": {
           "status": "submitted",
           "submitted": "2026-09-25",
+          "sourceBranch": "codex/improve-mobile-onboarding-copy",
+          "submittedCommit": "90fbf9e1ec0660057b0fef341de060c076a6b978",
           "notes": "Latest build submitted. Review outcome not yet recorded in this dashboard."
         },
         "coolmath": {
@@ -59,6 +68,11 @@
       "releaseReadiness": 74,
       "qualityScore": 62,
       "repo": "https://github.com/emfau88/galalaxy",
+      "github": {
+        "repo": "emfau88/galalaxy",
+        "developmentBranch": "main",
+        "pagesUrl": "https://emfau88.github.io/galalaxy/"
+      },
       "nextAction": "Submit to GameMonetize and GamePix without a large polish cycle",
       "issues": ["HUD weaker than desired", "Visual asset consistency", "Low Kongregate discovery so far"],
       "platforms": {
@@ -68,14 +82,18 @@
           "published": "2026-09-18",
           "latestPlays": 78,
           "playsAsOf": "2026-09-21",
-          "rating": 2.8,
+          "rating": 2.9,
           "ratingScale": 5,
           "ratingApprox": true,
+          "sourceBranch": "main",
+          "deployedCommit": "f3a261cff049f5f94b03019c72f5047be2bf91c2",
           "notes": "Very low discovery compared with HEXFRONT; not treated as evidence that the game is unsuitable for other portals."
         },
         "y8": {
           "status": "submitted",
           "submitted": "2026-09-25",
+          "sourceBranch": "codex/y8-integration",
+          "submittedCommit": "24c96c595bb62905e2e1594824b489378c5d2e3b",
           "notes": "Latest build submitted."
         },
         "gamemonetize": {"status": "not_submitted"},
@@ -98,13 +116,20 @@
       "status": "review",
       "releaseReadiness": 82,
       "qualityScore": 73,
-      "repo": "https://github.com/emfau88/phantom",
+      "repo": "https://github.com/emfau88/RoosterRage",
+      "github": {
+        "repo": "emfau88/RoosterRage",
+        "developmentBranch": "master",
+        "pagesUrl": "https://emfau88.github.io/RoosterRage/"
+      },
       "nextAction": "Record Kongregate review outcome; submit broadly once live build is confirmed",
       "issues": ["Release-ready rather than perfect", "Final balancing and presentation polish optional"],
       "platforms": {
         "kongregate": {
           "status": "submitted",
           "submitted": "2026-09-25",
+          "sourceBranch": "codex/kongregate-upload",
+          "submittedCommit": "fe755230a3601580dc6bfdcb90fba31893b6913f",
           "notes": "Earlier review rejected due to missing English description, instructions, screenshots, age rating and AI disclosure; corrected and resubmitted."
         },
         "y8": {"status": "planned"},
