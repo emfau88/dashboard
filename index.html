@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="de">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
@@ -24,60 +24,65 @@
     .git-platform b{color:var(--soft)}.git-platform span{color:var(--muted);line-height:1.35}.git-platform .current{color:var(--good)}.git-platform .changed{color:var(--warn)}.git-platform .broken,.git-summary.broken{color:var(--bad)}
     .git-loading,.git-empty{color:var(--muted);font-size:10px}
     .game-card,.git-summary,.git-platform span{min-width:0}.git-platform .git-link{overflow-wrap:anywhere}
-    @media(min-width:720px){.cards{grid-template-columns:repeat(2,minmax(0,1fr))}}
+    .matrix-wrap table{min-width:1180px}.matrix-cell{display:grid;gap:5px;min-width:106px}.matrix-meta{display:grid;gap:2px;color:var(--muted);font-size:9px;line-height:1.35}.matrix-meta .missing{color:var(--bad)}.matrix-version{color:var(--accent);font-size:9px;text-decoration:none}
+    .distribution-mobile{display:grid;gap:10px}.dist-card{padding:13px;background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:var(--radius)}.dist-card-head{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-bottom:5px}.dist-card-head strong{font-size:15px}.dist-list{display:grid;gap:7px;margin-top:10px}.dist-row{display:grid;grid-template-columns:minmax(92px,.8fr) minmax(0,1.4fr);gap:9px;padding:9px;background:#0c1219;border:1px solid #202c3a;border-radius:11px}.dist-platform{display:grid;align-content:start;gap:5px}.dist-platform b{font-size:11px}.dist-details{min-width:0;font-size:10px;color:var(--muted);line-height:1.45}.dist-details div+div{margin-top:2px}.dist-more{margin-top:9px}.dist-more summary{cursor:pointer;color:var(--accent);font-size:10px}.dist-empty{color:var(--muted);font-size:10px;margin-top:8px}.timeline-missing{margin-top:12px;padding:12px;border:1px solid rgba(231,111,81,.28);border-radius:12px;background:rgba(231,111,81,.05);font-size:11px;color:var(--soft)}.timeline-missing b{display:block;color:var(--bad);margin-bottom:5px}.timeline-missing ul{margin:0;padding-left:17px}.event-body .event-type{font-size:9px;text-transform:uppercase;letter-spacing:.05em;color:var(--accent);margin-bottom:3px}
+    @media(max-width:719px){.matrix-wrap{display:none}.section-title{align-items:start}.section-title span{text-align:right}}
+    @media(min-width:720px){.cards{grid-template-columns:repeat(2,minmax(0,1fr))}.distribution-mobile{display:none}}
     @media(min-width:1100px){.cards{grid-template-columns:repeat(4,minmax(0,1fr))}}
   </style>
 </head>
 <body>
   <main class="shell">
-    <header class="topbar"><div class="brand"><h1>emfau Game Ops</h1><p>Projects · submissions · portal fit · performance</p></div><div class="stamp" id="updated">Loading…</div></header>
-    <nav class="tabs" aria-label="Views">
-      <button class="tab active" data-view="overview">Overview</button>
+    <header class="topbar"><div class="brand"><h1>emfau Game Ops</h1><p>Projekte · Einreichungen · Portal-Eignung · Performance</p></div><div class="stamp" id="updated">Lädt…</div></header>
+    <nav class="tabs" aria-label="Ansichten">
+      <button class="tab active" data-view="overview">Übersicht</button>
       <button class="tab" data-view="matrix">Distribution</button>
-      <button class="tab" data-view="portals">Portals</button>
-      <button class="tab" data-view="timeline">History</button>
+      <button class="tab" data-view="portals">Portale</button>
+      <button class="tab" data-view="timeline">Verlauf</button>
     </nav>
 
     <section id="overview" class="view active">
       <div class="kpis" id="kpis"></div>
-      <div class="section-title"><h2>Games</h2><span>What is live, blocked and next</span></div>
+      <div class="section-title"><h2>Spiele</h2><span>Was live ist, was blockiert und was als Nächstes ansteht</span></div>
       <div class="cards" id="gameCards"></div>
     </section>
 
     <section id="matrix" class="view">
-      <div class="toolbar"><input id="gameSearch" class="search" placeholder="Search game or portal…"><select id="statusFilter" class="filter"><option value="">All statuses</option><option>live</option><option>submitted</option><option>planned</option><option>not_submitted</option><option>rejected</option></select></div>
+      <div class="toolbar"><input id="gameSearch" class="search" aria-label="Spiel oder Portal suchen" placeholder="Spiel oder Portal suchen…"><select id="statusFilter" class="filter" aria-label="Nach Status filtern"><option value="">Alle Status</option><option value="live">Live</option><option value="submitted">Eingereicht</option><option value="review">In Prüfung</option><option value="planned">Geplant</option><option value="not_submitted">Nicht eingereicht</option><option value="rejected">Abgelehnt</option></select></div>
       <div class="matrix-wrap"><table id="matrixTable"></table></div>
-      <p class="footnote">Status is operational state, not a quality verdict. Portal fit is stored separately in the Portals view.</p>
+      <div class="distribution-mobile" id="distributionMobile"></div>
+      <p class="footnote">Der Status beschreibt den operativen Stand, nicht die Qualität. Die Portal-Eignung wird separat unter „Portale“ geführt. Build-Versionen zeigen den aktuell zugeordneten Portal-Build und gehören nicht automatisch zum Datum der Ersteinreichung.</p>
     </section>
 
     <section id="portals" class="view">
-      <div class="section-title"><h2>Portal research</h2><span>Facts, estimates and confidence kept separate</span></div>
+      <div class="section-title"><h2>Portal-Recherche</h2><span>Fakten, Schätzungen und Sicherheit getrennt</span></div>
       <div class="portal-grid" id="portalGrid"></div>
     </section>
 
     <section id="timeline" class="view">
-      <div class="section-title"><h2>Submission & release history</h2><span>Newest first</span></div>
+      <div class="section-title"><h2>Einreichungs- und Veröffentlichungsverlauf</h2><span>Neueste Ereignisse zuerst</span></div>
       <div class="timeline" id="timelineList"></div>
     </section>
-    <p class="footnote">Research score ranges are comparative estimates from the September 2026 analysis, not official platform thresholds. Keep the date and confidence whenever you change a portal fact.</p>
+    <p class="footnote">Die Recherche-Spannen sind Vergleichsschätzungen aus der Analyse vom September 2026 und keine offiziellen Plattformschwellen. Datum und Sicherheit bei Änderungen an Portal-Fakten immer mitführen.</p>
   </main>
 <script>
-const labels={live:'Live',submitted:'Submitted',planned:'Planned',not_submitted:'Not submitted',rejected:'Rejected',review:'In review',development:'Development',very_good:'Very good fit',good:'Good fit',test:'Test',weak:'Weak fit',unknown:'Unknown'};
+const labels={live:'Live',submitted:'Eingereicht',planned:'Geplant',not_submitted:'Nicht eingereicht',rejected:'Abgelehnt',review:'In Prüfung',development:'Entwicklung',very_good:'Sehr gut geeignet',good:'Gut geeignet',test:'Testen',weak:'Schwach geeignet',unknown:'Unbekannt'};
 const portalShort={kongregate:'Kong',y8:'Y8',gamemonetize:'GM',gamepix:'GP',gamedistribution:'GD',crazygames:'CG',coolmath:'CM',newgrounds:'NG',poki:'Poki'};
 const GH_CACHE_KEY='emfau-game-ops-github-v1';
 const GH_CACHE_MS=15*60*1000;
-const fmtDate=d=>d?new Intl.DateTimeFormat('en-GB',{day:'2-digit',month:'short',year:'numeric'}).format(new Date(d+'T12:00:00')):'—';
-const fmtGitDate=d=>d?new Intl.DateTimeFormat('en-GB',{day:'2-digit',month:'short',hour:'2-digit',minute:'2-digit'}).format(new Date(d)):'—';
+const fmtDate=d=>d?new Intl.DateTimeFormat('de-DE',{day:'2-digit',month:'short',year:'numeric'}).format(new Date(d+'T12:00:00')):'—';
+const fmtCompactDate=d=>d?new Intl.DateTimeFormat('de-DE',{day:'2-digit',month:'2-digit',year:'2-digit'}).format(new Date(d+'T12:00:00')):'—';
+const fmtGitDate=d=>d?new Intl.DateTimeFormat('de-DE',{day:'2-digit',month:'short',hour:'2-digit',minute:'2-digit'}).format(new Date(d)):'—';
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const pill=s=>`<span class="pill ${esc(s)}">${esc(labels[s]||s)}</span>`;
-const shortSha=sha=>sha?sha.slice(0,7):'unknown';
+const shortSha=sha=>sha?sha.slice(0,7):'unbekannt';
 
 async function main(){
   const response=await fetch('data.json');
   if(!response.ok)throw new Error(`HTTP ${response.status}`);
   const d=await response.json();
   window.DATA=d;
-  document.getElementById('updated').textContent=`Updated ${fmtDate(d.meta.updated)}`;
+  document.getElementById('updated').textContent=`Stand ${fmtDate(d.meta.updated)}`;
   renderKPIs(d);renderGames(d);renderMatrix(d);renderPortals(d);renderTimeline(d);
   loadGitHubData(d);
 }
@@ -87,36 +92,82 @@ function renderKPIs(d){
   const submitted=d.games.reduce((n,g)=>n+Object.values(g.platforms).filter(p=>p.status==='submitted').length,0);
   const placements=d.games.reduce((n,g)=>n+Object.values(g.platforms).filter(p=>p.status==='live').length,0);
   const next=d.games.filter(g=>g.nextAction).length;
-  document.getElementById('kpis').innerHTML=[[live,'Live games'],[placements,'Live placements'],[submitted,'Pending submissions'],[next,'Defined next actions']].map(x=>`<div class="kpi"><div class="v">${x[0]}</div><div class="l">${x[1]}</div></div>`).join('');
+  document.getElementById('kpis').innerHTML=[[live,'Live-Spiele'],[placements,'Live-Platzierungen'],[submitted,'Offene Einreichungen'],[next,'Definierte nächste Schritte']].map(x=>`<div class="kpi"><div class="v">${x[0]}</div><div class="l">${x[1]}</div></div>`).join('');
 }
 
 function renderGames(d){
   document.getElementById('gameCards').innerHTML=d.games.map(g=>{
-    const active=Object.entries(g.platforms).filter(([,p])=>['live','submitted','rejected'].includes(p.status)).map(([id,p])=>`<div class="platform-chip"><span>${esc(portalShort[id]||id)}</span>${esc(labels[p.status])}</div>`).join('')||'<div class="platform-chip"><span>Distribution</span>No activity yet</div>';
-    const github=g.github?`<div class="github-sync" id="github-${esc(g.id)}" aria-live="polite"><div class="git-loading">Loading live GitHub status…</div></div>`:`<div class="github-sync"><div class="git-empty">No GitHub repository linked yet.</div></div>`;
-    return `<article class="game-card"><div class="game-head"><div><div class="game-name">${esc(g.name)}</div><div class="game-sub">${esc(g.subtitle)}</div></div>${pill(g.status)}</div><div class="score-row"><div class="score"><strong>${g.qualityScore}</strong><small>Research quality / 100</small></div><div class="score"><strong>${g.releaseReadiness}%</strong><small>Release readiness</small><div class="progress"><i style="width:${g.releaseReadiness}%"></i></div></div></div><div class="next"><b>Next action</b><div>${esc(g.nextAction)}</div></div><div class="platform-strip">${active}</div>${github}<ul class="issues">${g.issues.slice(0,3).map(i=>`<li>${esc(i)}</li>`).join('')}</ul></article>`;
+    const active=Object.entries(g.platforms).filter(([,p])=>['live','submitted','rejected'].includes(p.status)).map(([id,p])=>`<div class="platform-chip"><span>${esc(portalShort[id]||id)}</span>${esc(labels[p.status])}</div>`).join('')||'<div class="platform-chip"><span>Distribution</span>Noch keine Aktivität</div>';
+    const github=g.github?`<div class="github-sync" id="github-${esc(g.id)}" aria-live="polite"><div class="git-loading">Live-GitHub-Status wird geladen…</div></div>`:`<div class="github-sync"><div class="git-empty">Noch kein GitHub-Repository verknüpft.</div></div>`;
+    return `<article class="game-card"><div class="game-head"><div><div class="game-name">${esc(g.name)}</div><div class="game-sub">${esc(g.subtitle)}</div></div>${pill(g.status)}</div><div class="score-row"><div class="score"><strong>${g.qualityScore}</strong><small>Qualitätseinschätzung / 100</small></div><div class="score"><strong>${g.releaseReadiness}%</strong><small>Veröffentlichungsreife</small><div class="progress"><i style="width:${g.releaseReadiness}%"></i></div></div></div><div class="next"><b>Nächster Schritt</b><div>${esc(g.nextAction)}</div></div><div class="platform-strip">${active}</div>${github}<ul class="issues">${g.issues.slice(0,3).map(i=>`<li>${esc(i)}</li>`).join('')}</ul></article>`;
   }).join('');
+}
+
+function portalDateLines(p){
+  const lines=[];
+  if(p.submitted)lines.push({label:'Eingereicht',date:p.submitted});
+  if(p.accepted)lines.push({label:'Akzeptiert',date:p.accepted});
+  else if(p.status==='live')lines.push({label:'Annahme',missing:true,detail:'nicht separat erfasst'});
+  if(p.published&&p.published!==p.accepted)lines.push({label:'Live seit',date:p.published});
+  if(p.status==='rejected')lines.push(p.rejected?{label:'Abgelehnt',date:p.rejected}:{label:'Ablehnung',missing:true});
+  return lines;
+}
+
+function portalDetailsHtml(g,p){
+  const dates=portalDateLines(p).map(x=>x.missing?`<div class="missing">${esc(x.label)}: ${esc(x.detail||'Datum fehlt')}</div>`:`<div>${esc(x.label)} ${fmtCompactDate(x.date)}</div>`).join('');
+  const commit=p.deployedCommit||p.submittedCommit||p.rejectedCommit;
+  const version=p.version||(commit?shortSha(commit):null);
+  const url=commit&&g.github?`https://github.com/${g.github.repo}/commit/${commit}`:null;
+  const buildLabel=p.status==='live'?'Aktueller Portal-Build':p.status==='rejected'?'Abgelehnter Build':'Eingereichter Build';
+  const build=version?(url?`<a class="matrix-version" href="${esc(url)}" target="_blank" rel="noreferrer">${buildLabel} ${esc(version)} ↗</a>`:`<div class="matrix-version">${buildLabel} ${esc(version)}</div>`):'';
+  return `${dates?`<div class="matrix-meta">${dates}</div>`:''}${build}`;
+}
+
+function distributionRowHtml(d,g,portalId){
+  const portal=d.portals.find(x=>x.id===portalId),p=g.platforms[portalId]||{status:'not_submitted'};
+  return `<div class="dist-row"><div class="dist-platform"><b>${esc(portal.name)}</b>${pill(p.status)}</div><div class="dist-details">${portalDetailsHtml(g,p)||'<div>Noch kein datiertes Ereignis</div>'}</div></div>`;
 }
 
 function renderMatrix(d){
   const portalIds=d.portals.map(p=>p.id);
-  const head=`<thead><tr><th>Game</th>${portalIds.map(id=>`<th>${esc(d.portals.find(p=>p.id===id).name)}</th>`).join('')}</tr></thead>`;
-  const rows=d.games.map(g=>`<tr data-game="${esc(g.name.toLowerCase())}"><td><strong>${esc(g.name)}</strong></td>${portalIds.map(id=>{const st=g.platforms[id]?.status||'not_submitted';return `<td data-status="${esc(st)}" data-portal="${esc(d.portals.find(p=>p.id===id).name.toLowerCase())}">${pill(st)}</td>`}).join('')}</tr>`).join('');
+  const head=`<thead><tr><th>Spiel</th>${portalIds.map(id=>`<th>${esc(d.portals.find(p=>p.id===id).name)}</th>`).join('')}</tr></thead>`;
+  const rows=d.games.map(g=>`<tr data-game="${esc(g.name.toLowerCase())}"><td><strong>${esc(g.name)}</strong></td>${portalIds.map(id=>{const p=g.platforms[id]||{status:'not_submitted'},portal=d.portals.find(x=>x.id===id);return `<td data-status="${esc(p.status)}" data-portal="${esc(portal.name.toLowerCase())}"><div class="matrix-cell">${pill(p.status)}${portalDetailsHtml(g,p)}</div></td>`}).join('')}</tr>`).join('');
   document.getElementById('matrixTable').innerHTML=head+`<tbody>${rows}</tbody>`;
+  document.getElementById('distributionMobile').innerHTML=d.games.map(g=>{
+    const active=portalIds.filter(id=>!['planned','not_submitted'].includes(g.platforms[id]?.status||'not_submitted'));
+    const remaining=portalIds.filter(id=>!active.includes(id));
+    const searchText=[g.name,...d.portals.map(p=>p.name)].join(' ').toLowerCase();
+    const statuses=portalIds.map(id=>g.platforms[id]?.status||'not_submitted').join(' ');
+    return `<article class="dist-card" data-search="${esc(searchText)}" data-statuses="${esc(statuses)}"><div class="dist-card-head"><strong>${esc(g.name)}</strong><span class="game-sub">${active.length} aktive Portal${active.length===1?'':'e'}</span></div>${active.length?`<div class="dist-list">${active.map(id=>distributionRowHtml(d,g,id)).join('')}</div>`:'<div class="dist-empty">Noch keine Einreichung oder Entscheidung.</div>'}${remaining.length?`<details class="dist-more"><summary>Weitere Portale (${remaining.length})</summary><div class="dist-list">${remaining.map(id=>distributionRowHtml(d,g,id)).join('')}</div></details>`:''}</article>`;
+  }).join('');
   const search=document.getElementById('gameSearch'),filter=document.getElementById('statusFilter');
-  const apply=()=>{const q=search.value.toLowerCase(),s=filter.value;document.querySelectorAll('#matrixTable tbody tr').forEach(r=>{const hitText=!q||r.dataset.game.includes(q)||[...r.cells].some(c=>c.dataset.portal?.includes(q)),hitStatus=!s||[...r.cells].some(c=>c.dataset.status===s);r.style.display=hitText&&hitStatus?'':'none'})};
+  const apply=()=>{
+    const q=search.value.toLowerCase(),s=filter.value;
+    document.querySelectorAll('#matrixTable tbody tr').forEach(r=>{const hitText=!q||r.dataset.game.includes(q)||[...r.cells].some(c=>c.dataset.portal?.includes(q)),hitStatus=!s||[...r.cells].some(c=>c.dataset.status===s);r.style.display=hitText&&hitStatus?'':'none'});
+    document.querySelectorAll('#distributionMobile .dist-card').forEach(card=>{const hitText=!q||card.dataset.search.includes(q),hitStatus=!s||card.dataset.statuses.split(' ').includes(s);card.style.display=hitText&&hitStatus?'':'none'});
+  };
   search.oninput=apply;filter.onchange=apply;
 }
 
 function renderPortals(d){
-  document.getElementById('portalGrid').innerHTML=d.portals.map(p=>`<article class="portal-card"><div class="portal-top"><div><div class="portal-name">${esc(p.name)}</div><div class="portal-model">${esc(p.model)}</div></div><div class="score"><strong>${p.entryDifficulty}/5</strong><small>Entry difficulty</small></div></div><div class="portal-meta"><div class="fact"><b>Observed quality</b><span>${esc(p.qualityRange)}</span><div class="confidence">Confidence: ${esc(p.qualityRangeConfidence)}</div></div><div class="fact"><b>Reach / model</b><span>${esc(p.reach)}</span></div><div class="fact" style="grid-column:1/-1"><b>Research note</b><span>${esc(p.researchNote)}</span></div><div class="fact" style="grid-column:1/-1"><b>Current game fit</b><span>${Object.entries(p.fits).map(([gid,f])=>`${esc(d.games.find(g=>g.id===gid)?.name||gid)}: ${esc(labels[f])}`).join(' · ')}</span></div></div></article>`).join('');
+  document.getElementById('portalGrid').innerHTML=d.portals.map(p=>`<article class="portal-card"><div class="portal-top"><div><div class="portal-name">${esc(p.name)}</div><div class="portal-model">${esc(p.model)}</div></div><div class="score"><strong>${p.entryDifficulty}/5</strong><small>Einstiegshürde</small></div></div><div class="portal-meta"><div class="fact"><b>Beobachtete Qualität</b><span>${esc(p.qualityRange)}</span><div class="confidence">Sicherheit: ${esc(p.qualityRangeConfidence)}</div></div><div class="fact"><b>Reichweite / Modell</b><span>${esc(p.reach)}</span></div><div class="fact" style="grid-column:1/-1"><b>Recherche-Notiz</b><span>${esc(p.researchNote)}</span></div><div class="fact" style="grid-column:1/-1"><b>Aktuelle Spieleignung</b><span>${Object.entries(p.fits).map(([gid,f])=>`${esc(d.games.find(g=>g.id===gid)?.name||gid)}: ${esc(labels[f])}`).join(' · ')}</span></div></div></article>`).join('');
 }
 
 function renderTimeline(d){
-  const events=[];
-  d.games.forEach(g=>Object.entries(g.platforms).forEach(([pid,p])=>{if(p.submitted)events.push({date:p.submitted,title:`${g.name} → ${d.portals.find(x=>x.id===pid)?.name||pid}`,text:`Submitted · ${p.notes||''}`});if(p.published)events.push({date:p.published,title:`${g.name} live on ${d.portals.find(x=>x.id===pid)?.name||pid}`,text:`Published${p.latestPlays!=null?` · latest recorded ${p.latestPlays.toLocaleString()} plays`:''}`})}));
-  events.sort((a,b)=>b.date.localeCompare(a.date));
-  document.getElementById('timelineList').innerHTML=events.length?events.map(e=>`<div class="event"><div class="event-date">${fmtDate(e.date)}</div><div class="event-body"><strong>${esc(e.title)}</strong><div>${esc(e.text)}</div></div></div>`).join(''):'<div class="empty">No history yet.</div>';
+  const events=[],missing=[];
+  d.games.forEach(g=>Object.entries(g.platforms).forEach(([pid,p])=>{
+    const portal=d.portals.find(x=>x.id===pid)?.name||pid;
+    if(p.submitted)events.push({date:p.submitted,type:'Einreichung',title:`${g.name} → ${portal}`,text:p.submittedNote||'Beim Portal eingereicht.'});
+    if(p.accepted)events.push({date:p.accepted,type:'Annahme',title:`${g.name} von ${portal} angenommen`,text:p.acceptedNote||'Die Annahme wurde bestätigt.'});
+    if(p.published&&p.published!==p.accepted)events.push({date:p.published,type:'Veröffentlichung',title:`${g.name} auf ${portal} veröffentlicht`,text:p.publishedNote||'Das Spiel ist auf dem Portal live gegangen.'});
+    if(p.rejected)events.push({date:p.rejected,type:'Ablehnung',title:`${g.name} von ${portal} abgelehnt`,text:p.rejectedNote||'Die Ablehnung wurde erfasst.'});
+    else if(p.status==='rejected')missing.push(`${g.name}: Ablehnungsdatum bei ${portal} fehlt.`);
+    if(p.status==='live'&&!p.accepted)missing.push(`${g.name}: Annahmedatum bei ${portal} wurde nicht separat erfasst; bekannt ist nur das Live-Datum.`);
+  }));
+  events.sort((a,b)=>b.date.localeCompare(a.date)||a.title.localeCompare(b.title,'de'));
+  const dated=events.length?events.map(e=>`<div class="event"><div class="event-date">${fmtDate(e.date)}</div><div class="event-body"><div class="event-type">${esc(e.type)}</div><strong>${esc(e.title)}</strong><div>${esc(e.text)}</div></div></div>`).join(''):'<div class="empty">Noch keine datierten Ereignisse.</div>';
+  const missingHtml=missing.length?`<div class="timeline-missing"><b>Fehlende Verlaufsdaten</b><ul>${missing.map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div>`:'';
+  document.getElementById('timelineList').innerHTML=dated+missingHtml;
 }
 
 async function githubJson(path){
@@ -176,30 +227,30 @@ function renderGitHubStatuses(d,result){
   d.games.filter(g=>g.github).forEach(g=>{
     const target=document.getElementById(`github-${g.id}`),status=result[g.id];
     if(!target)return;
-    if(!status||status.error){target.innerHTML=`<div class="git-head"><span class="git-title">GitHub sync</span></div><div class="git-empty">Live status unavailable${status?.error?`: ${esc(status.error)}`:''}.</div>`;return}
+    if(!status||status.error){target.innerHTML=`<div class="git-head"><span class="git-title">GitHub-Sync</span></div><div class="git-empty">Live-Status nicht verfügbar${status?.error?`: ${esc(status.error)}`:''}.</div>`;return}
     const dev=status.development,repoUrl=`https://github.com/${status.repo}`;
-    const links=`<div class="git-links"><a class="git-link" href="${esc(repoUrl)}" target="_blank" rel="noreferrer">Repo ↗</a>${g.github.pagesUrl?`<a class="git-link" href="${esc(g.github.pagesUrl)}" target="_blank" rel="noreferrer">Preview ↗</a>`:''}</div>`;
-    const summary=dev?.error?`<div class="git-summary broken">${esc(status.developmentBranch)} unavailable</div>`:`<div class="git-summary"><a class="git-link" href="${esc(dev.url)}" target="_blank" rel="noreferrer">${esc(status.developmentBranch)} · ${shortSha(dev.sha)}</a> · ${fmtGitDate(dev.date)}<div class="git-message" title="${esc(dev.message)}">${esc(dev.message)}</div></div>`;
+    const links=`<div class="git-links"><a class="git-link" href="${esc(repoUrl)}" target="_blank" rel="noreferrer">Repo ↗</a>${g.github.pagesUrl?`<a class="git-link" href="${esc(g.github.pagesUrl)}" target="_blank" rel="noreferrer">Vorschau ↗</a>`:''}</div>`;
+    const summary=dev?.error?`<div class="git-summary broken">${esc(status.developmentBranch)} nicht verfügbar</div>`:`<div class="git-summary"><a class="git-link" href="${esc(dev.url)}" target="_blank" rel="noreferrer">${esc(status.developmentBranch)} · ${shortSha(dev.sha)}</a> · ${fmtGitDate(dev.date)}<div class="git-message" title="${esc(dev.message)}">${esc(dev.message)}</div></div>`;
     let ci='';
-    if(status.ci&&!status.ci.error){const running=status.ci.status!=='completed',cls=running?'warn':status.ci.conclusion==='success'?'ok':'bad',label=running?status.ci.status:status.ci.conclusion;ci=`<a class="git-ci" href="${esc(status.ci.url||repoUrl+'/actions')}" target="_blank" rel="noreferrer"><i class="git-dot ${cls}"></i>Latest ${esc(status.ci.name||'workflow')}: ${esc(label||'unknown')}</a>`}
+    if(status.ci&&!status.ci.error){const running=status.ci.status!=='completed',cls=running?'warn':status.ci.conclusion==='success'?'ok':'bad',rawLabel=running?status.ci.status:status.ci.conclusion,label={success:'erfolgreich',failure:'fehlgeschlagen',queued:'wartet',in_progress:'läuft'}[rawLabel]||rawLabel;ci=`<a class="git-ci" href="${esc(status.ci.url||repoUrl+'/actions')}" target="_blank" rel="noreferrer"><i class="git-dot ${cls}"></i>Letzter Workflow „${esc(status.ci.name||'Workflow')}“: ${esc(label||'unbekannt')}</a>`}
     const platformRows=Object.entries(status.portals).map(([portalId,p])=>{
       const portalName=d.portals.find(x=>x.id===portalId)?.name||portalId;
       let stateText,stateClass='';
-      if(p.error){stateText=`Branch unavailable: ${p.branch}`;stateClass='broken'}
-      else if(p.tracked&&p.tracked.toLowerCase()===p.headSha?.toLowerCase()){stateText=`Uploaded ${shortSha(p.tracked)} · branch current`;stateClass='current'}
-      else if(Number.isFinite(p.aheadBy)&&p.aheadBy>0){stateText=`${p.aheadBy} newer commit${p.aheadBy===1?'':'s'} on ${p.branch}`;stateClass='changed'}
-      else if(p.compareStatus==='diverged'||p.behindBy>0){stateText=`${p.branch} diverged from uploaded build`;stateClass='changed'}
-      else if(p.tracked){stateText=`Uploaded ${shortSha(p.tracked)} · branch changed`;stateClass='changed'}
-      else{stateText=`Tracking latest ${p.branch}`}
+      if(p.error){stateText=`Branch nicht verfügbar: ${p.branch}`;stateClass='broken'}
+      else if(p.tracked&&p.tracked.toLowerCase()===p.headSha?.toLowerCase()){stateText=`Portal-Build ${shortSha(p.tracked)} · Branch aktuell`;stateClass='current'}
+      else if(Number.isFinite(p.aheadBy)&&p.aheadBy>0){stateText=`${p.aheadBy} neue${p.aheadBy===1?'r Commit':' Commits'} auf ${p.branch}`;stateClass='changed'}
+      else if(p.compareStatus==='diverged'||p.behindBy>0){stateText=`${p.branch} weicht vom Portal-Build ab`;stateClass='changed'}
+      else if(p.tracked){stateText=`Portal-Build ${shortSha(p.tracked)} · Branch geändert`;stateClass='changed'}
+      else{stateText=`Verfolge den neuesten Stand von ${p.branch}`}
       const href=p.compareUrl||p.headUrl||repoUrl;
       return `<div class="git-platform"><b>${esc(portalName)}</b><span class="${stateClass}"><a class="git-link" href="${esc(href)}" target="_blank" rel="noreferrer">${esc(stateText)}</a></span></div>`;
     }).join('');
-    target.innerHTML=`<div class="git-head"><span class="git-title">GitHub sync</span>${links}</div>${summary}${ci}${platformRows?`<div class="git-platforms">${platformRows}</div>`:''}`;
+    target.innerHTML=`<div class="git-head"><span class="git-title">GitHub-Sync</span>${links}</div>${summary}${ci}${platformRows?`<div class="git-platforms">${platformRows}</div>`:''}`;
   });
 }
 
 document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));document.querySelectorAll('.view').forEach(x=>x.classList.remove('active'));b.classList.add('active');document.getElementById(b.dataset.view).classList.add('active')});
-main().catch(err=>{document.body.innerHTML=`<div style="padding:30px;font-family:system-ui;color:white;background:#0b0f14;min-height:100vh"><h2>Could not load data.json</h2><p>${esc(err.message)}</p><p>Open this folder through a local web server or GitHub Pages. Example: <code>python -m http.server 8000</code>.</p></div>`});
+main().catch(err=>{document.body.innerHTML=`<div style="padding:30px;font-family:system-ui;color:white;background:#0b0f14;min-height:100vh"><h2>data.json konnte nicht geladen werden</h2><p>${esc(err.message)}</p><p>Diesen Ordner über einen lokalen Webserver oder GitHub Pages öffnen, zum Beispiel mit <code>python -m http.server 8000</code>.</p></div>`});
 </script>
 </body>
 </html>

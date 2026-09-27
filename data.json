@@ -1,16 +1,16 @@
 {
   "meta": {
     "title": "emfau Game Ops",
-    "version": "0.1.0",
+    "version": "0.2.0",
     "updated": "2026-09-27",
     "currency": "EUR",
-    "notes": "Research ranges are internal comparative estimates from the September 2026 portal analysis, not official platform acceptance thresholds."
+    "notes": "Die Recherche-Spannen sind interne Vergleichswerte aus der Portal-Analyse vom September 2026 und keine offiziellen Annahmeschwellen der Plattformen."
   },
   "games": [
     {
       "id": "hexfront",
       "name": "HEXFRONT",
-      "subtitle": "Hex-grid numerical RTS",
+      "subtitle": "Numerisches Echtzeit-Strategiespiel auf Hexfeldern",
       "status": "live",
       "releaseReadiness": 78,
       "qualityScore": 63,
@@ -20,8 +20,8 @@
         "developmentBranch": "main",
         "pagesUrl": "https://emfau88.github.io/hexwars/"
       },
-      "nextAction": "Submit to GameMonetize, then GamePix",
-      "issues": ["Doomstack solution still incomplete", "Special-tile readability", "Maps 9–10 locked"],
+      "nextAction": "Bei GameMonetize einreichen, danach bei GamePix",
+      "issues": ["Doomstack-Lösung noch unvollständig", "Lesbarkeit der Spezialfelder", "Karten 9–10 noch gesperrt"],
       "platforms": {
         "kongregate": {
           "status": "live",
@@ -34,19 +34,19 @@
           "ratingApprox": true,
           "sourceBranch": "main",
           "deployedCommit": "29ff12d6897db9b994b97be980efb0037e54d476",
-          "notes": "Received an early homepage push. Later reappeared in New & Updated after an update; user observed another traffic bump."
+          "notes": "Frühe Platzierung auf der Startseite. Nach einem Update erneut unter New & Updated erschienen; dabei wurde ein weiterer Besucheranstieg beobachtet."
         },
         "y8": {
           "status": "submitted",
           "submitted": "2026-09-25",
           "sourceBranch": "codex/improve-mobile-onboarding-copy",
           "submittedCommit": "90fbf9e1ec0660057b0fef341de060c076a6b978",
-          "notes": "Latest build submitted. Review outcome not yet recorded in this dashboard."
+          "notes": "Aktuellsten Build eingereicht. Das Ergebnis der Prüfung ist noch nicht im Dashboard erfasst."
         },
         "coolmath": {
           "status": "rejected",
           "submitted": "2026-08-16",
-          "notes": "Licensing submission declined. Follow-up received: no detailed feedback due to capacity."
+          "notes": "Lizenzanfrage abgelehnt. Laut Rückmeldung war aus Kapazitätsgründen kein detailliertes Feedback möglich."
         },
         "gamemonetize": {"status": "not_submitted"},
         "gamepix": {"status": "not_submitted"},
@@ -63,7 +63,7 @@
     {
       "id": "galalaxy",
       "name": "GALALAXY",
-      "subtitle": "Top-down space action",
+      "subtitle": "Top-down-Weltraumaction",
       "status": "live",
       "releaseReadiness": 74,
       "qualityScore": 62,
@@ -73,8 +73,8 @@
         "developmentBranch": "main",
         "pagesUrl": "https://emfau88.github.io/galalaxy/"
       },
-      "nextAction": "Submit to GameMonetize and GamePix without a large polish cycle",
-      "issues": ["HUD weaker than desired", "Visual asset consistency", "Low Kongregate discovery so far"],
+      "nextAction": "Ohne große zusätzliche Polishing-Runde bei GameMonetize und GamePix einreichen",
+      "issues": ["HUD schwächer als gewünscht", "Uneinheitliche visuelle Assets", "Bisher geringe Sichtbarkeit auf Kongregate"],
       "platforms": {
         "kongregate": {
           "status": "live",
@@ -87,14 +87,14 @@
           "ratingApprox": true,
           "sourceBranch": "main",
           "deployedCommit": "f3a261cff049f5f94b03019c72f5047be2bf91c2",
-          "notes": "Very low discovery compared with HEXFRONT; not treated as evidence that the game is unsuitable for other portals."
+          "notes": "Im Vergleich zu HEXFRONT sehr geringe Sichtbarkeit; das gilt nicht als Beleg gegen eine Eignung für andere Portale."
         },
         "y8": {
           "status": "submitted",
           "submitted": "2026-09-25",
           "sourceBranch": "codex/y8-integration",
           "submittedCommit": "24c96c595bb62905e2e1594824b489378c5d2e3b",
-          "notes": "Latest build submitted."
+          "notes": "Aktuellsten Build eingereicht."
         },
         "gamemonetize": {"status": "not_submitted"},
         "gamepix": {"status": "not_submitted"},
@@ -112,7 +112,7 @@
     {
       "id": "rooster-rage",
       "name": "ROOSTER RAGE",
-      "subtitle": "Top-down survivor",
+      "subtitle": "Top-down-Survivor",
       "status": "review",
       "releaseReadiness": 82,
       "qualityScore": 73,
@@ -122,15 +122,15 @@
         "developmentBranch": "master",
         "pagesUrl": "https://emfau88.github.io/RoosterRage/"
       },
-      "nextAction": "Record Kongregate review outcome; submit broadly once live build is confirmed",
-      "issues": ["Release-ready rather than perfect", "Final balancing and presentation polish optional"],
+      "nextAction": "Ergebnis der Kongregate-Prüfung erfassen; nach bestätigtem Live-Build breit einreichen",
+      "issues": ["Veröffentlichungsreif statt perfekt", "Letztes Balancing und Präsentations-Polishing optional"],
       "platforms": {
         "kongregate": {
           "status": "submitted",
           "submitted": "2026-09-25",
           "sourceBranch": "codex/kongregate-upload",
           "submittedCommit": "fe755230a3601580dc6bfdcb90fba31893b6913f",
-          "notes": "Earlier review rejected due to missing English description, instructions, screenshots, age rating and AI disclosure; corrected and resubmitted."
+          "notes": "Frühere Prüfung wegen fehlender englischer Beschreibung, Anleitung, Screenshots, Altersfreigabe und KI-Angabe abgelehnt; korrigiert und erneut eingereicht."
         },
         "y8": {"status": "planned"},
         "gamemonetize": {"status": "planned"},
@@ -146,13 +146,13 @@
     {
       "id": "core-arena",
       "name": "CORE ARENA",
-      "subtitle": "Arena / CTF shooter",
+      "subtitle": "Arena-/CTF-Shooter",
       "status": "development",
       "releaseReadiness": 67,
       "qualityScore": 67,
       "repo": "",
-      "nextAction": "Reduce bot difficulty, finish sound pass, then prepare first submission build",
-      "issues": ["Release problem more than core-concept problem", "Bot difficulty", "Final sound and polish pass"],
+      "nextAction": "Bot-Schwierigkeit senken, Sound-Pass abschließen und ersten Einreichungs-Build vorbereiten",
+      "issues": ["Eher ein Veröffentlichungs- als ein Kernkonzeptproblem", "Bot-Schwierigkeit", "Abschließender Sound- und Polishing-Pass"],
       "platforms": {
         "kongregate": {"status": "planned"},
         "y8": {"status": "planned"},
@@ -172,99 +172,99 @@
       "id": "kongregate",
       "name": "Kongregate",
       "entryDifficulty": 2.5,
-      "model": "Direct portal",
-      "qualityRange": "~61–65 typical in research sample",
-      "qualityRangeConfidence": "medium",
-      "reach": "Established direct portal; homepage/New & Updated exposure can create concentrated bursts",
-      "researchNote": "Both HEXFRONT and GALALAXY were actually accepted, which is stronger evidence than an inferred threshold.",
+      "model": "Direkte Spieleplattform",
+      "qualityRange": "~61–65 typisch in der Recherche-Stichprobe",
+      "qualityRangeConfidence": "mittel",
+      "reach": "Etablierte direkte Plattform; Platzierungen auf der Startseite oder unter New & Updated können deutliche Besucherspitzen erzeugen",
+      "researchNote": "HEXFRONT und GALALAXY wurden tatsächlich angenommen. Das ist aussagekräftiger als eine abgeleitete Schwelle.",
       "fits": {"hexfront": "very_good", "galalaxy": "very_good", "rooster-rage": "very_good", "core-arena": "good"}
     },
     {
       "id": "y8",
       "name": "Y8",
       "entryDifficulty": 2,
-      "model": "Large direct portal",
-      "qualityRange": "Broad published range; no reliable acceptance threshold identified",
-      "qualityRangeConfidence": "low",
-      "reach": "Large direct audience; operator currently advertises 30M+ monthly players",
-      "researchNote": "Uncertainty is about the hidden review threshold, not an identified quality problem with HEXFRONT or GALALAXY.",
+      "model": "Große direkte Spieleplattform",
+      "qualityRange": "Große Bandbreite veröffentlichter Spiele; keine verlässliche Annahmeschwelle ermittelt",
+      "qualityRangeConfidence": "niedrig",
+      "reach": "Großes direktes Publikum; der Betreiber wirbt derzeit mit mehr als 30 Mio. monatlichen Spielern",
+      "researchNote": "Die Unsicherheit betrifft die nicht öffentliche Prüfschwelle, nicht ein erkanntes Qualitätsproblem bei HEXFRONT oder GALALAXY.",
       "fits": {"hexfront": "good", "galalaxy": "good", "rooster-rage": "good", "core-arena": "good"}
     },
     {
       "id": "gamemonetize",
       "name": "GameMonetize",
       "entryDifficulty": 1.5,
-      "model": "Distribution network + portal",
-      "qualityRange": "~54–59 typical; weaker published titles in ~40–50 band in research sample",
-      "qualityRangeConfidence": "medium",
-      "reach": "Distribution network; operator advertises 100M+ players across the network and thousands of publishers",
-      "researchNote": "HEXFRONT 63 and GALALAXY 62 sit above the observed typical sample. Do not interpret the range as an official acceptance cutoff.",
+      "model": "Distributionsnetzwerk und Portal",
+      "qualityRange": "~54–59 typisch; schwächere veröffentlichte Titel lagen in der Stichprobe bei ~40–50",
+      "qualityRangeConfidence": "mittel",
+      "reach": "Distributionsnetzwerk; der Betreiber wirbt mit mehr als 100 Mio. Spielern im Netzwerk und Tausenden Publishern",
+      "researchNote": "HEXFRONT mit 63 und GALALAXY mit 62 liegen über der beobachteten typischen Stichprobe. Die Spanne ist keine offizielle Annahmeschwelle.",
       "fits": {"hexfront": "very_good", "galalaxy": "very_good", "rooster-rage": "very_good", "core-arena": "very_good"}
     },
     {
       "id": "gamepix",
       "name": "GamePix",
       "entryDifficulty": 2,
-      "model": "Distribution network + portal",
-      "qualityRange": "~59–64 typical in research sample",
-      "qualityRangeConfidence": "medium",
-      "reach": "Broad HTML5 distribution network",
-      "researchNote": "HEXFRONT and GALALAXY land roughly in the middle of the observed published band.",
+      "model": "Distributionsnetzwerk und Portal",
+      "qualityRange": "~59–64 typisch in der Recherche-Stichprobe",
+      "qualityRangeConfidence": "mittel",
+      "reach": "Breites HTML5-Distributionsnetzwerk",
+      "researchNote": "HEXFRONT und GALALAXY liegen ungefähr in der Mitte der beobachteten veröffentlichten Bandbreite.",
       "fits": {"hexfront": "very_good", "galalaxy": "very_good", "rooster-rage": "very_good", "core-arena": "good"}
     },
     {
       "id": "gamedistribution",
       "name": "GameDistribution",
       "entryDifficulty": 3,
-      "model": "Distribution network",
-      "qualityRange": "No robust internal range retained",
-      "qualityRangeConfidence": "low",
-      "reach": "Large third-party distribution model",
-      "researchNote": "Worth testing, but prior research did not establish a clean quality threshold.",
+      "model": "Distributionsnetzwerk",
+      "qualityRange": "Keine belastbare interne Spanne vorhanden",
+      "qualityRangeConfidence": "niedrig",
+      "reach": "Großes Distributionsmodell über Drittseiten",
+      "researchNote": "Einen Test wert; die bisherige Recherche ergab aber keine klare Qualitätsschwelle.",
       "fits": {"hexfront": "test", "galalaxy": "test", "rooster-rage": "good", "core-arena": "test"}
     },
     {
       "id": "crazygames",
       "name": "CrazyGames",
       "entryDifficulty": 4,
-      "model": "Curated direct portal",
-      "qualityRange": "~74–77 typical in research sample",
-      "qualityRangeConfidence": "medium",
-      "reach": "Large direct portal with launch testing and performance gates",
-      "researchNote": "HEXFRONT/GALALAXY showed an estimated 11–15 point quality gap versus the sampled published band.",
+      "model": "Kuratiertes Direktportal",
+      "qualityRange": "~74–77 typisch in der Recherche-Stichprobe",
+      "qualityRangeConfidence": "mittel",
+      "reach": "Großes Direktportal mit Launch-Tests und Performance-Hürden",
+      "researchNote": "Bei HEXFRONT und GALALAXY zeigte sich gegenüber der untersuchten veröffentlichten Bandbreite eine geschätzte Qualitätslücke von 11–15 Punkten.",
       "fits": {"hexfront": "weak", "galalaxy": "weak", "rooster-rage": "test", "core-arena": "weak"}
     },
     {
       "id": "coolmath",
       "name": "Coolmath Games",
       "entryDifficulty": 1,
-      "model": "Curated licensing portal",
-      "qualityRange": "No reliable score threshold",
-      "qualityRangeConfidence": "low",
-      "reach": "Large curated audience; fit/licensing decision matters heavily",
-      "researchNote": "HEXFRONT was declined. This does not establish a general numerical quality cutoff.",
+      "model": "Kuratiertes Lizenzportal",
+      "qualityRange": "Keine verlässliche Punkteschwelle",
+      "qualityRangeConfidence": "niedrig",
+      "reach": "Großes kuratiertes Publikum; Eignung und Lizenzentscheidung haben hohes Gewicht",
+      "researchNote": "HEXFRONT wurde abgelehnt. Daraus ergibt sich keine allgemeine numerische Qualitätsschwelle.",
       "fits": {"hexfront": "rejected", "galalaxy": "unknown", "rooster-rage": "unknown", "core-arena": "unknown"}
     },
     {
       "id": "newgrounds",
       "name": "Newgrounds",
       "entryDifficulty": 1,
-      "model": "Community portal",
-      "qualityRange": "Very broad",
-      "qualityRangeConfidence": "medium",
-      "reach": "Direct community discovery rather than a distributor network",
-      "researchNote": "Easy to publish, but audience response can be harsher and more community-driven.",
+      "model": "Community-Portal",
+      "qualityRange": "Sehr breit",
+      "qualityRangeConfidence": "mittel",
+      "reach": "Direkte Entdeckung durch die Community statt über ein Distributionsnetzwerk",
+      "researchNote": "Einfach zu veröffentlichen; die Reaktion des Publikums kann aber kritischer und stärker communitygetrieben sein.",
       "fits": {"hexfront": "test", "galalaxy": "test", "rooster-rage": "good", "core-arena": "test"}
     },
     {
       "id": "poki",
       "name": "Poki",
       "entryDifficulty": 5,
-      "model": "Highly curated portal",
-      "qualityRange": "No retained numerical range",
-      "qualityRangeConfidence": "low",
-      "reach": "Very large curated audience",
-      "researchNote": "Higher process and product-fit hurdle; not prioritized for the current HEXFRONT/GALALAXY builds.",
+      "model": "Stark kuratiertes Portal",
+      "qualityRange": "Keine numerische Spanne vorhanden",
+      "qualityRangeConfidence": "niedrig",
+      "reach": "Sehr großes kuratiertes Publikum",
+      "researchNote": "Höhere Prozess- und Produkt-Eignungshürde; für die aktuellen Builds von HEXFRONT und GALALAXY nicht priorisiert.",
       "fits": {"hexfront": "weak", "galalaxy": "weak", "rooster-rage": "test", "core-arena": "weak"}
     }
   ]
