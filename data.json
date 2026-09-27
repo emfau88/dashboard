@@ -172,6 +172,7 @@
       "id": "kesselkrawall",
       "name": "KESSELKRAWALL",
       "subtitle": "Magischer Mobile-Autobattler",
+      "image": "assets/games/kesselkrawall.webp",
       "status": "development",
       "qualityScore": null,
       "repo": "https://github.com/emfau88/KesselKrawall",
@@ -204,9 +205,15 @@
       "id": "core-arena",
       "name": "CORE ARENA",
       "subtitle": "Arena-/CTF-Shooter",
+      "image": "assets/games/core-arena.webp",
       "status": "development",
       "qualityScore": 67,
-      "repo": "",
+      "repo": "https://github.com/emfau88/CTF-3.0",
+      "github": {
+        "repo": "emfau88/CTF-3.0",
+        "developmentBranch": "main",
+        "pagesUrl": "https://emfau88.github.io/CTF-3.0/"
+      },
       "nextAction": "Bot-Schwierigkeit senken, Sound-Pass abschließen und ersten Einreichungs-Build vorbereiten",
       "issues": ["Eher ein Veröffentlichungs- als ein Kernkonzeptproblem", "Bot-Schwierigkeit", "Abschließender Sound- und Polishing-Pass"],
       "platforms": {
