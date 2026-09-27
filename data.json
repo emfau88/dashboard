@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "emfau Game Ops",
-    "version": "0.2.0",
+    "version": "0.2.1",
     "updated": "2026-09-27",
     "currency": "EUR",
     "notes": "Die Recherche-Spannen sind interne Vergleichswerte aus der Portal-Analyse vom September 2026 und keine offiziellen Annahmeschwellen der Plattformen."
@@ -20,7 +20,7 @@
         "developmentBranch": "main",
         "pagesUrl": "https://emfau88.github.io/hexwars/"
       },
-      "nextAction": "Bei GameMonetize einreichen, danach bei GamePix",
+      "nextAction": "Ergebnis der GameMonetize-Prüfung erfassen, danach bei GamePix einreichen",
       "issues": ["Doomstack-Lösung noch unvollständig", "Lesbarkeit der Spezialfelder", "Karten 9–10 noch gesperrt"],
       "platforms": {
         "kongregate": {
@@ -48,7 +48,13 @@
           "submitted": "2026-08-16",
           "notes": "Lizenzanfrage abgelehnt. Laut Rückmeldung war aus Kapazitätsgründen kein detailliertes Feedback möglich."
         },
-        "gamemonetize": {"status": "not_submitted"},
+        "gamemonetize": {
+          "status": "submitted",
+          "submitted": "2026-09-27",
+          "sourceBranch": "codex/improve-mobile-onboarding-copy",
+          "submittedCommit": "90fbf9e1ec0660057b0fef341de060c076a6b978",
+          "notes": "Der aktuelle HEXFRONT-Build wurde eingereicht und befindet sich in Prüfung."
+        },
         "gamepix": {"status": "not_submitted"},
         "gamedistribution": {"status": "not_submitted"},
         "crazygames": {"status": "not_submitted"},
