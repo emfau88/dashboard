@@ -26,7 +26,7 @@ Beim jeweiligen Spiel und Portal:
 
 ```json
 "gamemonetize": {
-  "status": "submitted",
+  "status": "review",
   "submitted": "2026-09-27",
   "sourceBranch": "main",
   "submittedCommit": "vollständige-commit-sha",
@@ -48,7 +48,7 @@ Beim jeweiligen Spiel und Portal:
 }
 ```
 
-`accepted` und `published` können identisch sein. Wenn nur das Veröffentlichungsdatum bekannt ist, reicht `published`; das Dashboard zeigt es als „Akzeptiert/Live“ an.
+`accepted` und `published` können identisch sein. Ist die Annahme bestätigt, aber ihr genaues Datum unbekannt, wird zusätzlich `"acceptanceConfirmed": true` gepflegt. Das Dashboard weist dann ausdrücklich auf das fehlende Datum hin, statt eines zu schätzen.
 
 ### Ablehnung erfassen
 
@@ -83,10 +83,11 @@ Diese internen Werte konsistent verwenden:
 - `development`
 - `planned`
 - `not_submitted`
-- `submitted`
 - `review`
 - `live`
 - `rejected`
+
+Eine Einreichung ist ein datiertes Ereignis (`submitted`), kein dauerhafter Status. Solange die Entscheidung aussteht, lautet der aktuelle Status immer `review` („In Prüfung“).
 
 ## Portal-Eignung
 

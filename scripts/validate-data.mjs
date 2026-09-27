@@ -3,7 +3,8 @@ import fs from 'node:fs';
 const data=JSON.parse(fs.readFileSync(new URL('../data.json',import.meta.url),'utf8'));
 const errors=[];
 const warnings=[];
-const allowedStatuses=new Set(['development','planned','not_submitted','submitted','review','live','rejected']);
+const allowedStatuses=new Set(['development','planned','not_submitted','review','live','rejected']);
+const allowedEventTypes=new Set(['submission','acceptance','publication','rejection']);
 const dateFields=['submitted','accepted','published','rejected','playsAsOf'];
 const datePattern=/^\d{4}-\d{2}-\d{2}$/;
 
@@ -47,8 +48,14 @@ for(const game of data.games){
     assertOrder(placement.submitted,placement.rejected,`${game.id}/${portalId} Einreichung/Ablehnung`);
     assertOrder(placement.accepted,placement.published,`${game.id}/${portalId} Annahme/Veröffentlichung`);
     if(placement.status==='live'&&!placement.published)warn(`${game.id}/${portalId}: Live-Status ohne Veröffentlichungsdatum.`);
-    if(placement.status==='live'&&!placement.accepted)warn(`${game.id}/${portalId}: Annahmedatum ist nicht separat erfasst.`);
+    if(placement.acceptanceConfirmed!=null&&typeof placement.acceptanceConfirmed!=='boolean')error(`${game.id}/${portalId}: acceptanceConfirmed muss ein Boolean sein.`);
+    if(placement.status==='live'&&!placement.accepted)warn(placement.acceptanceConfirmed?`${game.id}/${portalId}: Annahme bestätigt, genaues Datum fehlt.`:`${game.id}/${portalId}: Annahmedatum ist nicht bekannt.`);
     if(placement.status==='rejected'&&!placement.rejected)warn(`${game.id}/${portalId}: Ablehnungsdatum fehlt.`);
+    for(const event of placement.previousEvents||[]){
+      if(!allowedEventTypes.has(event.type))error(`${game.id}/${portalId}: unbekannter historischer Ereignistyp ${event.type}.`);
+      if(!isValidDate(event.date||''))error(`${game.id}/${portalId}: historisches Ereignis ohne gültiges ISO-Datum.`);
+      if(event.date&&data.meta?.updated&&event.date>data.meta.updated)error(`${game.id}/${portalId}: historisches Ereignis ${event.date} liegt nach meta.updated.`);
+    }
     for(const field of ['deployedCommit','submittedCommit','rejectedCommit']){
       if(placement[field]&&!/^[0-9a-f]{40}$/i.test(placement[field]))error(`${game.id}/${portalId}: ${field} ist keine vollständige Commit-SHA.`);
     }

@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "emfau Game Ops",
-    "version": "0.3.0",
+    "version": "0.4.0",
     "updated": "2026-09-27",
     "currency": "EUR",
     "notes": "Die Recherche-Spannen sind interne Vergleichswerte aus der Portal-Analyse vom September 2026 und keine offiziellen Annahmeschwellen der Plattformen."
@@ -11,6 +11,7 @@
       "id": "hexfront",
       "name": "HEXFRONT",
       "subtitle": "Numerisches Echtzeit-Strategiespiel auf Hexfeldern",
+      "image": "assets/games/hexfront.webp",
       "status": "live",
       "qualityScore": 63,
       "repo": "https://github.com/emfau88/hexwars",
@@ -25,6 +26,7 @@
         "kongregate": {
           "status": "live",
           "submitted": "2026-08-27",
+          "accepted": "2026-09-01",
           "published": "2026-09-02",
           "latestPlays": 1185,
           "playsAsOf": "2026-09-21",
@@ -36,15 +38,17 @@
           "notes": "Frühe Platzierung auf der Startseite. Nach einem Update erneut unter New & Updated erschienen; dabei wurde ein weiterer Besucheranstieg beobachtet."
         },
         "y8": {
-          "status": "submitted",
-          "submitted": "2026-09-25",
+          "status": "review",
+          "submitted": "2026-09-26",
           "sourceBranch": "codex/improve-mobile-onboarding-copy",
           "submittedCommit": "90fbf9e1ec0660057b0fef341de060c076a6b978",
+          "submittedNote": "Neuesten verbesserten Build eingereicht; die Prüfung läuft.",
           "notes": "Aktuellsten Build eingereicht. Das Ergebnis der Prüfung ist noch nicht im Dashboard erfasst."
         },
         "coolmath": {
           "status": "rejected",
           "submitted": "2026-08-16",
+          "rejected": "2026-09-10",
           "notes": "Lizenzanfrage abgelehnt. Laut Rückmeldung war aus Kapazitätsgründen kein detailliertes Feedback möglich."
         },
         "gamemonetize": {
@@ -52,6 +56,7 @@
           "submitted": "2026-09-27",
           "sourceBranch": "codex/improve-mobile-onboarding-copy",
           "submittedCommit": "90fbf9e1ec0660057b0fef341de060c076a6b978",
+          "submittedNote": "Neu bei GameMonetize eingereicht; das Ergebnis ist offen.",
           "notes": "Der aktuelle HEXFRONT-Build wurde eingereicht und befindet sich in Prüfung."
         },
         "gamepix": {"status": "not_submitted"},
@@ -69,6 +74,7 @@
       "id": "galalaxy",
       "name": "GALALAXY",
       "subtitle": "Top-down-Weltraumaction",
+      "image": "assets/games/galalaxy.webp",
       "status": "live",
       "qualityScore": 62,
       "repo": "https://github.com/emfau88/galalaxy",
@@ -82,8 +88,9 @@
       "platforms": {
         "kongregate": {
           "status": "live",
-          "submitted": "2026-09-02",
-          "published": "2026-09-18",
+          "submitted": "2026-09-06",
+          "acceptanceConfirmed": true,
+          "published": "2026-09-12",
           "latestPlays": 78,
           "playsAsOf": "2026-09-21",
           "rating": 2.9,
@@ -91,13 +98,15 @@
           "ratingApprox": true,
           "sourceBranch": "main",
           "deployedCommit": "f3a261cff049f5f94b03019c72f5047be2bf91c2",
+          "submittedNote": "Zunächst fehlten Zielgruppen- und Altersangaben; nach der Korrektur wurde das Spiel angenommen.",
           "notes": "Im Vergleich zu HEXFRONT sehr geringe Sichtbarkeit; das gilt nicht als Beleg gegen eine Eignung für andere Portale."
         },
         "y8": {
-          "status": "submitted",
-          "submitted": "2026-09-25",
+          "status": "review",
+          "submitted": "2026-09-26",
           "sourceBranch": "codex/y8-integration",
           "submittedCommit": "24c96c595bb62905e2e1594824b489378c5d2e3b",
+          "submittedNote": "Bei Y8 eingereicht; die Prüfung läuft.",
           "notes": "Aktuellsten Build eingereicht."
         },
         "gamemonetize": {
@@ -105,6 +114,7 @@
           "submitted": "2026-09-27",
           "sourceBranch": "codex/gamemonetize-integration",
           "submittedCommit": "9e6c5da44149da7d92514255a0132b5815b77990",
+          "submittedNote": "Neu bei GameMonetize eingereicht; das Ergebnis ist offen.",
           "notes": "Der aktuelle GameMonetize-Build wurde eingereicht und befindet sich in Prüfung."
         },
         "gamepix": {"status": "not_submitted"},
@@ -123,6 +133,7 @@
       "id": "rooster-rage",
       "name": "ROOSTER RAGE",
       "subtitle": "Top-down-Survivor",
+      "image": "assets/games/rooster-rage.webp",
       "status": "review",
       "qualityScore": 73,
       "repo": "https://github.com/emfau88/RoosterRage",
@@ -135,11 +146,16 @@
       "issues": ["Veröffentlichungsreif statt perfekt", "Letztes Balancing und Präsentations-Polishing optional"],
       "platforms": {
         "kongregate": {
-          "status": "submitted",
+          "status": "review",
           "submitted": "2026-09-25",
           "sourceBranch": "codex/kongregate-upload",
           "submittedCommit": "fe755230a3601580dc6bfdcb90fba31893b6913f",
-          "notes": "Frühere Prüfung wegen fehlender englischer Beschreibung, Anleitung, Screenshots, Altersfreigabe und KI-Angabe abgelehnt; korrigiert und erneut eingereicht."
+          "submittedNote": "Nach der formalen Zurückweisung korrigiert und erneut eingereicht.",
+          "notes": "Aktuell in Prüfung. Die erste Zurückweisung war formal und keine bekannte Qualitätsablehnung.",
+          "previousEvents": [
+            {"date": "2026-09-21", "type": "submission", "note": "Erste Einreichung bei Kongregate."},
+            {"date": "2026-09-21", "type": "rejection", "note": "Formal zurückgewiesen: Beschreibung beziehungsweise Submission-Angaben fehlten; keine bekannte Qualitätsablehnung."}
+          ]
         },
         "y8": {"status": "planned"},
         "gamemonetize": {"status": "planned"},
@@ -147,6 +163,38 @@
         "gamedistribution": {"status": "planned"},
         "crazygames": {"status": "planned"},
         "newgrounds": {"status": "planned"},
+        "poki": {"status": "not_submitted"},
+        "coolmath": {"status": "not_submitted"}
+      },
+      "metricsHistory": []
+    },
+    {
+      "id": "kesselkrawall",
+      "name": "KESSELKRAWALL",
+      "subtitle": "Magischer Mobile-Autobattler",
+      "status": "development",
+      "qualityScore": null,
+      "repo": "https://github.com/emfau88/KesselKrawall",
+      "github": {
+        "repo": "emfau88/KesselKrawall",
+        "developmentBranch": "main",
+        "pagesUrl": "https://emfau88.github.io/KesselKrawall/"
+      },
+      "nextAction": "CrazyGames-Qualitätsfeedback auswerten und vor einer weiteren Portal-Einreichung gezielt nachbessern",
+      "issues": ["CrazyGames lehnte die Gesamtqualität ab", "Keine weitere bestätigte Portal-Einreichung"],
+      "platforms": {
+        "kongregate": {"status": "not_submitted"},
+        "y8": {"status": "not_submitted"},
+        "gamemonetize": {"status": "not_submitted"},
+        "gamepix": {"status": "not_submitted"},
+        "gamedistribution": {"status": "not_submitted"},
+        "crazygames": {
+          "status": "rejected",
+          "submitted": "2026-08-17",
+          "rejected": "2026-08-18",
+          "notes": "Abgelehnt, weil die Gesamtqualität nicht den Erwartungen entsprach."
+        },
+        "newgrounds": {"status": "not_submitted"},
         "poki": {"status": "not_submitted"},
         "coolmath": {"status": "not_submitted"}
       },
@@ -185,7 +233,7 @@
       "qualityRangeConfidence": "mittel",
       "reach": "Etablierte direkte Plattform; Platzierungen auf der Startseite oder unter New & Updated können deutliche Besucherspitzen erzeugen",
       "researchNote": "HEXFRONT und GALALAXY wurden tatsächlich angenommen. Das ist aussagekräftiger als eine abgeleitete Schwelle.",
-      "fits": {"hexfront": "very_good", "galalaxy": "very_good", "rooster-rage": "very_good", "core-arena": "good"}
+      "fits": {"hexfront": "very_good", "galalaxy": "very_good", "rooster-rage": "very_good", "kesselkrawall": "unknown", "core-arena": "good"}
     },
     {
       "id": "y8",
@@ -196,7 +244,7 @@
       "qualityRangeConfidence": "niedrig",
       "reach": "Großes direktes Publikum; der Betreiber wirbt derzeit mit mehr als 30 Mio. monatlichen Spielern",
       "researchNote": "Die Unsicherheit betrifft die nicht öffentliche Prüfschwelle, nicht ein erkanntes Qualitätsproblem bei HEXFRONT oder GALALAXY.",
-      "fits": {"hexfront": "good", "galalaxy": "good", "rooster-rage": "good", "core-arena": "good"}
+      "fits": {"hexfront": "good", "galalaxy": "good", "rooster-rage": "good", "kesselkrawall": "unknown", "core-arena": "good"}
     },
     {
       "id": "gamemonetize",
@@ -207,7 +255,7 @@
       "qualityRangeConfidence": "mittel",
       "reach": "Distributionsnetzwerk; der Betreiber wirbt mit mehr als 100 Mio. Spielern im Netzwerk und Tausenden Publishern",
       "researchNote": "HEXFRONT mit 63 und GALALAXY mit 62 liegen über der beobachteten typischen Stichprobe. Die Spanne ist keine offizielle Annahmeschwelle.",
-      "fits": {"hexfront": "very_good", "galalaxy": "very_good", "rooster-rage": "very_good", "core-arena": "very_good"}
+      "fits": {"hexfront": "very_good", "galalaxy": "very_good", "rooster-rage": "very_good", "kesselkrawall": "unknown", "core-arena": "very_good"}
     },
     {
       "id": "gamepix",
@@ -218,7 +266,7 @@
       "qualityRangeConfidence": "mittel",
       "reach": "Breites HTML5-Distributionsnetzwerk",
       "researchNote": "HEXFRONT und GALALAXY liegen ungefähr in der Mitte der beobachteten veröffentlichten Bandbreite.",
-      "fits": {"hexfront": "very_good", "galalaxy": "very_good", "rooster-rage": "very_good", "core-arena": "good"}
+      "fits": {"hexfront": "very_good", "galalaxy": "very_good", "rooster-rage": "very_good", "kesselkrawall": "unknown", "core-arena": "good"}
     },
     {
       "id": "gamedistribution",
@@ -229,7 +277,7 @@
       "qualityRangeConfidence": "niedrig",
       "reach": "Großes Distributionsmodell über Drittseiten",
       "researchNote": "Einen Test wert; die bisherige Recherche ergab aber keine klare Qualitätsschwelle.",
-      "fits": {"hexfront": "test", "galalaxy": "test", "rooster-rage": "good", "core-arena": "test"}
+      "fits": {"hexfront": "test", "galalaxy": "test", "rooster-rage": "good", "kesselkrawall": "unknown", "core-arena": "test"}
     },
     {
       "id": "crazygames",
@@ -239,8 +287,8 @@
       "qualityRange": "~74–77 typisch in der Recherche-Stichprobe",
       "qualityRangeConfidence": "mittel",
       "reach": "Großes Direktportal mit Launch-Tests und Performance-Hürden",
-      "researchNote": "Bei HEXFRONT und GALALAXY zeigte sich gegenüber der untersuchten veröffentlichten Bandbreite eine geschätzte Qualitätslücke von 11–15 Punkten.",
-      "fits": {"hexfront": "weak", "galalaxy": "weak", "rooster-rage": "test", "core-arena": "weak"}
+      "researchNote": "KESSELKRAWALL wurde mit ausdrücklichem Hinweis auf die Gesamtqualität abgelehnt. Bei HEXFRONT und GALALAXY zeigte sich gegenüber der untersuchten veröffentlichten Bandbreite eine geschätzte Qualitätslücke von 11–15 Punkten.",
+      "fits": {"hexfront": "weak", "galalaxy": "weak", "rooster-rage": "test", "kesselkrawall": "rejected", "core-arena": "weak"}
     },
     {
       "id": "coolmath",
@@ -251,7 +299,7 @@
       "qualityRangeConfidence": "niedrig",
       "reach": "Großes kuratiertes Publikum; Eignung und Lizenzentscheidung haben hohes Gewicht",
       "researchNote": "HEXFRONT wurde abgelehnt. Daraus ergibt sich keine allgemeine numerische Qualitätsschwelle.",
-      "fits": {"hexfront": "rejected", "galalaxy": "unknown", "rooster-rage": "unknown", "core-arena": "unknown"}
+      "fits": {"hexfront": "rejected", "galalaxy": "unknown", "rooster-rage": "unknown", "kesselkrawall": "unknown", "core-arena": "unknown"}
     },
     {
       "id": "newgrounds",
@@ -262,7 +310,7 @@
       "qualityRangeConfidence": "mittel",
       "reach": "Direkte Entdeckung durch die Community statt über ein Distributionsnetzwerk",
       "researchNote": "Einfach zu veröffentlichen; die Reaktion des Publikums kann aber kritischer und stärker communitygetrieben sein.",
-      "fits": {"hexfront": "test", "galalaxy": "test", "rooster-rage": "good", "core-arena": "test"}
+      "fits": {"hexfront": "test", "galalaxy": "test", "rooster-rage": "good", "kesselkrawall": "unknown", "core-arena": "test"}
     },
     {
       "id": "poki",
@@ -273,7 +321,7 @@
       "qualityRangeConfidence": "niedrig",
       "reach": "Sehr großes kuratiertes Publikum",
       "researchNote": "Höhere Prozess- und Produkt-Eignungshürde; für die aktuellen Builds von HEXFRONT und GALALAXY nicht priorisiert.",
-      "fits": {"hexfront": "weak", "galalaxy": "weak", "rooster-rage": "test", "core-arena": "weak"}
+      "fits": {"hexfront": "weak", "galalaxy": "weak", "rooster-rage": "test", "kesselkrawall": "unknown", "core-arena": "weak"}
     }
   ]
 }
