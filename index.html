@@ -89,7 +89,7 @@ async function main(){
 
 function renderKPIs(d){
   const live=d.games.filter(g=>g.status==='live').length;
-  const submitted=d.games.reduce((n,g)=>n+Object.values(g.platforms).filter(p=>p.status==='submitted').length,0);
+  const submitted=d.games.reduce((n,g)=>n+Object.values(g.platforms).filter(p=>['submitted','review'].includes(p.status)).length,0);
   const placements=d.games.reduce((n,g)=>n+Object.values(g.platforms).filter(p=>p.status==='live').length,0);
   const next=d.games.filter(g=>g.nextAction).length;
   document.getElementById('kpis').innerHTML=[[live,'Live-Spiele'],[placements,'Live-Platzierungen'],[submitted,'Offene Einreichungen'],[next,'Definierte nächste Schritte']].map(x=>`<div class="kpi"><div class="v">${x[0]}</div><div class="l">${x[1]}</div></div>`).join('');
@@ -97,7 +97,7 @@ function renderKPIs(d){
 
 function renderGames(d){
   document.getElementById('gameCards').innerHTML=d.games.map(g=>{
-    const active=Object.entries(g.platforms).filter(([,p])=>['live','submitted','rejected'].includes(p.status)).map(([id,p])=>`<div class="platform-chip"><span>${esc(portalShort[id]||id)}</span>${esc(labels[p.status])}</div>`).join('')||'<div class="platform-chip"><span>Distribution</span>Noch keine Aktivität</div>';
+    const active=Object.entries(g.platforms).filter(([,p])=>['live','submitted','review','rejected'].includes(p.status)).map(([id,p])=>`<div class="platform-chip"><span>${esc(portalShort[id]||id)}</span>${esc(labels[p.status])}</div>`).join('')||'<div class="platform-chip"><span>Distribution</span>Noch keine Aktivität</div>';
     const github=g.github?`<div class="github-sync" id="github-${esc(g.id)}" aria-live="polite"><div class="git-loading">Live-GitHub-Status wird geladen…</div></div>`:`<div class="github-sync"><div class="git-empty">Noch kein GitHub-Repository verknüpft.</div></div>`;
     return `<article class="game-card"><div class="game-head"><div><div class="game-name">${esc(g.name)}</div><div class="game-sub">${esc(g.subtitle)}</div></div>${pill(g.status)}</div><div class="score-row"><div class="score"><strong>${g.qualityScore}</strong><small>Qualitätseinschätzung / 100</small></div><div class="score"><strong>${g.releaseReadiness}%</strong><small>Veröffentlichungsreife</small><div class="progress"><i style="width:${g.releaseReadiness}%"></i></div></div></div><div class="next"><b>Nächster Schritt</b><div>${esc(g.nextAction)}</div></div><div class="platform-strip">${active}</div>${github}<ul class="issues">${g.issues.slice(0,3).map(i=>`<li>${esc(i)}</li>`).join('')}</ul></article>`;
   }).join('');

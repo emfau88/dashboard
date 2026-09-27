@@ -49,7 +49,7 @@
           "notes": "Lizenzanfrage abgelehnt. Laut Rückmeldung war aus Kapazitätsgründen kein detailliertes Feedback möglich."
         },
         "gamemonetize": {
-          "status": "submitted",
+          "status": "review",
           "submitted": "2026-09-27",
           "sourceBranch": "codex/improve-mobile-onboarding-copy",
           "submittedCommit": "90fbf9e1ec0660057b0fef341de060c076a6b978",
