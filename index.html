@@ -78,7 +78,7 @@ const pill=s=>`<span class="pill ${esc(s)}">${esc(labels[s]||s)}</span>`;
 const shortSha=sha=>sha?sha.slice(0,7):'unbekannt';
 
 async function main(){
-  const response=await fetch('data.json');
+  const response=await fetch('data.json',{cache:'no-store'});
   if(!response.ok)throw new Error(`HTTP ${response.status}`);
   const d=await response.json();
   window.DATA=d;
