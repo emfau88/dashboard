@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "emfau Game Ops",
-    "version": "0.2.1",
+    "version": "0.3.0",
     "updated": "2026-09-27",
     "currency": "EUR",
     "notes": "Die Recherche-Spannen sind interne Vergleichswerte aus der Portal-Analyse vom September 2026 und keine offiziellen Annahmeschwellen der Plattformen."
@@ -12,7 +12,6 @@
       "name": "HEXFRONT",
       "subtitle": "Numerisches Echtzeit-Strategiespiel auf Hexfeldern",
       "status": "live",
-      "releaseReadiness": 78,
       "qualityScore": 63,
       "repo": "https://github.com/emfau88/hexwars",
       "github": {
@@ -71,7 +70,6 @@
       "name": "GALALAXY",
       "subtitle": "Top-down-Weltraumaction",
       "status": "live",
-      "releaseReadiness": 74,
       "qualityScore": 62,
       "repo": "https://github.com/emfau88/galalaxy",
       "github": {
@@ -79,7 +77,7 @@
         "developmentBranch": "main",
         "pagesUrl": "https://emfau88.github.io/galalaxy/"
       },
-      "nextAction": "Ohne große zusätzliche Polishing-Runde bei GameMonetize und GamePix einreichen",
+      "nextAction": "Ergebnis der GameMonetize-Prüfung erfassen, danach bei GamePix einreichen",
       "issues": ["HUD schwächer als gewünscht", "Uneinheitliche visuelle Assets", "Bisher geringe Sichtbarkeit auf Kongregate"],
       "platforms": {
         "kongregate": {
@@ -102,7 +100,13 @@
           "submittedCommit": "24c96c595bb62905e2e1594824b489378c5d2e3b",
           "notes": "Aktuellsten Build eingereicht."
         },
-        "gamemonetize": {"status": "not_submitted"},
+        "gamemonetize": {
+          "status": "review",
+          "submitted": "2026-09-27",
+          "sourceBranch": "codex/gamemonetize-integration",
+          "submittedCommit": "9e6c5da44149da7d92514255a0132b5815b77990",
+          "notes": "Der aktuelle GameMonetize-Build wurde eingereicht und befindet sich in Prüfung."
+        },
         "gamepix": {"status": "not_submitted"},
         "gamedistribution": {"status": "not_submitted"},
         "crazygames": {"status": "not_submitted"},
@@ -120,7 +124,6 @@
       "name": "ROOSTER RAGE",
       "subtitle": "Top-down-Survivor",
       "status": "review",
-      "releaseReadiness": 82,
       "qualityScore": 73,
       "repo": "https://github.com/emfau88/RoosterRage",
       "github": {
@@ -154,7 +157,6 @@
       "name": "CORE ARENA",
       "subtitle": "Arena-/CTF-Shooter",
       "status": "development",
-      "releaseReadiness": 67,
       "qualityScore": 67,
       "repo": "",
       "nextAction": "Bot-Schwierigkeit senken, Sound-Pass abschließen und ersten Einreichungs-Build vorbereiten",

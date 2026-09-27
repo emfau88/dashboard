@@ -16,6 +16,8 @@ Statisches, mobile-first Dashboard für Spieleprojekte, Portal-Einreichungen, Po
 
 Die meisten Änderungen erfolgen ausschließlich in `data.json`.
 
+`qualityScore` ist eine manuelle interne Orientierung auf einer Skala von 0 bis 100. Er ist kein Messwert eines Portals und wird deshalb im Dashboard ausdrücklich als interner Qualitätsscore bezeichnet. Ein weiterer prozentualer Reife-Score wird nicht geführt, weil dafür keine objektive Berechnungsgrundlage vorlag.
+
 GitHub-Aktivitäten müssen nicht in das Dashboard kopiert werden. Bei einem Portal-Upload wird nur einmal der hochgeladene Commit als `deployedCommit` oder `submittedCommit` festgehalten. Das Dashboard vergleicht diesen unveränderlichen Commit anschließend automatisch mit dem aktuellen konfigurierten Branch.
 
 ### Neue Einreichung erfassen
