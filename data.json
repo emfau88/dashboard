@@ -1,0 +1,246 @@
+{
+  "meta": {
+    "title": "emfau Game Ops",
+    "version": "0.1.0",
+    "updated": "2026-09-27",
+    "currency": "EUR",
+    "notes": "Research ranges are internal comparative estimates from the September 2026 portal analysis, not official platform acceptance thresholds."
+  },
+  "games": [
+    {
+      "id": "hexfront",
+      "name": "HEXFRONT",
+      "subtitle": "Hex-grid numerical RTS",
+      "status": "live",
+      "releaseReadiness": 78,
+      "qualityScore": 63,
+      "repo": "https://github.com/emfau88/hexwars",
+      "nextAction": "Submit to GameMonetize, then GamePix",
+      "issues": ["Doomstack solution still incomplete", "Special-tile readability", "Maps 9–10 locked"],
+      "platforms": {
+        "kongregate": {
+          "status": "live",
+          "submitted": "2026-08-27",
+          "published": "2026-09-02",
+          "latestPlays": 1185,
+          "playsAsOf": "2026-09-21",
+          "rating": 2.8,
+          "ratingScale": 5,
+          "ratingApprox": true,
+          "notes": "Received an early homepage push. Later reappeared in New & Updated after an update; user observed another traffic bump."
+        },
+        "y8": {
+          "status": "submitted",
+          "submitted": "2026-09-25",
+          "notes": "Latest build submitted. Review outcome not yet recorded in this dashboard."
+        },
+        "coolmath": {
+          "status": "rejected",
+          "submitted": "2026-08-16",
+          "notes": "Licensing submission declined. Follow-up received: no detailed feedback due to capacity."
+        },
+        "gamemonetize": {"status": "not_submitted"},
+        "gamepix": {"status": "not_submitted"},
+        "gamedistribution": {"status": "not_submitted"},
+        "crazygames": {"status": "not_submitted"},
+        "newgrounds": {"status": "not_submitted"},
+        "poki": {"status": "not_submitted"}
+      },
+      "metricsHistory": [
+        {"date": "2026-09-19", "platform": "kongregate", "plays": 1148, "rating": null},
+        {"date": "2026-09-21", "platform": "kongregate", "plays": 1185, "rating": 2.8}
+      ]
+    },
+    {
+      "id": "galalaxy",
+      "name": "GALALAXY",
+      "subtitle": "Top-down space action",
+      "status": "live",
+      "releaseReadiness": 74,
+      "qualityScore": 62,
+      "repo": "https://github.com/emfau88/galalaxy",
+      "nextAction": "Submit to GameMonetize and GamePix without a large polish cycle",
+      "issues": ["HUD weaker than desired", "Visual asset consistency", "Low Kongregate discovery so far"],
+      "platforms": {
+        "kongregate": {
+          "status": "live",
+          "submitted": "2026-09-02",
+          "published": "2026-09-18",
+          "latestPlays": 78,
+          "playsAsOf": "2026-09-21",
+          "rating": 2.8,
+          "ratingScale": 5,
+          "ratingApprox": true,
+          "notes": "Very low discovery compared with HEXFRONT; not treated as evidence that the game is unsuitable for other portals."
+        },
+        "y8": {
+          "status": "submitted",
+          "submitted": "2026-09-25",
+          "notes": "Latest build submitted."
+        },
+        "gamemonetize": {"status": "not_submitted"},
+        "gamepix": {"status": "not_submitted"},
+        "gamedistribution": {"status": "not_submitted"},
+        "crazygames": {"status": "not_submitted"},
+        "newgrounds": {"status": "not_submitted"},
+        "poki": {"status": "not_submitted"},
+        "coolmath": {"status": "not_submitted"}
+      },
+      "metricsHistory": [
+        {"date": "2026-09-19", "platform": "kongregate", "plays": 77, "rating": null},
+        {"date": "2026-09-21", "platform": "kongregate", "plays": 78, "rating": 2.9}
+      ]
+    },
+    {
+      "id": "rooster-rage",
+      "name": "ROOSTER RAGE",
+      "subtitle": "Top-down survivor",
+      "status": "review",
+      "releaseReadiness": 82,
+      "qualityScore": 73,
+      "repo": "https://github.com/emfau88/phantom",
+      "nextAction": "Record Kongregate review outcome; submit broadly once live build is confirmed",
+      "issues": ["Release-ready rather than perfect", "Final balancing and presentation polish optional"],
+      "platforms": {
+        "kongregate": {
+          "status": "submitted",
+          "submitted": "2026-09-25",
+          "notes": "Earlier review rejected due to missing English description, instructions, screenshots, age rating and AI disclosure; corrected and resubmitted."
+        },
+        "y8": {"status": "planned"},
+        "gamemonetize": {"status": "planned"},
+        "gamepix": {"status": "planned"},
+        "gamedistribution": {"status": "planned"},
+        "crazygames": {"status": "planned"},
+        "newgrounds": {"status": "planned"},
+        "poki": {"status": "not_submitted"},
+        "coolmath": {"status": "not_submitted"}
+      },
+      "metricsHistory": []
+    },
+    {
+      "id": "core-arena",
+      "name": "CORE ARENA",
+      "subtitle": "Arena / CTF shooter",
+      "status": "development",
+      "releaseReadiness": 67,
+      "qualityScore": 67,
+      "repo": "",
+      "nextAction": "Reduce bot difficulty, finish sound pass, then prepare first submission build",
+      "issues": ["Release problem more than core-concept problem", "Bot difficulty", "Final sound and polish pass"],
+      "platforms": {
+        "kongregate": {"status": "planned"},
+        "y8": {"status": "planned"},
+        "gamemonetize": {"status": "planned"},
+        "gamepix": {"status": "planned"},
+        "gamedistribution": {"status": "planned"},
+        "crazygames": {"status": "planned"},
+        "newgrounds": {"status": "planned"},
+        "poki": {"status": "not_submitted"},
+        "coolmath": {"status": "not_submitted"}
+      },
+      "metricsHistory": []
+    }
+  ],
+  "portals": [
+    {
+      "id": "kongregate",
+      "name": "Kongregate",
+      "entryDifficulty": 2.5,
+      "model": "Direct portal",
+      "qualityRange": "~61–65 typical in research sample",
+      "qualityRangeConfidence": "medium",
+      "reach": "Established direct portal; homepage/New & Updated exposure can create concentrated bursts",
+      "researchNote": "Both HEXFRONT and GALALAXY were actually accepted, which is stronger evidence than an inferred threshold.",
+      "fits": {"hexfront": "very_good", "galalaxy": "very_good", "rooster-rage": "very_good", "core-arena": "good"}
+    },
+    {
+      "id": "y8",
+      "name": "Y8",
+      "entryDifficulty": 2,
+      "model": "Large direct portal",
+      "qualityRange": "Broad published range; no reliable acceptance threshold identified",
+      "qualityRangeConfidence": "low",
+      "reach": "Large direct audience; operator currently advertises 30M+ monthly players",
+      "researchNote": "Uncertainty is about the hidden review threshold, not an identified quality problem with HEXFRONT or GALALAXY.",
+      "fits": {"hexfront": "good", "galalaxy": "good", "rooster-rage": "good", "core-arena": "good"}
+    },
+    {
+      "id": "gamemonetize",
+      "name": "GameMonetize",
+      "entryDifficulty": 1.5,
+      "model": "Distribution network + portal",
+      "qualityRange": "~54–59 typical; weaker published titles in ~40–50 band in research sample",
+      "qualityRangeConfidence": "medium",
+      "reach": "Distribution network; operator advertises 100M+ players across the network and thousands of publishers",
+      "researchNote": "HEXFRONT 63 and GALALAXY 62 sit above the observed typical sample. Do not interpret the range as an official acceptance cutoff.",
+      "fits": {"hexfront": "very_good", "galalaxy": "very_good", "rooster-rage": "very_good", "core-arena": "very_good"}
+    },
+    {
+      "id": "gamepix",
+      "name": "GamePix",
+      "entryDifficulty": 2,
+      "model": "Distribution network + portal",
+      "qualityRange": "~59–64 typical in research sample",
+      "qualityRangeConfidence": "medium",
+      "reach": "Broad HTML5 distribution network",
+      "researchNote": "HEXFRONT and GALALAXY land roughly in the middle of the observed published band.",
+      "fits": {"hexfront": "very_good", "galalaxy": "very_good", "rooster-rage": "very_good", "core-arena": "good"}
+    },
+    {
+      "id": "gamedistribution",
+      "name": "GameDistribution",
+      "entryDifficulty": 3,
+      "model": "Distribution network",
+      "qualityRange": "No robust internal range retained",
+      "qualityRangeConfidence": "low",
+      "reach": "Large third-party distribution model",
+      "researchNote": "Worth testing, but prior research did not establish a clean quality threshold.",
+      "fits": {"hexfront": "test", "galalaxy": "test", "rooster-rage": "good", "core-arena": "test"}
+    },
+    {
+      "id": "crazygames",
+      "name": "CrazyGames",
+      "entryDifficulty": 4,
+      "model": "Curated direct portal",
+      "qualityRange": "~74–77 typical in research sample",
+      "qualityRangeConfidence": "medium",
+      "reach": "Large direct portal with launch testing and performance gates",
+      "researchNote": "HEXFRONT/GALALAXY showed an estimated 11–15 point quality gap versus the sampled published band.",
+      "fits": {"hexfront": "weak", "galalaxy": "weak", "rooster-rage": "test", "core-arena": "weak"}
+    },
+    {
+      "id": "coolmath",
+      "name": "Coolmath Games",
+      "entryDifficulty": 1,
+      "model": "Curated licensing portal",
+      "qualityRange": "No reliable score threshold",
+      "qualityRangeConfidence": "low",
+      "reach": "Large curated audience; fit/licensing decision matters heavily",
+      "researchNote": "HEXFRONT was declined. This does not establish a general numerical quality cutoff.",
+      "fits": {"hexfront": "rejected", "galalaxy": "unknown", "rooster-rage": "unknown", "core-arena": "unknown"}
+    },
+    {
+      "id": "newgrounds",
+      "name": "Newgrounds",
+      "entryDifficulty": 1,
+      "model": "Community portal",
+      "qualityRange": "Very broad",
+      "qualityRangeConfidence": "medium",
+      "reach": "Direct community discovery rather than a distributor network",
+      "researchNote": "Easy to publish, but audience response can be harsher and more community-driven.",
+      "fits": {"hexfront": "test", "galalaxy": "test", "rooster-rage": "good", "core-arena": "test"}
+    },
+    {
+      "id": "poki",
+      "name": "Poki",
+      "entryDifficulty": 5,
+      "model": "Highly curated portal",
+      "qualityRange": "No retained numerical range",
+      "qualityRangeConfidence": "low",
+      "reach": "Very large curated audience",
+      "researchNote": "Higher process and product-fit hurdle; not prioritized for the current HEXFRONT/GALALAXY builds.",
+      "fits": {"hexfront": "weak", "galalaxy": "weak", "rooster-rage": "test", "core-arena": "weak"}
+    }
+  ]
+}
