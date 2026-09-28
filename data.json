@@ -1,8 +1,8 @@
 {
   "meta": {
     "title": "emfau Game Ops",
-    "version": "0.5.0",
-    "updated": "2026-09-27",
+    "version": "0.5.1",
+    "updated": "2026-09-28",
     "currency": "EUR",
     "notes": "Die Recherche-Spannen sind interne Vergleichswerte aus der Portal-Analyse vom September 2026 und keine offiziellen Annahmeschwellen der Plattformen."
   },
@@ -20,7 +20,7 @@
         "developmentBranch": "main",
         "pagesUrl": "https://emfau88.github.io/hexwars/"
       },
-      "nextAction": "Ergebnis der GameMonetize-Prüfung erfassen, danach bei GamePix einreichen",
+      "nextAction": "Ergebnis der Y8-Prüfung erfassen und die GameMonetize-Qualitätsablehnung vor der nächsten Einreichung auswerten",
       "issues": ["Doomstack-Lösung noch unvollständig", "Lesbarkeit der Spezialfelder", "Karten 9–10 noch gesperrt"],
       "platforms": {
         "kongregate": {
@@ -52,12 +52,14 @@
           "notes": "Lizenzanfrage abgelehnt. Laut Rückmeldung war aus Kapazitätsgründen kein detailliertes Feedback möglich."
         },
         "gamemonetize": {
-          "status": "review",
+          "status": "rejected",
           "submitted": "2026-09-27",
+          "rejected": "2026-09-28",
           "sourceBranch": "codex/improve-mobile-onboarding-copy",
           "submittedCommit": "90fbf9e1ec0660057b0fef341de060c076a6b978",
           "submittedNote": "Neu bei GameMonetize eingereicht; das Ergebnis ist offen.",
-          "notes": "Der aktuelle HEXFRONT-Build wurde eingereicht und befindet sich in Prüfung."
+          "rejectedNote": "Abgelehnt mit der Rückmeldung: „Do not meet quality standards“.",
+          "notes": "Laut GameMonetize erfüllt der eingereichte Build die Qualitätsstandards nicht. Eine genauere Begründung wurde nicht mitgeteilt."
         },
         "gamepix": {"status": "not_submitted"},
         "gamedistribution": {"status": "not_submitted"},
@@ -83,7 +85,7 @@
         "developmentBranch": "main",
         "pagesUrl": "https://emfau88.github.io/galalaxy/"
       },
-      "nextAction": "Ergebnis der GameMonetize-Prüfung erfassen, danach bei GamePix einreichen",
+      "nextAction": "Ergebnis der Y8-Prüfung erfassen und die GameMonetize-Qualitätsablehnung vor der nächsten Einreichung auswerten",
       "issues": ["HUD schwächer als gewünscht", "Uneinheitliche visuelle Assets", "Bisher geringe Sichtbarkeit auf Kongregate"],
       "platforms": {
         "kongregate": {
@@ -110,12 +112,14 @@
           "notes": "Aktuellsten Build eingereicht."
         },
         "gamemonetize": {
-          "status": "review",
+          "status": "rejected",
           "submitted": "2026-09-27",
+          "rejected": "2026-09-28",
           "sourceBranch": "codex/gamemonetize-integration",
           "submittedCommit": "9e6c5da44149da7d92514255a0132b5815b77990",
           "submittedNote": "Neu bei GameMonetize eingereicht; das Ergebnis ist offen.",
-          "notes": "Der aktuelle GameMonetize-Build wurde eingereicht und befindet sich in Prüfung."
+          "rejectedNote": "Abgelehnt mit der Rückmeldung: „Do not meet quality standards“.",
+          "notes": "Laut GameMonetize erfüllt der eingereichte Build die Qualitätsstandards nicht. Eine genauere Begründung wurde nicht mitgeteilt."
         },
         "gamepix": {"status": "not_submitted"},
         "gamedistribution": {"status": "not_submitted"},
@@ -289,8 +293,8 @@
       "qualityRange": "~54–59 typisch; schwächere veröffentlichte Titel lagen in der Stichprobe bei ~40–50",
       "qualityRangeConfidence": "mittel",
       "reach": "Distributionsnetzwerk; der Betreiber wirbt mit mehr als 100 Mio. Spielern im Netzwerk und Tausenden Publishern",
-      "researchNote": "HEXFRONT mit 63 und GALALAXY mit 62 liegen über der beobachteten typischen Stichprobe. Die Spanne ist keine offizielle Annahmeschwelle.",
-      "fits": {"hexfront": "very_good", "galalaxy": "very_good", "rooster-rage": "very_good", "kesselkrawall": "unknown", "core-arena": "very_good", "more-than-wombat": "unknown"}
+      "researchNote": "HEXFRONT und GALALAXY wurden am 28.09.2026 mit der Rückmeldung abgelehnt, sie erfüllten die Qualitätsstandards nicht. Eine genauere Begründung wurde nicht mitgeteilt; die beobachtete Vergleichsspanne war damit keine belastbare Annahmeprognose.",
+      "fits": {"hexfront": "rejected", "galalaxy": "rejected", "rooster-rage": "very_good", "kesselkrawall": "unknown", "core-arena": "very_good", "more-than-wombat": "unknown"}
     },
     {
       "id": "gamepix",
