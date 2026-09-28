@@ -27,7 +27,7 @@
     .git-loading,.git-empty{color:var(--muted);font-size:10px}
     .game-card,.git-summary,.git-platform span{min-width:0}.git-platform .git-link{overflow-wrap:anywhere}
     .matrix-wrap table{min-width:1180px}.matrix-cell{display:grid;gap:5px;min-width:106px}.matrix-meta{display:grid;gap:2px;color:var(--muted);font-size:9px;line-height:1.35}.matrix-meta .missing{color:var(--bad)}.matrix-version{color:var(--accent);font-size:9px;text-decoration:none}
-    .distribution-mobile{display:grid;gap:10px}.dist-card{padding:13px;background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:var(--radius)}.dist-card-head{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-bottom:5px}.dist-card-head strong{font-size:15px}.dist-list{display:grid;gap:7px;margin-top:10px}.dist-row{display:grid;grid-template-columns:minmax(92px,.8fr) minmax(0,1.4fr);gap:9px;padding:9px;background:#0c1219;border:1px solid #202c3a;border-radius:11px}.dist-platform{display:grid;align-content:start;gap:5px}.dist-platform b{font-size:11px}.dist-details{min-width:0;font-size:10px;color:var(--muted);line-height:1.45}.dist-details div+div{margin-top:2px}.dist-more{margin-top:9px}.dist-more summary{cursor:pointer;color:var(--accent);font-size:10px}.dist-empty{color:var(--muted);font-size:10px;margin-top:8px}.timeline-missing{margin-top:12px;padding:12px;border:1px solid rgba(231,111,81,.28);border-radius:12px;background:rgba(231,111,81,.05);font-size:11px;color:var(--soft)}.timeline-missing b{display:block;color:var(--bad);margin-bottom:5px}.timeline-missing ul{margin:0;padding-left:17px}.event-body .event-type{font-size:9px;text-transform:uppercase;letter-spacing:.05em;color:var(--accent);margin-bottom:3px}
+    .distribution-mobile{display:grid;gap:10px}.dist-card{padding:13px;background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:var(--radius)}.dist-card-head{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-bottom:5px}.dist-card-head strong{font-size:15px}.dist-list{display:grid;gap:7px;margin-top:10px}.dist-row{display:grid;grid-template-columns:minmax(92px,.8fr) minmax(0,1.4fr);gap:9px;padding:9px;background:#0c1219;border:1px solid #202c3a;border-radius:11px}.dist-platform{display:grid;align-content:start;gap:5px}.dist-platform b{font-size:11px}.dist-details{min-width:0;font-size:10px;color:var(--muted);line-height:1.45}.dist-details div+div{margin-top:2px}.dist-more{margin-top:9px}.dist-more summary{cursor:pointer;color:var(--accent);font-size:10px}.dist-empty{color:var(--muted);font-size:10px;margin-top:8px}.timeline-missing{margin-top:12px;padding:12px;border:1px solid rgba(231,111,81,.28);border-radius:12px;background:rgba(231,111,81,.05);font-size:11px;color:var(--soft)}.timeline-missing b{display:block;color:var(--bad);margin-bottom:5px}.timeline-missing ul{margin:0;padding-left:17px}.event-main{display:flex;align-items:flex-start;gap:10px}.event-icons{display:flex;align-items:flex-start;flex:0 0 auto;padding-top:1px}.event-icons .matrix-thumb,.event-icons .matrix-monogram{width:36px;height:36px;flex-basis:36px;border-radius:10px}.event-icons .portal-logo{width:22px;height:22px;flex-basis:22px;margin:16px 0 0 -8px;border:2px solid var(--panel)}.event-copy{min-width:0;flex:1}.event-body .event-type{font-size:9px;text-transform:uppercase;letter-spacing:.05em;color:var(--accent);margin-bottom:3px}.event-body.rejection{border-left-color:var(--bad);background:linear-gradient(90deg,rgba(231,111,81,.08),transparent)}.event-body.rejection .event-type{color:var(--bad)}.event-body.acceptance,.event-body.publication{border-left-color:var(--good)}.event-body.acceptance .event-type,.event-body.publication .event-type{color:var(--good)}
     @media(max-width:719px){.matrix-wrap{display:none}}
     @media(min-width:720px){.cards{grid-template-columns:repeat(2,minmax(0,1fr))}.distribution-mobile{display:none}}
     @media(min-width:1100px){.cards{grid-template-columns:repeat(4,minmax(0,1fr))}}
@@ -83,7 +83,7 @@ const gameVisual=(g,size='card')=>g.image?`<img class="${size==='card'?'game-thu
 const portalVisual=p=>`<img class="portal-logo" src="assets/portals/${esc(p.id)}.png" alt="" loading="lazy" decoding="async">`;
 
 async function main(){
-  const response=await fetch('data.json',{cache:'no-store'});
+  const response=await fetch(`data.json?v=${Date.now()}`,{cache:'no-store'});
   if(!response.ok)throw new Error(`HTTP ${response.status}`);
   const d=await response.json();
   window.DATA=d;
@@ -171,21 +171,21 @@ function renderPortals(d){
 function renderTimeline(d){
   const events=[],missing=[];
   d.games.forEach(g=>Object.entries(g.platforms).forEach(([pid,p])=>{
-    const portal=d.portals.find(x=>x.id===pid)?.name||pid;
+    const portalData=d.portals.find(x=>x.id===pid)||{id:pid,name:pid},portal=portalData.name;
     (p.previousEvents||[]).forEach((event,index)=>{
       const typeLabels={submission:'Einreichung',acceptance:'Annahme',publication:'Veröffentlichung',rejection:'Ablehnung'};
       const titles={submission:`${g.name} → ${portal}`,acceptance:`${g.name} von ${portal} angenommen`,publication:`${g.name} auf ${portal} veröffentlicht`,rejection:`${g.name} von ${portal} abgelehnt`};
-      events.push({date:event.date,type:typeLabels[event.type]||event.type,title:titles[event.type]||`${g.name} · ${portal}`,text:event.note||'Historisches Ereignis.',order:index+1});
+      events.push({date:event.date,type:typeLabels[event.type]||event.type,kind:event.type,title:titles[event.type]||`${g.name} · ${portal}`,text:event.note||'Historisches Ereignis.',order:index+1,game:g,portal:portalData});
     });
-    if(p.submitted)events.push({date:p.submitted,type:'Einreichung',title:`${g.name} → ${portal}`,text:p.submittedNote||'Beim Portal eingereicht.',order:0});
-    if(p.accepted)events.push({date:p.accepted,type:'Annahme',title:`${g.name} von ${portal} angenommen`,text:p.acceptedNote||'Die Annahme wurde bestätigt.',order:1});
-    if(p.published&&p.published!==p.accepted)events.push({date:p.published,type:'Veröffentlichung',title:`${g.name} auf ${portal} veröffentlicht`,text:p.publishedNote||'Das Spiel ist auf dem Portal live gegangen.',order:2});
-    if(p.rejected)events.push({date:p.rejected,type:'Ablehnung',title:`${g.name} von ${portal} abgelehnt`,text:p.rejectedNote||p.notes||'Die Ablehnung wurde erfasst.',order:2});
+    if(p.submitted)events.push({date:p.submitted,type:'Einreichung',kind:'submission',title:`${g.name} → ${portal}`,text:p.submittedNote||'Beim Portal eingereicht.',order:0,game:g,portal:portalData});
+    if(p.accepted)events.push({date:p.accepted,type:'Annahme',kind:'acceptance',title:`${g.name} von ${portal} angenommen`,text:p.acceptedNote||'Die Annahme wurde bestätigt.',order:1,game:g,portal:portalData});
+    if(p.published&&p.published!==p.accepted)events.push({date:p.published,type:'Veröffentlichung',kind:'publication',title:`${g.name} auf ${portal} veröffentlicht`,text:p.publishedNote||'Das Spiel ist auf dem Portal live gegangen.',order:2,game:g,portal:portalData});
+    if(p.rejected)events.push({date:p.rejected,type:'Ablehnung',kind:'rejection',title:`${g.name} von ${portal} abgelehnt`,text:p.rejectedNote||p.notes||'Die Ablehnung wurde erfasst.',order:2,game:g,portal:portalData});
     else if(p.status==='rejected')missing.push(`${g.name}: Ablehnungsdatum bei ${portal} fehlt.`);
     if(p.status==='live'&&!p.accepted)missing.push(p.acceptanceConfirmed?`${g.name}: Annahme bei ${portal} ist bestätigt; das genaue Datum fehlt.`:`${g.name}: Annahmedatum bei ${portal} ist nicht bekannt; erfasst ist nur das Live-Datum.`);
   }));
   events.sort((a,b)=>b.date.localeCompare(a.date)||(b.order||0)-(a.order||0)||a.title.localeCompare(b.title,'de'));
-  const dated=events.length?events.map(e=>`<div class="event"><div class="event-date">${fmtDate(e.date)}</div><div class="event-body"><div class="event-type">${esc(e.type)}</div><strong>${esc(e.title)}</strong><div>${esc(e.text)}</div></div></div>`).join(''):'<div class="empty">Noch keine datierten Ereignisse.</div>';
+  const dated=events.length?events.map(e=>`<div class="event"><div class="event-date">${fmtDate(e.date)}</div><div class="event-body ${esc(e.kind)}"><div class="event-main"><div class="event-icons" aria-hidden="true">${gameVisual(e.game,'matrix')}${portalVisual(e.portal)}</div><div class="event-copy"><div class="event-type">${esc(e.type)}</div><strong>${esc(e.title)}</strong><div>${esc(e.text)}</div></div></div></div></div>`).join(''):'<div class="empty">Noch keine datierten Ereignisse.</div>';
   const missingHtml=missing.length?`<div class="timeline-missing"><b>Fehlende Verlaufsdaten</b><ul>${missing.map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div>`:'';
   document.getElementById('timelineList').innerHTML=dated+missingHtml;
 }

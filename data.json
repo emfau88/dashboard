@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "emfau Game Ops",
-    "version": "0.5.1",
+    "version": "0.5.2",
     "updated": "2026-09-28",
     "currency": "EUR",
     "notes": "Die Recherche-Spannen sind interne Vergleichswerte aus der Portal-Analyse vom September 2026 und keine offiziellen Annahmeschwellen der Plattformen."
@@ -57,7 +57,7 @@
           "rejected": "2026-09-28",
           "sourceBranch": "codex/improve-mobile-onboarding-copy",
           "submittedCommit": "90fbf9e1ec0660057b0fef341de060c076a6b978",
-          "submittedNote": "Neu bei GameMonetize eingereicht; das Ergebnis ist offen.",
+          "submittedNote": "Bei GameMonetize eingereicht.",
           "rejectedNote": "Abgelehnt mit der Rückmeldung: „Do not meet quality standards“.",
           "notes": "Laut GameMonetize erfüllt der eingereichte Build die Qualitätsstandards nicht. Eine genauere Begründung wurde nicht mitgeteilt."
         },
@@ -117,7 +117,7 @@
           "rejected": "2026-09-28",
           "sourceBranch": "codex/gamemonetize-integration",
           "submittedCommit": "9e6c5da44149da7d92514255a0132b5815b77990",
-          "submittedNote": "Neu bei GameMonetize eingereicht; das Ergebnis ist offen.",
+          "submittedNote": "Bei GameMonetize eingereicht.",
           "rejectedNote": "Abgelehnt mit der Rückmeldung: „Do not meet quality standards“.",
           "notes": "Laut GameMonetize erfüllt der eingereichte Build die Qualitätsstandards nicht. Eine genauere Begründung wurde nicht mitgeteilt."
         },
