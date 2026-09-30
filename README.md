@@ -84,10 +84,12 @@ Diese internen Werte konsistent verwenden:
 - `planned`
 - `not_submitted`
 - `review`
+- `changes_requested`
+- `approved`
 - `live`
 - `rejected`
 
-Eine Einreichung ist ein datiertes Ereignis (`submitted`), kein dauerhafter Status. Solange die Entscheidung aussteht, lautet der aktuelle Status immer `review` („In Prüfung“).
+Eine Einreichung ist ein datiertes Ereignis (`submitted`), kein dauerhafter Status. Solange die Entscheidung ohne Rückmeldung aussteht, lautet der aktuelle Status `review` („In Prüfung“). Verlangt das Portal eine Korrektur, wird `changes_requested` verwendet. Ist ein Spiel freigegeben, aber noch nicht veröffentlicht, lautet der Status `approved`; erst nach der tatsächlichen Veröffentlichung gilt `live`.
 
 ## Portal-Eignung
 

@@ -1,8 +1,8 @@
 {
   "meta": {
     "title": "emfau Game Ops",
-    "version": "0.5.2",
-    "updated": "2026-09-28",
+    "version": "0.6.0",
+    "updated": "2026-09-30",
     "currency": "EUR",
     "notes": "Die Recherche-Spannen sind interne Vergleichswerte aus der Portal-Analyse vom September 2026 und keine offiziellen Annahmeschwellen der Plattformen."
   },
@@ -85,7 +85,7 @@
         "developmentBranch": "main",
         "pagesUrl": "https://emfau88.github.io/galalaxy/"
       },
-      "nextAction": "Ergebnis der Y8-Prüfung erfassen und die GameMonetize-Qualitätsablehnung vor der nächsten Einreichung auswerten",
+      "nextAction": "Von Y8 gemeldete WASD-Steuerung prüfen, nötigenfalls korrigieren und den aktualisierten Build erneut einreichen",
       "issues": ["HUD schwächer als gewünscht", "Uneinheitliche visuelle Assets", "Bisher geringe Sichtbarkeit auf Kongregate"],
       "platforms": {
         "kongregate": {
@@ -104,12 +104,13 @@
           "notes": "Im Vergleich zu HEXFRONT sehr geringe Sichtbarkeit; das gilt nicht als Beleg gegen eine Eignung für andere Portale."
         },
         "y8": {
-          "status": "review",
+          "status": "changes_requested",
           "submitted": "2026-09-26",
           "sourceBranch": "codex/y8-integration",
           "submittedCommit": "24c96c595bb62905e2e1594824b489378c5d2e3b",
-          "submittedNote": "Bei Y8 eingereicht; die Prüfung läuft.",
-          "notes": "Aktuellsten Build eingereicht."
+          "submittedNote": "Bei Y8 eingereicht.",
+          "feedbackNote": "Y8 meldet, dass die WASD-Steuerung nicht funktioniere, und verlangt eine Änderung. Die Ursache ist noch zu prüfen.",
+          "notes": "Änderung angefordert; der eingereichte Build ist noch nicht freigegeben."
         },
         "gamemonetize": {
           "status": "rejected",
@@ -138,7 +139,7 @@
       "name": "ROOSTER RAGE",
       "subtitle": "Top-down-Survivor",
       "image": "assets/games/rooster-rage.webp",
-      "status": "review",
+      "status": "approved",
       "qualityScore": 73,
       "repo": "https://github.com/emfau88/RoosterRage",
       "github": {
@@ -146,16 +147,17 @@
         "developmentBranch": "master",
         "pagesUrl": "https://emfau88.github.io/RoosterRage/"
       },
-      "nextAction": "Ergebnis der Kongregate-Prüfung erfassen; nach bestätigtem Live-Build breit einreichen",
+      "nextAction": "Den bei Kongregate freigegebenen Produktions-Build live schalten und anschließend die Veröffentlichung erfassen",
       "issues": ["Veröffentlichungsreif statt perfekt", "Letztes Balancing und Präsentations-Polishing optional"],
       "platforms": {
         "kongregate": {
-          "status": "review",
+          "status": "approved",
           "submitted": "2026-09-25",
+          "acceptanceConfirmed": true,
           "sourceBranch": "codex/kongregate-upload",
           "submittedCommit": "fe755230a3601580dc6bfdcb90fba31893b6913f",
           "submittedNote": "Nach der formalen Zurückweisung korrigiert und erneut eingereicht.",
-          "notes": "Aktuell in Prüfung. Die erste Zurückweisung war formal und keine bekannte Qualitätsablehnung.",
+          "notes": "Von Kongregate zur Produktion freigegeben, aber noch nicht live geschaltet. Das genaue Freigabedatum ist nicht bekannt.",
           "previousEvents": [
             {"date": "2026-09-21", "type": "submission", "note": "Erste Einreichung bei Kongregate."},
             {"date": "2026-09-21", "type": "rejection", "note": "Formal zurückgewiesen: Beschreibung beziehungsweise Submission-Angaben fehlten; keine bekannte Qualitätsablehnung."}

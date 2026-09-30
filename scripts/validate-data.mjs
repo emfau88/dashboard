@@ -3,9 +3,9 @@ import fs from 'node:fs';
 const data=JSON.parse(fs.readFileSync(new URL('../data.json',import.meta.url),'utf8'));
 const errors=[];
 const warnings=[];
-const allowedStatuses=new Set(['development','planned','not_submitted','review','live','rejected']);
-const allowedEventTypes=new Set(['submission','acceptance','publication','rejection']);
-const dateFields=['submitted','accepted','published','rejected','playsAsOf'];
+const allowedStatuses=new Set(['development','planned','not_submitted','review','changes_requested','approved','live','rejected']);
+const allowedEventTypes=new Set(['submission','change_request','acceptance','publication','rejection']);
+const dateFields=['submitted','changeRequested','accepted','published','rejected','playsAsOf'];
 const datePattern=/^\d{4}-\d{2}-\d{2}$/;
 
 function error(message){errors.push(message)}
@@ -44,6 +44,7 @@ for(const game of data.games){
       if(value&&data.meta?.updated&&value>data.meta.updated)error(`${game.id}/${portalId}: ${field} liegt nach meta.updated.`);
     }
     assertOrder(placement.submitted,placement.accepted,`${game.id}/${portalId} Einreichung/Annahme`);
+    assertOrder(placement.submitted,placement.changeRequested,`${game.id}/${portalId} Einreichung/Änderungsanforderung`);
     assertOrder(placement.submitted,placement.published,`${game.id}/${portalId} Einreichung/Veröffentlichung`);
     assertOrder(placement.submitted,placement.rejected,`${game.id}/${portalId} Einreichung/Ablehnung`);
     assertOrder(placement.accepted,placement.published,`${game.id}/${portalId} Annahme/Veröffentlichung`);
@@ -51,6 +52,8 @@ for(const game of data.games){
     if(placement.acceptanceConfirmed!=null&&typeof placement.acceptanceConfirmed!=='boolean')error(`${game.id}/${portalId}: acceptanceConfirmed muss ein Boolean sein.`);
     if(placement.status==='live'&&!placement.accepted)warn(placement.acceptanceConfirmed?`${game.id}/${portalId}: Annahme bestätigt, genaues Datum fehlt.`:`${game.id}/${portalId}: Annahmedatum ist nicht bekannt.`);
     if(placement.status==='rejected'&&!placement.rejected)warn(`${game.id}/${portalId}: Ablehnungsdatum fehlt.`);
+    if(placement.status==='approved'&&!placement.accepted)warn(`${game.id}/${portalId}: Freigabe bestätigt, genaues Datum fehlt.`);
+    if(placement.status==='changes_requested'&&!placement.changeRequested)warn(`${game.id}/${portalId}: Änderungsanforderung bestätigt, genaues Datum fehlt.`);
     for(const event of placement.previousEvents||[]){
       if(!allowedEventTypes.has(event.type))error(`${game.id}/${portalId}: unbekannter historischer Ereignistyp ${event.type}.`);
       if(!isValidDate(event.date||''))error(`${game.id}/${portalId}: historisches Ereignis ohne gültiges ISO-Datum.`);
