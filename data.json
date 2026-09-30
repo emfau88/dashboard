@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "emfau Game Ops",
-    "version": "0.6.0",
+    "version": "0.6.1",
     "updated": "2026-09-30",
     "currency": "EUR",
     "notes": "Die Recherche-Spannen sind interne Vergleichswerte aus der Portal-Analyse vom September 2026 und keine offiziellen Annahmeschwellen der Plattformen."
@@ -106,6 +106,7 @@
         "y8": {
           "status": "changes_requested",
           "submitted": "2026-09-26",
+          "changeRequested": "2026-09-30",
           "sourceBranch": "codex/y8-integration",
           "submittedCommit": "24c96c595bb62905e2e1594824b489378c5d2e3b",
           "submittedNote": "Bei Y8 eingereicht.",
