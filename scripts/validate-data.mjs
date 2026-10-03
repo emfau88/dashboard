@@ -4,8 +4,8 @@ const data=JSON.parse(fs.readFileSync(new URL('../data.json',import.meta.url),'u
 const errors=[];
 const warnings=[];
 const allowedStatuses=new Set(['development','planned','not_submitted','review','changes_requested','approved','live','rejected']);
-const allowedEventTypes=new Set(['submission','change_request','acceptance','publication','rejection']);
-const dateFields=['submitted','changeRequested','accepted','published','rejected','playsAsOf'];
+const allowedEventTypes=new Set(['submission','change_request','resubmission','acceptance','publication','rejection']);
+const dateFields=['submitted','changeRequested','revisionSubmitted','accepted','published','rejected','playsAsOf'];
 const datePattern=/^\d{4}-\d{2}-\d{2}$/;
 
 function error(message){errors.push(message)}
@@ -45,11 +45,13 @@ for(const game of data.games){
     }
     assertOrder(placement.submitted,placement.accepted,`${game.id}/${portalId} Einreichung/Annahme`);
     assertOrder(placement.submitted,placement.changeRequested,`${game.id}/${portalId} Einreichung/Änderungsanforderung`);
+    assertOrder(placement.submitted,placement.revisionSubmitted,`${game.id}/${portalId} Einreichung/Überarbeitung`);
     assertOrder(placement.submitted,placement.published,`${game.id}/${portalId} Einreichung/Veröffentlichung`);
     assertOrder(placement.submitted,placement.rejected,`${game.id}/${portalId} Einreichung/Ablehnung`);
     assertOrder(placement.accepted,placement.published,`${game.id}/${portalId} Annahme/Veröffentlichung`);
     if(placement.status==='live'&&!placement.published)warn(`${game.id}/${portalId}: Live-Status ohne Veröffentlichungsdatum.`);
     if(placement.acceptanceConfirmed!=null&&typeof placement.acceptanceConfirmed!=='boolean')error(`${game.id}/${portalId}: acceptanceConfirmed muss ein Boolean sein.`);
+    if(placement.revisionSubmittedConfirmed!=null&&typeof placement.revisionSubmittedConfirmed!=='boolean')error(`${game.id}/${portalId}: revisionSubmittedConfirmed muss ein Boolean sein.`);
     if(placement.status==='live'&&!placement.accepted)warn(placement.acceptanceConfirmed?`${game.id}/${portalId}: Annahme bestätigt, genaues Datum fehlt.`:`${game.id}/${portalId}: Annahmedatum ist nicht bekannt.`);
     if(placement.status==='rejected'&&!placement.rejected)warn(`${game.id}/${portalId}: Ablehnungsdatum fehlt.`);
     if(placement.status==='approved'&&!placement.accepted)warn(`${game.id}/${portalId}: Freigabe bestätigt, genaues Datum fehlt.`);

@@ -118,6 +118,8 @@ function portalDateLines(p){
   else if(p.status==='live')lines.push({label:'Annahme',uncertain:true,detail:'Datum unbekannt'});
   if(p.changeRequested)lines.push({label:'Änderung angefordert',date:p.changeRequested});
   else if(p.status==='changes_requested')lines.push({label:'Änderung angefordert',uncertain:true,detail:'Datum unbekannt'});
+  if(p.revisionSubmitted)lines.push({label:'Überarbeitung nachgereicht',date:p.revisionSubmitted});
+  else if(p.revisionSubmittedConfirmed)lines.push({label:'Überarbeitung nachgereicht',uncertain:true,detail:'Datum unbekannt'});
   if(p.published&&p.published!==p.accepted)lines.push({label:'Live seit',date:p.published});
   if(p.status==='rejected')lines.push(p.rejected?{label:'Abgelehnt',date:p.rejected}:{label:'Ablehnung',missing:true});
   return lines;
@@ -130,7 +132,7 @@ function portalDetailsHtml(g,p){
   const url=commit&&g.github?`https://github.com/${g.github.repo}/commit/${commit}`:null;
   const buildLabel=p.status==='live'?'Aktueller Portal-Build':p.status==='approved'?'Freigegebener Build':p.status==='changes_requested'?'Build mit Änderungsbedarf':p.status==='rejected'?'Abgelehnter Build':'Eingereichter Build';
   const build=version?(url?`<a class="matrix-version" href="${esc(url)}" target="_blank" rel="noreferrer">${buildLabel} ${esc(version)} ↗</a>`:`<div class="matrix-version">${buildLabel} ${esc(version)}</div>`):'';
-  const feedback=p.status==='changes_requested'&&p.feedbackNote?`<div class="matrix-feedback">${esc(p.feedbackNote)}</div>`:'';
+  const feedback=p.status==='changes_requested'&&p.feedbackNote?`<div class="matrix-feedback">${esc(p.feedbackNote)}</div>`:p.revisionSubmittedConfirmed&&p.revisionSubmittedNote?`<div class="matrix-feedback">${esc(p.revisionSubmittedNote)}</div>`:'';
   return `${dates?`<div class="matrix-meta">${dates}</div>`:''}${build}${feedback}`;
 }
 
@@ -176,18 +178,20 @@ function renderTimeline(d){
   d.games.forEach(g=>Object.entries(g.platforms).forEach(([pid,p])=>{
     const portalData=d.portals.find(x=>x.id===pid)||{id:pid,name:pid},portal=portalData.name;
     (p.previousEvents||[]).forEach((event,index)=>{
-      const typeLabels={submission:'Einreichung',change_request:'Änderungsanforderung',acceptance:'Annahme',publication:'Veröffentlichung',rejection:'Ablehnung'};
-      const titles={submission:`${g.name} → ${portal}`,change_request:`${portal} verlangt eine Änderung an ${g.name}`,acceptance:`${g.name} von ${portal} angenommen`,publication:`${g.name} auf ${portal} veröffentlicht`,rejection:`${g.name} von ${portal} abgelehnt`};
+      const typeLabels={submission:'Einreichung',change_request:'Änderungsanforderung',resubmission:'Überarbeitung',acceptance:'Annahme',publication:'Veröffentlichung',rejection:'Ablehnung'};
+      const titles={submission:`${g.name} → ${portal}`,change_request:`${portal} verlangt eine Änderung an ${g.name}`,resubmission:`Überarbeitung von ${g.name} bei ${portal} nachgereicht`,acceptance:`${g.name} von ${portal} angenommen`,publication:`${g.name} auf ${portal} veröffentlicht`,rejection:`${g.name} von ${portal} abgelehnt`};
       events.push({date:event.date,type:typeLabels[event.type]||event.type,kind:event.type,title:titles[event.type]||`${g.name} · ${portal}`,text:event.note||'Historisches Ereignis.',order:index+1,game:g,portal:portalData});
     });
     if(p.submitted)events.push({date:p.submitted,type:'Einreichung',kind:'submission',title:`${g.name} → ${portal}`,text:p.submittedNote||'Beim Portal eingereicht.',order:0,game:g,portal:portalData});
     if(p.changeRequested)events.push({date:p.changeRequested,type:'Änderungsanforderung',kind:'change_request',title:`${portal} verlangt eine Änderung an ${g.name}`,text:p.feedbackNote||p.notes||'Das Portal verlangt eine Änderung.',order:1,game:g,portal:portalData});
+    if(p.revisionSubmitted)events.push({date:p.revisionSubmitted,type:'Überarbeitung',kind:'resubmission',title:`Überarbeitung von ${g.name} bei ${portal} nachgereicht`,text:p.revisionSubmittedNote||'Die angeforderte Überarbeitung wurde nachgereicht.',order:1,game:g,portal:portalData});
     if(p.accepted)events.push({date:p.accepted,type:'Annahme',kind:'acceptance',title:`${g.name} von ${portal} angenommen`,text:p.acceptedNote||'Die Annahme wurde bestätigt.',order:1,game:g,portal:portalData});
     if(p.published&&p.published!==p.accepted)events.push({date:p.published,type:'Veröffentlichung',kind:'publication',title:`${g.name} auf ${portal} veröffentlicht`,text:p.publishedNote||'Das Spiel ist auf dem Portal live gegangen.',order:2,game:g,portal:portalData});
     if(p.rejected)events.push({date:p.rejected,type:'Ablehnung',kind:'rejection',title:`${g.name} von ${portal} abgelehnt`,text:p.rejectedNote||p.notes||'Die Ablehnung wurde erfasst.',order:2,game:g,portal:portalData});
     else if(p.status==='rejected')missing.push(`${g.name}: Ablehnungsdatum bei ${portal} fehlt.`);
     if(p.status==='approved'&&!p.accepted)missing.push(`${g.name}: Freigabe bei ${portal} ist bestätigt; das genaue Datum fehlt.`);
     if(p.status==='changes_requested'&&!p.changeRequested)missing.push(`${g.name}: Änderungsanforderung bei ${portal} ist bestätigt; das genaue Datum fehlt.`);
+    if(p.revisionSubmittedConfirmed&&!p.revisionSubmitted)missing.push(`${g.name}: Überarbeitung bei ${portal} wurde nachgereicht; das genaue Datum fehlt.`);
     if(p.status==='live'&&!p.accepted)missing.push(p.acceptanceConfirmed?`${g.name}: Annahme bei ${portal} ist bestätigt; das genaue Datum fehlt.`:`${g.name}: Annahmedatum bei ${portal} ist nicht bekannt; erfasst ist nur das Live-Datum.`);
   }));
   events.sort((a,b)=>b.date.localeCompare(a.date)||(b.order||0)-(a.order||0)||a.title.localeCompare(b.title,'de'));
