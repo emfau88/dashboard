@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "emfau Game Ops",
-    "version": "0.8.0",
+    "version": "0.9.0",
     "updated": "2026-10-05",
     "currency": "EUR",
     "notes": "Die Recherche-Spannen sind interne Vergleichswerte aus der Portal-Analyse vom September 2026 und keine offiziellen Annahmeschwellen der Plattformen."
@@ -43,7 +43,10 @@
           "sourceBranch": "codex/improve-mobile-onboarding-copy",
           "submittedCommit": "90fbf9e1ec0660057b0fef341de060c076a6b978",
           "submittedNote": "Neuesten verbesserten Build eingereicht; die Prüfung läuft.",
-          "notes": "Aktuellsten Build eingereicht. Das Ergebnis der Prüfung ist noch nicht im Dashboard erfasst."
+          "notes": "Aktuellsten Build eingereicht. Y8 zeigt am 05.10.2026 weiterhin den Status „In review“.",
+          "statusUpdates": [
+            {"date": "2026-10-05", "status": "review", "note": "Zwischenstand: Y8 zeigt für HEXFRONT weiterhin „In review“; der letzte Portal-Update-Hinweis datiert vom 01.10.2026."}
+          ]
         },
         "coolmath": {
           "status": "rejected",
@@ -85,7 +88,7 @@
         "developmentBranch": "main",
         "pagesUrl": "https://emfau88.github.io/galalaxy/"
       },
-      "nextAction": "Auf die erneute Y8-Prüfung nach der nachgereichten WASD-Korrektur warten und das Ergebnis erfassen",
+      "nextAction": "Den Y8-Livegang und die erste Resonanz beobachten; weitere Portal-Ergebnisse weiterhin erfassen",
       "issues": ["HUD schwächer als gewünscht", "Uneinheitliche visuelle Assets", "Bisher geringe Sichtbarkeit auf Kongregate"],
       "platforms": {
         "kongregate": {
@@ -104,16 +107,24 @@
           "notes": "Im Vergleich zu HEXFRONT sehr geringe Sichtbarkeit; das gilt nicht als Beleg gegen eine Eignung für andere Portale."
         },
         "y8": {
-          "status": "review",
+          "status": "live",
           "submitted": "2026-09-26",
           "changeRequested": "2026-09-30",
           "revisionSubmittedConfirmed": true,
+          "acceptanceConfirmed": true,
+          "published": "2026-10-05",
           "sourceBranch": "codex/y8-integration",
           "submittedCommit": "24c96c595bb62905e2e1594824b489378c5d2e3b",
+          "deployedCommit": "24c96c595bb62905e2e1594824b489378c5d2e3b",
+          "publicUrl": "https://de.y8.com/games/galalaxy",
           "submittedNote": "Bei Y8 eingereicht.",
           "feedbackNote": "Y8 meldet, dass die WASD-Steuerung nicht funktioniere, und verlangt eine Änderung. Die Ursache ist noch zu prüfen.",
           "revisionSubmittedNote": "Die bemängelte WASD-Steuerung wurde überarbeitet und vor einigen Tagen erneut bei Y8 eingereicht; das genaue Datum ist nicht bekannt.",
-          "notes": "Überarbeitung nachgereicht; seitdem keine weitere Rückmeldung von Y8. Die Prüfung läuft erneut."
+          "publishedNote": "GALALAXY ist über die öffentliche Y8-Spielseite aufrufbar und spielbar.",
+          "notes": "Am 05.10.2026 öffentlich auf Y8 spielbar. Im Entwicklerportal wurde am selben Tag noch „Scheduled“ angezeigt.",
+          "statusUpdates": [
+            {"date": "2026-10-05", "status": "scheduled", "note": "Zwischenstand: Das Y8-Entwicklerportal zeigt „Scheduled“; die öffentliche Spielseite ist bereits spielbar."}
+          ]
         },
         "gamemonetize": {
           "status": "rejected",
@@ -297,8 +308,8 @@
       "qualityRange": "Große Bandbreite veröffentlichter Spiele; keine verlässliche Annahmeschwelle ermittelt",
       "qualityRangeConfidence": "niedrig",
       "reach": "Großes direktes Publikum; der Betreiber wirbt derzeit mit mehr als 30 Mio. monatlichen Spielern",
-      "researchNote": "Die Unsicherheit betrifft die nicht öffentliche Prüfschwelle, nicht ein erkanntes Qualitätsproblem bei HEXFRONT oder GALALAXY.",
-      "fits": {"hexfront": "good", "galalaxy": "good", "rooster-rage": "good", "kesselkrawall": "unknown", "core-arena": "good", "more-than-wombat": "unknown"}
+      "researchNote": "GALALAXY ist seit dem 05.10.2026 öffentlich auf Y8 spielbar, nachdem zuvor eine WASD-Korrektur verlangt wurde. Im Entwicklerportal stand am selben Tag noch „Scheduled“. HEXFRONT befindet sich weiterhin in Prüfung.",
+      "fits": {"hexfront": "good", "galalaxy": "very_good", "rooster-rage": "good", "kesselkrawall": "unknown", "core-arena": "good", "more-than-wombat": "unknown"}
     },
     {
       "id": "gamemonetize",

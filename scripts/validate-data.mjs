@@ -3,9 +3,9 @@ import fs from 'node:fs';
 const data=JSON.parse(fs.readFileSync(new URL('../data.json',import.meta.url),'utf8'));
 const errors=[];
 const warnings=[];
-const allowedStatuses=new Set(['development','planned','not_submitted','review','changes_requested','approved','live','rejected']);
+const allowedStatuses=new Set(['development','planned','not_submitted','review','changes_requested','scheduled','approved','live','rejected']);
 const allowedEventTypes=new Set(['submission','change_request','resubmission','acceptance','publication','rejection']);
-const dateFields=['submitted','changeRequested','revisionSubmitted','accepted','published','rejected','playsAsOf'];
+const dateFields=['submitted','changeRequested','revisionSubmitted','scheduledAt','accepted','published','rejected','playsAsOf'];
 const datePattern=/^\d{4}-\d{2}-\d{2}$/;
 
 function error(message){errors.push(message)}
@@ -60,6 +60,11 @@ for(const game of data.games){
       if(!allowedEventTypes.has(event.type))error(`${game.id}/${portalId}: unbekannter historischer Ereignistyp ${event.type}.`);
       if(!isValidDate(event.date||''))error(`${game.id}/${portalId}: historisches Ereignis ohne gültiges ISO-Datum.`);
       if(event.date&&data.meta?.updated&&event.date>data.meta.updated)error(`${game.id}/${portalId}: historisches Ereignis ${event.date} liegt nach meta.updated.`);
+    }
+    for(const update of placement.statusUpdates||[]){
+      if(!allowedStatuses.has(update.status))error(`${game.id}/${portalId}: unbekannter Zwischenstatus ${update.status}.`);
+      if(!isValidDate(update.date||''))error(`${game.id}/${portalId}: Zwischenstand ohne gültiges ISO-Datum.`);
+      if(update.date&&data.meta?.updated&&update.date>data.meta.updated)error(`${game.id}/${portalId}: Zwischenstand ${update.date} liegt nach meta.updated.`);
     }
     for(const field of ['deployedCommit','submittedCommit','rejectedCommit']){
       if(placement[field]&&!/^[0-9a-f]{40}$/i.test(placement[field]))error(`${game.id}/${portalId}: ${field} ist keine vollständige Commit-SHA.`);

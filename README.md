@@ -85,11 +85,12 @@ Diese internen Werte konsistent verwenden:
 - `not_submitted`
 - `review`
 - `changes_requested`
+- `scheduled`
 - `approved`
 - `live`
 - `rejected`
 
-Eine Einreichung ist ein datiertes Ereignis (`submitted`), kein dauerhafter Status. Solange die Entscheidung ohne Rückmeldung aussteht, lautet der aktuelle Status `review` („In Prüfung“). Verlangt das Portal eine Korrektur, wird `changes_requested` verwendet. Ist ein Spiel freigegeben, aber noch nicht veröffentlicht, lautet der Status `approved`; erst nach der tatsächlichen Veröffentlichung gilt `live`.
+Eine Einreichung ist ein datiertes Ereignis (`submitted`), kein dauerhafter Status. Solange die Entscheidung ohne Rückmeldung aussteht, lautet der aktuelle Status `review` („In Prüfung“). Verlangt das Portal eine Korrektur, wird `changes_requested` verwendet. Ist ein Spiel freigegeben, aber noch nicht veröffentlicht, lautet der Status `approved`. Hat ein Portal die Veröffentlichung bereits eingeplant, ist sie aber noch nicht öffentlich bestätigt, wird `scheduled` verwendet. Erst sobald die öffentliche Spielseite samt Player ohne Entwicklerzugang erreichbar ist, gilt `live`.
 
 ## Portal-Eignung
 
