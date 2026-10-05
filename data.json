@@ -1,8 +1,8 @@
 {
   "meta": {
     "title": "emfau Game Ops",
-    "version": "0.7.0",
-    "updated": "2026-10-03",
+    "version": "0.8.0",
+    "updated": "2026-10-05",
     "currency": "EUR",
     "notes": "Die Recherche-Spannen sind interne Vergleichswerte aus der Portal-Analyse vom September 2026 und keine offiziellen Annahmeschwellen der Plattformen."
   },
@@ -185,7 +185,7 @@
       "name": "KESSELKRAWALL",
       "subtitle": "Magischer Mobile-Autobattler",
       "image": "assets/games/kesselkrawall.webp",
-      "status": "development",
+      "status": "review",
       "qualityScore": null,
       "repo": "https://github.com/emfau88/KesselKrawall",
       "github": {
@@ -193,10 +193,17 @@
         "developmentBranch": "main",
         "pagesUrl": "https://emfau88.github.io/KesselKrawall/"
       },
-      "nextAction": "CrazyGames-Qualitätsfeedback auswerten und vor einer weiteren Portal-Einreichung gezielt nachbessern",
-      "issues": ["CrazyGames lehnte die Gesamtqualität ab", "Keine weitere bestätigte Portal-Einreichung"],
+      "nextAction": "Ergebnis der Kongregate-Prüfung abwarten und erfassen; das frühere CrazyGames-Qualitätsfeedback bei weiteren Verbesserungen berücksichtigen",
+      "issues": ["CrazyGames lehnte die Gesamtqualität ab", "Kongregate-Prüfung läuft"],
       "platforms": {
-        "kongregate": {"status": "not_submitted"},
+        "kongregate": {
+          "status": "review",
+          "submitted": "2026-10-05",
+          "sourceBranch": "main",
+          "submittedCommit": "e41507eebc63507909d46b26973dd76c4b24e76b",
+          "submittedNote": "Aktuellen main-Build bei Kongregate zur Prüfung eingereicht.",
+          "notes": "Die Kongregate-Prüfung läuft; ein Ergebnis liegt noch nicht vor."
+        },
         "y8": {"status": "not_submitted"},
         "gamemonetize": {"status": "not_submitted"},
         "gamepix": {"status": "not_submitted"},
@@ -279,7 +286,7 @@
       "qualityRange": "~61–65 typisch in der Recherche-Stichprobe",
       "qualityRangeConfidence": "mittel",
       "reach": "Etablierte direkte Plattform; Platzierungen auf der Startseite oder unter New & Updated können deutliche Besucherspitzen erzeugen",
-      "researchNote": "HEXFRONT und GALALAXY wurden tatsächlich angenommen. Das ist aussagekräftiger als eine abgeleitete Schwelle.",
+      "researchNote": "HEXFRONT, GALALAXY und ROOSTER RAGE wurden tatsächlich angenommen beziehungsweise veröffentlicht. KESSELKRAWALL ist seit dem 05.10.2026 in Prüfung. Diese realen Ergebnisse sind aussagekräftiger als eine abgeleitete Schwelle.",
       "fits": {"hexfront": "very_good", "galalaxy": "very_good", "rooster-rage": "very_good", "kesselkrawall": "unknown", "core-arena": "good", "more-than-wombat": "unknown"}
     },
     {
