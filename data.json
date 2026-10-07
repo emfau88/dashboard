@@ -1,8 +1,8 @@
 {
   "meta": {
     "title": "emfau Game Ops",
-    "version": "0.9.0",
-    "updated": "2026-10-05",
+    "version": "0.10.0",
+    "updated": "2026-10-07",
     "currency": "EUR",
     "notes": "Die Recherche-Spannen sind interne Vergleichswerte aus der Portal-Analyse vom September 2026 und keine offiziellen Annahmeschwellen der Plattformen."
   },
@@ -161,8 +161,8 @@
         "developmentBranch": "master",
         "pagesUrl": "https://emfau88.github.io/RoosterRage/"
       },
-      "nextAction": "Die erste Resonanz auf Kongregate beobachten und anschließend die nächsten geeigneten Portale priorisieren",
-      "issues": ["Veröffentlichungsreif statt perfekt", "Letztes Balancing und Präsentations-Polishing optional"],
+      "nextAction": "Das Ergebnis der Y8-Prüfung abwarten und parallel die Resonanz auf Kongregate beobachten",
+      "issues": ["Y8-Prüfung läuft", "Veröffentlichungsreif statt perfekt", "Letztes Balancing und Präsentations-Polishing optional"],
       "platforms": {
         "kongregate": {
           "status": "live",
@@ -180,7 +180,14 @@
             {"date": "2026-09-21", "type": "rejection", "note": "Formal zurückgewiesen: Beschreibung beziehungsweise Submission-Angaben fehlten; keine bekannte Qualitätsablehnung."}
           ]
         },
-        "y8": {"status": "planned"},
+        "y8": {
+          "status": "review",
+          "submitted": "2026-10-07",
+          "sourceBranch": "master",
+          "submittedCommit": "328843a042f19f551f53e9ea17e9922a7100417e",
+          "submittedNote": "Aktuellen master-Build bei Y8 zur Prüfung eingereicht.",
+          "notes": "Am 07.10.2026 bei Y8 eingereicht; die Prüfung läuft. Der zugeordnete Build entspricht dem neuesten Repository-Stand vom 05.10.2026."
+        },
         "gamemonetize": {"status": "planned"},
         "gamepix": {"status": "planned"},
         "gamedistribution": {"status": "planned"},
@@ -308,7 +315,7 @@
       "qualityRange": "Große Bandbreite veröffentlichter Spiele; keine verlässliche Annahmeschwelle ermittelt",
       "qualityRangeConfidence": "niedrig",
       "reach": "Großes direktes Publikum; der Betreiber wirbt derzeit mit mehr als 30 Mio. monatlichen Spielern",
-      "researchNote": "GALALAXY ist seit dem 05.10.2026 öffentlich auf Y8 spielbar, nachdem zuvor eine WASD-Korrektur verlangt wurde. Im Entwicklerportal stand am selben Tag noch „Scheduled“. HEXFRONT befindet sich weiterhin in Prüfung.",
+      "researchNote": "GALALAXY ist seit dem 05.10.2026 öffentlich auf Y8 spielbar, nachdem zuvor eine WASD-Korrektur verlangt wurde. Im Entwicklerportal stand am selben Tag noch „Scheduled“. HEXFRONT und seit dem 07.10.2026 auch ROOSTER RAGE befinden sich in Prüfung.",
       "fits": {"hexfront": "good", "galalaxy": "very_good", "rooster-rage": "good", "kesselkrawall": "unknown", "core-arena": "good", "more-than-wombat": "unknown"}
     },
     {
