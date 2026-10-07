@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "emfau Game Ops",
-    "version": "0.10.0",
+    "version": "0.11.0",
     "updated": "2026-10-07",
     "currency": "EUR",
     "notes": "Die Recherche-Spannen sind interne Vergleichswerte aus der Portal-Analyse vom September 2026 und keine offiziellen Annahmeschwellen der Plattformen."
@@ -211,8 +211,8 @@
         "developmentBranch": "main",
         "pagesUrl": "https://emfau88.github.io/KesselKrawall/"
       },
-      "nextAction": "Ergebnis der Kongregate-Prüfung abwarten und erfassen; das frühere CrazyGames-Qualitätsfeedback bei weiteren Verbesserungen berücksichtigen",
-      "issues": ["CrazyGames lehnte die Gesamtqualität ab", "Kongregate-Prüfung läuft"],
+      "nextAction": "Ergebnisse der laufenden Prüfungen bei Kongregate und Y8 abwarten und erfassen",
+      "issues": ["CrazyGames lehnte die Gesamtqualität ab", "Kongregate-Prüfung läuft", "Y8-Prüfung läuft"],
       "platforms": {
         "kongregate": {
           "status": "review",
@@ -222,7 +222,15 @@
           "submittedNote": "Aktuellen main-Build bei Kongregate zur Prüfung eingereicht.",
           "notes": "Die Kongregate-Prüfung läuft; ein Ergebnis liegt noch nicht vor."
         },
-        "y8": {"status": "not_submitted"},
+        "y8": {
+          "status": "review",
+          "portalTitle": "Cauldron Rumble: Merge & Battle",
+          "submitted": "2026-10-07",
+          "sourceBranch": "main",
+          "submittedCommit": "83d17ab14ff265559b58652e9040eecef7d7ad51",
+          "submittedNote": "Unter dem Portalnamen „Cauldron Rumble: Merge & Battle“ bei Y8 zur Prüfung eingereicht.",
+          "notes": "Am 07.10.2026 bei Y8 eingereicht; die Prüfung läuft. Der zugeordnete Build entspricht dem neuesten main-Stand vom 05.10.2026."
+        },
         "gamemonetize": {"status": "not_submitted"},
         "gamepix": {"status": "not_submitted"},
         "gamedistribution": {"status": "not_submitted"},
@@ -315,7 +323,7 @@
       "qualityRange": "Große Bandbreite veröffentlichter Spiele; keine verlässliche Annahmeschwelle ermittelt",
       "qualityRangeConfidence": "niedrig",
       "reach": "Großes direktes Publikum; der Betreiber wirbt derzeit mit mehr als 30 Mio. monatlichen Spielern",
-      "researchNote": "GALALAXY ist seit dem 05.10.2026 öffentlich auf Y8 spielbar, nachdem zuvor eine WASD-Korrektur verlangt wurde. Im Entwicklerportal stand am selben Tag noch „Scheduled“. HEXFRONT und seit dem 07.10.2026 auch ROOSTER RAGE befinden sich in Prüfung.",
+      "researchNote": "GALALAXY ist seit dem 05.10.2026 öffentlich auf Y8 spielbar, nachdem zuvor eine WASD-Korrektur verlangt wurde. Im Entwicklerportal stand am selben Tag noch „Scheduled“. HEXFRONT sowie seit dem 07.10.2026 ROOSTER RAGE und KESSELKRAWALL befinden sich in Prüfung.",
       "fits": {"hexfront": "good", "galalaxy": "very_good", "rooster-rage": "good", "kesselkrawall": "unknown", "core-arena": "good", "more-than-wombat": "unknown"}
     },
     {

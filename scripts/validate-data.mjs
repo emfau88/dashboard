@@ -38,6 +38,7 @@ for(const game of data.games){
     const placement=game.platforms[portalId];
     if(!placement){error(`${game.id}: Portal ${portalId} fehlt.`);continue}
     if(!allowedStatuses.has(placement.status))error(`${game.id}/${portalId}: ungültiger Status ${placement.status}.`);
+    if(placement.portalTitle!=null&&(typeof placement.portalTitle!=='string'||!placement.portalTitle.trim()))error(`${game.id}/${portalId}: portalTitle muss eine nicht leere Zeichenkette sein.`);
     for(const field of dateFields){
       const value=placement[field];
       if(value&&!isValidDate(value))error(`${game.id}/${portalId}: ${field} ist kein gültiges ISO-Datum.`);

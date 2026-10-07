@@ -27,12 +27,15 @@ Beim jeweiligen Spiel und Portal:
 ```json
 "gamemonetize": {
   "status": "review",
+  "portalTitle": "Abweichender Titel im Portal",
   "submitted": "2026-09-27",
   "sourceBranch": "main",
   "submittedCommit": "vollständige-commit-sha",
   "notes": "Erste Einreichung"
 }
 ```
+
+`portalTitle` wird nur gepflegt, wenn ein Spiel im Portal unter einem anderen Namen als im Dashboard eingereicht oder veröffentlicht wurde. Der abweichende Name erscheint dann in Distribution und Verlauf.
 
 ### Annahme oder Veröffentlichung erfassen
 
