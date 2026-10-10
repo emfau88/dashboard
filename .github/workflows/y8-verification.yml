@@ -1,0 +1,44 @@
+name: Y8 metrics - integration verification
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - '.github/workflows/deploy-pages.yml'
+      - '.github/workflows/y8-verification.yml'
+      - 'scripts/sync_y8.py'
+      - 'analytics/y8.json'
+      - 'tests/test_y8_metrics.py'
+      - 'index.html'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - name: Checkout proposed changes
+        uses: actions/checkout@v4
+      - name: Offline unit tests
+        run: python -m unittest discover -s tests -v
+      - name: Check archive formats
+        run: |
+          python -c "from scripts.sync_y8 import load_archive; load_archive()"
+          python -c "from scripts.sync_kongregate import load_archive,ARCHIVE; load_archive(ARCHIVE)"
+          node scripts/validate-data.mjs
+      - name: Validate embedded JavaScript syntax
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          page=Path('index.html').read_text(encoding='utf-8')
+          scripts=re.findall(r'<script>([\s\S]*?)</script>',page)
+          assert scripts, 'No inline JavaScript found'
+          Path('/tmp/emfau-dashboard.js').write_text(scripts[-1],encoding='utf-8')
+          PY
+          node --check /tmp/emfau-dashboard.js
+      - name: Verify live Y8 page via the real collector
+        run: python scripts/sync_y8.py --check-live

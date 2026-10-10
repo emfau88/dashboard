@@ -35,14 +35,24 @@ jobs:
         if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
         run: python scripts/sync_kongregate.py
 
+      - name: Y8-Daten abrufen (Zeitplan oder manuell)
+        if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+        id: y8_sync
+        continue-on-error: true
+        run: python scripts/sync_y8.py
+
+      - name: Fehler beim Y8-Abruf sichtbar machen
+        if: steps.y8_sync.outcome == 'failure'
+        run: echo "::warning file=scripts/sync_y8.py::Y8-Statistiken konnten nicht abgerufen werden; letzter gültiger Stand bleibt erhalten."
+
       - name: Neue Tageswerte dauerhaft archivieren
         if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
         run: |
-          if ! git diff --quiet -- analytics/kongregate.json; then
+          if ! git diff --quiet -- analytics/kongregate.json analytics/y8.json; then
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add analytics/kongregate.json
-            git commit -m "chore: update daily Kongregate metrics"
+            git add analytics/kongregate.json analytics/y8.json
+            git commit -m "chore: update daily platform metrics"
             git push origin HEAD:main
           else
             echo "No new metrics to commit."
@@ -50,6 +60,9 @@ jobs:
 
       - name: KPI-Archiv prüfen
         run: python -c "from scripts.sync_kongregate import load_archive, ARCHIVE; load_archive(ARCHIVE)"
+
+      - name: Y8-Archiv prüfen
+        run: python -c "from scripts.sync_y8 import load_archive; load_archive()"
 
       - name: Dashboard-Daten prüfen
         run: node scripts/validate-data.mjs
