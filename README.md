@@ -119,3 +119,19 @@ Danach [http://localhost:8000](http://localhost:8000) öffnen.
 1. Automatische tägliche Kongregate-/Y8-Snapshots, sofern öffentliche Metriken zuverlässig abrufbar sind.
 2. Umsatz- und RPM-Felder je Portal.
 3. Kleines Bearbeitungsformular, falls die direkte JSON-Pflege zu umständlich wird.
+
+## Kongregate: tägliche Performance-Daten (automatisiert)
+
+Das Dashboard zeigt unter **Übersicht → Kongregate · Performance** die drei aktiven Kongregate-Spiele (HEXFRONT, GALALAXY, ROOSTER RAGE). Pro Spiel werden kumulative Plays, Favoriten, Bewertung, Veränderung gegenüber dem **vorherigen vorhandenen Messpunkt** und eine Verlaufskurve angezeigt.
+
+- Datenquelle: öffentliches Kongregate-Metrics-JSON unter `https://www.kongregate.com/games/emfau/<spiel-slug>/metrics.json`.
+- Abrufskript: `scripts/sync_kongregate.py` (Python-Standardbibliothek; kein API-Schlüssel).
+- Zeitreihe: `analytics/kongregate.json`. Historische ältere Messwerte sind als `existing_dashboard` oder `user_reported` markiert; neue Abrufe als `kongregate_metrics` mit tatsächlichem UTC-Zeitstempel.
+- Automatik: `.github/workflows/deploy-pages.yml` sammelt täglich um **07:17 UTC** (bei GitHub eventuell verzögert), committed geänderte öffentliche KPI-Daten und stellt das Dashboard im **selben Workflow-Lauf** bereit. Der Zeitplan beginnt erst, wenn die Änderung in `main` übernommen wurde.
+- Manuell auslösen: **Actions → Game-Ops-Dashboard veröffentlichen → Run workflow**. Ein manueller Durchlauf aktualisiert ebenfalls die Daten.
+- Lokal prüfen: `python -m unittest discover -s tests -v`; nur die Feeds prüfen: `python scripts/sync_kongregate.py --check-live`; Tageswert speichern: `python scripts/sync_kongregate.py`.
+- Ein wiederholter Lauf am selben Kalendertag (Zeitzone Europe/Berlin) erzeugt keinen doppelten Datensatz. Bei einer neuen Zahl wird der Tagesdatensatz aktualisiert. Fehlende Tage werden **nicht** als 0 Plays nachgetragen; ein fehlgeschlagener Feed behält den letzten belegten Wert. Der Abruf meldet Fehler in den Actions-Logs.
+
+Die bisherigen `data.json`-Felder `latestPlays` und `metricsHistory` sind **historische manuell gepflegte Angaben** und werden bewusst nicht überschrieben. Für die neue automatische Performance-Ansicht ist `analytics/kongregate.json` maßgeblich. Alle dort gespeicherten Daten sind **öffentlich**; vertrauliche Umsatzwerte und Zugangsdaten gehören weder in die Datei noch ins Repository.
+
+Das Skript ruft die **öffentlichen kumulativen Gameplays** ab, nicht die internen Kongregate-Developer-KPIs wie DAU, Retention oder geschätzten Werbeumsatz. Ein Tageszuwachs zwischen zwei Snapshots ist nicht automatisch eine vollständig gemessene tägliche Spielerzahl.
