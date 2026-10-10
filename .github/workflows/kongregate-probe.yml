@@ -32,7 +32,7 @@ jobs:
           from pathlib import Path
           import re
           page = Path('index.html').read_text(encoding='utf-8')
-          scripts = re.findall(r'<script(?:\\s[^>]*)?>([\\s\\S]*?)</script>', page)
+          scripts = re.findall(r'<script(?:\s[^>]*)?>([\s\S]*?)</script>', page)
           assert scripts, 'No embedded JS found'
           Path('/tmp/game-ops-js.js').write_text(scripts[-1], encoding='utf-8')
           PY
