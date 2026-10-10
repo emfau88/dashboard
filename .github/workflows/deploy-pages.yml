@@ -48,6 +48,9 @@ jobs:
             echo "No new metrics to commit."
           fi
 
+      - name: KPI-Archiv prüfen
+        run: python -c "from scripts.sync_kongregate import load_archive, ARCHIVE; load_archive(ARCHIVE)"
+
       - name: Dashboard-Daten prüfen
         run: node scripts/validate-data.mjs
 
