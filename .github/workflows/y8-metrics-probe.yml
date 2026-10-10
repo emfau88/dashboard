@@ -37,9 +37,9 @@ jobs:
                   print('MATCH', repr(term), 'COUNT', len(matches))
                   for m in matches[:4]:
                       region=data[max(0,m.start()-180):m.end()+120]
-                      print('CONTEXT:', re.sub(r'\\s+',' ',region)[:470])
+                      print('CONTEXT:', re.sub(r'\s+',' ',region)[:470])
               plain=html.unescape(re.sub(r'<[^>]+>', ' ', data))
-              plain=re.sub(r'\\s+',' ',plain)
+              plain=re.sub(r'\s+',' ',plain)
               for m in list(re.finditer('play times',plain,re.I))[:3]:
                   print('TEXT CONTEXT:', plain[max(0,m.start()-110):m.end()+90])
           except Exception as error:
