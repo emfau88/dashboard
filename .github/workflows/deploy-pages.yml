@@ -5,15 +5,17 @@ on:
     branches:
       - main
   workflow_dispatch:
+  schedule:
+    - cron: '17 7 * * *' # Daily, 07:17 UTC; GitHub schedule may be delayed
 
 permissions:
-  contents: read
+  contents: write  # Commit daily public metrics, not credentials
   pages: write
   id-token: write
 
 concurrency:
   group: pages
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   deploy:
@@ -21,27 +23,48 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - name: Repository auschecken
-        uses: actions/checkout@v6
+        uses: actions/checkout@v4
+
+      - name: Tägliche Metriktests
+        run: python -m unittest discover -s tests -v
+
+      - name: Kongregate-Daten abrufen (Zeitplan oder manuell)
+        if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+        run: python scripts/sync_kongregate.py
+
+      - name: Neue Tageswerte dauerhaft archivieren
+        if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+        run: |
+          if ! git diff --quiet -- analytics/kongregate.json; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add analytics/kongregate.json
+            git commit -m "chore: update daily Kongregate metrics"
+            git push origin HEAD:main
+          else
+            echo "No new metrics to commit."
+          fi
 
       - name: Dashboard-Daten prüfen
         run: node scripts/validate-data.mjs
 
       - name: Statische Seite vorbereiten
         run: |
-          mkdir _site
+          mkdir -p _site
           cp index.html data.json _site/
-          cp -R assets _site/
+          cp -R assets analytics _site/
 
-      - name: GitHub Pages konfigurieren
-        uses: actions/configure-pages@v6
+      - name: Pages konfigurieren
+        uses: actions/configure-pages@v5
 
       - name: Pages-Artefakt hochladen
-        uses: actions/upload-pages-artifact@v4
+        uses: actions/upload-pages-artifact@v3
         with:
           path: _site
 
       - name: GitHub Pages veröffentlichen
         id: deployment
-        uses: actions/deploy-pages@v5
+        uses: actions/deploy-pages@v4
