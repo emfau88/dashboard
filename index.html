@@ -56,6 +56,23 @@
     .perf-error{font-size:11px;color:var(--warn);line-height:1.5}
     @media(min-width:720px){.perf-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
   </style>
+
+  <style>
+    .y8-perf-card{display:grid;grid-template-columns:minmax(0,1fr);gap:10px}
+    .y8-perf-card .perf-title{grid-column:1/-1}
+    .y8-perf-card .perf-number{margin-top:4px}
+    .y8-perf-card .perf-chart{margin:0}
+    .y8-perf-card .perf-source{margin-top:3px}
+    .y8-perf-chartbox{min-width:0}
+    .y8-perf-card .perf-details{margin-top:8px}
+    .y8-perf-link{color:var(--accent);font-size:10px;text-decoration:none}
+    .y8-perf-link:hover{text-decoration:underline}
+    @media(min-width:720px){
+      .y8-perf-card{grid-template-columns:minmax(180px,.65fr) minmax(0,1.35fr);align-items:center;column-gap:22px}
+      .y8-perf-card .perf-title{grid-column:1/-1}
+      .y8-perf-card .perf-chart{height:75px}
+    }
+  </style>
 </head>
 <body>
   <main class="shell">
@@ -70,6 +87,7 @@
     <section id="overview" class="view active">
       <div class="kpis" id="kpis"></div>
       <section class="perf-monitor" id="kongregateMonitor" aria-label="Kongregate Performance"><p class="perf-note">Performance-Daten werden geladen…</p></section>
+      <section class="perf-monitor" id="y8Monitor" aria-label="Y8 Performance"><p class="perf-note">Y8-Statistiken werden geladen…</p></section>
       <div class="section-title"><h2>Spiele</h2><span>Was live ist, was blockiert und was als Nächstes ansteht</span></div>
       <div class="cards" id="gameCards"></div>
       <p class="footnote">Der interne Qualitätsscore ist eine manuelle Orientierungshilfe und kein Messwert eines Portals.</p>
@@ -119,6 +137,14 @@ async function main(){
     if(!metricsResponse.ok)throw new Error('HTTP '+metricsResponse.status);
     renderKongregateMetrics(d,await metricsResponse.json());
   }catch(error){console.warn('Kongregate KPI request failed:',error);renderKongregateMetrics(d,null);}
+  try {
+    const y8Response=await fetch('analytics/y8.json?v='+Date.now(),{cache:'no-store'});
+    if(!y8Response.ok)throw new Error('HTTP '+y8Response.status);
+    renderY8Metrics(d,await y8Response.json());
+  }catch(error){
+    console.warn('Y8 KPI request failed:',error);
+    renderY8Metrics(d,null);
+  }
   loadGitHubData(d);
 }
 
@@ -184,6 +210,56 @@ function renderKongregateMetrics(data, archive){
     '<span class="perf-update">'+esc(lastSync)+'</span></div>'+
     '<div class="perf-grid">'+cards+'</div>'+
     '<p class="perf-note">Ältere Messpunkte stammen aus dem bisherigen Dashboard oder manuell gemeldeten Ständen. Ab Aktivierung des täglichen Workflows wird ein Messpunkt pro Spiel und Kalendertag automatisch erfasst. Fehlende Tage bedeuten nicht null Plays. Die Differenz bezieht sich immer auf den vorherigen vorhandenen Messpunkt.</p>';
+}
+
+
+function renderY8Metrics(data, archive){
+  const panel=document.getElementById('y8Monitor');
+  if(!panel)return;
+  if(!archive||archive.schemaVersion!==1||!archive.games){
+    panel.innerHTML='<div class="perf-heading"><h2>Y8 · Performance</h2></div>'+
+      '<p class="perf-error">Y8-KPI-Datei derzeit nicht verfügbar. Die anderen Plattformstatistiken bleiben erhalten.</p>';
+    return;
+  }
+  const updatedAt=archive.updatedAt
+    ? new Date(archive.updatedAt).toLocaleString('de-DE',{dateStyle:'short',timeStyle:'short',timeZone:'Europe/Berlin'})
+    : 'Erster automatischer Abruf ausstehend';
+  const monitored=['galalaxy'];
+  const cards=monitored.map(gameId=>{
+    const game=data.games.find(g=>g.id===gameId);
+    const series=Array.isArray(archive.games[gameId])?archive.games[gameId]:[];
+    const latest=series[series.length-1];
+    const title=game?.name||gameId;
+    if(!latest||!Number.isSafeInteger(latest.plays)||latest.plays<0){
+      return '<article class="perf-card"><div class="perf-title">'+esc(title)+'</div>'+
+        '<p class="perf-error">Erster gültiger Messpunkt steht noch aus.</p></article>';
+    }
+    const before=series.length>1?series[series.length-2]:null;
+    const change=before?latest.plays-before.plays:null;
+    const changeLabel=change===null?'Erster erfasster Stand':
+      (change>0?'+':'')+change.toLocaleString('de-DE')+' Plays seit '+fmtCompactDate(before.date);
+    const likes=Number.isSafeInteger(latest.likes)?latest.likes.toLocaleString('de-DE')+' Likes':'Likes nicht verfügbar';
+    const rating=typeof latest.rating==='number'?
+      'Bewertung '+latest.rating.toLocaleString('de-DE',{maximumFractionDigits:2})+'/10':'Bewertung nicht verfügbar';
+    const source=latest.source==='y8_public_page'?'Öffentliche Y8-Spielseite':'Manuell erfasster Wert';
+    const ageDays=Math.floor((Date.now()-Date.parse(latest.date+'T12:00:00Z'))/86400000);
+    const stale=ageDays>2?'<span class="perf-error"> · Letzter Wert älter als zwei Tage</span>':'';
+    return '<article class="perf-card y8-perf-card">'+
+      '<div class="perf-title">'+esc(title)+'<span class="perf-date">'+esc(fmtCompactDate(latest.date))+'</span></div>'+
+      '<div><div class="perf-number">'+latest.plays.toLocaleString('de-DE')+
+        '<span class="perf-unit">Plays gesamt</span></div>'+
+        '<div class="perf-delta'+(change>0?' positive':'')+'">'+esc(changeLabel)+'</div>'+
+        '<div class="perf-details"><span>'+esc(likes)+'</span><span>'+esc(rating)+'</span></div>'+
+        '<div class="perf-source">'+esc(source)+stale+'</div></div>'+
+      '<div class="y8-perf-chartbox">'+performanceSparkline(series,title)+
+        '<a class="y8-perf-link" href="https://www.y8.com/games/galalaxy" target="_blank" rel="noopener noreferrer">Öffentliche Spielseite ↗</a></div>'+
+    '</article>';
+  }).join('');
+  panel.innerHTML='<div class="perf-heading"><div><h2>Y8 · Performance</h2>'+
+    '<p>Öffentlich sichtbare Gesamtaufrufe, Likes und Bewertung auf der Y8-Skala von 0 bis 10</p></div>'+
+    '<span class="perf-update">Letzter Abruf: '+esc(updatedAt)+'</span></div>'+
+    cards+
+    '<p class="perf-note">Die Y8-Seite wird einmal täglich abgerufen. Fehlt ein Tageswert oder verändert Y8 das HTML, wird kein Wert erfunden; der letzte erfolgreiche Snapshot bleibt sichtbar. Veränderungen gelten jeweils seit dem letzten tatsächlich erfassten Messpunkt, nicht notwendigerweise innerhalb eines Tages.</p>';
 }
 
 function renderGames(d){
