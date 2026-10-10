@@ -1,0 +1,52 @@
+name: Kongregate metrics - tests and live probe
+
+on:
+  push:
+    branches:
+      - feature/kongregate-daily-metrics
+  pull_request:
+    paths:
+      - 'scripts/sync_kongregate.py'
+      - 'analytics/kongregate.json'
+      - 'tests/test_kongregate_metrics.py'
+      - 'index.html'
+      - '.github/workflows/*'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Unit tests
+        run: python -m unittest discover -s tests -v
+      - name: Validate existing dashboard data
+        run: node scripts/validate-data.mjs
+      - name: JavaScript syntax check
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          page = Path('index.html').read_text(encoding='utf-8')
+          scripts = re.findall(r'<script(?:\s[^>]*)?>([\s\S]*?)</script>', page)
+          assert scripts, 'No embedded JS found'
+          Path('/tmp/game-ops-js.js').write_text(scripts[-1], encoding='utf-8')
+          PY
+          node --check /tmp/game-ops-js.js
+      - name: Verify actual feed and write current daily sample
+        if: github.event_name == 'push'
+        run: python scripts/sync_kongregate.py
+      - name: Persist first live sample on feature branch
+        if: github.event_name == 'push'
+        run: |
+          if ! git diff --quiet -- analytics/kongregate.json; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add analytics/kongregate.json
+            git commit -m "test: capture first live Kongregate KPI snapshot"
+            git push origin HEAD:feature/kongregate-daily-metrics
+          fi

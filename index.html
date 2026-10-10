@@ -32,6 +32,30 @@
     @media(min-width:720px){.cards{grid-template-columns:repeat(2,minmax(0,1fr))}.distribution-mobile{display:none}}
     @media(min-width:1100px){.cards{grid-template-columns:repeat(4,minmax(0,1fr))}}
   </style>
+
+  <style>
+    .perf-monitor{margin:20px 0 22px;padding:17px;border:1px solid var(--line);border-radius:var(--radius);background:linear-gradient(180deg,rgba(144,184,248,.055),rgba(17,24,33,.6))}
+    .perf-heading{display:flex;justify-content:space-between;align-items:start;flex-wrap:wrap;gap:10px;margin-bottom:13px}
+    .perf-heading h2{margin:0 0 4px;font-size:17px;letter-spacing:-.02em}
+    .perf-heading p{margin:0;font-size:11px;color:var(--muted);line-height:1.5}
+    .perf-update{font-size:10px;color:var(--muted);padding:5px 9px;border:1px solid var(--line);border-radius:999px}
+    .perf-grid{display:grid;grid-template-columns:1fr;gap:10px}
+    .perf-card{padding:13px;background:#0d141d;border:1px solid var(--line);border-radius:13px;min-width:0}
+    .perf-title{display:flex;align-items:center;justify-content:space-between;gap:7px;font-weight:750;font-size:12px}
+    .perf-date{font-size:9px;font-weight:500;color:var(--muted)}
+    .perf-number{font-size:clamp(22px,3vw,29px);font-weight:800;letter-spacing:-.04em;margin:9px 0 0;font-variant-numeric:tabular-nums}
+    .perf-unit{font-size:10px;color:var(--muted);margin-left:4px;font-weight:500;letter-spacing:0}
+    .perf-delta{font-size:11px;color:var(--soft);margin:5px 0 7px;min-height:17px}
+    .perf-delta.positive{color:var(--good)}
+    .perf-chart{display:block;width:100%;height:63px;margin:5px 0 8px}
+    .perf-chart .perf-line{stroke:var(--accent);stroke-width:2.5;fill:none;stroke-linecap:round;stroke-linejoin:round}
+    .perf-chart .perf-dot{fill:var(--accent)}
+    .perf-details{display:flex;gap:10px;flex-wrap:wrap;font-size:10px;color:var(--soft)}
+    .perf-source{margin-top:6px;font-size:9px;color:var(--muted)}
+    .perf-note{margin:11px 1px 0;font-size:10px;line-height:1.5;color:var(--muted)}
+    .perf-error{font-size:11px;color:var(--warn);line-height:1.5}
+    @media(min-width:720px){.perf-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+  </style>
 </head>
 <body>
   <main class="shell">
@@ -45,6 +69,7 @@
 
     <section id="overview" class="view active">
       <div class="kpis" id="kpis"></div>
+      <section class="perf-monitor" id="kongregateMonitor" aria-label="Kongregate Performance"><p class="perf-note">Performance-Daten werden geladen…</p></section>
       <div class="section-title"><h2>Spiele</h2><span>Was live ist, was blockiert und was als Nächstes ansteht</span></div>
       <div class="cards" id="gameCards"></div>
       <p class="footnote">Der interne Qualitätsscore ist eine manuelle Orientierungshilfe und kein Messwert eines Portals.</p>
@@ -89,6 +114,11 @@ async function main(){
   window.DATA=d;
   document.getElementById('updated').textContent=`Stand ${fmtDate(d.meta.updated)}`;
   renderKPIs(d);renderGames(d);renderMatrix(d);renderPortals(d);renderTimeline(d);
+  try {
+    const metricsResponse=await fetch('analytics/kongregate.json?v='+Date.now(),{cache:'no-store'});
+    if(!metricsResponse.ok)throw new Error('HTTP '+metricsResponse.status);
+    renderKongregateMetrics(d,await metricsResponse.json());
+  }catch(error){console.warn('Kongregate KPI request failed:',error);renderKongregateMetrics(d,null);}
   loadGitHubData(d);
 }
 
@@ -98,6 +128,62 @@ function renderKPIs(d){
   const oldest=open.map(p=>p.submitted).filter(Boolean).sort()[0];
   const oldestLabel=oldest?new Intl.DateTimeFormat('de-DE',{day:'2-digit',month:'2-digit'}).format(new Date(oldest+'T12:00:00')):'—';
   document.getElementById('kpis').innerHTML=[[d.games.length,'Projekte'],[live,'Live-Spiele'],[open.length,'Offene Portalvorgänge'],[oldestLabel,'Ältester offener Vorgang']].map(x=>`<div class="kpi"><div class="v">${x[0]}</div><div class="l">${x[1]}</div></div>`).join('');
+}
+
+
+function performanceSparkline(history, title){
+  const points=history.filter(item=>Number.isSafeInteger(item.plays)&&!Number.isNaN(Date.parse(item.date+'T12:00:00Z'))).slice(-90);
+  if(!points.length)return '';
+  const dates=points.map(item=>Date.parse(item.date+'T12:00:00Z'));
+  const values=points.map(item=>item.plays);
+  const minX=Math.min(...dates),maxX=Math.max(...dates),minY=Math.min(...values),maxY=Math.max(...values);
+  const positions=points.map((item,i)=>{
+    const x=10+(maxX===minX?0:(dates[i]-minX)/(maxX-minX)*240);
+    const y=54-(maxY===minY ? 0.5 : (values[i]-minY)/(maxY-minY))*44;
+    return [Number(x.toFixed(2)),Number(y.toFixed(2))];
+  });
+  const coords=positions.map(item=>item.join(',')).join(' ');
+  const end=positions[positions.length-1];
+  const stroke=points.length>1?'<polyline class="perf-line" points="'+coords+'"></polyline>':'';
+  const description=title+': '+values[0]+' bis '+values[values.length-1]+' Plays in '+points.length+' Messpunkten';
+  return '<svg class="perf-chart" viewBox="0 0 260 64" preserveAspectRatio="none" role="img" aria-label="'+esc(description)+'">'+
+    '<line x1="10" y1="54" x2="250" y2="54" stroke="var(--line)" stroke-width="1"></line>'+
+    stroke+'<circle class="perf-dot" cx="'+end[0]+'" cy="'+end[1]+'" r="3.5"></circle></svg>';
+}
+
+function renderKongregateMetrics(data, archive){
+  const panel=document.getElementById('kongregateMonitor');
+  if(!archive||archive.schemaVersion!==1||!archive.games){
+    panel.innerHTML='<div class="perf-heading"><h2>Kongregate · Performance</h2></div>'+
+      '<p class="perf-error">Die KPI-Datei ist nicht erreichbar. Historische Zahlen wurden nicht überschrieben.</p>';
+    return;
+  }
+  const lastSync=archive.updatedAt?new Date(archive.updatedAt).toLocaleString('de-DE',{dateStyle:'short',timeStyle:'short',timeZone:'Europe/Berlin'}):'Erster automatischer Abruf ausstehend';
+  const order=['hexfront','galalaxy','rooster-rage'];
+  const cards=order.map(id=>{
+    const game=data.games.find(g=>g.id===id);
+    const history=Array.isArray(archive.games[id])?archive.games[id]:[];
+    const recent=history[history.length-1];
+    if(!game||!recent)return '<article class="perf-card"><div class="perf-title">'+esc(game?.name||id)+'</div><p class="perf-error">Noch keine Messwerte vorhanden</p></article>';
+    const before=history.length>1?history[history.length-2]:null;
+    const difference=before?recent.plays-before.plays:null;
+    const signed=difference==null?'Kein Vergleich verfügbar':(difference>0?'+':'')+difference.toLocaleString('de-DE')+' Plays seit '+fmtCompactDate(before.date);
+    const favorite=Number.isSafeInteger(recent.favorites)?recent.favorites.toLocaleString('de-DE')+' Favoriten':'Favoriten: noch unbekannt';
+    const rating=typeof recent.rating==='number'?'Bewertung '+recent.rating.toLocaleString('de-DE',{maximumFractionDigits:2})+'/5':'Bewertung: nicht erfasst';
+    const source=recent.source==='kongregate_metrics'?'Kongregate-Feed':'Historischer manueller Stand';
+    return '<article class="perf-card">'+
+      '<div class="perf-title">'+esc(game.name)+'<span class="perf-date">'+esc(fmtCompactDate(recent.date))+'</span></div>'+
+      '<div class="perf-number">'+recent.plays.toLocaleString('de-DE')+'<span class="perf-unit">Plays gesamt</span></div>'+
+      '<div class="perf-delta'+(difference>0?' positive':'')+'">'+esc(signed)+'</div>'+
+      performanceSparkline(history,game.name)+
+      '<div class="perf-details"><span>'+esc(favorite)+'</span><span>'+esc(rating)+'</span></div>'+
+      '<div class="perf-source">'+esc(source)+'</div>'+
+    '</article>';
+  }).join('');
+  panel.innerHTML='<div class="perf-heading"><div><h2>Kongregate · Performance</h2><p>Öffentliche kumulative Spielaufrufe · täglich dokumentiert, keine Schätzungen</p></div>'+
+    '<span class="perf-update">'+esc(lastSync)+'</span></div>'+
+    '<div class="perf-grid">'+cards+'</div>'+
+    '<p class="perf-note">Ältere Messpunkte stammen aus dem bisherigen Dashboard oder manuell gemeldeten Ständen. Ab Aktivierung des täglichen Workflows wird ein Messpunkt pro Spiel und Kalendertag automatisch erfasst. Fehlende Tage bedeuten nicht null Plays. Die Differenz bezieht sich immer auf den vorherigen vorhandenen Messpunkt.</p>';
 }
 
 function renderGames(d){
