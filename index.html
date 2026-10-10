@@ -139,7 +139,7 @@ function performanceSparkline(history, title){
   const minX=Math.min(...dates),maxX=Math.max(...dates),minY=Math.min(...values),maxY=Math.max(...values);
   const positions=points.map((item,i)=>{
     const x=10+(maxX===minX?0:(dates[i]-minX)/(maxX-minX)*240);
-    const y=54-(maxY===minY?.5:(values[i]-minY)/(maxY-minY))*44;
+    const y=54-(maxY===minY ? 0.5 : (values[i]-minY)/(maxY-minY))*44;
     return [Number(x.toFixed(2)),Number(y.toFixed(2))];
   });
   const coords=positions.map(item=>item.join(',')).join(' ');
