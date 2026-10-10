@@ -36,7 +36,7 @@ jobs:
                   found = list(re.finditer(pattern, data, re.I))
                   print('TARGET', pattern, len(found))
                   for m in found[:3]:
-                      print('HTML', re.sub(r'\\s+', ' ', data[max(0,m.start()-150):m.start()+650])[:800])
+                      print('HTML', re.sub(r'\s+', ' ', data[max(0,m.start()-150):m.start()+650])[:800])
               for term in ['play times','galalaxy','Like','rating','views_count','play_count']:
                   matches=list(re.finditer(re.escape(term), data, flags=re.I))
                   print('MATCH', repr(term), 'COUNT', len(matches))
