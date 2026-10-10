@@ -32,6 +32,11 @@ jobs:
                   print('URL:', result.geturl())
                   print('BYTES:', len(data))
                   print('CONTENT-TYPE:', result.headers.get('Content-Type'))
+              for pattern in [r'<div class="rating">', r'<span class="sub-infos', r'>\\s*6\\s*</', r'Like</', r'like-button', r'like-count', r'game-like', r'game-info-container__right']:
+                  found = list(re.finditer(pattern, data, re.I))
+                  print('TARGET', pattern, len(found))
+                  for m in found[:3]:
+                      print('HTML', re.sub(r'\\s+', ' ', data[max(0,m.start()-150):m.start()+650])[:800])
               for term in ['play times','galalaxy','Like','rating','views_count','play_count']:
                   matches=list(re.finditer(re.escape(term), data, flags=re.I))
                   print('MATCH', repr(term), 'COUNT', len(matches))
