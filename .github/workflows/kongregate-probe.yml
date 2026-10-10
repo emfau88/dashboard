@@ -22,5 +22,5 @@ jobs:
                   value=json.load(r)
                   print(slug,'KEYS',sorted(value))
                   print(slug,'GAMEPLAYS',value.get('gameplays_count'),'FAVORITES',value.get('favorites_count'))
-                  print(slug,'GAME_STATISTICS',str(value.get('game_statistics',''))[:1600].replace('\\n',' '))
+                  print(slug,'RATING',repr(value.get('rating')),'AVERAGE_TEXT',repr(value.get('average_rating_text')),'AVERAGE_WITH_COUNT',repr(str(value.get('average_rating_with_count'))[:300]))
           PY
