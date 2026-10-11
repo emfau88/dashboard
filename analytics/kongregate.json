@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-10-10T23:10:26Z",
+  "updatedAt": "2026-10-11T14:01:21Z",
   "games": {
     "hexfront": [
       {
@@ -26,11 +26,11 @@
       },
       {
         "date": "2026-10-11",
-        "plays": 1604,
+        "plays": 1609,
         "favorites": 6,
         "rating": 2.77,
         "source": "kongregate_metrics",
-        "fetchedAt": "2026-10-10T23:10:26Z"
+        "fetchedAt": "2026-10-11T14:01:21Z"
       }
     ],
     "galalaxy": [
@@ -77,11 +77,11 @@
       },
       {
         "date": "2026-10-11",
-        "plays": 203,
+        "plays": 206,
         "favorites": 7,
         "rating": 3.6,
         "source": "kongregate_metrics",
-        "fetchedAt": "2026-10-10T23:10:26Z"
+        "fetchedAt": "2026-10-11T14:01:21Z"
       }
     ]
   }
