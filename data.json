@@ -1,8 +1,8 @@
 {
   "meta": {
     "title": "emfau Game Ops",
-    "version": "0.11.0",
-    "updated": "2026-10-07",
+    "version": "0.12.0",
+    "updated": "2026-10-11",
     "currency": "EUR",
     "notes": "Die Recherche-Spannen sind interne Vergleichswerte aus der Portal-Analyse vom September 2026 und keine offiziellen Annahmeschwellen der Plattformen."
   },
@@ -40,10 +40,14 @@
         "y8": {
           "status": "review",
           "submitted": "2026-09-26",
+          "revisionSubmitted": "2026-10-11",
+          "revisionSubmittedConfirmed": true,
           "sourceBranch": "codex/improve-mobile-onboarding-copy",
           "submittedCommit": "90fbf9e1ec0660057b0fef341de060c076a6b978",
           "submittedNote": "Neuesten verbesserten Build eingereicht; die Prüfung läuft.",
-          "notes": "Aktuellsten Build eingereicht. Y8 zeigt am 05.10.2026 weiterhin den Status „In review“.",
+          "feedbackNote": "Y8 hatte Korrekturen an der eingereichten Version verlangt; die einzelnen Punkte sind im Dashboard nicht näher erfasst.",
+          "revisionSubmittedNote": "Die von Y8 gewünschten Korrekturen wurden umgesetzt und als neue Version nachgereicht; die Prüfung läuft erneut.",
+          "notes": "Korrigierte Version am 11.10.2026 nachgereicht; seitdem wieder in Prüfung. Im GitHub-Repository ist kein neuerer Commit als der bereits zugeordnete Y8-Build sichtbar.",
           "statusUpdates": [
             {"date": "2026-10-05", "status": "review", "note": "Zwischenstand: Y8 zeigt für HEXFRONT weiterhin „In review“; der letzte Portal-Update-Hinweis datiert vom 01.10.2026."}
           ]
@@ -405,3 +409,4 @@
     }
   ]
 }
+
