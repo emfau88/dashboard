@@ -65,18 +65,20 @@
     .y8-perf-card .perf-source{margin-top:3px}
     .y8-perf-chartbox{min-width:0}
     .y8-perf-card .perf-details{margin-top:8px}
-    .y8-history{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;margin:9px 0 8px}
-    .y8-trend{min-width:0;padding:8px 9px;border:1px solid #202c3a;border-radius:10px;background:rgba(255,255,255,.018)}
-    .y8-trend-head{display:flex;align-items:baseline;justify-content:space-between;gap:6px}
-    .y8-trend-label{font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.035em}
-    .y8-trend-value{font-size:13px;font-weight:800;font-variant-numeric:tabular-nums;white-space:nowrap}
-    .y8-trend-delta{margin-top:2px;font-size:9px;color:var(--soft);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-    .y8-trend-delta.positive{color:var(--good)}
-    .y8-trend-chart{display:block;width:100%;height:34px;margin-top:5px}
-    .y8-trend-chart .trend-line{fill:none;stroke:var(--accent);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
-    .y8-trend-chart .trend-dot{fill:var(--accent)}
-    .y8-trend.likes .trend-line{stroke:var(--good)}
-    .y8-trend.likes .trend-dot{fill:var(--good)}
+    .metric-history{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;margin:9px 0 8px}
+    .metric-history.single{grid-template-columns:minmax(0,1fr);margin:8px 0 6px}
+    .metric-trend{min-width:0;padding:8px 9px;border:1px solid #202c3a;border-radius:10px;background:rgba(255,255,255,.018)}
+    .metric-trend-head{display:flex;align-items:baseline;justify-content:space-between;gap:6px}
+    .metric-trend-label{font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.035em}
+    .metric-trend-value{font-size:13px;font-weight:800;font-variant-numeric:tabular-nums;white-space:nowrap}
+    .metric-trend-delta{margin-top:2px;font-size:9px;color:var(--soft);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .metric-trend-delta.positive{color:var(--good)}
+    .metric-trend-delta.negative{color:var(--bad)}
+    .metric-trend-chart{display:block;width:100%;height:34px;margin-top:5px}
+    .metric-trend-chart .trend-line{fill:none;stroke:var(--accent);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+    .metric-trend-chart .trend-dot{fill:var(--accent)}
+    .metric-trend.likes .trend-line{stroke:var(--good)}
+    .metric-trend.likes .trend-dot{fill:var(--good)}
     .y8-perf-link{color:var(--accent);font-size:10px;text-decoration:none}
     .y8-perf-link:hover{text-decoration:underline}
     @media(min-width:720px){
@@ -189,13 +191,13 @@ function performanceSparkline(history, title){
     stroke+'<circle class="perf-dot" cx="'+end[0]+'" cy="'+end[1]+'" r="3.5"></circle></svg>';
 }
 
-function y8MetricTrend(history,{key,label,suffix='',maximumFractionDigits=0,fixedMax=null,className=''}){
+function metricTrend(history,{key,label,suffix='',maximumFractionDigits=0,fixedMax=null,className='',compareFrom='previous'}){
   const points=history.filter(item=>typeof item[key]==='number'&&Number.isFinite(item[key])&&!Number.isNaN(Date.parse(item.date+'T12:00:00Z'))).slice(-90);
-  if(!points.length)return '<div class="y8-trend '+esc(className)+'"><div class="y8-trend-label">'+esc(label)+'</div><div class="y8-trend-delta">Noch kein Verlauf</div></div>';
+  if(!points.length)return '<div class="metric-trend '+esc(className)+'"><div class="metric-trend-label">'+esc(label)+'</div><div class="metric-trend-delta">Noch kein Verlauf</div></div>';
   const values=points.map(item=>item[key]);
   const dates=points.map(item=>Date.parse(item.date+'T12:00:00Z'));
   const latest=points[points.length-1];
-  const before=points.length>1?points[points.length-2]:null;
+  const before=points.length>1?(compareFrom==='first'?points[0]:points[points.length-2]):null;
   const minX=Math.min(...dates),maxX=Math.max(...dates),minY=0,maxY=fixedMax??Math.max(...values,1);
   const positions=points.map((item,i)=>{
     const x=5+(maxX===minX?65:(dates[i]-minX)/(maxX-minX)*130);
@@ -210,10 +212,10 @@ function y8MetricTrend(history,{key,label,suffix='',maximumFractionDigits=0,fixe
   const coords=positions.map(item=>item.join(',')).join(' ');
   const first=positions[0],end=positions[positions.length-1];
   const line=points.length>1?'<polyline class="trend-line" points="'+coords+'"></polyline>':'';
-  return '<div class="y8-trend '+esc(className)+'">'+
-    '<div class="y8-trend-head"><span class="y8-trend-label">'+esc(label)+'</span><span class="y8-trend-value">'+esc(format(latest[key])+suffix)+'</span></div>'+
-    '<div class="y8-trend-delta'+(difference>0?' positive':'')+'">'+esc(delta)+'</div>'+
-    '<svg class="y8-trend-chart" viewBox="0 0 140 40" preserveAspectRatio="none" role="img" aria-label="'+esc(description)+'">'+
+  return '<div class="metric-trend '+esc(className)+'">'+
+    '<div class="metric-trend-head"><span class="metric-trend-label">'+esc(label)+'</span><span class="metric-trend-value">'+esc(format(latest[key])+suffix)+'</span></div>'+
+    '<div class="metric-trend-delta'+(difference>0?' positive':difference<0?' negative':'')+'">'+esc(delta)+'</div>'+
+    '<svg class="metric-trend-chart" viewBox="0 0 140 40" preserveAspectRatio="none" role="img" aria-label="'+esc(description)+'">'+
       '<line x1="5" y1="35" x2="135" y2="35" stroke="var(--line)" stroke-width="1"></line>'+line+
       '<circle class="trend-dot" cx="'+first[0]+'" cy="'+first[1]+'" r="2.5"></circle>'+
       '<circle class="trend-dot" cx="'+end[0]+'" cy="'+end[1]+'" r="3"></circle></svg></div>';
@@ -238,6 +240,8 @@ function renderKongregateMetrics(data, archive){
     const signed=difference==null?'Kein Vergleich verfügbar':(difference>0?'+':'')+difference.toLocaleString('de-DE')+' Plays seit '+fmtCompactDate(before.date);
     const favorite=Number.isSafeInteger(recent.favorites)?recent.favorites.toLocaleString('de-DE')+' Favoriten':'Favoriten: noch unbekannt';
     const rating=typeof recent.rating==='number'?'Bewertung '+recent.rating.toLocaleString('de-DE',{maximumFractionDigits:2})+'/5':'Bewertung: nicht erfasst';
+    const ratingHistory='<div class="metric-history single" aria-label="Historischer Bewertungsverlauf">'+
+      metricTrend(history,{key:'rating',label:'Bewertungsverlauf',suffix:'/5',maximumFractionDigits:2,fixedMax:5,className:'rating',compareFrom:'first'})+'</div>';
     const source=recent.source==='kongregate_metrics'?'Kongregate-Feed':'Historischer manueller Stand';
     return '<article class="perf-card">'+
       '<div class="perf-title">'+esc(game.name)+'<span class="perf-date">'+esc(fmtCompactDate(recent.date))+'</span></div>'+
@@ -245,13 +249,14 @@ function renderKongregateMetrics(data, archive){
       '<div class="perf-delta'+(difference>0?' positive':'')+'">'+esc(signed)+'</div>'+
       performanceSparkline(history,game.name)+
       '<div class="perf-details"><span>'+esc(favorite)+'</span><span>'+esc(rating)+'</span></div>'+
+      ratingHistory+
       '<div class="perf-source">'+esc(source)+'</div>'+
     '</article>';
   }).join('');
   panel.innerHTML='<div class="perf-heading"><div><h2>Kongregate · Performance</h2><p>Öffentliche kumulative Spielaufrufe · täglich dokumentiert, keine Schätzungen</p></div>'+
     '<span class="perf-update">'+esc(lastSync)+'</span></div>'+
     '<div class="perf-grid">'+cards+'</div>'+
-    '<p class="perf-note">Ältere Messpunkte stammen aus dem bisherigen Dashboard oder manuell gemeldeten Ständen. Ab Aktivierung des täglichen Workflows wird ein Messpunkt pro Spiel und Kalendertag automatisch erfasst. Fehlende Tage bedeuten nicht null Plays. Die Differenz bezieht sich immer auf den vorherigen vorhandenen Messpunkt.</p>';
+    '<p class="perf-note">Ältere Messpunkte stammen aus dem bisherigen Dashboard oder manuell gemeldeten Ständen. Ab Aktivierung des täglichen Workflows wird ein Messpunkt pro Spiel und Kalendertag automatisch erfasst. Fehlende Tage bedeuten nicht null Plays. Die Plays-Differenz bezieht sich auf den vorherigen vorhandenen Messpunkt; beim Bewertungsverlauf wird die Änderung seit der ersten erfassten Bewertung gezeigt.</p>';
 }
 
 
@@ -283,9 +288,9 @@ function renderY8Metrics(data, archive){
     const likes=Number.isSafeInteger(latest.likes)?latest.likes.toLocaleString('de-DE')+' Likes':'Likes nicht verfügbar';
     const rating=typeof latest.rating==='number'?
       'Bewertung '+latest.rating.toLocaleString('de-DE',{maximumFractionDigits:2})+'/10':'Bewertung nicht verfügbar';
-    const secondaryHistory='<div class="y8-history" aria-label="Verlauf von Bewertung und Likes">'+
-      y8MetricTrend(series,{key:'rating',label:'Bewertung',suffix:'/10',maximumFractionDigits:1,fixedMax:10,className:'rating'})+
-      y8MetricTrend(series,{key:'likes',label:'Likes',maximumFractionDigits:0,className:'likes'})+'</div>';
+    const secondaryHistory='<div class="metric-history" aria-label="Verlauf von Bewertung und Likes">'+
+      metricTrend(series,{key:'rating',label:'Bewertung',suffix:'/10',maximumFractionDigits:1,fixedMax:10,className:'rating'})+
+      metricTrend(series,{key:'likes',label:'Likes',maximumFractionDigits:0,className:'likes'})+'</div>';
     const source=latest.source==='y8_public_page'?'Öffentliche Y8-Spielseite':'Manuell erfasster Wert';
     const ageDays=Math.floor((Date.now()-Date.parse(latest.date+'T12:00:00Z'))/86400000);
     const stale=ageDays>2?'<span class="perf-error"> · Letzter Wert älter als zwei Tage</span>':'';
@@ -499,3 +504,4 @@ main().catch(err=>{document.body.innerHTML=`<div style="padding:30px;font-family
 </script>
 </body>
 </html>
+

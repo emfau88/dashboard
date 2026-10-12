@@ -122,7 +122,7 @@ Danach [http://localhost:8000](http://localhost:8000) öffnen.
 
 ## Kongregate: tägliche Performance-Daten (automatisiert)
 
-Das Dashboard zeigt unter **Übersicht → Kongregate · Performance** die drei aktiven Kongregate-Spiele (HEXFRONT, GALALAXY, ROOSTER RAGE). Pro Spiel werden kumulative Plays, Favoriten, Bewertung, Veränderung gegenüber dem **vorherigen vorhandenen Messpunkt** und eine Verlaufskurve angezeigt.
+Das Dashboard zeigt unter **Übersicht → Kongregate · Performance** die drei aktiven Kongregate-Spiele (HEXFRONT, GALALAXY, ROOSTER RAGE). Pro Spiel werden kumulative Plays, Favoriten sowie getrennte Verlaufskurven für Plays und Bewertung angezeigt. Die Plays-Differenz vergleicht den **vorherigen vorhandenen Messpunkt**; der Bewertungsverlauf nennt die Veränderung seit der ersten erfassten Bewertung.
 
 - Datenquelle: öffentliches Kongregate-Metrics-JSON unter `https://www.kongregate.com/games/emfau/<spiel-slug>/metrics.json`.
 - Abrufskript: `scripts/sync_kongregate.py` (Python-Standardbibliothek; kein API-Schlüssel).
@@ -149,3 +149,4 @@ Für **Galalaxy** ist die öffentliche Y8-Spielseite unter [y8.com/games/galalax
 - Neue Y8-Spiele erst aufnehmen, wenn die öffentliche Spielseite tatsächlich live ist. Dann die Konfiguration `GAMES` und das Archiv ergänzen und die Darstellung erweitern.
 
 **Wichtige Einschränkung:** Das Auslesen einer öffentlichen HTML-Seite ist kein offizieller, stabil garantierter Reporting-API-Vertrag. Änderungen an Y8s Markup können eine Skriptkorrektur erfordern. Das ist **nicht** der Zugriff auf interne Y8-Studio-Statistiken (DAU, Retention, Umsatz). Einmal täglich wird nur die konkrete Spielseite abgerufen. 
+
