@@ -75,10 +75,12 @@
     .metric-trend-delta.positive{color:var(--good)}
     .metric-trend-delta.negative{color:var(--bad)}
     .metric-trend-chart{display:block;width:100%;height:34px;margin-top:5px}
+    .metric-history.single .metric-trend-chart{height:40px}
     .metric-trend-chart .trend-line{fill:none;stroke:var(--accent);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
     .metric-trend-chart .trend-dot{fill:var(--accent)}
     .metric-trend.likes .trend-line{stroke:var(--good)}
     .metric-trend.likes .trend-dot{fill:var(--good)}
+    .metric-trend-scale{margin-top:2px;font-size:8px;color:var(--muted);font-variant-numeric:tabular-nums;text-align:right}
     .y8-perf-link{color:var(--accent);font-size:10px;text-decoration:none}
     .y8-perf-link:hover{text-decoration:underline}
     @media(min-width:720px){
@@ -191,14 +193,27 @@ function performanceSparkline(history, title){
     stroke+'<circle class="perf-dot" cx="'+end[0]+'" cy="'+end[1]+'" r="3.5"></circle></svg>';
 }
 
-function metricTrend(history,{key,label,suffix='',maximumFractionDigits=0,fixedMax=null,className='',compareFrom='previous'}){
+function metricTrend(history,{key,label,suffix='',maximumFractionDigits=0,fixedMax=null,className='',compareFrom='previous',minimumRange=null,scaleBounds=null}){
   const points=history.filter(item=>typeof item[key]==='number'&&Number.isFinite(item[key])&&!Number.isNaN(Date.parse(item.date+'T12:00:00Z'))).slice(-90);
   if(!points.length)return '<div class="metric-trend '+esc(className)+'"><div class="metric-trend-label">'+esc(label)+'</div><div class="metric-trend-delta">Noch kein Verlauf</div></div>';
   const values=points.map(item=>item[key]);
   const dates=points.map(item=>Date.parse(item.date+'T12:00:00Z'));
   const latest=points[points.length-1];
   const before=points.length>1?(compareFrom==='first'?points[0]:points[points.length-2]):null;
-  const minX=Math.min(...dates),maxX=Math.max(...dates),minY=0,maxY=fixedMax??Math.max(...values,1);
+  const minX=Math.min(...dates),maxX=Math.max(...dates);
+  let minY=0,maxY=fixedMax??Math.max(...values,1),scaleLabel='';
+  if(minimumRange){
+    const observedMin=Math.min(...values),observedMax=Math.max(...values);
+    const span=Math.max(observedMax-observedMin,minimumRange);
+    const center=(observedMin+observedMax)/2;
+    minY=center-span/2;maxY=center+span/2;
+    if(scaleBounds){
+      if(minY<scaleBounds[0]){maxY+=scaleBounds[0]-minY;minY=scaleBounds[0];}
+      if(maxY>scaleBounds[1]){minY-=maxY-scaleBounds[1];maxY=scaleBounds[1];}
+    }
+    const scaleFormat=value=>value.toLocaleString('de-DE',{minimumFractionDigits:1,maximumFractionDigits:2});
+    scaleLabel='<div class="metric-trend-scale">Skala '+esc(scaleFormat(minY))+'–'+esc(scaleFormat(maxY))+'</div>';
+  }
   const positions=points.map((item,i)=>{
     const x=5+(maxX===minX?65:(dates[i]-minX)/(maxX-minX)*130);
     const y=35-(maxY===minY?0.5:(values[i]-minY)/(maxY-minY))*28;
@@ -210,15 +225,14 @@ function metricTrend(history,{key,label,suffix='',maximumFractionDigits=0,fixedM
     (difference>0?'+':'')+format(difference)+' seit '+fmtCompactDate(before.date);
   const description=label+': '+values.map(format).join(', ')+'; '+points.length+' Messpunkte';
   const coords=positions.map(item=>item.join(',')).join(' ');
-  const first=positions[0],end=positions[positions.length-1];
   const line=points.length>1?'<polyline class="trend-line" points="'+coords+'"></polyline>':'';
+  const dots=positions.map(position=>'<circle class="trend-dot" cx="'+position[0]+'" cy="'+position[1]+'" r="2.8"></circle>').join('');
   return '<div class="metric-trend '+esc(className)+'">'+
     '<div class="metric-trend-head"><span class="metric-trend-label">'+esc(label)+'</span><span class="metric-trend-value">'+esc(format(latest[key])+suffix)+'</span></div>'+
     '<div class="metric-trend-delta'+(difference>0?' positive':difference<0?' negative':'')+'">'+esc(delta)+'</div>'+
     '<svg class="metric-trend-chart" viewBox="0 0 140 40" preserveAspectRatio="none" role="img" aria-label="'+esc(description)+'">'+
       '<line x1="5" y1="35" x2="135" y2="35" stroke="var(--line)" stroke-width="1"></line>'+line+
-      '<circle class="trend-dot" cx="'+first[0]+'" cy="'+first[1]+'" r="2.5"></circle>'+
-      '<circle class="trend-dot" cx="'+end[0]+'" cy="'+end[1]+'" r="3"></circle></svg></div>';
+      dots+'</svg>'+scaleLabel+'</div>';
 }
 
 function renderKongregateMetrics(data, archive){
@@ -241,7 +255,7 @@ function renderKongregateMetrics(data, archive){
     const favorite=Number.isSafeInteger(recent.favorites)?recent.favorites.toLocaleString('de-DE')+' Favoriten':'Favoriten: noch unbekannt';
     const rating=typeof recent.rating==='number'?'Bewertung '+recent.rating.toLocaleString('de-DE',{maximumFractionDigits:2})+'/5':'Bewertung: nicht erfasst';
     const ratingHistory='<div class="metric-history single" aria-label="Historischer Bewertungsverlauf">'+
-      metricTrend(history,{key:'rating',label:'Bewertungsverlauf',suffix:'/5',maximumFractionDigits:2,fixedMax:5,className:'rating',compareFrom:'first'})+'</div>';
+      metricTrend(history,{key:'rating',label:'Bewertungsverlauf',suffix:'/5',maximumFractionDigits:2,className:'rating',compareFrom:'first',minimumRange:.4,scaleBounds:[0,5]})+'</div>';
     const source=recent.source==='kongregate_metrics'?'Kongregate-Feed':'Historischer manueller Stand';
     return '<article class="perf-card">'+
       '<div class="perf-title">'+esc(game.name)+'<span class="perf-date">'+esc(fmtCompactDate(recent.date))+'</span></div>'+
@@ -256,7 +270,7 @@ function renderKongregateMetrics(data, archive){
   panel.innerHTML='<div class="perf-heading"><div><h2>Kongregate · Performance</h2><p>Öffentliche kumulative Spielaufrufe · täglich dokumentiert, keine Schätzungen</p></div>'+
     '<span class="perf-update">'+esc(lastSync)+'</span></div>'+
     '<div class="perf-grid">'+cards+'</div>'+
-    '<p class="perf-note">Ältere Messpunkte stammen aus dem bisherigen Dashboard oder manuell gemeldeten Ständen. Ab Aktivierung des täglichen Workflows wird ein Messpunkt pro Spiel und Kalendertag automatisch erfasst. Fehlende Tage bedeuten nicht null Plays. Die Plays-Differenz bezieht sich auf den vorherigen vorhandenen Messpunkt; beim Bewertungsverlauf wird die Änderung seit der ersten erfassten Bewertung gezeigt.</p>';
+    '<p class="perf-note">Ältere Messpunkte stammen aus dem bisherigen Dashboard oder manuell gemeldeten Ständen. Ab Aktivierung des täglichen Workflows wird ein Messpunkt pro Spiel und Kalendertag automatisch erfasst. Fehlende Tage bedeuten nicht null Plays. Die Plays-Differenz bezieht sich auf den vorherigen vorhandenen Messpunkt; beim Bewertungsverlauf wird die Änderung seit der ersten erfassten Bewertung gezeigt. Damit kleine Bewegungen erkennbar bleiben, nutzt die Bewertungskurve eine beschriftete Zoom-Skala mit mindestens 0,4 Punkten Spannweite.</p>';
 }
 
 
