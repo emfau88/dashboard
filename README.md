@@ -142,7 +142,7 @@ Für **Galalaxy** ist die öffentliche Y8-Spielseite unter [y8.com/games/galalax
 
 - Abrufskript: `scripts/sync_y8.py` (Python-Standardbibliothek, ohne Entwicklerkonto, Cookies oder API-Schlüssel).
 - Historisches Archiv: `analytics/y8.json` mit einem datierten Messpunkt pro Berlin-Kalendertag, UTC-Abrufzeitpunkt und Herkunft `y8_public_page`.
-- Dashboard: eigene **Y8 · Performance**-Ansicht auf der Übersicht. Veränderungen und Diagramme beziehen sich auf die **vorhandenen** Snapshots.
+- Dashboard: eigene **Y8 · Performance**-Ansicht auf der Übersicht. Plays, Bewertung und Likes werden jeweils als kompakter Verlauf dargestellt; Veränderungen beziehen sich auf den **vorherigen vorhandenen** Snapshot.
 - Automatik: derselbe geplante Workflow wie bei Kongregate (`.github/workflows/deploy-pages.yml`) ruft beide Plattformen ab und speichert die öffentlichen KPI-Dateien. Über **Actions → Game-Ops-Dashboard veröffentlichen → Run workflow** kann der Abruf zusätzlich manuell ausgelöst werden.
 - Prüfen: `python -m unittest discover -s tests -v`; `python scripts/sync_y8.py --check-live` testet die Webseite ohne Änderung; `python scripts/sync_y8.py` speichert den aktuellen Snapshot lokal.
 - Fehlerfälle: falsche/fehlende Titel oder Zählwerte, widersprüchliche Desktop-/Mobilanzeigen, abnehmende kumulative Plays, HTML-Änderungen oder fehlgeschlagene HTTP-Aufrufe werden **nicht** zu 0 umgedeutet. Bei Y8-Abrufproblemen bleibt Kongregates Workflow unabhängig lauffähig; der letzte gespeicherte Y8-Stand bleibt bestehen. Eine fehlende Like-Zahl wird als **unbekannt**, nicht als null, gekennzeichnet.
