@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-10-13T15:01:44Z",
+  "updatedAt": "2026-10-14T12:51:57Z",
   "games": {
     "galalaxy": [
       {
@@ -26,6 +26,14 @@
         "likes": 9,
         "source": "y8_public_page",
         "fetchedAt": "2026-10-13T15:01:44Z"
+      },
+      {
+        "date": "2026-10-14",
+        "plays": 2038,
+        "rating": 9.0,
+        "likes": 9,
+        "source": "y8_public_page",
+        "fetchedAt": "2026-10-14T12:51:57Z"
       }
     ]
   }
