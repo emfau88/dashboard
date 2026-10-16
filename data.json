@@ -165,8 +165,8 @@
         "developmentBranch": "master",
         "pagesUrl": "https://emfau88.github.io/RoosterRage/"
       },
-      "nextAction": "Die Resonanz und Kennzahlen auf Y8 und Kongregate beobachten",
-      "issues": ["Veröffentlichungsreif statt perfekt", "Resonanz auf Y8 und Kongregate beobachten", "Letztes Balancing und Präsentations-Polishing optional"],
+      "nextAction": "Die Y8-Prüfung von Build 002 abwarten und parallel die Kennzahlen auf Y8 und Kongregate beobachten",
+      "issues": ["Y8 Build 002 mit ergänzter Werbung in Prüfung", "Resonanz auf Y8 und Kongregate beobachten", "Letztes Balancing und Präsentations-Polishing optional"],
       "platforms": {
         "kongregate": {
           "status": "live",
@@ -194,6 +194,12 @@
           "submittedNote": "Aktuellen master-Build bei Y8 zur Prüfung eingereicht.",
           "publishedNote": "ROOSTER RAGE wurde öffentlich auf Y8 veröffentlicht.",
           "publicUrl": "https://de.y8.com/games/rooster_rage",
+          "pendingBuild": {
+            "version": "002",
+            "status": "review",
+            "uploaded": "2026-10-16",
+            "note": "Build 002 mit ergänzter Werbung beziehungsweise Monetarisierung hochgeladen; Y8 zeigt „In review“. Es wurden keine Patch Notes hinterlegt."
+          },
           "notes": "Am 15.10.2026 öffentlich auf Y8 veröffentlicht. Der zugeordnete Build entspricht dem bei Y8 eingereichten master-Stand."
         },
         "gamemonetize": {"status": "planned"},

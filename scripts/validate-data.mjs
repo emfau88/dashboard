@@ -53,6 +53,14 @@ for(const game of data.games){
     if(placement.status==='live'&&!placement.published)warn(`${game.id}/${portalId}: Live-Status ohne Veröffentlichungsdatum.`);
     if(placement.acceptanceConfirmed!=null&&typeof placement.acceptanceConfirmed!=='boolean')error(`${game.id}/${portalId}: acceptanceConfirmed muss ein Boolean sein.`);
     if(placement.revisionSubmittedConfirmed!=null&&typeof placement.revisionSubmittedConfirmed!=='boolean')error(`${game.id}/${portalId}: revisionSubmittedConfirmed muss ein Boolean sein.`);
+    if(placement.pendingBuild){
+      const pending=placement.pendingBuild;
+      if(typeof pending.version!=='string'||!pending.version.trim())error(`${game.id}/${portalId}: pendingBuild.version fehlt.`);
+      if(!allowedStatuses.has(pending.status)||!['review','changes_requested','scheduled'].includes(pending.status))error(`${game.id}/${portalId}: pendingBuild.status ist ungültig.`);
+      if(!isValidDate(pending.uploaded||''))error(`${game.id}/${portalId}: pendingBuild.uploaded ist kein gültiges ISO-Datum.`);
+      if(pending.uploaded&&data.meta?.updated&&pending.uploaded>data.meta.updated)error(`${game.id}/${portalId}: pendingBuild.uploaded liegt nach meta.updated.`);
+      if(pending.note!=null&&(typeof pending.note!=='string'||!pending.note.trim()))error(`${game.id}/${portalId}: pendingBuild.note muss eine nicht leere Zeichenkette sein.`);
+    }
     if(placement.status==='live'&&!placement.accepted)warn(placement.acceptanceConfirmed?`${game.id}/${portalId}: Annahme bestätigt, genaues Datum fehlt.`:`${game.id}/${portalId}: Annahmedatum ist nicht bekannt.`);
     if(placement.status==='rejected'&&!placement.rejected)warn(`${game.id}/${portalId}: Ablehnungsdatum fehlt.`);
     if(placement.status==='approved'&&!placement.accepted)warn(`${game.id}/${portalId}: Freigabe bestätigt, genaues Datum fehlt.`);
