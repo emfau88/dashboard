@@ -81,12 +81,48 @@
     .metric-trend.likes .trend-line{stroke:var(--good)}
     .metric-trend.likes .trend-dot{fill:var(--good)}
     .metric-trend-scale{margin-top:2px;font-size:8px;color:var(--muted);font-variant-numeric:tabular-nums;text-align:right}
+    .kong-rating-section{margin-top:18px;padding-top:17px;border-top:1px solid var(--line)}
+    .kong-rating-heading{display:flex;align-items:end;justify-content:space-between;gap:12px;margin-bottom:10px}
+    .kong-rating-heading h3{margin:0;font-size:14px;letter-spacing:-.01em}
+    .kong-rating-heading p{margin:3px 0 0;color:var(--muted);font-size:10px;line-height:1.45}
+    .kong-rating-heading>span{color:var(--muted);font-size:9px;text-align:right}
+    .kong-rating-list{display:grid;gap:10px}
+    .rating-card{display:grid;grid-template-columns:minmax(0,1fr);gap:13px;padding:14px;background:#0d141d;border:1px solid var(--line);border-radius:13px;min-width:0}
+    .rating-summary{min-width:0}
+    .rating-game{display:flex;align-items:center;gap:9px;font-size:12px;font-weight:800}
+    .rating-game .matrix-thumb,.rating-game .matrix-monogram{width:34px;height:34px;flex-basis:34px;border-radius:10px}
+    .rating-current{margin-top:10px;font-size:28px;font-weight:800;line-height:1;font-variant-numeric:tabular-nums;letter-spacing:-.04em}
+    .rating-current span{font-size:11px;color:var(--muted);font-weight:600;letter-spacing:0}
+    .rating-change{margin-top:6px;font-size:10px;color:var(--soft);line-height:1.4}
+    .rating-change.positive{color:var(--good)}
+    .rating-change.negative{color:var(--bad)}
+    .rating-scale-note{margin-top:8px;color:var(--muted);font-size:9px;font-variant-numeric:tabular-nums}
+    .rating-chart-area{min-width:0}
+    .rating-plot-grid{display:grid;grid-template-columns:42px minmax(0,1fr);gap:8px;align-items:stretch}
+    .rating-y-axis{height:132px;display:flex;flex-direction:column;justify-content:space-between;text-align:right;color:var(--muted);font-size:9px;font-variant-numeric:tabular-nums;padding:1px 0}
+    .rating-plot{min-width:0}
+    .rating-chart{display:block;width:100%;height:132px;overflow:visible}
+    .rating-chart .rating-gridline{stroke:var(--line);stroke-width:1;stroke-dasharray:3 4;vector-effect:non-scaling-stroke}
+    .rating-chart .rating-line{fill:none;stroke:var(--accent);stroke-width:3;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
+    .rating-chart .rating-dot{fill:var(--accent);stroke:#0d141d;stroke-width:2.5;vector-effect:non-scaling-stroke}
+    .rating-x-axis{display:flex;justify-content:space-between;gap:8px;margin-top:5px;color:var(--muted);font-size:9px;font-variant-numeric:tabular-nums}
+    .rating-x-axis span:nth-child(2){text-align:center}
+    .rating-x-axis span:last-child{text-align:right}
+    .rating-observations{display:flex;flex-wrap:wrap;gap:5px;margin:10px 0 0 50px}
+    .rating-observation{padding:4px 7px;border:1px solid #263545;border-radius:999px;background:rgba(255,255,255,.018);color:var(--soft);font-size:9px;font-variant-numeric:tabular-nums}
     .y8-perf-link{color:var(--accent);font-size:10px;text-decoration:none}
     .y8-perf-link:hover{text-decoration:underline}
+    @media(max-width:719px){
+      .kong-rating-heading{display:block}.kong-rating-heading>span{display:block;margin-top:5px;text-align:left}
+      .rating-card{padding:12px}.rating-plot-grid{grid-template-columns:38px minmax(0,1fr);gap:7px}
+      .rating-y-axis,.rating-chart{height:146px}.rating-observations{margin-left:45px}
+    }
     @media(min-width:720px){
       .y8-perf-card{grid-template-columns:minmax(180px,.65fr) minmax(0,1.35fr);align-items:center;column-gap:22px}
       .y8-perf-card .perf-title{grid-column:1/-1}
       .y8-perf-card .perf-chart{height:75px}
+      .rating-card{grid-template-columns:190px minmax(0,1fr);gap:20px;align-items:center;padding:15px 17px}
+      .rating-observations{grid-column:2;margin-left:50px;margin-top:-3px}
     }
   </style>
 </head>
@@ -235,6 +271,65 @@ function metricTrend(history,{key,label,suffix='',maximumFractionDigits=0,fixedM
       dots+'</svg>'+scaleLabel+'</div>';
 }
 
+function ratingHistoryChart(history, game){
+  const points=history.filter(item=>typeof item.rating==='number'&&Number.isFinite(item.rating)&&!Number.isNaN(Date.parse(item.date+'T12:00:00Z'))).slice(-90);
+  if(!points.length)return '<article class="rating-card"><div class="rating-game">'+gameVisual(game,'matrix')+'<span>'+esc(game.name)+'</span></div><p class="perf-error">Noch kein Bewertungsverlauf vorhanden.</p></article>';
+
+  const values=points.map(item=>item.rating);
+  const dates=points.map(item=>Date.parse(item.date+'T12:00:00Z'));
+  const observedMin=Math.min(...values),observedMax=Math.max(...values);
+  const minimumSpan=.5;
+  const targetSpan=Math.max(minimumSpan,(observedMax-observedMin)*1.6);
+  const center=(observedMin+observedMax)/2;
+  let minY=Math.floor((center-targetSpan/2)*20)/20;
+  let maxY=Math.ceil((center+targetSpan/2)*20)/20;
+  if(minY<0){maxY-=minY;minY=0;}
+  if(maxY>5){minY-=maxY-5;maxY=5;}
+  minY=Math.max(0,minY);maxY=Math.min(5,maxY);
+  if(maxY-minY<minimumSpan){
+    if(minY===0)maxY=minimumSpan;
+    else if(maxY===5)minY=5-minimumSpan;
+    else{minY-=minimumSpan-(maxY-minY);}
+  }
+
+  const minX=Math.min(...dates),maxX=Math.max(...dates);
+  const plotTop=8,plotBottom=112;
+  const positions=points.map((item,index)=>{
+    const x=8+(maxX===minX?292:(dates[index]-minX)/(maxX-minX)*584);
+    const y=plotBottom-(item.rating-minY)/(maxY-minY)*(plotBottom-plotTop);
+    return [Number(x.toFixed(2)),Number(y.toFixed(2))];
+  });
+  const format=value=>value.toLocaleString('de-DE',{minimumFractionDigits:2,maximumFractionDigits:2});
+  const first=points[0],latest=points[points.length-1];
+  const difference=latest.rating-first.rating;
+  const delta=points.length===1?'Erster Messpunkt':
+    (difference>0?'+':'')+format(difference)+' seit '+fmtCompactDate(first.date);
+  const deltaClass=difference>0?' positive':difference<0?' negative':'';
+  const midIndex=Math.floor((points.length-1)/2);
+  const middleDate=points.length>2?fmtCompactDate(points[midIndex].date):'';
+  const gridLines=[plotTop,(plotTop+plotBottom)/2,plotBottom].map(y=>'<line class="rating-gridline" x1="8" y1="'+y+'" x2="592" y2="'+y+'"></line>').join('');
+  const line=points.length>1?'<polyline class="rating-line" points="'+positions.map(position=>position.join(',')).join(' ')+'"></polyline>':'';
+  const dots=positions.map(position=>'<circle class="rating-dot" cx="'+position[0]+'" cy="'+position[1]+'" r="4"></circle>').join('');
+  const relevant=points.filter((point,index)=>index===0||point.rating!==points[index-1].rating||index===points.length-1);
+  const observations=relevant.map((point,index)=>{
+    const label=index===0?'Start':index===relevant.length-1?'Aktuell':'Änderung';
+    return '<span class="rating-observation">'+label+' · '+esc(fmtCompactDate(point.date))+' · '+esc(format(point.rating))+'</span>';
+  }).join('');
+  const description=game.name+' Bewertung: '+points.map(point=>fmtCompactDate(point.date)+' '+format(point.rating)+' von 5').join(', ')+'. Angezeigte Skala '+format(minY)+' bis '+format(maxY)+'.';
+
+  return '<article class="rating-card">'+
+    '<div class="rating-summary"><div class="rating-game">'+gameVisual(game,'matrix')+'<span>'+esc(game.name)+'</span></div>'+
+      '<div class="rating-current">'+esc(format(latest.rating))+'<span> / 5</span></div>'+
+      '<div class="rating-change'+deltaClass+'">'+esc(delta)+'</div>'+
+      '<div class="rating-scale-note">Diagrammskala: '+esc(format(minY))+'–'+esc(format(maxY))+'</div></div>'+
+    '<div class="rating-chart-area"><div class="rating-plot-grid">'+
+      '<div class="rating-y-axis" aria-hidden="true"><span>'+esc(format(maxY))+'</span><span>'+esc(format((minY+maxY)/2))+'</span><span>'+esc(format(minY))+'</span></div>'+
+      '<div class="rating-plot"><svg class="rating-chart" viewBox="0 0 600 120" preserveAspectRatio="none" role="img" aria-label="'+esc(description)+'">'+gridLines+line+dots+'</svg>'+
+        '<div class="rating-x-axis" aria-hidden="true"><span>'+esc(fmtCompactDate(first.date))+'</span><span>'+esc(middleDate)+'</span><span>'+esc(fmtCompactDate(latest.date))+'</span></div></div></div></div>'+
+    '<div class="rating-observations" aria-label="Relevante Bewertungsstände">'+observations+'</div>'+
+  '</article>';
+}
+
 function renderKongregateMetrics(data, archive){
   const panel=document.getElementById('kongregateMonitor');
   if(!archive||archive.schemaVersion!==1||!archive.games){
@@ -254,8 +349,6 @@ function renderKongregateMetrics(data, archive){
     const signed=difference==null?'Kein Vergleich verfügbar':(difference>0?'+':'')+difference.toLocaleString('de-DE')+' Plays seit '+fmtCompactDate(before.date);
     const favorite=Number.isSafeInteger(recent.favorites)?recent.favorites.toLocaleString('de-DE')+' Favoriten':'Favoriten: noch unbekannt';
     const rating=typeof recent.rating==='number'?'Bewertung '+recent.rating.toLocaleString('de-DE',{maximumFractionDigits:2})+'/5':'Bewertung: nicht erfasst';
-    const ratingHistory='<div class="metric-history single" aria-label="Historischer Bewertungsverlauf">'+
-      metricTrend(history,{key:'rating',label:'Bewertungsverlauf',suffix:'/5',maximumFractionDigits:2,className:'rating',compareFrom:'first',minimumRange:.4,scaleBounds:[0,5]})+'</div>';
     const source=recent.source==='kongregate_metrics'?'Kongregate-Feed':'Historischer manueller Stand';
     return '<article class="perf-card">'+
       '<div class="perf-title">'+esc(game.name)+'<span class="perf-date">'+esc(fmtCompactDate(recent.date))+'</span></div>'+
@@ -263,14 +356,19 @@ function renderKongregateMetrics(data, archive){
       '<div class="perf-delta'+(difference>0?' positive':'')+'">'+esc(signed)+'</div>'+
       performanceSparkline(history,game.name)+
       '<div class="perf-details"><span>'+esc(favorite)+'</span><span>'+esc(rating)+'</span></div>'+
-      ratingHistory+
       '<div class="perf-source">'+esc(source)+'</div>'+
     '</article>';
+  }).join('');
+  const ratingCards=order.map(id=>{
+    const game=data.games.find(item=>item.id===id);
+    const history=Array.isArray(archive.games[id])?archive.games[id]:[];
+    return game?ratingHistoryChart(history,game):'';
   }).join('');
   panel.innerHTML='<div class="perf-heading"><div><h2>Kongregate · Performance</h2><p>Öffentliche kumulative Spielaufrufe · täglich dokumentiert, keine Schätzungen</p></div>'+
     '<span class="perf-update">'+esc(lastSync)+'</span></div>'+
     '<div class="perf-grid">'+cards+'</div>'+
-    '<p class="perf-note">Ältere Messpunkte stammen aus dem bisherigen Dashboard oder manuell gemeldeten Ständen. Ab Aktivierung des täglichen Workflows wird ein Messpunkt pro Spiel und Kalendertag automatisch erfasst. Fehlende Tage bedeuten nicht null Plays. Die Plays-Differenz bezieht sich auf den vorherigen vorhandenen Messpunkt; beim Bewertungsverlauf wird die Änderung seit der ersten erfassten Bewertung gezeigt. Damit kleine Bewegungen erkennbar bleiben, nutzt die Bewertungskurve eine beschriftete Zoom-Skala mit mindestens 0,4 Punkten Spannweite.</p>';
+    '<section class="kong-rating-section" aria-labelledby="kongRatingTitle"><div class="kong-rating-heading"><div><h3 id="kongRatingTitle">Bewertungsverlauf</h3><p>Eigene große Skala je Spiel · exakte Werte darunter</p></div><span>Kongregate-Skala: 0–5</span></div><div class="kong-rating-list">'+ratingCards+'</div></section>'+
+    '<p class="perf-note">Ältere Messpunkte stammen aus dem bisherigen Dashboard oder manuell gemeldeten Ständen. Ab Aktivierung des täglichen Workflows wird ein Messpunkt pro Spiel und Kalendertag automatisch erfasst. Fehlende Tage bedeuten nicht null Plays. Die Plays-Differenz bezieht sich auf den vorherigen vorhandenen Messpunkt; beim Bewertungsverlauf wird die Änderung seit der ersten erfassten Bewertung gezeigt. Jedes Bewertungsdiagramm nutzt eine klar beschriftete, auf mindestens 0,5 Punkte begrenzte Ausschnittsskala; Start, echte Änderungen und aktueller Stand stehen zusätzlich als exakte Werte darunter.</p>';
 }
 
 

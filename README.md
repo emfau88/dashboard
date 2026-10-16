@@ -122,7 +122,7 @@ Danach [http://localhost:8000](http://localhost:8000) öffnen.
 
 ## Kongregate: tägliche Performance-Daten (automatisiert)
 
-Das Dashboard zeigt unter **Übersicht → Kongregate · Performance** die drei aktiven Kongregate-Spiele (HEXFRONT, GALALAXY, ROOSTER RAGE). Pro Spiel werden kumulative Plays, Favoriten sowie getrennte Verlaufskurven für Plays und Bewertung angezeigt. Die Plays-Differenz vergleicht den **vorherigen vorhandenen Messpunkt**; der Bewertungsverlauf nennt die Veränderung seit der ersten erfassten Bewertung. Seine sichtbar beschriftete Zoom-Skala umfasst mindestens 0,4 Bewertungspunkte, damit kleine Bewegungen erkennbar bleiben, ohne sie grenzenlos zu vergrößern.
+Das Dashboard zeigt unter **Übersicht → Kongregate · Performance** die drei aktiven Kongregate-Spiele (HEXFRONT, GALALAXY, ROOSTER RAGE). Pro Spiel werden kumulative Plays und Favoriten kompakt dargestellt. Die Bewertungsverläufe stehen darunter in einer eigenen, großformatigen Sektion mit je einer vollständigen Diagrammzeile pro Spiel. Die Plays-Differenz vergleicht den **vorherigen vorhandenen Messpunkt**; der Bewertungsverlauf nennt die Veränderung seit der ersten erfassten Bewertung. Seine sichtbar beschriftete Ausschnittsskala umfasst mindestens 0,5 Bewertungspunkte. Startwert, tatsächliche Änderungen und aktueller Stand werden zusätzlich mit Datum und exaktem Wert unter der Kurve genannt.
 
 - Datenquelle: öffentliches Kongregate-Metrics-JSON unter `https://www.kongregate.com/games/emfau/<spiel-slug>/metrics.json`.
 - Abrufskript: `scripts/sync_kongregate.py` (Python-Standardbibliothek; kein API-Schlüssel).
