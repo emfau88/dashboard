@@ -95,6 +95,8 @@ Diese internen Werte konsistent verwenden:
 
 Eine Einreichung ist ein datiertes Ereignis (`submitted`), kein dauerhafter Status. Solange die Entscheidung ohne Rückmeldung aussteht, lautet der aktuelle Status `review` („In Prüfung“). Verlangt das Portal eine Korrektur, wird `changes_requested` verwendet. Ist ein Spiel freigegeben, aber noch nicht veröffentlicht, lautet der Status `approved`. Hat ein Portal die Veröffentlichung bereits eingeplant, ist sie aber noch nicht öffentlich bestätigt, wird `scheduled` verwendet. Erst sobald die öffentliche Spielseite samt Player ohne Entwicklerzugang erreichbar ist, gilt `live`.
 
+Bleibt ein bereits veröffentlichtes Spiel live, während ein neuer Build geprüft wird, behält die Platzierung den Status `live`. Das laufende Update wird getrennt als `pendingBuild` mit `version`, `status`, `uploaded` und `note` erfasst. Dadurch bleiben öffentlicher Live-Status und Build-Prüfung gleichzeitig sichtbar, ohne den bisher veröffentlichten Commit vorzeitig zu überschreiben.
+
 ## Portal-Eignung
 
 - `very_good`
