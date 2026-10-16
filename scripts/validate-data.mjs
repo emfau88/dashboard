@@ -55,7 +55,11 @@ for(const game of data.games){
     if(placement.revisionSubmittedConfirmed!=null&&typeof placement.revisionSubmittedConfirmed!=='boolean')error(`${game.id}/${portalId}: revisionSubmittedConfirmed muss ein Boolean sein.`);
     if(placement.pendingBuild){
       const pending=placement.pendingBuild;
-      if(typeof pending.version!=='string'||!pending.version.trim())error(`${game.id}/${portalId}: pendingBuild.version fehlt.`);
+      const hasVersion=typeof pending.version==='string'&&pending.version.trim();
+      const hasLabel=typeof pending.label==='string'&&pending.label.trim();
+      if(!hasVersion&&!hasLabel)error(`${game.id}/${portalId}: pendingBuild benötigt version oder label.`);
+      if(pending.version!=null&&!hasVersion)error(`${game.id}/${portalId}: pendingBuild.version muss eine nicht leere Zeichenkette sein.`);
+      if(pending.label!=null&&!hasLabel)error(`${game.id}/${portalId}: pendingBuild.label muss eine nicht leere Zeichenkette sein.`);
       if(!allowedStatuses.has(pending.status)||!['review','changes_requested','scheduled'].includes(pending.status))error(`${game.id}/${portalId}: pendingBuild.status ist ungültig.`);
       if(!isValidDate(pending.uploaded||''))error(`${game.id}/${portalId}: pendingBuild.uploaded ist kein gültiges ISO-Datum.`);
       if(pending.uploaded&&data.meta?.updated&&pending.uploaded>data.meta.updated)error(`${game.id}/${portalId}: pendingBuild.uploaded liegt nach meta.updated.`);
