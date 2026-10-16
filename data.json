@@ -20,8 +20,8 @@
         "developmentBranch": "main",
         "pagesUrl": "https://emfau88.github.io/hexwars/"
       },
-      "nextAction": "Ergebnis der Y8-Prüfung erfassen und die GameMonetize-Qualitätsablehnung vor der nächsten Einreichung auswerten",
-      "issues": ["Doomstack-Lösung noch unvollständig", "Lesbarkeit der Spezialfelder", "Karten 9–10 noch gesperrt"],
+      "nextAction": "Die erneute Y8-Prüfung von Build 003 abwarten und das Ergebnis vollständig erfassen",
+      "issues": ["Y8 Build 003 erneut in Prüfung", "Doomstack-Lösung noch unvollständig", "Lesbarkeit der Spezialfelder"],
       "platforms": {
         "kongregate": {
           "status": "live",
@@ -47,7 +47,13 @@
           "submittedNote": "Neuesten verbesserten Build eingereicht; die Prüfung läuft.",
           "feedbackNote": "Y8 hatte Korrekturen an der eingereichten Version verlangt; die einzelnen Punkte sind im Dashboard nicht näher erfasst.",
           "revisionSubmittedNote": "Die von Y8 gewünschten Korrekturen wurden umgesetzt und als neue Version nachgereicht; die Prüfung läuft erneut.",
-          "notes": "Korrigierte Version am 11.10.2026 nachgereicht; seitdem wieder in Prüfung. Im GitHub-Repository ist kein neuerer Commit als der bereits zugeordnete Y8-Build sichtbar.",
+          "pendingBuild": {
+            "version": "003",
+            "status": "review",
+            "uploaded": "2026-10-16",
+            "note": "Build 003 zusammen mit allen von Y8 geforderten Screenshots und Promo-Bildern hochgeladen. Der Build soll die beanstandeten Punkte beheben und ist erneut in Prüfung; ein zugehöriger neuer öffentlicher GitHub-Commit ist noch nicht sicher zuordenbar."
+          },
+          "notes": "Korrigierte Version am 11.10.2026 nachgereicht. Am 16.10.2026 folgte Build 003 mit allen geforderten Screenshots und Promo-Bildern; dieser Build ist erneut in Prüfung.",
           "statusUpdates": [
             {"date": "2026-10-05", "status": "review", "note": "Zwischenstand: Y8 zeigt für HEXFRONT weiterhin „In review“; der letzte Portal-Update-Hinweis datiert vom 01.10.2026."}
           ]
