@@ -383,7 +383,7 @@ function renderY8Metrics(data, archive){
   const updatedAt=archive.updatedAt
     ? new Date(archive.updatedAt).toLocaleString('de-DE',{dateStyle:'short',timeStyle:'short',timeZone:'Europe/Berlin'})
     : 'Erster automatischer Abruf ausstehend';
-  const monitored=['galalaxy'];
+  const monitored=['galalaxy','rooster-rage'];
   const cards=monitored.map(gameId=>{
     const game=data.games.find(g=>g.id===gameId);
     const series=Array.isArray(archive.games[gameId])?archive.games[gameId]:[];
@@ -404,6 +404,8 @@ function renderY8Metrics(data, archive){
       metricTrend(series,{key:'rating',label:'Bewertung',suffix:'/10',maximumFractionDigits:1,fixedMax:10,className:'rating'})+
       metricTrend(series,{key:'likes',label:'Likes',maximumFractionDigits:0,className:'likes'})+'</div>';
     const source=latest.source==='y8_public_page'?'Öffentliche Y8-Spielseite':'Manuell erfasster Wert';
+    const publicUrl=game?.platforms?.y8?.publicUrl;
+    const publicLink=publicUrl?'<a class="y8-perf-link" href="'+esc(publicUrl)+'" target="_blank" rel="noopener noreferrer">Öffentliche Spielseite ↗</a>':'';
     const ageDays=Math.floor((Date.now()-Date.parse(latest.date+'T12:00:00Z'))/86400000);
     const stale=ageDays>2?'<span class="perf-error"> · Letzter Wert älter als zwei Tage</span>':'';
     return '<article class="perf-card y8-perf-card">'+
@@ -415,14 +417,14 @@ function renderY8Metrics(data, archive){
         '<div class="perf-source">'+esc(source)+stale+'</div></div>'+
       '<div class="y8-perf-chartbox">'+performanceSparkline(series,title)+
         secondaryHistory+
-        '<a class="y8-perf-link" href="https://www.y8.com/games/galalaxy" target="_blank" rel="noopener noreferrer">Öffentliche Spielseite ↗</a></div>'+
+        publicLink+'</div>'+
     '</article>';
   }).join('');
   panel.innerHTML='<div class="perf-heading"><div><h2>Y8 · Performance</h2>'+
     '<p>Öffentlich sichtbare Gesamtaufrufe, Likes und Bewertung auf der Y8-Skala von 0 bis 10</p></div>'+
     '<span class="perf-update">Letzter Abruf: '+esc(updatedAt)+'</span></div>'+
     cards+
-    '<p class="perf-note">Die Y8-Seite wird einmal täglich abgerufen. Fehlt ein Tageswert oder verändert Y8 das HTML, wird kein Wert erfunden; der letzte erfolgreiche Snapshot bleibt sichtbar. Veränderungen gelten jeweils seit dem letzten tatsächlich erfassten Messpunkt, nicht notwendigerweise innerhalb eines Tages.</p>';
+    '<p class="perf-note">Die öffentlichen Y8-Seiten von GALALAXY und ROOSTER RAGE werden einmal täglich abgerufen. Fehlt ein Tageswert oder verändert Y8 das HTML, wird kein Wert erfunden; der letzte erfolgreiche Snapshot bleibt sichtbar. Veränderungen gelten jeweils seit dem letzten tatsächlich erfassten Messpunkt, nicht notwendigerweise innerhalb eines Tages.</p>';
 }
 
 function renderGames(d){

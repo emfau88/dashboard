@@ -2,7 +2,7 @@
   "meta": {
     "title": "emfau Game Ops",
     "version": "0.12.0",
-    "updated": "2026-10-11",
+    "updated": "2026-10-16",
     "currency": "EUR",
     "notes": "Die Recherche-Spannen sind interne Vergleichswerte aus der Portal-Analyse vom September 2026 und keine offiziellen Annahmeschwellen der Plattformen."
   },
@@ -165,8 +165,8 @@
         "developmentBranch": "master",
         "pagesUrl": "https://emfau88.github.io/RoosterRage/"
       },
-      "nextAction": "Das Ergebnis der Y8-Prüfung abwarten und parallel die Resonanz auf Kongregate beobachten",
-      "issues": ["Y8-Prüfung läuft", "Veröffentlichungsreif statt perfekt", "Letztes Balancing und Präsentations-Polishing optional"],
+      "nextAction": "Die Resonanz und Kennzahlen auf Y8 und Kongregate beobachten",
+      "issues": ["Veröffentlichungsreif statt perfekt", "Resonanz auf Y8 und Kongregate beobachten", "Letztes Balancing und Präsentations-Polishing optional"],
       "platforms": {
         "kongregate": {
           "status": "live",
@@ -185,12 +185,16 @@
           ]
         },
         "y8": {
-          "status": "review",
+          "status": "live",
           "submitted": "2026-10-07",
+          "published": "2026-10-15",
           "sourceBranch": "master",
           "submittedCommit": "328843a042f19f551f53e9ea17e9922a7100417e",
+          "deployedCommit": "328843a042f19f551f53e9ea17e9922a7100417e",
           "submittedNote": "Aktuellen master-Build bei Y8 zur Prüfung eingereicht.",
-          "notes": "Am 07.10.2026 bei Y8 eingereicht; die Prüfung läuft. Der zugeordnete Build entspricht dem neuesten Repository-Stand vom 05.10.2026."
+          "publishedNote": "ROOSTER RAGE wurde öffentlich auf Y8 veröffentlicht.",
+          "publicUrl": "https://de.y8.com/games/rooster_rage",
+          "notes": "Am 15.10.2026 öffentlich auf Y8 veröffentlicht. Der zugeordnete Build entspricht dem bei Y8 eingereichten master-Stand."
         },
         "gamemonetize": {"status": "planned"},
         "gamepix": {"status": "planned"},
@@ -409,4 +413,5 @@
     }
   ]
 }
+
 

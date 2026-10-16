@@ -20,7 +20,10 @@ from zoneinfo import ZoneInfo
 
 ROOT = Path(__file__).resolve().parents[1]
 ARCHIVE = ROOT / "analytics" / "y8.json"
-GAMES = {"galalaxy": {"slug": "galalaxy", "title": "Galalaxy"}}
+GAMES = {
+    "galalaxy": {"slug": "galalaxy", "title": "Galalaxy"},
+    "rooster-rage": {"slug": "rooster_rage", "title": "Rooster Rage"},
+}
 SITE = "https://www.y8.com/games/"
 MAX_RESPONSE_BYTES = 2_000_000
 VOID_TAGS = frozenset("area base br col embed hr img input link meta param source track wbr".split())
@@ -240,3 +243,4 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
+

@@ -32,7 +32,8 @@ def sample_html(plays="642", rating="8.6", likes="6", title="Galalaxy", duplicat
 
 class Y8SyncTests(unittest.TestCase):
     def fresh(self):
-        return {"schemaVersion": 1, "updatedAt": None, "games": {"galalaxy": []}}
+        return {"schemaVersion": 1, "updatedAt": None,
+                "games": {game_id: [] for game_id in y8.GAMES}}
 
     def metrics(self, _slug, _title):
         return {"plays": 642, "rating": 8.6, "likes": 6}
@@ -43,6 +44,15 @@ class Y8SyncTests(unittest.TestCase):
     def test_realistic_y8_dom_and_repeated_mobile_markup(self):
         self.assertEqual(y8.parse_metrics(sample_html(duplicate=True)),
                          {"plays": 642, "rating": 8.6, "likes": 6})
+
+    def test_rooster_rage_uses_the_same_public_metrics(self):
+        self.assertEqual(y8.GAMES["rooster-rage"],
+                         {"slug": "rooster_rage", "title": "Rooster Rage"})
+        self.assertEqual(
+            y8.parse_metrics(sample_html(plays="230", rating="8.0", likes="0",
+                                         title="Rooster Rage"), "Rooster Rage"),
+            {"plays": 230, "rating": 8.0, "likes": 0},
+        )
 
     def test_number_groupings_are_exact(self):
         for display in ("1,234", "1.234", "1 234", "1\u202f234"):
@@ -85,29 +95,32 @@ class Y8SyncTests(unittest.TestCase):
 
     def test_same_day_does_not_duplicate(self):
         archive = self.fresh()
-        self.assertEqual(y8.collect(archive, self.now(), self.metrics), (1, 0, True))
-        self.assertEqual(y8.collect(archive, self.now(), self.metrics), (1, 0, False))
+        self.assertEqual(y8.collect(archive, self.now(), self.metrics), (2, 0, True))
+        self.assertEqual(y8.collect(archive, self.now(), self.metrics), (2, 0, False))
         self.assertEqual(len(archive["games"]["galalaxy"]), 1)
+        self.assertEqual(len(archive["games"]["rooster-rage"]), 1)
 
     def test_later_same_day_value_replaces_old_one(self):
         archive = self.fresh()
         y8.collect(archive, self.now(), self.metrics)
         reader = lambda slug, title: {"plays": 643, "rating": 8.7, "likes": 6}
-        self.assertEqual(y8.collect(archive, self.now(), reader), (1, 0, True))
+        self.assertEqual(y8.collect(archive, self.now(), reader), (2, 0, True))
         self.assertEqual(archive["games"]["galalaxy"][0]["plays"], 643)
+        self.assertEqual(archive["games"]["rooster-rage"][0]["plays"], 643)
 
     def test_counter_decrease_is_rejected(self):
         archive = self.fresh()
-        archive["games"]["galalaxy"].append({"date": "2026-10-10", "plays": 1000, "rating": 8.6})
-        self.assertEqual(y8.collect(archive, self.now(), self.metrics), (0, 1, False))
-        self.assertEqual(len(archive["games"]["galalaxy"]), 1)
+        for history in archive["games"].values():
+            history.append({"date": "2026-10-10", "plays": 1000, "rating": 8.6})
+        self.assertEqual(y8.collect(archive, self.now(), self.metrics), (0, 2, False))
+        self.assertTrue(all(len(history) == 1 for history in archive["games"].values()))
 
     def test_failure_does_not_add_zero(self):
         archive = self.fresh()
         def broken(slug, title):
             raise y8.MetricsError("No page stats")
-        self.assertEqual(y8.collect(archive, self.now(), broken), (0, 1, False))
-        self.assertFalse(archive["games"]["galalaxy"])
+        self.assertEqual(y8.collect(archive, self.now(), broken), (0, 2, False))
+        self.assertTrue(all(not history for history in archive["games"].values()))
 
     def test_berlin_day_boundary(self):
         archive = self.fresh()
@@ -128,3 +141,4 @@ class Y8SyncTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
