@@ -92,8 +92,8 @@
         "developmentBranch": "main",
         "pagesUrl": "https://emfau88.github.io/galalaxy/"
       },
-      "nextAction": "Den Y8-Livegang und die erste Resonanz beobachten; weitere Portal-Ergebnisse weiterhin erfassen",
-      "issues": ["HUD schwächer als gewünscht", "Uneinheitliche visuelle Assets", "Bisher geringe Sichtbarkeit auf Kongregate"],
+      "nextAction": "Die Y8-Prüfung des Werbe-Patches abwarten und parallel die Resonanz auf Y8 beobachten",
+      "issues": ["Y8-Werbe-Patch in Prüfung", "HUD schwächer als gewünscht", "Uneinheitliche visuelle Assets"],
       "platforms": {
         "kongregate": {
           "status": "live",
@@ -125,6 +125,12 @@
           "feedbackNote": "Y8 meldet, dass die WASD-Steuerung nicht funktioniere, und verlangt eine Änderung. Die Ursache ist noch zu prüfen.",
           "revisionSubmittedNote": "Die bemängelte WASD-Steuerung wurde überarbeitet und vor einigen Tagen erneut bei Y8 eingereicht; das genaue Datum ist nicht bekannt.",
           "publishedNote": "GALALAXY ist über die öffentliche Y8-Spielseite aufrufbar und spielbar.",
+          "pendingBuild": {
+            "label": "Werbe-Patch",
+            "status": "review",
+            "uploaded": "2026-10-16",
+            "note": "Patch bei Y8 eingereicht, der zu Spielbeginn einmal Werbung anzeigt. Der Patch ist in Prüfung; eine Buildnummer wurde nicht genannt und ein neuerer öffentlicher GitHub-Commit ist noch nicht zuordenbar."
+          },
           "notes": "Am 05.10.2026 öffentlich auf Y8 spielbar. Im Entwicklerportal wurde am selben Tag noch „Scheduled“ angezeigt.",
           "statusUpdates": [
             {"date": "2026-10-05", "status": "scheduled", "note": "Zwischenstand: Das Y8-Entwicklerportal zeigt „Scheduled“; die öffentliche Spielseite ist bereits spielbar."}
