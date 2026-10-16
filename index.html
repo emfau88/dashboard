@@ -204,8 +204,9 @@ function renderKPIs(d){
   const live=d.games.filter(g=>g.status==='live').length;
   const open=d.games.flatMap(g=>Object.values(g.platforms).flatMap(p=>{
     const items=[];
-    if(['review','changes_requested','scheduled'].includes(p.status))items.push({date:p.submitted});
-    if(p.pendingBuild&&['review','changes_requested','scheduled'].includes(p.pendingBuild.status))items.push({date:p.pendingBuild.uploaded});
+    const placementOpen=['review','changes_requested','scheduled'].includes(p.status);
+    if(placementOpen)items.push({date:p.submitted});
+    else if(p.pendingBuild&&['review','changes_requested','scheduled'].includes(p.pendingBuild.status))items.push({date:p.pendingBuild.uploaded});
     return items;
   }));
   const oldest=open.map(item=>item.date).filter(Boolean).sort()[0];
@@ -438,7 +439,8 @@ function renderGames(d){
       const portal=d.portals.find(x=>x.id===id);
       const pending=p.pendingBuild&&['review','changes_requested','scheduled'].includes(p.pendingBuild.status);
       const pendingName=pending?(p.pendingBuild.label||`Build ${p.pendingBuild.version}`):'';
-      const statusText=pending?`${labels[p.status]} · ${pendingName} ${labels[p.pendingBuild.status]}`:labels[p.status];
+      const placementOpen=['review','changes_requested','scheduled'].includes(p.status);
+      const statusText=pending?(placementOpen?`${labels[p.status]} · ${pendingName}`:`${labels[p.status]} · ${pendingName} ${labels[p.pendingBuild.status]}`):labels[p.status];
       return `<div class="platform-chip ${esc(p.status)}${pending?' pending-update':''}"><span>${esc(portal?.name||id)}</span><strong>${esc(statusText)}</strong></div>`;
     }).join('')||'<div class="platform-chip"><span>Distribution</span><strong>Noch keine Aktivität</strong></div>';
     const github=g.github?`<details class="github-sync"><summary><span class="github-state" id="github-summary-${esc(g.id)}"><i></i>GitHub wird geprüft…</span></summary><div class="github-detail" id="github-${esc(g.id)}" aria-live="polite"><div class="git-loading">Live-GitHub-Status wird geladen…</div></div></details>`:`<div class="github-sync"><div class="git-empty" style="padding:10px 11px">Noch kein GitHub-Repository verknüpft.</div></div>`;
@@ -471,7 +473,7 @@ function portalDetailsHtml(g,p){
   const commit=p.deployedCommit||p.submittedCommit||p.rejectedCommit;
   const version=p.version||(commit?shortSha(commit):null);
   const url=commit&&g.github?`https://github.com/${g.github.repo}/commit/${commit}`:null;
-  const buildLabel=p.status==='live'?'Aktueller Portal-Build':p.status==='approved'?'Freigegebener Build':p.status==='scheduled'?'Zur Veröffentlichung geplanter Build':p.status==='changes_requested'?'Build mit Änderungsbedarf':p.status==='rejected'?'Abgelehnter Build':'Eingereichter Build';
+  const buildLabel=p.pendingBuild?(p.status==='live'?'Aktueller Live-Build':'Zuvor zugeordneter Portal-Build'):p.status==='live'?'Aktueller Portal-Build':p.status==='approved'?'Freigegebener Build':p.status==='scheduled'?'Zur Veröffentlichung geplanter Build':p.status==='changes_requested'?'Build mit Änderungsbedarf':p.status==='rejected'?'Abgelehnter Build':'Eingereichter Build';
   const build=version?(url?`<a class="matrix-version" href="${esc(url)}" target="_blank" rel="noreferrer">${buildLabel} ${esc(version)} ↗</a>`:`<div class="matrix-version">${buildLabel} ${esc(version)}</div>`):'';
   const feedback=p.status==='changes_requested'&&p.feedbackNote?`<div class="matrix-feedback">${esc(p.feedbackNote)}</div>`:p.revisionSubmittedConfirmed&&p.revisionSubmittedNote?`<div class="matrix-feedback">${esc(p.revisionSubmittedNote)}</div>`:'';
   const pendingName=p.pendingBuild?(p.pendingBuild.label||`Build ${p.pendingBuild.version}`):'';
