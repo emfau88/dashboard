@@ -344,7 +344,7 @@ function renderKongregateMetrics(data, archive){
     return;
   }
   const lastSync=archive.updatedAt?new Date(archive.updatedAt).toLocaleString('de-DE',{dateStyle:'short',timeStyle:'short',timeZone:'Europe/Berlin'}):'Erster automatischer Abruf ausstehend';
-  const order=['hexfront','galalaxy','rooster-rage'];
+  const order=['hexfront','galalaxy','rooster-rage','kesselkrawall'];
   const cards=order.map(id=>{
     const game=data.games.find(g=>g.id===id);
     const history=Array.isArray(archive.games[id])?archive.games[id]:[];

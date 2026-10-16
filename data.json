@@ -229,7 +229,7 @@
       "name": "KESSELKRAWALL",
       "subtitle": "Magischer Mobile-Autobattler",
       "image": "assets/games/kesselkrawall.webp",
-      "status": "review",
+      "status": "live",
       "qualityScore": null,
       "repo": "https://github.com/emfau88/KesselKrawall",
       "github": {
@@ -237,16 +237,22 @@
         "developmentBranch": "main",
         "pagesUrl": "https://emfau88.github.io/KesselKrawall/"
       },
-      "nextAction": "Ergebnisse der laufenden Prüfungen bei Kongregate und Y8 abwarten und erfassen",
-      "issues": ["CrazyGames lehnte die Gesamtqualität ab", "Kongregate-Prüfung läuft", "Y8-Prüfung läuft"],
+      "nextAction": "Resonanz und Kennzahlen auf Kongregate beobachten und das Ergebnis der Y8-Prüfung abwarten",
+      "issues": ["Y8-Prüfung läuft", "Kongregate-Resonanz beobachten", "CrazyGames lehnte die Gesamtqualität ab"],
       "platforms": {
         "kongregate": {
-          "status": "review",
+          "status": "live",
+          "portalTitle": "Cauldron Rumble Merge-Autobattler",
           "submitted": "2026-10-05",
+          "acceptanceConfirmed": true,
+          "published": "2026-10-16",
           "sourceBranch": "main",
           "submittedCommit": "e41507eebc63507909d46b26973dd76c4b24e76b",
+          "deployedCommit": "e41507eebc63507909d46b26973dd76c4b24e76b",
           "submittedNote": "Aktuellen main-Build bei Kongregate zur Prüfung eingereicht.",
-          "notes": "Die Kongregate-Prüfung läuft; ein Ergebnis liegt noch nicht vor."
+          "publishedNote": "Unter dem Portalnamen „Cauldron Rumble Merge-Autobattler“ öffentlich auf Kongregate veröffentlicht.",
+          "publicUrl": "https://www.kongregate.com/en/games/emfau/cauldron-rumble-merge-autobattler",
+          "notes": "Schon vor dem 16.10.2026 zur Veröffentlichung freigegeben; das genaue Annahmedatum ist nicht erfasst. Seit dem 16.10.2026 öffentlich auf Kongregate spielbar."
         },
         "y8": {
           "status": "review",
@@ -338,8 +344,8 @@
       "qualityRange": "~61–65 typisch in der Recherche-Stichprobe",
       "qualityRangeConfidence": "mittel",
       "reach": "Etablierte direkte Plattform; Platzierungen auf der Startseite oder unter New & Updated können deutliche Besucherspitzen erzeugen",
-      "researchNote": "HEXFRONT, GALALAXY und ROOSTER RAGE wurden tatsächlich angenommen beziehungsweise veröffentlicht. KESSELKRAWALL ist seit dem 05.10.2026 in Prüfung. Diese realen Ergebnisse sind aussagekräftiger als eine abgeleitete Schwelle.",
-      "fits": {"hexfront": "very_good", "galalaxy": "very_good", "rooster-rage": "very_good", "kesselkrawall": "unknown", "core-arena": "good", "more-than-wombat": "unknown"}
+      "researchNote": "HEXFRONT, GALALAXY, ROOSTER RAGE und KESSELKRAWALL wurden veröffentlicht. KESSELKRAWALL ging am 16.10.2026 unter dem Titel „Cauldron Rumble Merge-Autobattler“ live. Diese realen Ergebnisse sind aussagekräftiger als eine abgeleitete Schwelle.",
+      "fits": {"hexfront": "very_good", "galalaxy": "very_good", "rooster-rage": "very_good", "kesselkrawall": "very_good", "core-arena": "good", "more-than-wombat": "unknown"}
     },
     {
       "id": "y8",

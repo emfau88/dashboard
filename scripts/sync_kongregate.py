@@ -22,6 +22,7 @@ GAMES = {
     "hexfront": "hexfront",
     "galalaxy": "galalaxy",
     "rooster-rage": "roosterrage-survivor",
+    "kesselkrawall": "cauldron-rumble-merge-autobattler",
 }
 BASE_URL = "https://www.kongregate.com/games/emfau/"
 MAX_RESPONSE_BYTES = 100_000
@@ -42,7 +43,14 @@ def parse_metrics(payload: object) -> dict:
         raise MetricsError("favorites_count must be a non-negative integer")
 
     raw_rating = payload.get("rating")
-    if raw_rating is None or raw_rating == "":
+    rating_text = " ".join(
+        str(payload.get(field, ""))
+        for field in ("average_rating_text", "average_rating_with_count")
+    ).lower()
+    under_judgement = "under judgement" in rating_text
+    if raw_rating is None or raw_rating == "" or (
+        under_judgement and str(raw_rating).strip() in {"0", "0.0", "0.00"}
+    ):
         rating = None
     else:
         try:
