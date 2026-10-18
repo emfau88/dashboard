@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-10-17T11:35:17Z",
+  "updatedAt": "2026-10-18T12:03:02Z",
   "games": {
     "galalaxy": [
       {
@@ -58,6 +58,14 @@
         "likes": 9,
         "source": "y8_public_page",
         "fetchedAt": "2026-10-17T11:35:17Z"
+      },
+      {
+        "date": "2026-10-18",
+        "plays": 2108,
+        "rating": 9.1,
+        "likes": 10,
+        "source": "y8_public_page",
+        "fetchedAt": "2026-10-18T12:03:02Z"
       }
     ],
     "rooster-rage": [
@@ -76,6 +84,14 @@
         "likes": 1,
         "source": "y8_public_page",
         "fetchedAt": "2026-10-17T11:35:17Z"
+      },
+      {
+        "date": "2026-10-18",
+        "plays": 294,
+        "rating": 8.2,
+        "likes": 2,
+        "source": "y8_public_page",
+        "fetchedAt": "2026-10-18T12:03:02Z"
       }
     ]
   }
