@@ -2,7 +2,7 @@
   "meta": {
     "title": "emfau Game Ops",
     "version": "0.12.0",
-    "updated": "2026-10-16",
+    "updated": "2026-10-19",
     "currency": "EUR",
     "notes": "Die Recherche-Spannen sind interne Vergleichswerte aus der Portal-Analyse vom September 2026 und keine offiziellen Annahmeschwellen der Plattformen."
   },
@@ -177,8 +177,8 @@
         "developmentBranch": "master",
         "pagesUrl": "https://emfau88.github.io/RoosterRage/"
       },
-      "nextAction": "Die Y8-Prüfung von Build 002 abwarten und parallel die Kennzahlen auf Y8 und Kongregate beobachten",
-      "issues": ["Y8 Build 002 mit ergänzter Werbung in Prüfung", "Resonanz auf Y8 und Kongregate beobachten", "Letztes Balancing und Präsentations-Polishing optional"],
+      "nextAction": "Kennzahlen auf Y8 und Kongregate sowie die Werbeintegration von Build 002 im Live-Betrieb beobachten",
+      "issues": ["Werbeintegration von Build 002 auf Y8 im Live-Betrieb beobachten", "Resonanz auf Y8 und Kongregate beobachten", "Letztes Balancing und Präsentations-Polishing optional"],
       "platforms": {
         "kongregate": {
           "status": "live",
@@ -206,13 +206,14 @@
           "submittedNote": "Aktuellen master-Build bei Y8 zur Prüfung eingereicht.",
           "publishedNote": "ROOSTER RAGE wurde öffentlich auf Y8 veröffentlicht.",
           "publicUrl": "https://de.y8.com/games/rooster_rage",
-          "pendingBuild": {
+          "liveBuild": {
             "version": "002",
-            "status": "review",
             "uploaded": "2026-10-16",
-            "note": "Build 002 mit ergänzter Werbung beziehungsweise Monetarisierung hochgeladen; Y8 zeigt „In review“. Es wurden keine Patch Notes hinterlegt."
+            "published": "2026-10-19",
+            "uploadedNote": "Build 002 mit ergänzter Werbung beziehungsweise Monetarisierung hochgeladen; Y8 zeigte anschließend „In review“. Es wurden keine Patch Notes hinterlegt.",
+            "publishedNote": "Der Werbe-Build 002 ist auf Y8 live und ersetzt dort den zuvor veröffentlichten Build."
           },
-          "notes": "Am 15.10.2026 öffentlich auf Y8 veröffentlicht. Der zugeordnete Build entspricht dem bei Y8 eingereichten master-Stand."
+          "notes": "Am 15.10.2026 erstmals öffentlich auf Y8 veröffentlicht. Der am 16.10.2026 hochgeladene Werbe-Build 002 ist seit dem 19.10.2026 live. Ein neuer öffentlicher GitHub-Commit ist diesem Portal-Build noch nicht sicher zugeordnet."
         },
         "gamemonetize": {"status": "planned"},
         "gamepix": {"status": "planned"},
@@ -437,5 +438,4 @@
     }
   ]
 }
-
 

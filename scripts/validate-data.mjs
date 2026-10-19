@@ -65,6 +65,22 @@ for(const game of data.games){
       if(pending.uploaded&&data.meta?.updated&&pending.uploaded>data.meta.updated)error(`${game.id}/${portalId}: pendingBuild.uploaded liegt nach meta.updated.`);
       if(pending.note!=null&&(typeof pending.note!=='string'||!pending.note.trim()))error(`${game.id}/${portalId}: pendingBuild.note muss eine nicht leere Zeichenkette sein.`);
     }
+    if(placement.liveBuild){
+      const liveBuild=placement.liveBuild;
+      const hasVersion=typeof liveBuild.version==='string'&&liveBuild.version.trim();
+      const hasLabel=typeof liveBuild.label==='string'&&liveBuild.label.trim();
+      if(!hasVersion&&!hasLabel)error(`${game.id}/${portalId}: liveBuild benötigt version oder label.`);
+      if(liveBuild.version!=null&&!hasVersion)error(`${game.id}/${portalId}: liveBuild.version muss eine nicht leere Zeichenkette sein.`);
+      if(liveBuild.label!=null&&!hasLabel)error(`${game.id}/${portalId}: liveBuild.label muss eine nicht leere Zeichenkette sein.`);
+      for(const field of ['uploaded','published']){
+        if(!isValidDate(liveBuild[field]||''))error(`${game.id}/${portalId}: liveBuild.${field} ist kein gültiges ISO-Datum.`);
+        if(liveBuild[field]&&data.meta?.updated&&liveBuild[field]>data.meta.updated)error(`${game.id}/${portalId}: liveBuild.${field} liegt nach meta.updated.`);
+      }
+      assertOrder(liveBuild.uploaded,liveBuild.published,`${game.id}/${portalId} Live-Build Upload/Veröffentlichung`);
+      for(const field of ['uploadedNote','publishedNote']){
+        if(liveBuild[field]!=null&&(typeof liveBuild[field]!=='string'||!liveBuild[field].trim()))error(`${game.id}/${portalId}: liveBuild.${field} muss eine nicht leere Zeichenkette sein.`);
+      }
+    }
     if(placement.status==='live'&&!placement.accepted)warn(placement.acceptanceConfirmed?`${game.id}/${portalId}: Annahme bestätigt, genaues Datum fehlt.`:`${game.id}/${portalId}: Annahmedatum ist nicht bekannt.`);
     if(placement.status==='rejected'&&!placement.rejected)warn(`${game.id}/${portalId}: Ablehnungsdatum fehlt.`);
     if(placement.status==='approved'&&!placement.accepted)warn(`${game.id}/${portalId}: Freigabe bestätigt, genaues Datum fehlt.`);
@@ -106,4 +122,3 @@ for(const message of warnings)console.warn(`WARNUNG: ${message}`);
 for(const message of errors)console.error(`FEHLER: ${message}`);
 if(errors.length)process.exit(1);
 console.log(`Datenprüfung erfolgreich (${warnings.length} Warnung${warnings.length===1?'':'en'}).`);
-

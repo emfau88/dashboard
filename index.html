@@ -439,8 +439,9 @@ function renderGames(d){
       const portal=d.portals.find(x=>x.id===id);
       const pending=p.pendingBuild&&['review','changes_requested','scheduled'].includes(p.pendingBuild.status);
       const pendingName=pending?(p.pendingBuild.label||`Build ${p.pendingBuild.version}`):'';
+      const liveBuildName=p.liveBuild?(p.liveBuild.label||`Build ${p.liveBuild.version}`):'';
       const placementOpen=['review','changes_requested','scheduled'].includes(p.status);
-      const statusText=pending?(placementOpen?`${labels[p.status]} · ${pendingName}`:`${labels[p.status]} · ${pendingName} ${labels[p.pendingBuild.status]}`):labels[p.status];
+      const statusText=pending?(placementOpen?`${labels[p.status]} · ${pendingName}`:`${labels[p.status]} · ${pendingName} ${labels[p.pendingBuild.status]}`):p.liveBuild?`${labels[p.status]} · ${liveBuildName}`:labels[p.status];
       return `<div class="platform-chip ${esc(p.status)}${pending?' pending-update':''}"><span>${esc(portal?.name||id)}</span><strong>${esc(statusText)}</strong></div>`;
     }).join('')||'<div class="platform-chip"><span>Distribution</span><strong>Noch keine Aktivität</strong></div>';
     const github=g.github?`<details class="github-sync"><summary><span class="github-state" id="github-summary-${esc(g.id)}"><i></i>GitHub wird geprüft…</span></summary><div class="github-detail" id="github-${esc(g.id)}" aria-live="polite"><div class="git-loading">Live-GitHub-Status wird geladen…</div></div></details>`:`<div class="github-sync"><div class="git-empty" style="padding:10px 11px">Noch kein GitHub-Repository verknüpft.</div></div>`;
@@ -473,13 +474,15 @@ function portalDetailsHtml(g,p){
   const commit=p.deployedCommit||p.submittedCommit||p.rejectedCommit;
   const version=p.version||(commit?shortSha(commit):null);
   const url=commit&&g.github?`https://github.com/${g.github.repo}/commit/${commit}`:null;
-  const buildLabel=p.pendingBuild?(p.status==='live'?'Aktueller Live-Build':'Zuvor zugeordneter Portal-Build'):p.status==='live'?'Aktueller Portal-Build':p.status==='approved'?'Freigegebener Build':p.status==='scheduled'?'Zur Veröffentlichung geplanter Build':p.status==='changes_requested'?'Build mit Änderungsbedarf':p.status==='rejected'?'Abgelehnter Build':'Eingereichter Build';
+  const buildLabel=p.liveBuild?'Zuvor zugeordneter Portal-Build':p.pendingBuild?(p.status==='live'?'Aktueller Live-Build':'Zuvor zugeordneter Portal-Build'):p.status==='live'?'Aktueller Portal-Build':p.status==='approved'?'Freigegebener Build':p.status==='scheduled'?'Zur Veröffentlichung geplanter Build':p.status==='changes_requested'?'Build mit Änderungsbedarf':p.status==='rejected'?'Abgelehnter Build':'Eingereichter Build';
   const build=version?(url?`<a class="matrix-version" href="${esc(url)}" target="_blank" rel="noreferrer">${buildLabel} ${esc(version)} ↗</a>`:`<div class="matrix-version">${buildLabel} ${esc(version)}</div>`):'';
   const feedback=p.status==='changes_requested'&&p.feedbackNote?`<div class="matrix-feedback">${esc(p.feedbackNote)}</div>`:p.revisionSubmittedConfirmed&&p.revisionSubmittedNote?`<div class="matrix-feedback">${esc(p.revisionSubmittedNote)}</div>`:'';
   const pendingName=p.pendingBuild?(p.pendingBuild.label||`Build ${p.pendingBuild.version}`):'';
   const pending=p.pendingBuild?`<div class="matrix-feedback"><strong>${esc(pendingName)} · ${esc(labels[p.pendingBuild.status]||p.pendingBuild.status)}</strong><br>Hochgeladen ${esc(fmtCompactDate(p.pendingBuild.uploaded))}<br>${esc(p.pendingBuild.note)}</div>`:'';
+  const liveBuildName=p.liveBuild?(p.liveBuild.label||`Build ${p.liveBuild.version}`):'';
+  const liveBuild=p.liveBuild?`<div class="matrix-feedback"><strong>${esc(liveBuildName)} · Live</strong><br>Hochgeladen ${esc(fmtCompactDate(p.liveBuild.uploaded))}<br>Live seit ${esc(fmtCompactDate(p.liveBuild.published))}<br>${esc(p.liveBuild.publishedNote)}</div>`:'';
   const publicLink=p.publicUrl?`<a class="matrix-version" href="${esc(p.publicUrl)}" target="_blank" rel="noreferrer">Spiel öffnen ↗</a>`:'';
-  return `${alias}${dates?`<div class="matrix-meta">${dates}</div>`:''}${build}${feedback}${pending}${publicLink}`;
+  return `${alias}${dates?`<div class="matrix-meta">${dates}</div>`:''}${build}${feedback}${pending}${liveBuild}${publicLink}`;
 }
 
 function distributionRowHtml(d,g,portalId){
@@ -533,6 +536,11 @@ function renderTimeline(d){
     if(p.pendingBuild){
       const pendingName=p.pendingBuild.label||`Build ${p.pendingBuild.version}`;
       events.push({date:p.pendingBuild.uploaded,type:'Build-Update',kind:'status_update',title:`${placementName} bei ${portal}: ${pendingName} ${labels[p.pendingBuild.status]||p.pendingBuild.status}`,text:p.pendingBuild.note||'Ein neuer Portal-Build wurde hochgeladen.',order:3,game:g,portal:portalData});
+    }
+    if(p.liveBuild){
+      const liveBuildName=p.liveBuild.label||`Build ${p.liveBuild.version}`;
+      if(p.liveBuild.uploaded)events.push({date:p.liveBuild.uploaded,type:'Build-Update',kind:'status_update',title:`${placementName} bei ${portal}: ${liveBuildName} zur Prüfung hochgeladen`,text:p.liveBuild.uploadedNote||'Ein neuer Portal-Build wurde zur Prüfung hochgeladen.',order:3,game:g,portal:portalData});
+      if(p.liveBuild.published)events.push({date:p.liveBuild.published,type:'Build-Update',kind:'publication',title:`${placementName} bei ${portal}: ${liveBuildName} live`,text:p.liveBuild.publishedNote||'Der neue Portal-Build ist live.',order:3,game:g,portal:portalData});
     }
     if(p.changeRequested)events.push({date:p.changeRequested,type:'Änderungsanforderung',kind:'change_request',title:`${portal} verlangt eine Änderung an ${placementName}`,text:p.feedbackNote||p.notes||'Das Portal verlangt eine Änderung.',order:1,game:g,portal:portalData});
     if(p.revisionSubmitted)events.push({date:p.revisionSubmitted,type:'Überarbeitung',kind:'resubmission',title:`Überarbeitung von ${placementName} bei ${portal} nachgereicht`,text:p.revisionSubmittedNote||'Die angeforderte Überarbeitung wurde nachgereicht.',order:1,game:g,portal:portalData});
@@ -637,4 +645,3 @@ main().catch(err=>{document.body.innerHTML=`<div style="padding:30px;font-family
 </script>
 </body>
 </html>
-
