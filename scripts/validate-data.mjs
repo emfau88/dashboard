@@ -39,6 +39,13 @@ for(const game of data.games){
     if(!placement){error(`${game.id}: Portal ${portalId} fehlt.`);continue}
     if(!allowedStatuses.has(placement.status))error(`${game.id}/${portalId}: ungültiger Status ${placement.status}.`);
     if(placement.portalTitle!=null&&(typeof placement.portalTitle!=='string'||!placement.portalTitle.trim()))error(`${game.id}/${portalId}: portalTitle muss eine nicht leere Zeichenkette sein.`);
+    if(placement.availabilityIssue){
+      const issue=placement.availabilityIssue;
+      if(!isValidDate(issue.reported||'')||issue.reported>data.meta.updated)error(`${game.id}/${portalId}: Verfügbarkeitsproblem benötigt ein gültiges Meldedatum.`);
+      for(const field of ['label','note']){
+        if(typeof issue[field]!=='string'||!issue[field].trim())error(`${game.id}/${portalId}: availabilityIssue.${field} fehlt.`);
+      }
+    }
     for(const field of dateFields){
       const value=placement[field];
       if(value&&!isValidDate(value))error(`${game.id}/${portalId}: ${field} ist kein gültiges ISO-Datum.`);

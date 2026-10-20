@@ -20,8 +20,8 @@
         "developmentBranch": "main",
         "pagesUrl": "https://emfau88.github.io/hexwars/"
       },
-      "nextAction": "Resonanz und Kennzahlen auf Y8 und Kongregate beobachten",
-      "issues": ["Resonanz des Y8-Live-Builds 003 beobachten", "Doomstack-Lösung noch unvollständig", "Lesbarkeit der Spezialfelder"],
+      "nextAction": "Mobile Gerätesperre bei Y8 prüfen und beheben: Gerätefreigabe und Mobile-Einstellungen kontrollieren, danach auf dem Smartphone erneut testen",
+      "issues": ["Dringend: Y8 sperrt HEXFRONT auf Mobilgeräten; Ursache und Gerätefreigabe prüfen", "Doomstack-Lösung noch unvollständig", "Lesbarkeit der Spezialfelder"],
       "platforms": {
         "kongregate": {
           "status": "live",
@@ -43,7 +43,12 @@
           "acceptanceConfirmed": true,
           "published": "2026-10-20",
           "publicUrl": "https://www.y8.com/games/hexfront",
-          "publishedNote": "HEXFRONT ist mit Build 003 öffentlich auf Y8 spielbar. Die öffentliche Spielseite nennt den 20.10.2026 als Veröffentlichungsdatum; auch das Entwicklerportal zeigt „Live“.",
+          "publishedNote": "HEXFRONT wurde mit Build 003 auf Y8 veröffentlicht. Die öffentliche Spielseite nennt den 20.10.2026 als Veröffentlichungsdatum; das Entwicklerportal zeigt „Live“. Am selben Tag wurde eine mobile Gerätesperre festgestellt.",
+          "availabilityIssue": {
+            "reported": "2026-10-20",
+            "label": "Mobil gesperrt",
+            "note": "Y8 zeigt auf dem Smartphone „Dieses Spiel ist auf deinem Gerät nicht verfügbar“ und bietet ein Ersatzspiel an. Mit mobiler Browserkennung reproduziert. Ursache offen; Gerätefreigabe und Mobile-Einstellungen im Y8-Portal prüfen und die mobile Spielbarkeit nach der Korrektur erneut testen."
+          },
           "revisionSubmitted": "2026-10-11",
           "revisionSubmittedConfirmed": true,
           "sourceBranch": "codex/improve-mobile-onboarding-copy",
@@ -58,7 +63,7 @@
             "uploadedNote": "Build 003 zusammen mit allen von Y8 geforderten Screenshots und Promo-Bildern zur erneuten Prüfung hochgeladen. Der Build sollte die beanstandeten Punkte beheben.",
             "publishedNote": "Build 003 ist öffentlich auf Y8 live. Ein zugehöriger neuer GitHub-Commit ist noch nicht sicher zugeordnet."
           },
-          "notes": "Korrigierte Version am 11.10.2026 nachgereicht. Am 16.10.2026 folgte Build 003 mit allen geforderten Screenshots und Promo-Bildern. Seit dem 20.10.2026 öffentlich auf Y8 live; das genaue Annahmedatum und der GitHub-Commit von Build 003 sind nicht bekannt.",
+          "notes": "Korrigierte Version am 11.10.2026 nachgereicht. Am 16.10.2026 folgte Build 003 mit allen geforderten Screenshots und Promo-Bildern. Seit dem 20.10.2026 auf Y8 live, mobil jedoch durch eine Y8-Gerätesperre nicht erreichbar. Ursache noch offen; das genaue Annahmedatum und der GitHub-Commit von Build 003 sind nicht bekannt.",
           "statusUpdates": [
             {"date": "2026-10-05", "status": "review", "note": "Zwischenstand: Y8 zeigt für HEXFRONT weiterhin „In review“; der letzte Portal-Update-Hinweis datiert vom 01.10.2026."}
           ]
@@ -361,7 +366,7 @@
       "qualityRange": "Große Bandbreite veröffentlichter Spiele; keine verlässliche Annahmeschwelle ermittelt",
       "qualityRangeConfidence": "niedrig",
       "reach": "Großes direktes Publikum; der Betreiber wirbt derzeit mit mehr als 30 Mio. monatlichen Spielern",
-      "researchNote": "GALALAXY ist seit dem 05.10.2026, ROOSTER RAGE seit dem 15.10.2026 und HEXFRONT mit Build 003 seit dem 20.10.2026 öffentlich auf Y8 spielbar. Der Werbe-Build 002 von ROOSTER RAGE ist seit dem 19.10.2026 live. Der Werbe-Patch von GALALAXY und KESSELKRAWALL befinden sich weiterhin in Prüfung.",
+      "researchNote": "GALALAXY ist seit dem 05.10.2026, ROOSTER RAGE seit dem 15.10.2026 und HEXFRONT mit Build 003 seit dem 20.10.2026 auf Y8 veröffentlicht. HEXFRONT wird auf Mobilgeräten jedoch von Y8 gesperrt; die Gerätefreigabe ist zu prüfen. Der Werbe-Build 002 von ROOSTER RAGE ist seit dem 19.10.2026 live. Der Werbe-Patch von GALALAXY und KESSELKRAWALL befinden sich weiterhin in Prüfung.",
       "fits": {"hexfront": "very_good", "galalaxy": "very_good", "rooster-rage": "very_good", "kesselkrawall": "unknown", "core-arena": "good", "more-than-wombat": "unknown"}
     },
     {

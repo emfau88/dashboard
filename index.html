@@ -15,6 +15,7 @@
   <style>
     .platform-strip{flex-wrap:wrap;overflow:visible}.platform-chip{min-width:max-content;padding:8px 10px;border-width:1px;background:#0c1219}.platform-chip span{color:var(--soft);font-size:10px;font-weight:700;letter-spacing:.01em;text-transform:none}.platform-chip strong{display:block;font-size:11px;text-transform:uppercase;letter-spacing:.035em}.platform-chip.live,.platform-chip.approved{color:var(--good);border-color:rgba(116,198,157,.5);background:rgba(116,198,157,.11)}.platform-chip.live span,.platform-chip.approved span{color:#bce5ce}.platform-chip.review,.platform-chip.changes_requested,.platform-chip.scheduled{color:var(--warn);border-color:rgba(233,196,106,.46);background:rgba(233,196,106,.1)}.platform-chip.review span,.platform-chip.changes_requested span,.platform-chip.scheduled span{color:#ead9a7}.platform-chip.rejected{color:var(--bad);border-color:rgba(231,111,81,.46);background:rgba(231,111,81,.1)}.platform-chip.rejected span{color:#efb6a7}.platform-chip.pending-update{color:var(--warn);border-color:rgba(233,196,106,.46);background:linear-gradient(90deg,rgba(116,198,157,.1),rgba(233,196,106,.11))}.platform-chip.pending-update span{color:#d9e5dd}
     .github-sync{margin-top:12px;background:#0b1118;border:1px solid #202c3a;border-radius:13px}
+    .platform-chip.has-availability-issue{color:var(--warn);border-color:rgba(233,196,106,.46);background:rgba(233,196,106,.1)}.portal-availability-issue{margin-top:6px;padding:8px;border:1px solid rgba(233,196,106,.46);border-radius:8px;background:rgba(233,196,106,.08);color:var(--warn);font-size:11px;line-height:1.5}
     .github-sync>summary{display:flex;align-items:center;justify-content:space-between;gap:10px;cursor:pointer;padding:10px 11px;color:var(--soft);font-size:10px;list-style:none}.github-sync>summary::-webkit-details-marker{display:none}.github-sync>summary:after{content:'Details';color:var(--accent)}.github-state{display:inline-flex;align-items:center;gap:6px}.github-state i{width:7px;height:7px;border-radius:50%;background:var(--muted)}.github-state.ok i{background:var(--good)}.github-state.warn i{background:var(--warn)}.github-state.bad i{background:var(--bad)}.github-detail{padding:0 11px 11px;border-top:1px solid #1e2a37}
     .git-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:8px}
     .git-title{font-size:10px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--accent)}
@@ -406,6 +407,8 @@ function renderY8Metrics(data, archive){
     const likes=Number.isSafeInteger(latest.likes)?latest.likes.toLocaleString('de-DE')+' Likes':'Likes nicht verfügbar';
     const rating=typeof latest.rating==='number'?
       'Bewertung '+latest.rating.toLocaleString('de-DE',{maximumFractionDigits:2})+'/10':'Bewertung nicht verfügbar';
+    const availabilityIssue=game?.platforms.y8?.availabilityIssue;
+    const availabilityWarning=availabilityIssue?'<div class="portal-availability-issue"><strong>'+esc(availabilityIssue.label)+'</strong> · '+esc(availabilityIssue.note)+'</div>':'';
     const secondaryHistory='<div class="metric-history" aria-label="Verlauf von Bewertung und Likes">'+
       metricTrend(series,{key:'rating',label:'Bewertung',suffix:'/10',maximumFractionDigits:1,fixedMax:10,className:'rating'})+
       metricTrend(series,{key:'likes',label:'Likes',maximumFractionDigits:0,className:'likes'})+'</div>';
@@ -420,7 +423,7 @@ function renderY8Metrics(data, archive){
         '<span class="perf-unit">Plays gesamt</span></div>'+
         '<div class="perf-delta'+(change>0?' positive':'')+'">'+esc(changeLabel)+'</div>'+
         '<div class="perf-details"><span>'+esc(likes)+'</span><span>'+esc(rating)+'</span></div>'+
-        '<div class="perf-source">'+esc(source)+stale+'</div></div>'+
+        '<div class="perf-source">'+esc(source)+stale+'</div>'+availabilityWarning+'</div>'+
       '<div class="y8-perf-chartbox">'+performanceSparkline(series,title)+
         secondaryHistory+
         publicLink+'</div>'+
@@ -442,7 +445,8 @@ function renderGames(d){
       const liveBuildName=p.liveBuild?(p.liveBuild.label||`Build ${p.liveBuild.version}`):'';
       const placementOpen=['review','changes_requested','scheduled'].includes(p.status);
       const statusText=pending?(placementOpen?`${labels[p.status]} · ${pendingName}`:`${labels[p.status]} · ${pendingName} ${labels[p.pendingBuild.status]}`):p.liveBuild?`${labels[p.status]} · ${liveBuildName}`:labels[p.status];
-      return `<div class="platform-chip ${esc(p.status)}${pending?' pending-update':''}"><span>${esc(portal?.name||id)}</span><strong>${esc(statusText)}</strong></div>`;
+      const availabilityLabel=p.availabilityIssue?` · ${p.availabilityIssue.label}`:'';
+      return `<div class="platform-chip ${esc(p.status)}${pending?' pending-update':''}${p.availabilityIssue?' has-availability-issue':''}"><span>${esc(portal?.name||id)}</span><strong>${esc(statusText+availabilityLabel)}</strong></div>`;
     }).join('')||'<div class="platform-chip"><span>Distribution</span><strong>Noch keine Aktivität</strong></div>';
     const github=g.github?`<details class="github-sync"><summary><span class="github-state" id="github-summary-${esc(g.id)}"><i></i>GitHub wird geprüft…</span></summary><div class="github-detail" id="github-${esc(g.id)}" aria-live="polite"><div class="git-loading">Live-GitHub-Status wird geladen…</div></div></details>`:`<div class="github-sync"><div class="git-empty" style="padding:10px 11px">Noch kein GitHub-Repository verknüpft.</div></div>`;
     const issues=g.issues.length?`<details class="issues-details"><summary>Offene Punkte (${g.issues.length})</summary><ul class="issues">${g.issues.slice(0,3).map(i=>`<li>${esc(i)}</li>`).join('')}</ul></details>`:'';
@@ -482,7 +486,8 @@ function portalDetailsHtml(g,p){
   const liveBuildName=p.liveBuild?(p.liveBuild.label||`Build ${p.liveBuild.version}`):'';
   const liveBuild=p.liveBuild?`<div class="matrix-feedback"><strong>${esc(liveBuildName)} · Live</strong><br>Hochgeladen ${esc(fmtCompactDate(p.liveBuild.uploaded))}<br>Live seit ${esc(fmtCompactDate(p.liveBuild.published))}<br>${esc(p.liveBuild.publishedNote)}</div>`:'';
   const publicLink=p.publicUrl?`<a class="matrix-version" href="${esc(p.publicUrl)}" target="_blank" rel="noreferrer">Spiel öffnen ↗</a>`:'';
-  return `${alias}${dates?`<div class="matrix-meta">${dates}</div>`:''}${build}${feedback}${pending}${liveBuild}${publicLink}`;
+  const availabilityWarning=p.availabilityIssue?`<div class="portal-availability-issue"><strong>${esc(p.availabilityIssue.label)} · gemeldet ${esc(fmtCompactDate(p.availabilityIssue.reported))}</strong><br>${esc(p.availabilityIssue.note)}</div>`:'';
+  return `${alias}${dates?`<div class="matrix-meta">${dates}</div>`:''}${availabilityWarning}${build}${feedback}${pending}${liveBuild}${publicLink}`;
 }
 
 function distributionRowHtml(d,g,portalId){
@@ -533,6 +538,7 @@ function renderTimeline(d){
     });
     if(p.submitted)events.push({date:p.submitted,type:'Einreichung',kind:'submission',title:`${placementName} → ${portal}`,text:p.submittedNote||'Beim Portal eingereicht.',order:0,game:g,portal:portalData});
     (p.statusUpdates||[]).forEach(update=>events.push({date:update.date,type:'Zwischenstand',kind:'status_update',title:`${placementName} bei ${portal}: ${labels[update.status]||update.status}`,text:update.note||`Portalstatus: ${labels[update.status]||update.status}.`,order:1,game:g,portal:portalData}));
+    if(p.availabilityIssue)events.push({date:p.availabilityIssue.reported,type:'Spielbarkeit eingeschränkt',kind:'change_request',title:`${placementName} bei ${portal}: ${p.availabilityIssue.label}`,text:p.availabilityIssue.note,order:4,game:g,portal:portalData});
     if(p.pendingBuild){
       const pendingName=p.pendingBuild.label||`Build ${p.pendingBuild.version}`;
       events.push({date:p.pendingBuild.uploaded,type:'Build-Update',kind:'status_update',title:`${placementName} bei ${portal}: ${pendingName} ${labels[p.pendingBuild.status]||p.pendingBuild.status}`,text:p.pendingBuild.note||'Ein neuer Portal-Build wurde hochgeladen.',order:3,game:g,portal:portalData});
