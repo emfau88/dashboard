@@ -389,7 +389,7 @@ function renderY8Metrics(data, archive){
   const updatedAt=archive.updatedAt
     ? new Date(archive.updatedAt).toLocaleString('de-DE',{dateStyle:'short',timeStyle:'short',timeZone:'Europe/Berlin'})
     : 'Erster automatischer Abruf ausstehend';
-  const monitored=['galalaxy','rooster-rage'];
+  const monitored=['hexfront','galalaxy','rooster-rage'];
   const cards=monitored.map(gameId=>{
     const game=data.games.find(g=>g.id===gameId);
     const series=Array.isArray(archive.games[gameId])?archive.games[gameId]:[];
@@ -430,7 +430,7 @@ function renderY8Metrics(data, archive){
     '<p>Öffentlich sichtbare Gesamtaufrufe, Likes und Bewertung auf der Y8-Skala von 0 bis 10</p></div>'+
     '<span class="perf-update">Letzter Abruf: '+esc(updatedAt)+'</span></div>'+
     cards+
-    '<p class="perf-note">Die öffentlichen Y8-Seiten von GALALAXY und ROOSTER RAGE werden einmal täglich abgerufen. Fehlt ein Tageswert oder verändert Y8 das HTML, wird kein Wert erfunden; der letzte erfolgreiche Snapshot bleibt sichtbar. Veränderungen gelten jeweils seit dem letzten tatsächlich erfassten Messpunkt, nicht notwendigerweise innerhalb eines Tages.</p>';
+    '<p class="perf-note">Die öffentlichen Y8-Seiten von HEXFRONT, GALALAXY und ROOSTER RAGE werden einmal täglich abgerufen. Fehlt ein Tageswert oder verändert Y8 das HTML, wird kein Wert erfunden; der letzte erfolgreiche Snapshot bleibt sichtbar. Veränderungen gelten jeweils seit dem letzten tatsächlich erfassten Messpunkt, nicht notwendigerweise innerhalb eines Tages. Die öffentlichen Gesamtaufrufe können von den zeitlich begrenzten Plays im Y8-Entwicklerportal abweichen.</p>';
 }
 
 function renderGames(d){
@@ -540,7 +540,7 @@ function renderTimeline(d){
     if(p.liveBuild){
       const liveBuildName=p.liveBuild.label||`Build ${p.liveBuild.version}`;
       if(p.liveBuild.uploaded)events.push({date:p.liveBuild.uploaded,type:'Build-Update',kind:'status_update',title:`${placementName} bei ${portal}: ${liveBuildName} zur Prüfung hochgeladen`,text:p.liveBuild.uploadedNote||'Ein neuer Portal-Build wurde zur Prüfung hochgeladen.',order:3,game:g,portal:portalData});
-      if(p.liveBuild.published)events.push({date:p.liveBuild.published,type:'Build-Update',kind:'publication',title:`${placementName} bei ${portal}: ${liveBuildName} live`,text:p.liveBuild.publishedNote||'Der neue Portal-Build ist live.',order:3,game:g,portal:portalData});
+      if(p.liveBuild.published&&p.liveBuild.published!==p.published)events.push({date:p.liveBuild.published,type:'Build-Update',kind:'publication',title:`${placementName} bei ${portal}: ${liveBuildName} live`,text:p.liveBuild.publishedNote||'Der neue Portal-Build ist live.',order:3,game:g,portal:portalData});
     }
     if(p.changeRequested)events.push({date:p.changeRequested,type:'Änderungsanforderung',kind:'change_request',title:`${portal} verlangt eine Änderung an ${placementName}`,text:p.feedbackNote||p.notes||'Das Portal verlangt eine Änderung.',order:1,game:g,portal:portalData});
     if(p.revisionSubmitted)events.push({date:p.revisionSubmitted,type:'Überarbeitung',kind:'resubmission',title:`Überarbeitung von ${placementName} bei ${portal} nachgereicht`,text:p.revisionSubmittedNote||'Die angeforderte Überarbeitung wurde nachgereicht.',order:1,game:g,portal:portalData});
@@ -624,14 +624,16 @@ function renderGitHubStatuses(d,result){
     if(status.ci&&!status.ci.error){const running=status.ci.status!=='completed',cls=running?'warn':status.ci.conclusion==='success'?'ok':'bad',rawLabel=running?status.ci.status:status.ci.conclusion,label={success:'erfolgreich',failure:'fehlgeschlagen',queued:'wartet',in_progress:'läuft'}[rawLabel]||rawLabel;ci=`<a class="git-ci" href="${esc(status.ci.url||repoUrl+'/actions')}" target="_blank" rel="noreferrer"><i class="git-dot ${cls}"></i>Letzter Workflow „${esc(status.ci.name||'Workflow')}“: ${esc(label||'unbekannt')}</a>`}
     const platformRows=Object.entries(status.portals).map(([portalId,p])=>{
       const portalName=d.portals.find(x=>x.id===portalId)?.name||portalId;
+      const placement=g.platforms[portalId],unassignedLiveBuild=placement?.liveBuild&&!placement.liveBuild.commit;
       let stateText,stateClass='';
-      if(p.error){stateText=`Branch nicht verfügbar: ${p.branch}`;stateClass='broken'}
+      if(unassignedLiveBuild){stateText=`Live-${placement.liveBuild.label||'Build '+placement.liveBuild.version} · Commit noch nicht zugeordnet`;stateClass='changed'}
+      else if(p.error){stateText=`Branch nicht verfügbar: ${p.branch}`;stateClass='broken'}
       else if(p.tracked&&p.tracked.toLowerCase()===p.headSha?.toLowerCase()){stateText=`Portal-Build ${shortSha(p.tracked)} · Branch aktuell`;stateClass='current'}
       else if(Number.isFinite(p.aheadBy)&&p.aheadBy>0){stateText=`${p.aheadBy} neue${p.aheadBy===1?'r Commit':' Commits'} auf ${p.branch}`;stateClass='changed'}
       else if(p.compareStatus==='diverged'||p.behindBy>0){stateText=`${p.branch} weicht vom Portal-Build ab`;stateClass='changed'}
       else if(p.tracked){stateText=`Portal-Build ${shortSha(p.tracked)} · Branch geändert`;stateClass='changed'}
       else{stateText=`Verfolge den neuesten Stand von ${p.branch}`}
-      const href=p.compareUrl||p.headUrl||repoUrl;
+      const href=unassignedLiveBuild?(placement.publicUrl||repoUrl):p.compareUrl||p.headUrl||repoUrl;
       return `<div class="git-platform"><b>${esc(portalName)}</b><span class="${stateClass}"><a class="git-link" href="${esc(href)}" target="_blank" rel="noreferrer">${esc(stateText)}</a></span></div>`;
     }).join('');
     const portalStates=Object.values(status.portals),hasUpdate=portalStates.some(p=>p.error||p.aheadBy>0||p.behindBy>0||p.compareStatus==='diverged'||(p.tracked&&p.headSha&&p.tracked.toLowerCase()!==p.headSha.toLowerCase()&&!Number.isFinite(p.aheadBy))),ciBad=status.ci&&!status.ci.error&&status.ci.status==='completed'&&status.ci.conclusion!=='success';

@@ -95,8 +95,8 @@ class Y8SyncTests(unittest.TestCase):
 
     def test_same_day_does_not_duplicate(self):
         archive = self.fresh()
-        self.assertEqual(y8.collect(archive, self.now(), self.metrics), (2, 0, True))
-        self.assertEqual(y8.collect(archive, self.now(), self.metrics), (2, 0, False))
+        self.assertEqual(y8.collect(archive, self.now(), self.metrics), (len(y8.GAMES), 0, True))
+        self.assertEqual(y8.collect(archive, self.now(), self.metrics), (len(y8.GAMES), 0, False))
         self.assertEqual(len(archive["games"]["galalaxy"]), 1)
         self.assertEqual(len(archive["games"]["rooster-rage"]), 1)
 
@@ -104,7 +104,7 @@ class Y8SyncTests(unittest.TestCase):
         archive = self.fresh()
         y8.collect(archive, self.now(), self.metrics)
         reader = lambda slug, title: {"plays": 643, "rating": 8.7, "likes": 6}
-        self.assertEqual(y8.collect(archive, self.now(), reader), (2, 0, True))
+        self.assertEqual(y8.collect(archive, self.now(), reader), (len(y8.GAMES), 0, True))
         self.assertEqual(archive["games"]["galalaxy"][0]["plays"], 643)
         self.assertEqual(archive["games"]["rooster-rage"][0]["plays"], 643)
 
@@ -112,14 +112,14 @@ class Y8SyncTests(unittest.TestCase):
         archive = self.fresh()
         for history in archive["games"].values():
             history.append({"date": "2026-10-10", "plays": 1000, "rating": 8.6})
-        self.assertEqual(y8.collect(archive, self.now(), self.metrics), (0, 2, False))
+        self.assertEqual(y8.collect(archive, self.now(), self.metrics), (0, len(y8.GAMES), False))
         self.assertTrue(all(len(history) == 1 for history in archive["games"].values()))
 
     def test_failure_does_not_add_zero(self):
         archive = self.fresh()
         def broken(slug, title):
             raise y8.MetricsError("No page stats")
-        self.assertEqual(y8.collect(archive, self.now(), broken), (0, 2, False))
+        self.assertEqual(y8.collect(archive, self.now(), broken), (0, len(y8.GAMES), False))
         self.assertTrue(all(not history for history in archive["games"].values()))
 
     def test_berlin_day_boundary(self):
@@ -141,4 +141,3 @@ class Y8SyncTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
-

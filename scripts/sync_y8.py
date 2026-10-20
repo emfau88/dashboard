@@ -21,6 +21,7 @@ from zoneinfo import ZoneInfo
 ROOT = Path(__file__).resolve().parents[1]
 ARCHIVE = ROOT / "analytics" / "y8.json"
 GAMES = {
+    "hexfront": {"slug": "hexfront", "title": "Hexfront"},
     "galalaxy": {"slug": "galalaxy", "title": "Galalaxy"},
     "rooster-rage": {"slug": "rooster_rage", "title": "Rooster Rage"},
 }
@@ -243,4 +244,3 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
-
