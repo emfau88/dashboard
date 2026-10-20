@@ -1,7 +1,17 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-10-16T18:13:19Z",
+  "updatedAt": "2026-10-20T20:26:22Z",
   "games": {
+    "hexfront": [
+      {
+        "date": "2026-10-20",
+        "plays": 259,
+        "rating": 7.9,
+        "likes": 0,
+        "source": "y8_public_page",
+        "fetchedAt": "2026-10-20T20:26:22Z"
+      }
+    ],
     "galalaxy": [
       {
         "date": "2026-10-11",
@@ -50,6 +60,38 @@
         "likes": 9,
         "source": "y8_public_page",
         "fetchedAt": "2026-10-16T18:13:19Z"
+      },
+      {
+        "date": "2026-10-17",
+        "plays": 2091,
+        "rating": 9.0,
+        "likes": 9,
+        "source": "y8_public_page",
+        "fetchedAt": "2026-10-17T11:35:17Z"
+      },
+      {
+        "date": "2026-10-18",
+        "plays": 2108,
+        "rating": 9.1,
+        "likes": 10,
+        "source": "y8_public_page",
+        "fetchedAt": "2026-10-18T12:03:02Z"
+      },
+      {
+        "date": "2026-10-19",
+        "plays": 2128,
+        "rating": 9.2,
+        "likes": 11,
+        "source": "y8_public_page",
+        "fetchedAt": "2026-10-19T14:39:20Z"
+      },
+      {
+        "date": "2026-10-20",
+        "plays": 2145,
+        "rating": 9.2,
+        "likes": 12,
+        "source": "y8_public_page",
+        "fetchedAt": "2026-10-20T12:42:16Z"
       }
     ],
     "rooster-rage": [
@@ -60,6 +102,38 @@
         "likes": 0,
         "source": "y8_public_page",
         "fetchedAt": "2026-10-16T18:10:35Z"
+      },
+      {
+        "date": "2026-10-17",
+        "plays": 256,
+        "rating": 8.1,
+        "likes": 1,
+        "source": "y8_public_page",
+        "fetchedAt": "2026-10-17T11:35:17Z"
+      },
+      {
+        "date": "2026-10-18",
+        "plays": 294,
+        "rating": 8.2,
+        "likes": 2,
+        "source": "y8_public_page",
+        "fetchedAt": "2026-10-18T12:03:02Z"
+      },
+      {
+        "date": "2026-10-19",
+        "plays": 326,
+        "rating": 8.4,
+        "likes": 4,
+        "source": "y8_public_page",
+        "fetchedAt": "2026-10-19T14:39:20Z"
+      },
+      {
+        "date": "2026-10-20",
+        "plays": 338,
+        "rating": 8.5,
+        "likes": 5,
+        "source": "y8_public_page",
+        "fetchedAt": "2026-10-20T12:42:16Z"
       }
     ]
   }
