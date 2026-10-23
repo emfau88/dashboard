@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-10-22T12:57:32Z",
+  "updatedAt": "2026-10-23T12:36:34Z",
   "games": {
     "hexfront": [
       {
@@ -26,6 +26,14 @@
         "likes": 1,
         "source": "y8_public_page",
         "fetchedAt": "2026-10-22T12:57:32Z"
+      },
+      {
+        "date": "2026-10-23",
+        "plays": 378,
+        "rating": 6.7,
+        "likes": 1,
+        "source": "y8_public_page",
+        "fetchedAt": "2026-10-23T12:36:34Z"
       }
     ],
     "galalaxy": [
@@ -124,6 +132,14 @@
         "likes": 13,
         "source": "y8_public_page",
         "fetchedAt": "2026-10-22T12:57:32Z"
+      },
+      {
+        "date": "2026-10-23",
+        "plays": 2169,
+        "rating": 9.3,
+        "likes": 13,
+        "source": "y8_public_page",
+        "fetchedAt": "2026-10-23T12:36:34Z"
       }
     ],
     "rooster-rage": [
@@ -182,6 +198,14 @@
         "likes": 6,
         "source": "y8_public_page",
         "fetchedAt": "2026-10-22T12:57:32Z"
+      },
+      {
+        "date": "2026-10-23",
+        "plays": 400,
+        "rating": 8.6,
+        "likes": 6,
+        "source": "y8_public_page",
+        "fetchedAt": "2026-10-23T12:36:34Z"
       }
     ]
   }
