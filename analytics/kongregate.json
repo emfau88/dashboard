@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-10-23T12:36:33Z",
+  "updatedAt": "2026-10-24T11:58:46Z",
   "games": {
     "hexfront": [
       {
@@ -127,6 +127,14 @@
         "rating": 2.77,
         "source": "kongregate_metrics",
         "fetchedAt": "2026-10-23T12:36:33Z"
+      },
+      {
+        "date": "2026-10-24",
+        "plays": 1659,
+        "favorites": 7,
+        "rating": 2.77,
+        "source": "kongregate_metrics",
+        "fetchedAt": "2026-10-24T11:58:46Z"
       }
     ],
     "galalaxy": [
@@ -254,6 +262,14 @@
         "rating": 3.09,
         "source": "kongregate_metrics",
         "fetchedAt": "2026-10-23T12:36:33Z"
+      },
+      {
+        "date": "2026-10-24",
+        "plays": 102,
+        "favorites": 3,
+        "rating": 3.09,
+        "source": "kongregate_metrics",
+        "fetchedAt": "2026-10-24T11:58:46Z"
       }
     ],
     "rooster-rage": [
@@ -370,6 +386,14 @@
         "rating": 3.37,
         "source": "kongregate_metrics",
         "fetchedAt": "2026-10-23T12:36:33Z"
+      },
+      {
+        "date": "2026-10-24",
+        "plays": 916,
+        "favorites": 13,
+        "rating": 3.29,
+        "source": "kongregate_metrics",
+        "fetchedAt": "2026-10-24T11:58:46Z"
       }
     ],
     "kesselkrawall": [
@@ -436,6 +460,14 @@
         "rating": 1.66,
         "source": "kongregate_metrics",
         "fetchedAt": "2026-10-23T12:36:33Z"
+      },
+      {
+        "date": "2026-10-24",
+        "plays": 119,
+        "favorites": 0,
+        "rating": 1.66,
+        "source": "kongregate_metrics",
+        "fetchedAt": "2026-10-24T11:58:46Z"
       }
     ]
   }
