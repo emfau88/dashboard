@@ -68,7 +68,8 @@ for(const game of data.games){
       if(pending.version!=null&&!hasVersion)error(`${game.id}/${portalId}: pendingBuild.version muss eine nicht leere Zeichenkette sein.`);
       if(pending.label!=null&&!hasLabel)error(`${game.id}/${portalId}: pendingBuild.label muss eine nicht leere Zeichenkette sein.`);
       if(!allowedStatuses.has(pending.status)||!['review','changes_requested','scheduled'].includes(pending.status))error(`${game.id}/${portalId}: pendingBuild.status ist ungültig.`);
-      if(!isValidDate(pending.uploaded||''))error(`${game.id}/${portalId}: pendingBuild.uploaded ist kein gültiges ISO-Datum.`);
+      if(!isValidDate(pending.uploaded||pending.reported||''))error(`${game.id}/${portalId}: pendingBuild benötigt ein Upload- oder Bestätigungsdatum.`);
+      if(pending.reported&&(!isValidDate(pending.reported)||pending.reported>data.meta.updated))error(`${game.id}/${portalId}: pendingBuild.reported ist ungültig.`);
       if(pending.uploaded&&data.meta?.updated&&pending.uploaded>data.meta.updated)error(`${game.id}/${portalId}: pendingBuild.uploaded liegt nach meta.updated.`);
       if(pending.note!=null&&(typeof pending.note!=='string'||!pending.note.trim()))error(`${game.id}/${portalId}: pendingBuild.note muss eine nicht leere Zeichenkette sein.`);
     }
@@ -79,11 +80,13 @@ for(const game of data.games){
       if(!hasVersion&&!hasLabel)error(`${game.id}/${portalId}: liveBuild benötigt version oder label.`);
       if(liveBuild.version!=null&&!hasVersion)error(`${game.id}/${portalId}: liveBuild.version muss eine nicht leere Zeichenkette sein.`);
       if(liveBuild.label!=null&&!hasLabel)error(`${game.id}/${portalId}: liveBuild.label muss eine nicht leere Zeichenkette sein.`);
-      for(const field of ['uploaded','published']){
+      if(!liveBuild.published&&!liveBuild.confirmedOn)error(`${game.id}/${portalId}: Live-Build benötigt Veröffentlichungs- oder Bestätigungsdatum.`);
+      for(const field of ['uploaded',...(liveBuild.published?['published']:['confirmedOn'])]){
         if(!isValidDate(liveBuild[field]||''))error(`${game.id}/${portalId}: liveBuild.${field} ist kein gültiges ISO-Datum.`);
         if(liveBuild[field]&&data.meta?.updated&&liveBuild[field]>data.meta.updated)error(`${game.id}/${portalId}: liveBuild.${field} liegt nach meta.updated.`);
       }
       assertOrder(liveBuild.uploaded,liveBuild.published,`${game.id}/${portalId} Live-Build Upload/Veröffentlichung`);
+      assertOrder(liveBuild.uploaded,liveBuild.confirmedOn,`${game.id}/${portalId} Live-Build Upload/Bestätigung`);
       for(const field of ['uploadedNote','publishedNote']){
         if(liveBuild[field]!=null&&(typeof liveBuild[field]!=='string'||!liveBuild[field].trim()))error(`${game.id}/${portalId}: liveBuild.${field} muss eine nicht leere Zeichenkette sein.`);
       }

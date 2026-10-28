@@ -7,6 +7,7 @@ Statisches, mobile-first Dashboard für Spieleprojekte, Portal-Einreichungen, Po
 ## Aufbau
 
 - `index.html` enthält Darstellung und Rendering-Logik.
+- `assets/charts.js` und `assets/charts.css` enthalten die interaktiven Messwertdiagramme.
 - `data.json` enthält die manuell gepflegten Informationen.
 - Öffentliche GitHub-Daten zu Repositories, Branches, Commits und Workflows werden automatisch geladen und kurzzeitig im Browser zwischengespeichert.
 - Kein Framework, keine Datenbank und kein lokaler Build-Prozess.
@@ -69,6 +70,12 @@ Fehlt ein historisches Entscheidungsdatum, wird im Dashboard bewusst „Datum fe
 
 ### Performance-Snapshot ergänzen
 
+Die Diagramme bieten 14/30/90 Tage oder den gesamten Verlauf. Bewertungen haben eine beschriftete Detailansicht (Mindestspanne 0,1 bei Kongregate bzw. 0,2 bei Y8) und eine umschaltbare vollständige Portalskala. Es gibt keine Glättung. Fehlende Messpunkte werden nicht als Null interpretiert; Verbindungslinien über Datenlücken sind gestrichelt. Einzelwerte sind per Maus, Touch-Schieberegler, Tastatur und ausklappbarer Tabelle lesbar.
+
+Für Plays kann zwischen Gesamtaufrufen und Zuwachs pro Tag gewechselt werden. Bei mehrtägigen Abständen ist der Zuwachs ein ausdrücklich gekennzeichneter Intervallmittelwert. Die Auswertung verwendet die archivierten täglichen Stände; Veränderungen innerhalb eines Tages lassen sich daraus nicht rekonstruieren. Diagrammtests: `node --test tests/charts.test.cjs`.
+
+Ist nur der aktuelle Stand eines Updates bestätigt, wird kein Upload- oder Veröffentlichungsdatum erfunden: `pendingBuild.reported` bezeichnet das Bestätigungsdatum einer laufenden Prüfung, `liveBuild.confirmedOn` die Bestätigung eines bereits live geschalteten Updates. Diese Felder ersetzen jeweils das unbekannte `uploaded` bzw. `published`. Historische Meldungen zur Verfügbarkeit können über `availabilityIssue.initialLabel` und `initialNote` erhalten bleiben, während `label` und `note` den aktuellen Stand erklären.
+
 An `metricsHistory` anhängen:
 
 ```json
@@ -124,7 +131,7 @@ Danach [http://localhost:8000](http://localhost:8000) öffnen.
 
 ## Kongregate: tägliche Performance-Daten (automatisiert)
 
-Das Dashboard zeigt unter **Übersicht → Kongregate · Performance** die vier aktiven Kongregate-Spiele (HEXFRONT, GALALAXY, ROOSTER RAGE, KESSELKRAWALL). Pro Spiel werden kumulative Plays und Favoriten kompakt dargestellt. Die Bewertungsverläufe stehen darunter in einer eigenen, großformatigen Sektion mit je einer vollständigen Diagrammzeile pro Spiel. Solange Kongregate ein neues Spiel als „under judgement“ führt, zeigt das Dashboard bewusst noch keine Wertung statt einer irreführenden 0,0. Die Plays-Differenz vergleicht den **vorherigen vorhandenen Messpunkt**; der Bewertungsverlauf nennt die Veränderung seit der ersten erfassten Bewertung. Seine sichtbar beschriftete Ausschnittsskala umfasst mindestens 0,5 Bewertungspunkte. Startwert, tatsächliche Änderungen und aktueller Stand werden zusätzlich mit Datum und exaktem Wert unter der Kurve genannt.
+Das Dashboard zeigt unter **Übersicht → Kongregate · Performance** die vier aktiven Kongregate-Spiele (HEXFRONT, GALALAXY, ROOSTER RAGE, KESSELKRAWALL). Pro Spiel werden kumulative Plays und Favoriten kompakt dargestellt. Die Bewertungsverläufe stehen darunter in einer eigenen, großformatigen Sektion mit je einer vollständigen Diagrammzeile pro Spiel. Solange Kongregate ein neues Spiel als „under judgement“ führt, zeigt das Dashboard bewusst noch keine Wertung statt einer irreführenden 0,0. Die Plays-Differenz vergleicht den **vorherigen vorhandenen Messpunkt**; der Bewertungsverlauf nennt die Veränderung seit dem ersten Messpunkt im gewählten Zeitraum. Seine beschriftete Detailachse umfasst mindestens 0,1 Bewertungspunkte; die vollständige 0–5-Skala ist umschaltbar. Exakte Einzelwerte und Änderungen sind über die Messpunktauswahl und die Tabelle abrufbar.
 
 - Datenquelle: öffentliches Kongregate-Metrics-JSON unter `https://www.kongregate.com/games/emfau/<spiel-slug>/metrics.json`.
 - Abrufskript: `scripts/sync_kongregate.py` (Python-Standardbibliothek; kein API-Schlüssel).
@@ -150,4 +157,4 @@ Für **Hexfront**, **Galalaxy** und **Rooster Rage** sind die öffentlichen Y8-S
 - Fehlerfälle: falsche/fehlende Titel oder Zählwerte, widersprüchliche Desktop-/Mobilanzeigen, abnehmende kumulative Plays, HTML-Änderungen oder fehlgeschlagene HTTP-Aufrufe werden **nicht** zu 0 umgedeutet. Bei Y8-Abrufproblemen bleibt Kongregates Workflow unabhängig lauffähig; der letzte gespeicherte Y8-Stand bleibt bestehen. Eine fehlende Like-Zahl wird als **unbekannt**, nicht als null, gekennzeichnet.
 - Neue Y8-Spiele erst aufnehmen, wenn die öffentliche Spielseite tatsächlich live ist. Dann die Konfiguration `GAMES` und das Archiv ergänzen und die Darstellung erweitern.
 
-**Wichtige Einschränkung:** Das Auslesen einer öffentlichen HTML-Seite ist kein offizieller, stabil garantierter Reporting-API-Vertrag. Änderungen an Y8s Markup können eine Skriptkorrektur erfordern. Das ist **nicht** der Zugriff auf interne Y8-Studio-Statistiken (DAU, Retention, Umsatz). Einmal täglich wird nur die konkrete Spielseite abgerufen. 
+**Wichtige Einschränkung:** Das Auslesen einer öffentlichen HTML-Seite ist kein offizieller, stabil garantierter Reporting-API-Vertrag. Änderungen an Y8s Markup können eine Skriptkorrektur erfordern. Das ist **nicht** der Zugriff auf interne Y8-Studio-Statistiken (DAU, Retention, Umsatz). Einmal täglich wird nur die konkrete Spielseite abgerufen.

@@ -67,6 +67,9 @@ jobs:
       - name: Dashboard-Daten prüfen
         run: node scripts/validate-data.mjs
 
+      - name: Diagramm-Skalierung und Messintervalle prüfen
+        run: node --test tests/charts.test.cjs
+
       - name: Statische Seite vorbereiten
         run: |
           mkdir -p _site

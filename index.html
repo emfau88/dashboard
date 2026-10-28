@@ -48,9 +48,6 @@
     .perf-unit{font-size:10px;color:var(--muted);margin-left:4px;font-weight:500;letter-spacing:0}
     .perf-delta{font-size:11px;color:var(--soft);margin:5px 0 7px;min-height:17px}
     .perf-delta.positive{color:var(--good)}
-    .perf-chart{display:block;width:100%;height:63px;margin:5px 0 8px}
-    .perf-chart .perf-line{stroke:var(--accent);stroke-width:2.5;fill:none;stroke-linecap:round;stroke-linejoin:round}
-    .perf-chart .perf-dot{fill:var(--accent)}
     .perf-details{display:flex;gap:10px;flex-wrap:wrap;font-size:10px;color:var(--soft)}
     .perf-source{margin-top:6px;font-size:9px;color:var(--muted)}
     .perf-note{margin:11px 1px 0;font-size:10px;line-height:1.5;color:var(--muted)}
@@ -62,26 +59,9 @@
     .y8-perf-card{display:grid;grid-template-columns:minmax(0,1fr);gap:10px}
     .y8-perf-card .perf-title{grid-column:1/-1}
     .y8-perf-card .perf-number{margin-top:4px}
-    .y8-perf-card .perf-chart{margin:0}
     .y8-perf-card .perf-source{margin-top:3px}
     .y8-perf-chartbox{min-width:0}
     .y8-perf-card .perf-details{margin-top:8px}
-    .metric-history{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;margin:9px 0 8px}
-    .metric-history.single{grid-template-columns:minmax(0,1fr);margin:8px 0 6px}
-    .metric-trend{min-width:0;padding:8px 9px;border:1px solid #202c3a;border-radius:10px;background:rgba(255,255,255,.018)}
-    .metric-trend-head{display:flex;align-items:baseline;justify-content:space-between;gap:6px}
-    .metric-trend-label{font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.035em}
-    .metric-trend-value{font-size:13px;font-weight:800;font-variant-numeric:tabular-nums;white-space:nowrap}
-    .metric-trend-delta{margin-top:2px;font-size:9px;color:var(--soft);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-    .metric-trend-delta.positive{color:var(--good)}
-    .metric-trend-delta.negative{color:var(--bad)}
-    .metric-trend-chart{display:block;width:100%;height:34px;margin-top:5px}
-    .metric-history.single .metric-trend-chart{height:40px}
-    .metric-trend-chart .trend-line{fill:none;stroke:var(--accent);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
-    .metric-trend-chart .trend-dot{fill:var(--accent)}
-    .metric-trend.likes .trend-line{stroke:var(--good)}
-    .metric-trend.likes .trend-dot{fill:var(--good)}
-    .metric-trend-scale{margin-top:2px;font-size:8px;color:var(--muted);font-variant-numeric:tabular-nums;text-align:right}
     .kong-rating-section{margin-top:18px;padding-top:17px;border-top:1px solid var(--line)}
     .kong-rating-heading{display:flex;align-items:end;justify-content:space-between;gap:12px;margin-bottom:10px}
     .kong-rating-heading h3{margin:0;font-size:14px;letter-spacing:-.01em}
@@ -89,43 +69,23 @@
     .kong-rating-heading>span{color:var(--muted);font-size:9px;text-align:right}
     .kong-rating-list{display:grid;gap:10px}
     .rating-card{display:grid;grid-template-columns:minmax(0,1fr);gap:13px;padding:14px;background:#0d141d;border:1px solid var(--line);border-radius:13px;min-width:0}
-    .rating-summary{min-width:0}
     .rating-game{display:flex;align-items:center;gap:9px;font-size:12px;font-weight:800}
     .rating-game .matrix-thumb,.rating-game .matrix-monogram{width:34px;height:34px;flex-basis:34px;border-radius:10px}
-    .rating-current{margin-top:10px;font-size:28px;font-weight:800;line-height:1;font-variant-numeric:tabular-nums;letter-spacing:-.04em}
-    .rating-current span{font-size:11px;color:var(--muted);font-weight:600;letter-spacing:0}
-    .rating-change{margin-top:6px;font-size:10px;color:var(--soft);line-height:1.4}
-    .rating-change.positive{color:var(--good)}
-    .rating-change.negative{color:var(--bad)}
-    .rating-scale-note{margin-top:8px;color:var(--muted);font-size:9px;font-variant-numeric:tabular-nums}
-    .rating-chart-area{min-width:0}
-    .rating-plot-grid{display:grid;grid-template-columns:42px minmax(0,1fr);gap:8px;align-items:stretch}
-    .rating-y-axis{height:132px;display:flex;flex-direction:column;justify-content:space-between;text-align:right;color:var(--muted);font-size:9px;font-variant-numeric:tabular-nums;padding:1px 0}
     .rating-plot{min-width:0}
-    .rating-chart{display:block;width:100%;height:132px;overflow:visible}
-    .rating-chart .rating-gridline{stroke:var(--line);stroke-width:1;stroke-dasharray:3 4;vector-effect:non-scaling-stroke}
-    .rating-chart .rating-line{fill:none;stroke:var(--accent);stroke-width:3;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
-    .rating-chart .rating-dot{fill:var(--accent);stroke:#0d141d;stroke-width:2.5;vector-effect:non-scaling-stroke}
-    .rating-x-axis{display:flex;justify-content:space-between;gap:8px;margin-top:5px;color:var(--muted);font-size:9px;font-variant-numeric:tabular-nums}
-    .rating-x-axis span:nth-child(2){text-align:center}
-    .rating-x-axis span:last-child{text-align:right}
-    .rating-observations{display:flex;flex-wrap:wrap;gap:5px;margin:10px 0 0 50px}
-    .rating-observation{padding:4px 7px;border:1px solid #263545;border-radius:999px;background:rgba(255,255,255,.018);color:var(--soft);font-size:9px;font-variant-numeric:tabular-nums}
     .y8-perf-link{color:var(--accent);font-size:10px;text-decoration:none}
     .y8-perf-link:hover{text-decoration:underline}
     @media(max-width:719px){
       .kong-rating-heading{display:block}.kong-rating-heading>span{display:block;margin-top:5px;text-align:left}
-      .rating-card{padding:12px}.rating-plot-grid{grid-template-columns:38px minmax(0,1fr);gap:7px}
-      .rating-y-axis,.rating-chart{height:146px}.rating-observations{margin-left:45px}
+      .rating-card{padding:12px}
     }
     @media(min-width:720px){
       .y8-perf-card{grid-template-columns:minmax(180px,.65fr) minmax(0,1.35fr);align-items:center;column-gap:22px}
       .y8-perf-card .perf-title{grid-column:1/-1}
-      .y8-perf-card .perf-chart{height:75px}
       .rating-card{grid-template-columns:190px minmax(0,1fr);gap:20px;align-items:center;padding:15px 17px}
-      .rating-observations{grid-column:2;margin-left:50px;margin-top:-3px}
     }
   </style>
+  <link rel="stylesheet" href="assets/charts.css">
+  <script src="assets/charts.js"></script>
 </head>
 <body>
   <main class="shell">
@@ -139,11 +99,11 @@
 
     <section id="overview" class="view active">
       <div class="kpis" id="kpis"></div>
-      <section class="perf-monitor" id="kongregateMonitor" aria-label="Kongregate Performance"><p class="perf-note">Performance-Daten werden geladen…</p></section>
-      <section class="perf-monitor" id="y8Monitor" aria-label="Y8 Performance"><p class="perf-note">Y8-Statistiken werden geladen…</p></section>
       <div class="section-title"><h2>Spiele</h2><span>Was live ist, was blockiert und was als Nächstes ansteht</span></div>
       <div class="cards" id="gameCards"></div>
       <p class="footnote">Der interne Qualitätsscore ist eine manuelle Orientierungshilfe und kein Messwert eines Portals.</p>
+      <section class="perf-monitor" id="kongregateMonitor" aria-label="Kongregate Performance"><p class="perf-note">Performance-Daten werden geladen…</p></section>
+      <section class="perf-monitor" id="y8Monitor" aria-label="Y8 Performance"><p class="perf-note">Y8-Statistiken werden geladen…</p></section>
     </section>
 
     <section id="matrix" class="view">
@@ -207,7 +167,7 @@ function renderKPIs(d){
     const items=[];
     const placementOpen=['review','changes_requested','scheduled'].includes(p.status);
     if(placementOpen)items.push({date:p.submitted});
-    else if(p.pendingBuild&&['review','changes_requested','scheduled'].includes(p.pendingBuild.status))items.push({date:p.pendingBuild.uploaded});
+    else if(p.pendingBuild&&['review','changes_requested','scheduled'].includes(p.pendingBuild.status))items.push({date:p.pendingBuild.uploaded||p.pendingBuild.reported});
     return items;
   }));
   const oldest=open.map(item=>item.date).filter(Boolean).sort()[0];
@@ -216,125 +176,12 @@ function renderKPIs(d){
 }
 
 
-function performanceSparkline(history, title){
-  const points=history.filter(item=>Number.isSafeInteger(item.plays)&&!Number.isNaN(Date.parse(item.date+'T12:00:00Z'))).slice(-90);
-  if(!points.length)return '';
-  const dates=points.map(item=>Date.parse(item.date+'T12:00:00Z'));
-  const values=points.map(item=>item.plays);
-  const minX=Math.min(...dates),maxX=Math.max(...dates),minY=Math.min(...values),maxY=Math.max(...values);
-  const positions=points.map((item,i)=>{
-    const x=10+(maxX===minX?0:(dates[i]-minX)/(maxX-minX)*240);
-    const y=54-(maxY===minY ? 0.5 : (values[i]-minY)/(maxY-minY))*44;
-    return [Number(x.toFixed(2)),Number(y.toFixed(2))];
-  });
-  const coords=positions.map(item=>item.join(',')).join(' ');
-  const end=positions[positions.length-1];
-  const stroke=points.length>1?'<polyline class="perf-line" points="'+coords+'"></polyline>':'';
-  const description=title+': '+values[0]+' bis '+values[values.length-1]+' Plays in '+points.length+' Messpunkten';
-  return '<svg class="perf-chart" viewBox="0 0 260 64" preserveAspectRatio="none" role="img" aria-label="'+esc(description)+'">'+
-    '<line x1="10" y1="54" x2="250" y2="54" stroke="var(--line)" stroke-width="1"></line>'+
-    stroke+'<circle class="perf-dot" cx="'+end[0]+'" cy="'+end[1]+'" r="3.5"></circle></svg>';
+function performanceSparkline(history,title){
+  return GameCharts.render(history,{key:'plays',title:title+' · Spielaufrufe'});
 }
-
-function metricTrend(history,{key,label,suffix='',maximumFractionDigits=0,fixedMax=null,className='',compareFrom='previous',minimumRange=null,scaleBounds=null}){
-  const points=history.filter(item=>typeof item[key]==='number'&&Number.isFinite(item[key])&&!Number.isNaN(Date.parse(item.date+'T12:00:00Z'))).slice(-90);
-  if(!points.length)return '<div class="metric-trend '+esc(className)+'"><div class="metric-trend-label">'+esc(label)+'</div><div class="metric-trend-delta">Noch kein Verlauf</div></div>';
-  const values=points.map(item=>item[key]);
-  const dates=points.map(item=>Date.parse(item.date+'T12:00:00Z'));
-  const latest=points[points.length-1];
-  const before=points.length>1?(compareFrom==='first'?points[0]:points[points.length-2]):null;
-  const minX=Math.min(...dates),maxX=Math.max(...dates);
-  let minY=0,maxY=fixedMax??Math.max(...values,1),scaleLabel='';
-  if(minimumRange){
-    const observedMin=Math.min(...values),observedMax=Math.max(...values);
-    const span=Math.max(observedMax-observedMin,minimumRange);
-    const center=(observedMin+observedMax)/2;
-    minY=center-span/2;maxY=center+span/2;
-    if(scaleBounds){
-      if(minY<scaleBounds[0]){maxY+=scaleBounds[0]-minY;minY=scaleBounds[0];}
-      if(maxY>scaleBounds[1]){minY-=maxY-scaleBounds[1];maxY=scaleBounds[1];}
-    }
-    const scaleFormat=value=>value.toLocaleString('de-DE',{minimumFractionDigits:1,maximumFractionDigits:2});
-    scaleLabel='<div class="metric-trend-scale">Skala '+esc(scaleFormat(minY))+'–'+esc(scaleFormat(maxY))+'</div>';
-  }
-  const positions=points.map((item,i)=>{
-    const x=5+(maxX===minX?65:(dates[i]-minX)/(maxX-minX)*130);
-    const y=35-(maxY===minY?0.5:(values[i]-minY)/(maxY-minY))*28;
-    return [Number(x.toFixed(2)),Number(y.toFixed(2))];
-  });
-  const format=value=>value.toLocaleString('de-DE',{maximumFractionDigits});
-  const difference=before?latest[key]-before[key]:null;
-  const delta=difference===null?'Erster Messpunkt':
-    (difference>0?'+':'')+format(difference)+' seit '+fmtCompactDate(before.date);
-  const description=label+': '+values.map(format).join(', ')+'; '+points.length+' Messpunkte';
-  const coords=positions.map(item=>item.join(',')).join(' ');
-  const line=points.length>1?'<polyline class="trend-line" points="'+coords+'"></polyline>':'';
-  const dots=positions.map(position=>'<circle class="trend-dot" cx="'+position[0]+'" cy="'+position[1]+'" r="2.8"></circle>').join('');
-  return '<div class="metric-trend '+esc(className)+'">'+
-    '<div class="metric-trend-head"><span class="metric-trend-label">'+esc(label)+'</span><span class="metric-trend-value">'+esc(format(latest[key])+suffix)+'</span></div>'+
-    '<div class="metric-trend-delta'+(difference>0?' positive':difference<0?' negative':'')+'">'+esc(delta)+'</div>'+
-    '<svg class="metric-trend-chart" viewBox="0 0 140 40" preserveAspectRatio="none" role="img" aria-label="'+esc(description)+'">'+
-      '<line x1="5" y1="35" x2="135" y2="35" stroke="var(--line)" stroke-width="1"></line>'+line+
-      dots+'</svg>'+scaleLabel+'</div>';
-}
-
-function ratingHistoryChart(history, game){
-  const points=history.filter(item=>typeof item.rating==='number'&&Number.isFinite(item.rating)&&!Number.isNaN(Date.parse(item.date+'T12:00:00Z'))).slice(-90);
-  if(!points.length)return '<article class="rating-card"><div class="rating-game">'+gameVisual(game,'matrix')+'<span>'+esc(game.name)+'</span></div><p class="perf-error">Noch kein Bewertungsverlauf vorhanden.</p></article>';
-
-  const values=points.map(item=>item.rating);
-  const dates=points.map(item=>Date.parse(item.date+'T12:00:00Z'));
-  const observedMin=Math.min(...values),observedMax=Math.max(...values);
-  const minimumSpan=.5;
-  const targetSpan=Math.max(minimumSpan,(observedMax-observedMin)*1.6);
-  const center=(observedMin+observedMax)/2;
-  let minY=Math.floor((center-targetSpan/2)*20)/20;
-  let maxY=Math.ceil((center+targetSpan/2)*20)/20;
-  if(minY<0){maxY-=minY;minY=0;}
-  if(maxY>5){minY-=maxY-5;maxY=5;}
-  minY=Math.max(0,minY);maxY=Math.min(5,maxY);
-  if(maxY-minY<minimumSpan){
-    if(minY===0)maxY=minimumSpan;
-    else if(maxY===5)minY=5-minimumSpan;
-    else{minY-=minimumSpan-(maxY-minY);}
-  }
-
-  const minX=Math.min(...dates),maxX=Math.max(...dates);
-  const plotTop=8,plotBottom=112;
-  const positions=points.map((item,index)=>{
-    const x=8+(maxX===minX?292:(dates[index]-minX)/(maxX-minX)*584);
-    const y=plotBottom-(item.rating-minY)/(maxY-minY)*(plotBottom-plotTop);
-    return [Number(x.toFixed(2)),Number(y.toFixed(2))];
-  });
-  const format=value=>value.toLocaleString('de-DE',{minimumFractionDigits:2,maximumFractionDigits:2});
-  const first=points[0],latest=points[points.length-1];
-  const difference=latest.rating-first.rating;
-  const delta=points.length===1?'Erster Messpunkt':
-    (difference>0?'+':'')+format(difference)+' seit '+fmtCompactDate(first.date);
-  const deltaClass=difference>0?' positive':difference<0?' negative':'';
-  const midIndex=Math.floor((points.length-1)/2);
-  const middleDate=points.length>2?fmtCompactDate(points[midIndex].date):'';
-  const gridLines=[plotTop,(plotTop+plotBottom)/2,plotBottom].map(y=>'<line class="rating-gridline" x1="8" y1="'+y+'" x2="592" y2="'+y+'"></line>').join('');
-  const line=points.length>1?'<polyline class="rating-line" points="'+positions.map(position=>position.join(',')).join(' ')+'"></polyline>':'';
-  const dots=positions.map(position=>'<circle class="rating-dot" cx="'+position[0]+'" cy="'+position[1]+'" r="4"></circle>').join('');
-  const relevant=points.filter((point,index)=>index===0||point.rating!==points[index-1].rating||index===points.length-1);
-  const observations=relevant.map((point,index)=>{
-    const label=index===0?'Start':index===relevant.length-1?'Aktuell':'Änderung';
-    return '<span class="rating-observation">'+label+' · '+esc(fmtCompactDate(point.date))+' · '+esc(format(point.rating))+'</span>';
-  }).join('');
-  const description=game.name+' Bewertung: '+points.map(point=>fmtCompactDate(point.date)+' '+format(point.rating)+' von 5').join(', ')+'. Angezeigte Skala '+format(minY)+' bis '+format(maxY)+'.';
-
-  return '<article class="rating-card">'+
-    '<div class="rating-summary"><div class="rating-game">'+gameVisual(game,'matrix')+'<span>'+esc(game.name)+'</span></div>'+
-      '<div class="rating-current">'+esc(format(latest.rating))+'<span> / 5</span></div>'+
-      '<div class="rating-change'+deltaClass+'">'+esc(delta)+'</div>'+
-      '<div class="rating-scale-note">Diagrammskala: '+esc(format(minY))+'–'+esc(format(maxY))+'</div></div>'+
-    '<div class="rating-chart-area"><div class="rating-plot-grid">'+
-      '<div class="rating-y-axis" aria-hidden="true"><span>'+esc(format(maxY))+'</span><span>'+esc(format((minY+maxY)/2))+'</span><span>'+esc(format(minY))+'</span></div>'+
-      '<div class="rating-plot"><svg class="rating-chart" viewBox="0 0 600 120" preserveAspectRatio="none" role="img" aria-label="'+esc(description)+'">'+gridLines+line+dots+'</svg>'+
-        '<div class="rating-x-axis" aria-hidden="true"><span>'+esc(fmtCompactDate(first.date))+'</span><span>'+esc(middleDate)+'</span><span>'+esc(fmtCompactDate(latest.date))+'</span></div></div></div></div>'+
-    '<div class="rating-observations" aria-label="Relevante Bewertungsstände">'+observations+'</div>'+
-  '</article>';
+function ratingHistoryChart(history,game,maximum=5){
+  return '<article class="rating-card"><div class="rating-game">'+gameVisual(game,'matrix')+'<span>'+esc(game.name)+'</span></div>'+
+    GameCharts.render(history,{key:'rating',title:'Bewertungsverlauf',ratingMax:maximum})+'</article>';
 }
 
 function renderKongregateMetrics(data, archive){
@@ -374,8 +221,8 @@ function renderKongregateMetrics(data, archive){
   panel.innerHTML='<div class="perf-heading"><div><h2>Kongregate · Performance</h2><p>Öffentliche kumulative Spielaufrufe · täglich dokumentiert, keine Schätzungen</p></div>'+
     '<span class="perf-update">'+esc(lastSync)+'</span></div>'+
     '<div class="perf-grid">'+cards+'</div>'+
-    '<section class="kong-rating-section" aria-labelledby="kongRatingTitle"><div class="kong-rating-heading"><div><h3 id="kongRatingTitle">Bewertungsverlauf</h3><p>Eigene große Skala je Spiel · exakte Werte darunter</p></div><span>Kongregate-Skala: 0–5</span></div><div class="kong-rating-list">'+ratingCards+'</div></section>'+
-    '<p class="perf-note">Ältere Messpunkte stammen aus dem bisherigen Dashboard oder manuell gemeldeten Ständen. Ab Aktivierung des täglichen Workflows wird ein Messpunkt pro Spiel und Kalendertag automatisch erfasst. Fehlende Tage bedeuten nicht null Plays. Die Plays-Differenz bezieht sich auf den vorherigen vorhandenen Messpunkt; beim Bewertungsverlauf wird die Änderung seit der ersten erfassten Bewertung gezeigt. Jedes Bewertungsdiagramm nutzt eine klar beschriftete, auf mindestens 0,5 Punkte begrenzte Ausschnittsskala; Start, echte Änderungen und aktueller Stand stehen zusätzlich als exakte Werte darunter.</p>';
+    '<section class="kong-rating-section" aria-labelledby="kongRatingTitle"><div class="kong-rating-heading"><div><h3 id="kongRatingTitle">Bewertungsverlauf</h3><p>Detail- oder Gesamtskala · Messpunkte per Maus, Touch oder Tastatur auswählen</p></div><span>Kongregate-Skala: 0–5</span></div><div class="kong-rating-list">'+ratingCards+'</div></section>'+
+    '<p class="perf-note">Ältere Messpunkte stammen aus dem bisherigen Dashboard oder manuell gemeldeten Ständen. Ab Aktivierung des täglichen Workflows wird ein Messpunkt pro Spiel und Kalendertag automatisch erfasst. Fehlende Tage bedeuten nicht null Plays. Die Plays-Differenz bezieht sich auf den vorherigen vorhandenen Messpunkt; beim Bewertungsverlauf wird die Änderung seit dem ersten Messpunkt im gewählten Zeitraum gezeigt. Die Detailansicht passt die Achse an den gewählten Zeitraum an (mindestens 0,1 Punkte bei Kongregate). Die vollständige Skala bleibt umschaltbar. Im Modus „Zuwachs / Tag“ werden Lücken als Intervallmittel gekennzeichnet. Vergleiche zwischen Spielen bitte anhand der Zahlen und Achsen, nicht allein anhand der Linienhöhe.</p>';
 }
 
 
@@ -409,9 +256,9 @@ function renderY8Metrics(data, archive){
       'Bewertung '+latest.rating.toLocaleString('de-DE',{maximumFractionDigits:2})+'/10':'Bewertung nicht verfügbar';
     const availabilityIssue=game?.platforms.y8?.availabilityIssue;
     const availabilityWarning=availabilityIssue?'<div class="portal-availability-issue"><strong>'+esc(availabilityIssue.label)+'</strong> · '+esc(availabilityIssue.note)+'</div>':'';
-    const secondaryHistory='<div class="metric-history" aria-label="Verlauf von Bewertung und Likes">'+
-      metricTrend(series,{key:'rating',label:'Bewertung',suffix:'/10',maximumFractionDigits:1,fixedMax:10,className:'rating'})+
-      metricTrend(series,{key:'likes',label:'Likes',maximumFractionDigits:0,className:'likes'})+'</div>';
+    const secondaryHistory='<div class="y8-secondary">'+
+      GameCharts.render(series,{key:'rating',title:'Bewertungsverlauf',ratingMax:10})+
+      GameCharts.render(series,{key:'likes',title:'Likes'})+'</div>';
     const source=latest.source==='y8_public_page'?'Öffentliche Y8-Spielseite':'Manuell erfasster Wert';
     const publicUrl=game?.platforms?.y8?.publicUrl;
     const publicLink=publicUrl?'<a class="y8-perf-link" href="'+esc(publicUrl)+'" target="_blank" rel="noopener noreferrer">Öffentliche Spielseite ↗</a>':'';
@@ -445,7 +292,7 @@ function renderGames(d){
       const liveBuildName=p.liveBuild?(p.liveBuild.label||`Build ${p.liveBuild.version}`):'';
       const placementOpen=['review','changes_requested','scheduled'].includes(p.status);
       const statusText=pending?(placementOpen?`${labels[p.status]} · ${pendingName}`:`${labels[p.status]} · ${pendingName} ${labels[p.pendingBuild.status]}`):p.liveBuild?`${labels[p.status]} · ${liveBuildName}`:labels[p.status];
-      const availabilityLabel=p.availabilityIssue?` · ${p.availabilityIssue.label}`:'';
+      const availabilityLabel=p.availabilityIssue&&!pending?` · ${p.availabilityIssue.label}`:'';
       return `<div class="platform-chip ${esc(p.status)}${pending?' pending-update':''}${p.availabilityIssue?' has-availability-issue':''}"><span>${esc(portal?.name||id)}</span><strong>${esc(statusText+availabilityLabel)}</strong></div>`;
     }).join('')||'<div class="platform-chip"><span>Distribution</span><strong>Noch keine Aktivität</strong></div>';
     const github=g.github?`<details class="github-sync"><summary><span class="github-state" id="github-summary-${esc(g.id)}"><i></i>GitHub wird geprüft…</span></summary><div class="github-detail" id="github-${esc(g.id)}" aria-live="polite"><div class="git-loading">Live-GitHub-Status wird geladen…</div></div></details>`:`<div class="github-sync"><div class="git-empty" style="padding:10px 11px">Noch kein GitHub-Repository verknüpft.</div></div>`;
@@ -482,9 +329,9 @@ function portalDetailsHtml(g,p){
   const build=version?(url?`<a class="matrix-version" href="${esc(url)}" target="_blank" rel="noreferrer">${buildLabel} ${esc(version)} ↗</a>`:`<div class="matrix-version">${buildLabel} ${esc(version)}</div>`):'';
   const feedback=p.status==='changes_requested'&&p.feedbackNote?`<div class="matrix-feedback">${esc(p.feedbackNote)}</div>`:p.revisionSubmittedConfirmed&&p.revisionSubmittedNote?`<div class="matrix-feedback">${esc(p.revisionSubmittedNote)}</div>`:'';
   const pendingName=p.pendingBuild?(p.pendingBuild.label||`Build ${p.pendingBuild.version}`):'';
-  const pending=p.pendingBuild?`<div class="matrix-feedback"><strong>${esc(pendingName)} · ${esc(labels[p.pendingBuild.status]||p.pendingBuild.status)}</strong><br>Hochgeladen ${esc(fmtCompactDate(p.pendingBuild.uploaded))}<br>${esc(p.pendingBuild.note)}</div>`:'';
+  const pending=p.pendingBuild?`<div class="matrix-feedback"><strong>${esc(pendingName)} · ${esc(labels[p.pendingBuild.status]||p.pendingBuild.status)}</strong><br>${p.pendingBuild.uploaded?'Hochgeladen '+esc(fmtCompactDate(p.pendingBuild.uploaded)):'Stand bestätigt '+esc(fmtCompactDate(p.pendingBuild.reported))}<br>${esc(p.pendingBuild.note)}</div>`:'';
   const liveBuildName=p.liveBuild?(p.liveBuild.label||`Build ${p.liveBuild.version}`):'';
-  const liveBuild=p.liveBuild?`<div class="matrix-feedback"><strong>${esc(liveBuildName)} · Live</strong><br>Hochgeladen ${esc(fmtCompactDate(p.liveBuild.uploaded))}<br>Live seit ${esc(fmtCompactDate(p.liveBuild.published))}<br>${esc(p.liveBuild.publishedNote)}</div>`:'';
+  const liveBuild=p.liveBuild?`<div class="matrix-feedback"><strong>${esc(liveBuildName)} · Live</strong><br>Hochgeladen ${esc(fmtCompactDate(p.liveBuild.uploaded))}<br>${p.liveBuild.published?'Live seit '+esc(fmtCompactDate(p.liveBuild.published)):'Live bestätigt '+esc(fmtCompactDate(p.liveBuild.confirmedOn))}<br>${esc(p.liveBuild.publishedNote)}</div>`:'';
   const publicLink=p.publicUrl?`<a class="matrix-version" href="${esc(p.publicUrl)}" target="_blank" rel="noreferrer">Spiel öffnen ↗</a>`:'';
   const availabilityWarning=p.availabilityIssue?`<div class="portal-availability-issue"><strong>${esc(p.availabilityIssue.label)} · gemeldet ${esc(fmtCompactDate(p.availabilityIssue.reported))}</strong><br>${esc(p.availabilityIssue.note)}</div>`:'';
   return `${alias}${dates?`<div class="matrix-meta">${dates}</div>`:''}${availabilityWarning}${build}${feedback}${pending}${liveBuild}${publicLink}`;
@@ -499,19 +346,19 @@ function renderMatrix(d){
   const portalIds=d.portals.map(p=>p.id);
   const optional=new Set(portalIds.filter(id=>d.games.every(g=>['planned','not_submitted'].includes(g.platforms[id]?.status||'not_submitted'))));
   const head=`<thead><tr><th>Spiel</th>${portalIds.map(id=>{const portal=d.portals.find(p=>p.id===id);return `<th class="${optional.has(id)?'optional-portal':''}"><div class="portal-head">${portalVisual(portal)}<span>${esc(portal.name)}</span></div></th>`}).join('')}</tr></thead>`;
-  const rows=d.games.map(g=>`<tr data-game="${esc(g.name.toLowerCase())}"><td><div class="matrix-game">${gameVisual(g,'matrix')}<strong>${esc(g.name)}</strong></div></td>${portalIds.map(id=>{const p=g.platforms[id]||{status:'not_submitted'},portal=d.portals.find(x=>x.id===id);return `<td class="${optional.has(id)?'optional-portal':''}" data-status="${esc(p.status)}" data-portal="${esc(portal.name.toLowerCase())}"><div class="matrix-cell">${pill(p.status)}${portalDetailsHtml(g,p)}</div></td>`}).join('')}</tr>`).join('');
+  const rows=d.games.map(g=>`<tr data-game="${esc(g.name.toLowerCase())}"><td><div class="matrix-game">${gameVisual(g,'matrix')}<strong>${esc(g.name)}</strong></div></td>${portalIds.map(id=>{const p=g.platforms[id]||{status:'not_submitted'},portal=d.portals.find(x=>x.id===id);return `<td class="${optional.has(id)?'optional-portal':''}" data-status="${esc(p.status)}" data-pending-status="${esc(p.pendingBuild?.status||'')}" data-portal="${esc(portal.name.toLowerCase())}"><div class="matrix-cell">${pill(p.status)}${portalDetailsHtml(g,p)}</div></td>`}).join('')}</tr>`).join('');
   document.getElementById('matrixTable').innerHTML=head+`<tbody>${rows}</tbody>`;
   document.getElementById('distributionMobile').innerHTML=d.games.map(g=>{
     const active=portalIds.filter(id=>!['planned','not_submitted'].includes(g.platforms[id]?.status||'not_submitted'));
     const remaining=portalIds.filter(id=>!active.includes(id));
     const searchText=[g.name,...d.portals.map(p=>p.name)].join(' ').toLowerCase();
-    const statuses=portalIds.map(id=>g.platforms[id]?.status||'not_submitted').join(' ');
+    const statuses=portalIds.flatMap(id=>[g.platforms[id]?.status||'not_submitted',g.platforms[id]?.pendingBuild?.status||'']).join(' ');
     return `<article class="dist-card" data-search="${esc(searchText)}" data-statuses="${esc(statuses)}"><div class="dist-card-head"><div class="dist-game-title">${gameVisual(g,'matrix')}<strong>${esc(g.name)}</strong></div><span class="game-sub">${active.length} ${active.length===1?'aktives Portal':'aktive Portale'}</span></div>${active.length?`<div class="dist-list">${active.map(id=>distributionRowHtml(d,g,id)).join('')}</div>`:'<div class="dist-empty">Noch keine Einreichung oder Entscheidung.</div>'}${remaining.length?`<details class="dist-more"><summary>Weitere Portale (${remaining.length})</summary><div class="dist-list">${remaining.map(id=>distributionRowHtml(d,g,id)).join('')}</div></details>`:''}</article>`;
   }).join('');
   const search=document.getElementById('gameSearch'),filter=document.getElementById('statusFilter');
   const apply=()=>{
     const q=search.value.toLowerCase(),s=filter.value;
-    document.querySelectorAll('#matrixTable tbody tr').forEach(r=>{const hitText=!q||r.dataset.game.includes(q)||[...r.cells].some(c=>c.dataset.portal?.includes(q)),hitStatus=!s||[...r.cells].some(c=>c.dataset.status===s);r.style.display=hitText&&hitStatus?'':'none'});
+    document.querySelectorAll('#matrixTable tbody tr').forEach(r=>{const hitText=!q||r.dataset.game.includes(q)||[...r.cells].some(c=>c.dataset.portal?.includes(q)),hitStatus=!s||[...r.cells].some(c=>c.dataset.status===s||c.dataset.pendingStatus===s);r.style.display=hitText&&hitStatus?'':'none'});
     document.querySelectorAll('#distributionMobile .dist-card').forEach(card=>{const hitText=!q||card.dataset.search.includes(q),hitStatus=!s||card.dataset.statuses.split(' ').includes(s);card.style.display=hitText&&hitStatus?'':'none'});
   };
   search.oninput=apply;filter.onchange=apply;
@@ -538,14 +385,15 @@ function renderTimeline(d){
     });
     if(p.submitted)events.push({date:p.submitted,type:'Einreichung',kind:'submission',title:`${placementName} → ${portal}`,text:p.submittedNote||'Beim Portal eingereicht.',order:0,game:g,portal:portalData});
     (p.statusUpdates||[]).forEach(update=>events.push({date:update.date,type:'Zwischenstand',kind:'status_update',title:`${placementName} bei ${portal}: ${labels[update.status]||update.status}`,text:update.note||`Portalstatus: ${labels[update.status]||update.status}.`,order:1,game:g,portal:portalData}));
-    if(p.availabilityIssue)events.push({date:p.availabilityIssue.reported,type:'Spielbarkeit eingeschränkt',kind:'change_request',title:`${placementName} bei ${portal}: ${p.availabilityIssue.label}`,text:p.availabilityIssue.note,order:4,game:g,portal:portalData});
+    if(p.availabilityIssue)events.push({date:p.availabilityIssue.reported,type:'Spielbarkeit eingeschränkt',kind:'change_request',title:`${placementName} bei ${portal}: ${p.availabilityIssue.initialLabel||p.availabilityIssue.label}`,text:p.availabilityIssue.initialNote||p.availabilityIssue.note,order:4,game:g,portal:portalData});
     if(p.pendingBuild){
       const pendingName=p.pendingBuild.label||`Build ${p.pendingBuild.version}`;
-      events.push({date:p.pendingBuild.uploaded,type:'Build-Update',kind:'status_update',title:`${placementName} bei ${portal}: ${pendingName} ${labels[p.pendingBuild.status]||p.pendingBuild.status}`,text:p.pendingBuild.note||'Ein neuer Portal-Build wurde hochgeladen.',order:3,game:g,portal:portalData});
+      events.push({date:p.pendingBuild.uploaded||p.pendingBuild.reported,type:'Build-Update',kind:'status_update',title:`${placementName} bei ${portal}: ${pendingName} ${labels[p.pendingBuild.status]||p.pendingBuild.status}`,text:p.pendingBuild.note||'Ein neuer Portal-Build wurde hochgeladen.',order:3,game:g,portal:portalData});
     }
     if(p.liveBuild){
       const liveBuildName=p.liveBuild.label||`Build ${p.liveBuild.version}`;
       if(p.liveBuild.uploaded)events.push({date:p.liveBuild.uploaded,type:'Build-Update',kind:'status_update',title:`${placementName} bei ${portal}: ${liveBuildName} zur Prüfung hochgeladen`,text:p.liveBuild.uploadedNote||'Ein neuer Portal-Build wurde zur Prüfung hochgeladen.',order:3,game:g,portal:portalData});
+      if(p.liveBuild.confirmedOn&&!p.liveBuild.published)events.push({date:p.liveBuild.confirmedOn,type:'Live bestätigt',kind:'publication',title:`${placementName} bei ${portal}: ${liveBuildName} live bestätigt`,text:p.liveBuild.publishedNote,order:3,game:g,portal:portalData});
       if(p.liveBuild.published&&p.liveBuild.published!==p.published)events.push({date:p.liveBuild.published,type:'Build-Update',kind:'publication',title:`${placementName} bei ${portal}: ${liveBuildName} live`,text:p.liveBuild.publishedNote||'Der neue Portal-Build ist live.',order:3,game:g,portal:portalData});
     }
     if(p.changeRequested)events.push({date:p.changeRequested,type:'Änderungsanforderung',kind:'change_request',title:`${portal} verlangt eine Änderung an ${placementName}`,text:p.feedbackNote||p.notes||'Das Portal verlangt eine Änderung.',order:1,game:g,portal:portalData});
