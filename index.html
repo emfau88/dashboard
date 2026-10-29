@@ -84,9 +84,9 @@
       .rating-card{grid-template-columns:190px minmax(0,1fr);gap:20px;align-items:center;padding:15px 17px}
     }
   </style>
-  <link rel="stylesheet" href="assets/charts.css">
+  <link rel="stylesheet" href="assets/charts.css?v=20261029">
   <style>@media(max-width:719px){.tabs{grid-template-columns:repeat(3,minmax(0,1fr))}}</style>
-  <script src="assets/charts.js"></script>
+  <script src="assets/charts.js?v=20261029"></script>
 </head>
 <body>
   <main class="shell">
@@ -142,6 +142,32 @@ const shortSha=sha=>sha?sha.slice(0,7):'unbekannt';
 const initials=name=>name.split(/\s+/).map(part=>part[0]).join('').slice(0,2).toUpperCase();
 const gameVisual=(g,size='card')=>g.image?`<img class="${size==='card'?'game-thumb':'matrix-thumb'}" src="${esc(g.image)}" alt="" loading="lazy" decoding="async">`:`<span class="${size==='card'?'game-monogram':'matrix-monogram'}" aria-hidden="true">${esc(initials(g.name))}</span>`;
 const portalVisual=p=>`<img class="portal-logo" src="assets/portals/${esc(p.id)}.png" alt="" loading="lazy" decoding="async">`;
+const overviewArchives={};
+
+function renderOverviewPerformance(data,portalId,archive){
+  overviewArchives[portalId]=archive?.schemaVersion===1&&archive.games?archive:null;
+  const format=value=>value.toLocaleString('de-DE',{maximumFractionDigits:2});
+  const metric=(history,key,maximum)=>{
+    const result=GameCharts.compareLast(history,key),{value,difference,comparison}=result;
+    const unit=key==='plays'?'Plays':'Punkte';
+    const delta=value===null?'Nicht erfasst':difference===null?'Noch kein Vergleich':difference===0?'Unverändert':`${difference>0?'+':''}${format(difference)} ${unit}`;
+    return `<div><span class="overview-metric-label">${maximum?'Bewertung':'Plays gesamt'}</span><div class="overview-metric-value">${value===null?'—':esc(format(value))}<small>${maximum?'/ '+maximum:''}</small></div><div class="overview-metric-delta ${difference>0?'positive':difference<0?'negative':''}">${esc(delta)}</div>${value!==null&&difference!==null?`<span class="overview-metric-comparison">${esc(comparison)}</span>`:''}</div>`;
+  };
+  data.games.forEach(game=>{
+    const target=document.getElementById(`performance-${game.id}`);
+    if(!target)return;
+    const monitored=['kongregate','y8'].filter(id=>game.platforms[id]?.status==='live');
+    if(!monitored.length){target.innerHTML='<p class="overview-metric-empty">Noch keine öffentlichen Performance-Messwerte.</p>';return;}
+    target.innerHTML=monitored.map(id=>{
+      const portal=data.portals.find(p=>p.id===id),source=overviewArchives[id];
+      const history=Array.isArray(source?.games?.[game.id])?source.games[game.id]:[];
+      const latest=GameCharts.compareLast(history,'plays').latest;
+      const heading=`<div class="overview-metric-heading">${portalVisual(portal)}<strong>${esc(portal.name)}</strong>${latest?`<small>Stand ${esc(fmtCompactDate(latest.date))}</small>`:''}</div>`;
+      if(!latest)return `<section class="overview-metric-portal">${heading}<p class="overview-metric-empty">${source===undefined?'Messwerte werden geladen…':source===null?'Messwerte momentan nicht erreichbar.':'Noch keine öffentlichen Messwerte.'}</p></section>`;
+      return `<section class="overview-metric-portal" aria-label="${esc(portal.name)} Performance">${heading}<div class="overview-metric-values">${metric(history,'plays')}${metric(history,'rating',id==='kongregate'?5:10)}</div></section>`;
+    }).join('');
+  });
+}
 
 async function main(){
   const response=await fetch(`data.json?v=${Date.now()}`,{cache:'no-store'});
@@ -190,6 +216,7 @@ function ratingHistoryChart(history,game,maximum=5){
 }
 
 function renderKongregateMetrics(data, archive){
+  renderOverviewPerformance(data,'kongregate',archive);
   const panel=document.getElementById('kongregateMonitor');
   if(!archive||archive.schemaVersion!==1||!archive.games){
     panel.innerHTML='<div class="perf-heading"><h2>Kongregate · Performance</h2></div>'+
@@ -227,11 +254,12 @@ function renderKongregateMetrics(data, archive){
     '<span class="perf-update">'+esc(lastSync)+'</span></div>'+
     '<div class="perf-grid">'+cards+'</div>'+
     '<section class="kong-rating-section" aria-labelledby="kongRatingTitle"><div class="kong-rating-heading"><div><h3 id="kongRatingTitle">Bewertungsverlauf</h3><p>Detail- oder Gesamtskala · Messpunkte per Maus, Touch oder Tastatur auswählen</p></div><span>Kongregate-Skala: 0–5</span></div><div class="kong-rating-list">'+ratingCards+'</div></section>'+
-    '<p class="perf-note">Ältere Messpunkte stammen aus dem bisherigen Dashboard oder manuell gemeldeten Ständen. Ab Aktivierung des täglichen Workflows wird ein Messpunkt pro Spiel und Kalendertag automatisch erfasst. Fehlende Tage bedeuten nicht null Plays. Die Plays-Differenz bezieht sich auf den vorherigen vorhandenen Messpunkt; beim Bewertungsverlauf wird die Änderung seit dem ersten Messpunkt im gewählten Zeitraum gezeigt. Die Detailansicht passt die Achse an den gewählten Zeitraum an (mindestens 0,1 Punkte bei Kongregate). Die vollständige Skala bleibt umschaltbar. Im Modus „Zuwachs / Tag“ werden Lücken als Intervallmittel gekennzeichnet. Vergleiche zwischen Spielen bitte anhand der Zahlen und Achsen, nicht allein anhand der Linienhöhe.</p>';
+    '<p class="perf-note">Ältere Messpunkte stammen aus dem bisherigen Dashboard oder manuell gemeldeten Ständen. Ab Aktivierung des täglichen Workflows wird ein Messpunkt pro Spiel und Kalendertag automatisch erfasst. Fehlende Tage bedeuten nicht null Plays. Die Plays-Differenz bezieht sich auf den vorherigen vorhandenen Messpunkt; auch Bewertungen und Likes werden standardmäßig mit dem vorherigen verfügbaren Messtag verglichen. Das Vergleichsdatum ist immer angegeben; bei Lücken wird der Abstand in Tagen genannt. Die Detailansicht passt die Achse an den gewählten Zeitraum an (mindestens 0,1 Punkte bei Kongregate). Die vollständige Skala bleibt umschaltbar. Im Modus „Zuwachs / Tag“ werden Lücken als Intervallmittel gekennzeichnet. Vergleiche zwischen Spielen bitte anhand der Zahlen und Achsen, nicht allein anhand der Linienhöhe.</p>';
 }
 
 
 function renderY8Metrics(data, archive){
+  renderOverviewPerformance(data,'y8',archive);
   const panel=document.getElementById('y8Monitor');
   if(!panel)return;
   if(!archive||archive.schemaVersion!==1||!archive.games){
@@ -303,7 +331,7 @@ function renderGames(d){
     const github=g.github?`<details class="github-sync"><summary><span class="github-state" id="github-summary-${esc(g.id)}"><i></i>GitHub wird geprüft…</span></summary><div class="github-detail" id="github-${esc(g.id)}" aria-live="polite"><div class="git-loading">Live-GitHub-Status wird geladen…</div></div></details>`:`<div class="github-sync"><div class="git-empty" style="padding:10px 11px">Noch kein GitHub-Repository verknüpft.</div></div>`;
     const issues=g.issues.length?`<details class="issues-details"><summary>Offene Punkte (${g.issues.length})</summary><ul class="issues">${g.issues.slice(0,3).map(i=>`<li>${esc(i)}</li>`).join('')}</ul></details>`:'';
     const quality=g.qualityScore==null?'<span>Noch nicht intern bewertet</span>':`<strong>${g.qualityScore}/100</strong> · interner Qualitätsscore`;
-    return `<article class="game-card"><div class="game-head"><div class="game-identity">${gameVisual(g)}<div><div class="game-name">${esc(g.name)}</div><div class="game-sub">${esc(g.subtitle)}</div></div></div>${pill(g.status)}</div><div class="game-meta"><div class="quality-note" title="Manuelle interne Einschätzung; kein Portalwert">${quality}</div></div><div class="next"><b>Nächster Schritt</b><div>${esc(g.nextAction)}</div></div><div class="platform-strip">${active}</div>${github}${issues}</article>`;
+    return `<article class="game-card"><div class="game-head"><div class="game-identity">${gameVisual(g)}<div><div class="game-name">${esc(g.name)}</div><div class="game-sub">${esc(g.subtitle)}</div></div></div>${pill(g.status)}</div><div class="game-meta"><div class="quality-note" title="Manuelle interne Einschätzung; kein Portalwert">${quality}</div></div><div class="overview-performance" id="performance-${esc(g.id)}" aria-label="Performance von ${esc(g.name)}"><p class="overview-metric-empty">Messwerte werden geladen…</p></div><div class="next"><b>Nächster Schritt</b><div>${esc(g.nextAction)}</div></div><div class="platform-strip">${active}</div>${github}${issues}</article>`;
   }).join('');
 }
 

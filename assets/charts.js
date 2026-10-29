@@ -6,6 +6,16 @@
   const escape=value=>String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const date=value=>new Date(value+'T12:00:00Z').toLocaleDateString('de-DE',{day:'2-digit',month:'2-digit',year:'2-digit',timeZone:'UTC'});
   const number=(value,digits=2)=>value.toLocaleString('de-DE',{maximumFractionDigits:digits});
+  function compareLast(history,key){
+    const ordered=history.filter(p=>Number.isFinite(Date.parse(p.date+'T12:00:00Z'))).slice().sort((a,b)=>a.date.localeCompare(b.date));
+    const latest=ordered.at(-1);
+    const previous=ordered.slice(0,-1).reverse().find(p=>Number.isFinite(p[key]));
+    const value=Number.isFinite(latest?.[key])?latest[key]:null;
+    const difference=value!==null&&previous?Number((value-previous[key]).toFixed(8)):null;
+    const days=previous&&latest?(Date.parse(latest.date+'T12:00:00Z')-Date.parse(previous.date+'T12:00:00Z'))/DAY:null;
+    const comparison=previous?(days===1?'zum Vortag ('+date(previous.date)+')':'seit '+date(previous.date)+' · '+days+' Tage'):'';
+    return {latest,previous,value,difference,days,comparison};
+  }
   function samples(history,key){
     return history.filter(p=>Number.isFinite(p[key])&&Number.isFinite(Date.parse(p.date+'T12:00:00Z')))
       .map(p=>({...p,value:p[key],time:Date.parse(p.date+'T12:00:00Z')})).sort((a,b)=>a.time-b.time);
@@ -56,9 +66,10 @@
     if(!points.length)return controls+'<p class="measurement-note">'+(state.mode==='daily'?'Für den Zuwachs sind mindestens zwei Messpunkte nötig.':'Noch keine Messwerte in diesem Zeitraum.')+'</p>';
     const first=points[0],last=points.at(-1),digits=options.ratingMax?2:state.mode==='daily'?1:0;
     const format=v=>number(v,digits),unit=options.ratingMax?' / '+options.ratingMax:state.mode==='daily'?' Plays/Tag':options.key==='plays'?' Plays':' Likes';
-    const difference=last.value-first.value;
+    const comparison=compareLast(samples(entry.history,options.key),options.key);
+    const difference=comparison.difference;
     const signed=v=>(v>0?'+':'')+format(v);
-    const stat=points.length===1?'Erster Messpunkt':state.mode==='daily'?'Spitze: '+format(Math.max(...points.map(p=>p.value)))+' Plays/Tag':difference===0?'Unverändert seit '+date(first.date):signed(difference)+(options.ratingMax?' Punkte':'')+' seit '+date(first.date);
+    const stat=state.mode==='daily'?'Spitze: '+format(Math.max(...points.map(p=>p.value)))+' Plays/Tag':difference===null?'Noch kein Vergleichswert':(difference===0?'Unverändert':signed(difference)+(options.ratingMax?' Punkte':' '+(options.key==='plays'?'Plays':'Likes')))+' '+comparison.comparison;
     const summary='<div class="measurement-summary"><span class="measurement-value">'+format(last.value)+'<small>'+unit+'</small></span><span class="'+(difference>0?'positive':difference<0?'negative':'')+'">'+stat+'</span></div>';
     const x=p=>first.time===last.time?300:8+(p.time-first.time)/(last.time-first.time)*584;
     const y=p=>232-(p.value-axis.min)/(axis.max-axis.min)*224;
@@ -107,6 +118,6 @@
       const input=chart.querySelector('input');input.value=entry.selected;input.dispatchEvent(new Event('input',{bubbles:true}));
     });
   }
-  root.GameCharts={render,scale,samples,daily,model};
+  root.GameCharts={render,scale,samples,daily,model,compareLast};
   if(typeof module!=='undefined')module.exports=root.GameCharts;
 })(globalThis);

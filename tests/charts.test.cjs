@@ -1,6 +1,24 @@
 const {test}=require('node:test');
 const assert=require('node:assert/strict');
-const {scale,samples,daily,model}=require('../assets/charts.js');
+const {scale,samples,daily,model,compareLast,render}=require('../assets/charts.js');
+test('Standardvergleich nutzt den vorherigen Messtag und keine Zeitraum-Summe',()=>{
+  const history=[{date:'2026-10-01',plays:10,rating:2},{date:'2026-10-28',plays:100,rating:2.8},{date:'2026-10-29',plays:104,rating:2.77}];
+  assert.equal(compareLast(history,'plays').difference,4);
+  assert.equal(compareLast(history,'rating').difference,-.03);
+  assert.equal(compareLast(history,'plays').comparison,'zum Vortag (28.10.26)');
+  const html=render(history,{key:'plays',title:'Test'});
+  assert.ok(html.includes('+4 Plays zum Vortag (28.10.26)'));
+  assert.ok(!html.includes('+94 Plays'));
+});
+test('Vergleich benennt Lücken, fehlende Werte und echte Nullen korrekt',()=>{
+  const history=[{date:'2026-10-26',plays:0,rating:3},{date:'2026-10-28',plays:0,rating:null},{date:'2026-10-29',plays:4,rating:3}];
+  assert.equal(compareLast(history,'rating').comparison,'seit 26.10.26 · 3 Tage');
+  assert.equal(compareLast(history.slice(0,2),'rating').value,null);
+  assert.equal(compareLast(history.slice(0,2),'rating').difference,null);
+  assert.equal(compareLast(history.slice(0,2),'plays').difference,0);
+  assert.equal(compareLast(history.slice(0,1),'plays').difference,null);
+  assert.equal(compareLast([],'plays').value,null);
+});
 test('Bewertungsskalen umfassen alle Werte und bleiben innerhalb der Portalskala',()=>{
   for(const maximum of [5,10])for(const values of [[0],[maximum],[maximum-.01,maximum],[0,.01],[2.77,2.78],[1.2,3.7]]){
     const axis=scale(values,{ratingMax:maximum});

@@ -4,7 +4,7 @@ Statisches, mobile-first Dashboard für Spieleprojekte, Portal-Einreichungen, Po
 
 **Live-Dashboard:** [emfau88.github.io/dashboard](https://emfau88.github.io/dashboard/)
 
-Die **Übersicht** zeigt Kennzahlen, Spiele und ihren aktuellen Stand. Im Tab **Statistiken** stehen die Performance-, Bewertungs- und Likes-Verläufe von Kongregate und Y8.
+Die **Übersicht** zeigt Kennzahlen, Spiele und ihren aktuellen Stand sowie kompakte Plays- und Bewertungszahlen pro Live-Portal. Die Änderung vergleicht immer den letzten Stand mit dem vorherigen verfügbaren Messtag der jeweiligen Kennzahl. Vergleichsdatum und Messstand stehen dabei; Datenlücken werden als mehrtägiger Abstand bezeichnet, fehlende Zahlen bleiben unbekannt. Im Tab **Statistiken** stehen die Performance-, Bewertungs- und Likes-Verläufe von Kongregate und Y8.
 
 ## Aufbau
 
@@ -133,7 +133,7 @@ Danach [http://localhost:8000](http://localhost:8000) öffnen.
 
 ## Kongregate: tägliche Performance-Daten (automatisiert)
 
-Das Dashboard zeigt unter **Statistiken → Kongregate · Performance** die vier aktiven Kongregate-Spiele (HEXFRONT, GALALAXY, ROOSTER RAGE, KESSELKRAWALL). Pro Spiel werden kumulative Plays und Favoriten kompakt dargestellt. Die Bewertungsverläufe stehen darunter in einer eigenen, großformatigen Sektion mit je einer vollständigen Diagrammzeile pro Spiel. Solange Kongregate ein neues Spiel als „under judgement“ führt, zeigt das Dashboard bewusst noch keine Wertung statt einer irreführenden 0,0. Die Plays-Differenz vergleicht den **vorherigen vorhandenen Messpunkt**; der Bewertungsverlauf nennt die Veränderung seit dem ersten Messpunkt im gewählten Zeitraum. Seine beschriftete Detailachse umfasst mindestens 0,1 Bewertungspunkte; die vollständige 0–5-Skala ist umschaltbar. Exakte Einzelwerte und Änderungen sind über die Messpunktauswahl und die Tabelle abrufbar.
+Das Dashboard zeigt unter **Statistiken → Kongregate · Performance** die vier aktiven Kongregate-Spiele (HEXFRONT, GALALAXY, ROOSTER RAGE, KESSELKRAWALL). Pro Spiel werden kumulative Plays und Favoriten kompakt dargestellt. Die Bewertungsverläufe stehen darunter in einer eigenen, großformatigen Sektion mit je einer vollständigen Diagrammzeile pro Spiel. Solange Kongregate ein neues Spiel als „under judgement“ führt, zeigt das Dashboard bewusst noch keine Wertung statt einer irreführenden 0,0. Die Plays-Differenz vergleicht den **vorherigen vorhandenen Messpunkt**; auch der Bewertungsverlauf vergleicht standardmäßig mit dem vorherigen verfügbaren Messtag. Die Zeitraumwahl steuert den sichtbaren Verlauf, nicht die Vergleichsbasis. Seine beschriftete Detailachse umfasst mindestens 0,1 Bewertungspunkte; die vollständige 0–5-Skala ist umschaltbar. Exakte Einzelwerte und Änderungen sind über die Messpunktauswahl und die Tabelle abrufbar.
 
 - Datenquelle: öffentliches Kongregate-Metrics-JSON unter `https://www.kongregate.com/games/emfau/<spiel-slug>/metrics.json`.
 - Abrufskript: `scripts/sync_kongregate.py` (Python-Standardbibliothek; kein API-Schlüssel).
