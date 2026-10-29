@@ -85,6 +85,7 @@
     }
   </style>
   <link rel="stylesheet" href="assets/charts.css">
+  <style>@media(max-width:719px){.tabs{grid-template-columns:repeat(3,minmax(0,1fr))}}</style>
   <script src="assets/charts.js"></script>
 </head>
 <body>
@@ -93,6 +94,7 @@
     <nav class="tabs" aria-label="Ansichten">
       <button class="tab active" data-view="overview">Übersicht</button>
       <button class="tab" data-view="matrix">Distribution</button>
+      <button class="tab" data-view="statistics">Statistiken</button>
       <button class="tab" data-view="portals">Portale</button>
       <button class="tab" data-view="timeline">Verlauf</button>
     </nav>
@@ -102,6 +104,9 @@
       <div class="section-title"><h2>Spiele</h2><span>Was live ist, was blockiert und was als Nächstes ansteht</span></div>
       <div class="cards" id="gameCards"></div>
       <p class="footnote">Der interne Qualitätsscore ist eine manuelle Orientierungshilfe und kein Messwert eines Portals.</p>
+    </section>
+
+    <section id="statistics" class="view" aria-label="Statistiken und Diagramme">
       <section class="perf-monitor" id="kongregateMonitor" aria-label="Kongregate Performance"><p class="perf-note">Performance-Daten werden geladen…</p></section>
       <section class="perf-monitor" id="y8Monitor" aria-label="Y8 Performance"><p class="perf-note">Y8-Statistiken werden geladen…</p></section>
     </section>
