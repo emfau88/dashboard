@@ -2,7 +2,7 @@
   "meta": {
     "title": "emfau Game Ops",
     "version": "0.13.0",
-    "updated": "2026-10-28",
+    "updated": "2026-11-02",
     "currency": "EUR",
     "notes": "Die Recherche-Spannen sind interne Vergleichswerte aus der Portal-Analyse vom September 2026 und keine offiziellen Annahmeschwellen der Plattformen."
   },
@@ -341,9 +341,9 @@
         "developmentBranch": "main",
         "pagesUrl": "https://emfau88.github.io/KesselKrawall/"
       },
-      "nextAction": "Von Y8 geforderte Fixes umsetzen, erneut einreichen und Kongregate-Resonanz beobachten",
+      "nextAction": "Ergebnis der erneuten Y8-Prüfung abwarten und Kongregate-Resonanz beobachten",
       "issues": [
-        "Y8 fordert Fixes; konkrete Punkte noch nicht im Dashboard erfasst",
+        "Überarbeitete Y8-Version seit dem 02.11.2026 erneut in Prüfung",
         "Kongregate-Resonanz beobachten",
         "CrazyGames lehnte die Gesamtqualität ab"
       ],
@@ -363,15 +363,17 @@
           "notes": "Schon vor dem 16.10.2026 zur Veröffentlichung freigegeben; das genaue Annahmedatum ist nicht erfasst. Seit dem 16.10.2026 öffentlich auf Kongregate spielbar."
         },
         "y8": {
-          "status": "changes_requested",
+          "status": "review",
           "portalTitle": "Cauldron Rumble: Merge & Battle",
           "submitted": "2026-10-07",
+          "revisionSubmitted": "2026-11-02",
+          "revisionSubmittedConfirmed": true,
           "sourceBranch": "main",
-          "submittedCommit": "83d17ab14ff265559b58652e9040eecef7d7ad51",
-          "submittedNote": "Unter dem Portalnamen „Cauldron Rumble: Merge & Battle“ bei Y8 zur Prüfung eingereicht.",
-          "feedbackNote": "Y8 fordert Fixes. Am 28.10.2026 vom Entwickler bestätigt; konkrete Anforderungen und das genaue Datum der Rückmeldung sind noch nicht erfasst.",
+          "submittedNote": "Unter dem Portalnamen „Cauldron Rumble: Merge & Battle“ bei Y8 zur Prüfung eingereicht. Ursprünglicher Einreichungs-Commit: 83d17ab14ff265559b58652e9040eecef7d7ad51 (main-Stand vom 05.10.2026).",
+          "feedbackNote": "Y8 hatte Fixes verlangt, bestätigt am 28.10.2026. Die geforderten Korrekturen wurden umgesetzt und am 02.11.2026 nachgereicht; konkrete Anforderungen und das genaue Datum der ursprünglichen Rückmeldung sind nicht erfasst.",
+          "revisionSubmittedNote": "Die von Y8 geforderten Fixes wurden umgesetzt. Die korrigierte Version wurde am 02.11.2026 erneut hochgeladen und ist wieder in Prüfung. Buildnummer und Commit der Überarbeitung sind noch nicht zugeordnet.",
           "statusUpdates": [{"date": "2026-10-28", "status": "changes_requested", "note": "Zwischenstand bestätigt: Y8 verlangt Fixes. Vor einer erneuten Prüfung müssen die beanstandeten Punkte überarbeitet werden; Details noch offen."}],
-          "notes": "Am 07.10.2026 eingereicht. Stand 28.10.2026: Überarbeitung angefordert. Zugeordneter Einreichungs-Build: main-Stand vom 05.10.2026."
+          "notes": "Nach der Änderungsanforderung wurde die korrigierte Version am 02.11.2026 erneut bei Y8 eingereicht. Die erneute Prüfung läuft; eine Freigabe oder Veröffentlichung ist noch nicht bestätigt."
         },
         "gamemonetize": {
           "status": "not_submitted"
@@ -581,7 +583,7 @@
       "qualityRange": "Große Bandbreite veröffentlichter Spiele; keine verlässliche Annahmeschwelle ermittelt",
       "qualityRangeConfidence": "niedrig",
       "reach": "Großes direktes Publikum; der Betreiber wirbt derzeit mit mehr als 30 Mio. monatlichen Spielern",
-      "researchNote": "HEXFRONT, GALALAXY und ROOSTER RAGE sind auf Y8 veröffentlicht. Am 28.10.2026 wurde der GALALAXY-Werbe-Patch als live bestätigt. Bei HEXFRONT wartet die korrigierte mobile Gerätefreigabe noch auf Prüfung. Für KESSELKRAWALL verlangt Y8 Fixes; die konkrete Rückmeldung muss noch erfasst und umgesetzt werden.",
+      "researchNote": "HEXFRONT, GALALAXY und ROOSTER RAGE sind auf Y8 veröffentlicht. Am 28.10.2026 wurde der GALALAXY-Werbe-Patch als live bestätigt. Bei HEXFRONT wartet die korrigierte mobile Gerätefreigabe noch auf Prüfung. KESSELKRAWALL wurde nach Umsetzung der von Y8 geforderten Fixes am 02.11.2026 erneut hochgeladen und befindet sich wieder in Prüfung.",
       "fits": {
         "hexfront": "very_good",
         "galalaxy": "very_good",
