@@ -270,10 +270,10 @@
         "developmentBranch": "master",
         "pagesUrl": "https://emfau88.github.io/RoosterRage/"
       },
-      "nextAction": "Angekündigtes Update auch bei Y8 hochladen und den Live-Stand des neuen Kongregate-Uploads prüfen",
+      "nextAction": "Y8-Prüfung des neuen Updates abwarten und den Live-Stand des neuen Kongregate-Uploads prüfen",
       "issues": [
         "Kongregate-Update am 04.11.2026 hochgeladen; Freigabe beziehungsweise Live-Schaltung noch nicht bestätigt",
-        "Y8-Update angekündigt; Upload noch nicht bestätigt",
+        "Y8-Update am 04.11.2026 eingereicht; erneut in Prüfung",
         "Buildnummern und Commits der neuen Updates noch zuordnen; Resonanz und Werbung weiter beobachten"
       ],
       "platforms": {
@@ -326,11 +326,11 @@
           },
           "pendingBuild": {
             "label": "Update",
-            "status": "planned",
-            "reported": "2026-11-04",
-            "note": "Der Entwickler hat angekündigt, das neue Update nach dem Kongregate-Upload auch bei Y8 hochzuladen. Der Y8-Upload ist noch nicht bestätigt; es wird noch keine erneute Prüfung angenommen. Buildnummer und Commit sind noch offen."
+            "status": "review",
+            "uploaded": "2026-11-04",
+            "note": "Das zuvor angekündigte Update wurde am 04.11.2026 auch bei Y8 eingereicht und ist in Prüfung. Die Freigabe des neuen Builds steht aus; das bereits veröffentlichte Spiel bleibt live. Buildnummer und Commit sind noch nicht sicher zugeordnet."
           },
-          "notes": "Am 15.10.2026 erstmals öffentlich auf Y8 veröffentlicht. Der am 16.10.2026 hochgeladene Werbe-Build 002 ist seit dem 19.10.2026 live. Ein neuer öffentlicher GitHub-Commit ist diesem Portal-Build noch nicht sicher zugeordnet. Am 04.11.2026 wurde ein weiteres Update angekündigt; dessen Upload bei Y8 ist noch nicht bestätigt."
+          "notes": "Am 15.10.2026 erstmals öffentlich auf Y8 veröffentlicht. Der am 16.10.2026 hochgeladene Werbe-Build 002 ist seit dem 19.10.2026 live. Ein neuer öffentlicher GitHub-Commit ist diesem Portal-Build noch nicht sicher zugeordnet. Am 04.11.2026 wurde ein weiteres Update bei Y8 eingereicht und ist in Prüfung; dessen Freigabe steht noch aus."
         },
         "gamemonetize": {
           "status": "planned"
@@ -611,7 +611,7 @@
       "qualityRange": "Große Bandbreite veröffentlichter Spiele; keine verlässliche Annahmeschwelle ermittelt",
       "qualityRangeConfidence": "niedrig",
       "reach": "Großes direktes Publikum; der Betreiber wirbt derzeit mit mehr als 30 Mio. monatlichen Spielern",
-      "researchNote": "HEXFRONT, GALALAXY und ROOSTER RAGE sind auf Y8 veröffentlicht. Am 28.10.2026 wurde der GALALAXY-Werbe-Patch als live bestätigt. Bei HEXFRONT bemängelt Y8 die Querformat-Skalierung; der Entwickler hat eine Portrait-Umstellung beim Support angefragt und am 04.11.2026 ein neues Update zur Prüfung hochgeladen. KESSELKRAWALL wurde nach Umsetzung der von Y8 geforderten Fixes am 02.11.2026 erneut hochgeladen und befindet sich wieder in Prüfung. Für ROOSTER RAGE wurde am 04.11.2026 ein weiteres Update angekündigt; der Upload bei Y8 ist noch nicht bestätigt.",
+      "researchNote": "HEXFRONT, GALALAXY und ROOSTER RAGE sind auf Y8 veröffentlicht. Am 28.10.2026 wurde der GALALAXY-Werbe-Patch als live bestätigt. Bei HEXFRONT bemängelt Y8 die Querformat-Skalierung; der Entwickler hat eine Portrait-Umstellung beim Support angefragt und am 04.11.2026 ein neues Update zur Prüfung hochgeladen. KESSELKRAWALL wurde nach Umsetzung der von Y8 geforderten Fixes am 02.11.2026 erneut hochgeladen und befindet sich wieder in Prüfung. Für ROOSTER RAGE wurde am 04.11.2026 ein weiteres Update eingereicht und befindet sich in Prüfung; das bisherige Spiel bleibt live.",
       "fits": {
         "hexfront": "very_good",
         "galalaxy": "very_good",
