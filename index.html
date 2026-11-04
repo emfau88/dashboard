@@ -112,7 +112,7 @@
     </section>
 
     <section id="matrix" class="view">
-      <div class="toolbar"><input id="gameSearch" class="search" aria-label="Spiel oder Portal suchen" placeholder="Spiel oder Portal suchen…"><select id="statusFilter" class="filter" aria-label="Nach Status filtern"><option value="">Alle Status</option><option value="live">Live</option><option value="approved">Freigegeben</option><option value="scheduled">Veröffentlichung geplant</option><option value="changes_requested">Änderung angefordert</option><option value="review">In Prüfung</option><option value="planned">Geplant</option><option value="not_submitted">Nicht eingereicht</option><option value="rejected">Abgelehnt</option></select><button id="portalToggle" class="toolbar-button" type="button" aria-pressed="false">Alle Portale zeigen</button></div>
+      <div class="toolbar"><input id="gameSearch" class="search" aria-label="Spiel oder Portal suchen" placeholder="Spiel oder Portal suchen…"><select id="statusFilter" class="filter" aria-label="Nach Status filtern"><option value="">Alle Status</option><option value="live">Live</option><option value="approved">Freigegeben</option><option value="scheduled">Veröffentlichung geplant</option><option value="changes_requested">Änderung angefordert</option><option value="review">In Prüfung</option><option value="uploaded">Hochgeladen · Freigabe offen</option><option value="planned">Geplant</option><option value="not_submitted">Nicht eingereicht</option><option value="rejected">Abgelehnt</option></select><button id="portalToggle" class="toolbar-button" type="button" aria-pressed="false">Alle Portale zeigen</button></div>
       <div class="matrix-wrap"><table id="matrixTable"></table></div>
       <div class="distribution-mobile" id="distributionMobile"></div>
       <p class="footnote">Der Status beschreibt den operativen Stand, nicht die Qualität. Die Portal-Eignung wird separat unter „Portale“ geführt. Build-Versionen zeigen den aktuell zugeordneten Portal-Build und gehören nicht automatisch zum Datum der Ersteinreichung.</p>
@@ -130,7 +130,7 @@
     <p class="footnote">Die Recherche-Spannen sind Vergleichsschätzungen aus der Analyse vom September 2026 und keine offiziellen Plattformschwellen. Datum und Sicherheit bei Änderungen an Portal-Fakten immer mitführen.</p>
   </main>
 <script>
-const labels={live:'Live',approved:'Freigegeben',scheduled:'Veröffentlichung geplant',changes_requested:'Änderung angefordert',planned:'Geplant',not_submitted:'Nicht eingereicht',rejected:'Abgelehnt',review:'In Prüfung',development:'Entwicklung',very_good:'Sehr gut geeignet',good:'Gut geeignet',test:'Testen',weak:'Schwach geeignet',unknown:'Unbekannt'};
+const labels={live:'Live',approved:'Freigegeben',scheduled:'Veröffentlichung geplant',changes_requested:'Änderung angefordert',uploaded:'Hochgeladen · Freigabe offen',planned:'Geplant',not_submitted:'Nicht eingereicht',rejected:'Abgelehnt',review:'In Prüfung',development:'Entwicklung',very_good:'Sehr gut geeignet',good:'Gut geeignet',test:'Testen',weak:'Schwach geeignet',unknown:'Unbekannt'};
 const GH_CACHE_KEY='emfau-game-ops-github-v1';
 const GH_CACHE_MS=15*60*1000;
 const fmtDate=d=>d?new Intl.DateTimeFormat('de-DE',{day:'2-digit',month:'short',year:'numeric'}).format(new Date(d+'T12:00:00')):'—';
@@ -198,7 +198,7 @@ function renderKPIs(d){
     const items=[];
     const placementOpen=['review','changes_requested','scheduled'].includes(p.status);
     if(placementOpen)items.push({date:p.submitted});
-    else if(p.pendingBuild&&['review','changes_requested','scheduled'].includes(p.pendingBuild.status))items.push({date:p.pendingBuild.uploaded||p.pendingBuild.reported});
+    else if(p.pendingBuild&&['uploaded','review','changes_requested','scheduled'].includes(p.pendingBuild.status))items.push({date:p.pendingBuild.uploaded||p.pendingBuild.reported});
     return items;
   }));
   const oldest=open.map(item=>item.date).filter(Boolean).sort()[0];
@@ -320,7 +320,7 @@ function renderGames(d){
   document.getElementById('gameCards').innerHTML=d.games.map(g=>{
     const active=Object.entries(g.platforms).filter(([,p])=>['live','approved','scheduled','changes_requested','review','rejected'].includes(p.status)).map(([id,p])=>{
       const portal=d.portals.find(x=>x.id===id);
-      const pending=p.pendingBuild&&['review','changes_requested','scheduled'].includes(p.pendingBuild.status);
+      const pending=p.pendingBuild&&['planned','uploaded','review','changes_requested','scheduled'].includes(p.pendingBuild.status);
       const pendingName=pending?(p.pendingBuild.label||`Build ${p.pendingBuild.version}`):'';
       const liveBuildName=p.liveBuild?(p.liveBuild.label||`Build ${p.liveBuild.version}`):'';
       const placementOpen=['review','changes_requested','scheduled'].includes(p.status);
@@ -362,7 +362,7 @@ function portalDetailsHtml(g,p){
   const build=version?(url?`<a class="matrix-version" href="${esc(url)}" target="_blank" rel="noreferrer">${buildLabel} ${esc(version)} ↗</a>`:`<div class="matrix-version">${buildLabel} ${esc(version)}</div>`):'';
   const feedback=p.status==='changes_requested'&&p.feedbackNote?`<div class="matrix-feedback">${esc(p.feedbackNote)}</div>`:p.revisionSubmittedConfirmed&&p.revisionSubmittedNote?`<div class="matrix-feedback">${esc(p.revisionSubmittedNote)}</div>`:'';
   const pendingName=p.pendingBuild?(p.pendingBuild.label||`Build ${p.pendingBuild.version}`):'';
-  const pending=p.pendingBuild?`<div class="matrix-feedback"><strong>${esc(pendingName)} · ${esc(labels[p.pendingBuild.status]||p.pendingBuild.status)}</strong><br>${p.pendingBuild.uploaded?'Hochgeladen '+esc(fmtCompactDate(p.pendingBuild.uploaded)):'Stand bestätigt '+esc(fmtCompactDate(p.pendingBuild.reported))}<br>${esc(p.pendingBuild.note)}</div>`:'';
+  const pending=p.pendingBuild?`<div class="matrix-feedback"><strong>${esc(pendingName)} · ${esc(labels[p.pendingBuild.status]||p.pendingBuild.status)}</strong><br>${p.pendingBuild.uploaded?'Hochgeladen '+esc(fmtCompactDate(p.pendingBuild.uploaded)):(p.pendingBuild.status==='planned'?'Angekündigt ':'Stand bestätigt ')+esc(fmtCompactDate(p.pendingBuild.reported))}<br>${esc(p.pendingBuild.note)}</div>`:'';
   const liveBuildName=p.liveBuild?(p.liveBuild.label||`Build ${p.liveBuild.version}`):'';
   const liveBuild=p.liveBuild?`<div class="matrix-feedback"><strong>${esc(liveBuildName)} · Live</strong><br>Hochgeladen ${esc(fmtCompactDate(p.liveBuild.uploaded))}<br>${p.liveBuild.published?'Live seit '+esc(fmtCompactDate(p.liveBuild.published)):'Live bestätigt '+esc(fmtCompactDate(p.liveBuild.confirmedOn))}<br>${esc(p.liveBuild.publishedNote)}</div>`:'';
   const publicLink=p.publicUrl?`<a class="matrix-version" href="${esc(p.publicUrl)}" target="_blank" rel="noreferrer">Spiel öffnen ↗</a>`:'';

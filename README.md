@@ -106,6 +106,8 @@ Eine Einreichung ist ein datiertes Ereignis (`submitted`), kein dauerhafter Stat
 
 Bleibt ein bereits veröffentlichtes Spiel live, während ein neuer Build geprüft wird, behält die Platzierung den Status `live`. Das laufende Update wird getrennt als `pendingBuild` mit `version` oder einer beschreibenden `label` sowie `status`, `uploaded` und `note` erfasst. Dadurch bleiben öffentlicher Live-Status und Build-Prüfung gleichzeitig sichtbar, ohne den bisher veröffentlichten Commit vorzeitig zu überschreiben.
 
+Ist ein Update erst angekündigt, erhält `pendingBuild` den Status `planned` und das Meldedatum `reported`, aber kein Upload-Datum. Ein bestätigter Upload mit unbekanntem Prüf- oder Freigabestatus wird als `uploaded` mit `uploaded`-Datum erfasst („Hochgeladen · Freigabe offen“). Erst eine bestätigte Prüfung erhält `review`. Die Kennzahl „Offene Portalvorgänge“ zählt hochgeladene Updates mit offener Freigabe, aber keine bloßen Upload-Pläne. Beide Fälle erscheinen getrennt vom bestehenden Live-Status in Übersicht, Distribution und Verlauf.
+
 ## Portal-Eignung
 
 - `very_good`

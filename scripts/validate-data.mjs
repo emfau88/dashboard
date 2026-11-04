@@ -67,7 +67,9 @@ for(const game of data.games){
       if(!hasVersion&&!hasLabel)error(`${game.id}/${portalId}: pendingBuild benötigt version oder label.`);
       if(pending.version!=null&&!hasVersion)error(`${game.id}/${portalId}: pendingBuild.version muss eine nicht leere Zeichenkette sein.`);
       if(pending.label!=null&&!hasLabel)error(`${game.id}/${portalId}: pendingBuild.label muss eine nicht leere Zeichenkette sein.`);
-      if(!allowedStatuses.has(pending.status)||!['review','changes_requested','scheduled'].includes(pending.status))error(`${game.id}/${portalId}: pendingBuild.status ist ungültig.`);
+      if(!['planned','uploaded','review','changes_requested','scheduled'].includes(pending.status))error(`${game.id}/${portalId}: pendingBuild.status ist ungültig.`);
+      if(pending.status==='planned'&&pending.uploaded)error(`${game.id}/${portalId}: Ein geplantes Update darf noch kein Upload-Datum haben.`);
+      if(pending.status==='uploaded'&&!isValidDate(pending.uploaded||''))error(`${game.id}/${portalId}: Ein hochgeladenes Update benötigt ein Upload-Datum.`);
       if(!isValidDate(pending.uploaded||pending.reported||''))error(`${game.id}/${portalId}: pendingBuild benötigt ein Upload- oder Bestätigungsdatum.`);
       if(pending.reported&&(!isValidDate(pending.reported)||pending.reported>data.meta.updated))error(`${game.id}/${portalId}: pendingBuild.reported ist ungültig.`);
       if(pending.uploaded&&data.meta?.updated&&pending.uploaded>data.meta.updated)error(`${game.id}/${portalId}: pendingBuild.uploaded liegt nach meta.updated.`);

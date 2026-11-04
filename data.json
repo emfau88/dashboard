@@ -270,11 +270,11 @@
         "developmentBranch": "master",
         "pagesUrl": "https://emfau88.github.io/RoosterRage/"
       },
-      "nextAction": "Kennzahlen auf Y8 und Kongregate sowie die Werbeintegration von Build 002 im Live-Betrieb beobachten",
+      "nextAction": "Angekündigtes Update auch bei Y8 hochladen und den Live-Stand des neuen Kongregate-Uploads prüfen",
       "issues": [
-        "Werbeintegration von Build 002 auf Y8 im Live-Betrieb beobachten",
-        "Resonanz auf Y8 und Kongregate beobachten",
-        "Letztes Balancing und Präsentations-Polishing optional"
+        "Kongregate-Update am 04.11.2026 hochgeladen; Freigabe beziehungsweise Live-Schaltung noch nicht bestätigt",
+        "Y8-Update angekündigt; Upload noch nicht bestätigt",
+        "Buildnummern und Commits der neuen Updates noch zuordnen; Resonanz und Werbung weiter beobachten"
       ],
       "platforms": {
         "kongregate": {
@@ -287,7 +287,13 @@
           "deployedCommit": "fe755230a3601580dc6bfdcb90fba31893b6913f",
           "submittedNote": "Nach der formalen Zurückweisung korrigiert und erneut eingereicht.",
           "publishedNote": "ROOSTER RAGE wurde auf Kongregate veröffentlicht und ist dort live.",
-          "notes": "Am 03.10.2026 auf Kongregate veröffentlicht. Das genaue vorherige Freigabedatum ist nicht bekannt.",
+          "notes": "Am 03.10.2026 auf Kongregate veröffentlicht. Das genaue vorherige Freigabedatum ist nicht bekannt. Am 04.11.2026 wurde ein neues Update hochgeladen; dessen Freigabe beziehungsweise Live-Schaltung ist noch nicht bestätigt. Der bisher zugeordnete Commit bezeichnet nicht den neuen Upload.",
+          "pendingBuild": {
+            "label": "Update",
+            "status": "uploaded",
+            "uploaded": "2026-11-04",
+            "note": "Neues Update bei Kongregate hochgeladen. Der Upload ist bestätigt; Prüfstatus und Live-Schaltung des neuen Builds sind noch offen. Buildnummer, Commit und konkrete Änderungen wurden nicht genannt. Das bereits veröffentlichte Spiel bleibt live."
+          },
           "previousEvents": [
             {
               "date": "2026-09-21",
@@ -318,7 +324,13 @@
             "uploadedNote": "Build 002 mit ergänzter Werbung beziehungsweise Monetarisierung hochgeladen; Y8 zeigte anschließend „In review“. Es wurden keine Patch Notes hinterlegt.",
             "publishedNote": "Der Werbe-Build 002 ist auf Y8 live und ersetzt dort den zuvor veröffentlichten Build."
           },
-          "notes": "Am 15.10.2026 erstmals öffentlich auf Y8 veröffentlicht. Der am 16.10.2026 hochgeladene Werbe-Build 002 ist seit dem 19.10.2026 live. Ein neuer öffentlicher GitHub-Commit ist diesem Portal-Build noch nicht sicher zugeordnet."
+          "pendingBuild": {
+            "label": "Update",
+            "status": "planned",
+            "reported": "2026-11-04",
+            "note": "Der Entwickler hat angekündigt, das neue Update nach dem Kongregate-Upload auch bei Y8 hochzuladen. Der Y8-Upload ist noch nicht bestätigt; es wird noch keine erneute Prüfung angenommen. Buildnummer und Commit sind noch offen."
+          },
+          "notes": "Am 15.10.2026 erstmals öffentlich auf Y8 veröffentlicht. Der am 16.10.2026 hochgeladene Werbe-Build 002 ist seit dem 19.10.2026 live. Ein neuer öffentlicher GitHub-Commit ist diesem Portal-Build noch nicht sicher zugeordnet. Am 04.11.2026 wurde ein weiteres Update angekündigt; dessen Upload bei Y8 ist noch nicht bestätigt."
         },
         "gamemonetize": {
           "status": "planned"
@@ -580,7 +592,7 @@
       "qualityRange": "~61–65 typisch in der Recherche-Stichprobe",
       "qualityRangeConfidence": "mittel",
       "reach": "Etablierte direkte Plattform; Platzierungen auf der Startseite oder unter New & Updated können deutliche Besucherspitzen erzeugen",
-      "researchNote": "HEXFRONT, GALALAXY, ROOSTER RAGE und KESSELKRAWALL wurden veröffentlicht. KESSELKRAWALL ging am 16.10.2026 unter dem Titel „Cauldron Rumble Merge-Autobattler“ live. Diese realen Ergebnisse sind aussagekräftiger als eine abgeleitete Schwelle. Towers & Tantrums wurde am 28.10.2026 zur Prüfung eingereicht. Für HEXFRONT wurde am 04.11.2026 ein voraussichtlich bereits live geschaltetes Update mit Spielverbesserungen gemeldet; der genaue Live-Build ist noch nicht bestätigt.",
+      "researchNote": "HEXFRONT, GALALAXY, ROOSTER RAGE und KESSELKRAWALL wurden veröffentlicht. KESSELKRAWALL ging am 16.10.2026 unter dem Titel „Cauldron Rumble Merge-Autobattler“ live. Diese realen Ergebnisse sind aussagekräftiger als eine abgeleitete Schwelle. Towers & Tantrums wurde am 28.10.2026 zur Prüfung eingereicht. Für HEXFRONT wurde am 04.11.2026 ein voraussichtlich bereits live geschaltetes Update mit Spielverbesserungen gemeldet; der genaue Live-Build ist noch nicht bestätigt. Für ROOSTER RAGE wurde am 04.11.2026 ein neues Update hochgeladen; dessen Freigabe beziehungsweise Live-Schaltung ist noch offen.",
       "fits": {
         "hexfront": "very_good",
         "galalaxy": "very_good",
@@ -599,7 +611,7 @@
       "qualityRange": "Große Bandbreite veröffentlichter Spiele; keine verlässliche Annahmeschwelle ermittelt",
       "qualityRangeConfidence": "niedrig",
       "reach": "Großes direktes Publikum; der Betreiber wirbt derzeit mit mehr als 30 Mio. monatlichen Spielern",
-      "researchNote": "HEXFRONT, GALALAXY und ROOSTER RAGE sind auf Y8 veröffentlicht. Am 28.10.2026 wurde der GALALAXY-Werbe-Patch als live bestätigt. Bei HEXFRONT bemängelt Y8 die Querformat-Skalierung; der Entwickler hat eine Portrait-Umstellung beim Support angefragt und am 04.11.2026 ein neues Update zur Prüfung hochgeladen. KESSELKRAWALL wurde nach Umsetzung der von Y8 geforderten Fixes am 02.11.2026 erneut hochgeladen und befindet sich wieder in Prüfung.",
+      "researchNote": "HEXFRONT, GALALAXY und ROOSTER RAGE sind auf Y8 veröffentlicht. Am 28.10.2026 wurde der GALALAXY-Werbe-Patch als live bestätigt. Bei HEXFRONT bemängelt Y8 die Querformat-Skalierung; der Entwickler hat eine Portrait-Umstellung beim Support angefragt und am 04.11.2026 ein neues Update zur Prüfung hochgeladen. KESSELKRAWALL wurde nach Umsetzung der von Y8 geforderten Fixes am 02.11.2026 erneut hochgeladen und befindet sich wieder in Prüfung. Für ROOSTER RAGE wurde am 04.11.2026 ein weiteres Update angekündigt; der Upload bei Y8 ist noch nicht bestätigt.",
       "fits": {
         "hexfront": "very_good",
         "galalaxy": "very_good",
