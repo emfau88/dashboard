@@ -366,8 +366,11 @@ function portalDetailsHtml(g,p){
   const liveBuildName=p.liveBuild?(p.liveBuild.label||`Build ${p.liveBuild.version}`):'';
   const liveBuild=p.liveBuild?`<div class="matrix-feedback"><strong>${esc(liveBuildName)} · Live</strong><br>Hochgeladen ${esc(fmtCompactDate(p.liveBuild.uploaded))}<br>${p.liveBuild.published?'Live seit '+esc(fmtCompactDate(p.liveBuild.published)):'Live bestätigt '+esc(fmtCompactDate(p.liveBuild.confirmedOn))}<br>${esc(p.liveBuild.publishedNote)}</div>`:'';
   const publicLink=p.publicUrl?`<a class="matrix-version" href="${esc(p.publicUrl)}" target="_blank" rel="noreferrer">Spiel öffnen ↗</a>`:'';
+  const latestUpdate=[...(p.statusUpdates||[])].sort((a,b)=>b.date.localeCompare(a.date))[0];
+  const latestEventDate=[p.submitted,p.accepted,p.published,p.rejected,p.changeRequested,p.revisionSubmitted,p.pendingBuild?.uploaded,p.pendingBuild?.reported,p.liveBuild?.published,p.liveBuild?.confirmedOn].filter(Boolean).sort().at(-1)||'';
+  const currentNote=latestUpdate?.status===p.status&&latestUpdate.date>latestEventDate?`<div class="matrix-feedback"><strong>Zwischenstand ${esc(fmtCompactDate(latestUpdate.date))}</strong><br>${esc(latestUpdate.note)}</div>`:'';
   const availabilityWarning=p.availabilityIssue?`<div class="portal-availability-issue"><strong>${esc(p.availabilityIssue.label)} · gemeldet ${esc(fmtCompactDate(p.availabilityIssue.reported))}</strong><br>${esc(p.availabilityIssue.note)}</div>`:'';
-  return `${alias}${dates?`<div class="matrix-meta">${dates}</div>`:''}${availabilityWarning}${build}${feedback}${pending}${liveBuild}${publicLink}`;
+  return `${alias}${dates?`<div class="matrix-meta">${dates}</div>`:''}${availabilityWarning}${build}${feedback}${pending}${liveBuild}${currentNote}${publicLink}`;
 }
 
 function distributionRowHtml(d,g,portalId){

@@ -2,7 +2,7 @@
   "meta": {
     "title": "emfau Game Ops",
     "version": "0.13.0",
-    "updated": "2026-11-02",
+    "updated": "2026-11-04",
     "currency": "EUR",
     "notes": "Die Recherche-Spannen sind interne Vergleichswerte aus der Portal-Analyse vom September 2026 und keine offiziellen Annahmeschwellen der Plattformen."
   },
@@ -20,9 +20,9 @@
         "developmentBranch": "main",
         "pagesUrl": "https://emfau88.github.io/hexwars/"
       },
-      "nextAction": "Y8-Freigabe des Mobile-Updates abwarten und danach die Smartphone-Spielbarkeit prüfen",
+      "nextAction": "Y8-Supportantwort zur Portrait-Ausrichtung und Prüfung des neuen Uploads abwarten; Kongregate-Update im Live-Spiel kontrollieren",
       "issues": [
-        "Y8-Mobile-Freigabe in Prüfung; fehlender Portal-Haken als Ursache geklärt",
+        "Y8 bemängelt die Querformat-Skalierung; Portrait beim Support angefragt, neues Update am 04.11.2026 hochgeladen",
         "Doomstack-Lösung noch unvollständig",
         "Lesbarkeit der Spezialfelder"
       ],
@@ -38,8 +38,14 @@
           "ratingScale": 5,
           "ratingApprox": true,
           "sourceBranch": "main",
-          "deployedCommit": "29ff12d6897db9b994b97be980efb0037e54d476",
-          "notes": "Frühe Platzierung auf der Startseite. Nach einem Update erneut unter New & Updated erschienen; dabei wurde ein weiterer Besucheranstieg beobachtet."
+          "statusUpdates": [
+            {
+              "date": "2026-11-04",
+              "status": "live",
+              "note": "Laut Entwicklerrückmeldung sollte ein neues Update mit Spielverbesserungen inzwischen live sein. Der Live-Stand dieses Updates und sein genauer Commit sind noch nicht separat bestätigt; HEXFRONT selbst bleibt veröffentlicht."
+            }
+          ],
+          "notes": "Frühe Platzierung auf der Startseite. Nach einem früheren Update erneut unter New & Updated erschienen; dabei wurde ein weiterer Besucheranstieg beobachtet. Zuvor zugeordneter Portal-Build: 29ff12d6897db9b994b97be980efb0037e54d476. Am 04.11.2026 meldet der Entwickler ein voraussichtlich bereits live geschaltetes Update mit Spielverbesserungen; der alte Commit ist diesem neuen Update nicht zugeordnet."
         },
         "y8": {
           "status": "live",
@@ -52,8 +58,8 @@
             "reported": "2026-10-20",
             "initialLabel": "Mobil gesperrt",
             "initialNote": "Y8 zeigt auf dem Smartphone: Dieses Spiel ist auf deinem Gerät nicht verfügbar. Die Gerätesperre wurde mit mobiler Browserkennung reproduziert; Ursache zu diesem Zeitpunkt offen.",
-            "label": "Mobile-Freigabe ausstehend",
-            "note": "Am 20.10.2026 mobil durch Y8 blockiert. Ursache laut Entwickler am 28.10.2026 geklärt: Im Y8-Portal fehlte die Gerätefreigabe, obwohl das Spiel Mobile bereits unterstützt. Die Freigabe wurde angepasst; das Update ist noch in Prüfung."
+            "label": "Y8-Ausrichtung noch ungeklärt",
+            "note": "Nach der Korrektur der fehlenden Gerätefreigabe beanstandet Y8 nun die Skalierung im Querformat. Am 04.11.2026 berichtet der Entwickler, beim Support eine Umstellung auf Portrait angefragt und ein neues Update hochgeladen zu haben. Supportantwort und Freigabe stehen aus; die mobile Spielbarkeit ist noch nicht abschließend bestätigt."
           },
           "revisionSubmitted": "2026-10-11",
           "revisionSubmittedConfirmed": true,
@@ -69,19 +75,29 @@
             "uploadedNote": "Build 003 zusammen mit allen von Y8 geforderten Screenshots und Promo-Bildern zur erneuten Prüfung hochgeladen. Der Build sollte die beanstandeten Punkte beheben.",
             "publishedNote": "Build 003 ist öffentlich auf Y8 live. Ein zugehöriger neuer GitHub-Commit ist noch nicht sicher zugeordnet."
           },
-          "notes": "Build 003 ist seit dem 20.10.2026 auf Y8 live. Die mobile Gerätefreigabe wurde im Portal korrigiert und wartet noch auf die Prüfung; anschließend auf dem Smartphone testen.",
+          "notes": "Build 003 ist seit dem 20.10.2026 auf Y8 live. Nach der Korrektur der Gerätefreigabe bemängelt Y8 die Querformat-Skalierung. Eine Umstellung auf Portrait wurde beim Support angefragt; am 04.11.2026 wurde ein neues Update hochgeladen und ist wieder in Prüfung. Die Ausrichtungsfrage ist noch nicht geklärt.",
           "statusUpdates": [
             {
               "date": "2026-10-05",
               "status": "review",
               "note": "Zwischenstand: Y8 zeigt für HEXFRONT weiterhin „In review“; der letzte Portal-Update-Hinweis datiert vom 01.10.2026."
+            },
+            {
+              "date": "2026-10-28",
+              "status": "review",
+              "note": "Mobile-Unterstützung im Y8-Portal aktiviert; das Update wurde als weiterhin in Prüfung bestätigt. Exaktes Einreichdatum und Buildnummer wurden nicht angegeben."
+            },
+            {
+              "date": "2026-11-04",
+              "status": "changes_requested",
+              "note": "Y8 beanstandet laut Entwicklerrückmeldung die Skalierung im Querformat. Der Entwickler hat den Support gefragt, ob die Ausrichtung auf Portrait geändert werden kann. Eine Antwort steht aus; das genaue Datum der Y8-Beanstandung ist nicht bekannt."
             }
           ],
           "pendingBuild": {
-            "label": "Mobile-Freigabe",
+            "label": "Mobile-Update",
             "status": "review",
-            "reported": "2026-10-28",
-            "note": "Am 28.10.2026 als weiterhin in Prüfung bestätigt: Mobile-Unterstützung im Y8-Portal aktiviert. Exaktes Einreichdatum und neue Buildnummer nicht angegeben."
+            "uploaded": "2026-11-04",
+            "note": "Nach Y8s Beanstandung der Querformat-Skalierung erneut hochgeladen. Eine Umstellung auf Portrait ist beim Support angefragt, aber noch nicht bestätigt. Das neue Update ist in Prüfung; Buildnummer und Commit sind noch nicht sicher zugeordnet."
           }
         },
         "coolmath": {
@@ -564,7 +580,7 @@
       "qualityRange": "~61–65 typisch in der Recherche-Stichprobe",
       "qualityRangeConfidence": "mittel",
       "reach": "Etablierte direkte Plattform; Platzierungen auf der Startseite oder unter New & Updated können deutliche Besucherspitzen erzeugen",
-      "researchNote": "HEXFRONT, GALALAXY, ROOSTER RAGE und KESSELKRAWALL wurden veröffentlicht. KESSELKRAWALL ging am 16.10.2026 unter dem Titel „Cauldron Rumble Merge-Autobattler“ live. Diese realen Ergebnisse sind aussagekräftiger als eine abgeleitete Schwelle. Towers & Tantrums wurde am 28.10.2026 zur Prüfung eingereicht.",
+      "researchNote": "HEXFRONT, GALALAXY, ROOSTER RAGE und KESSELKRAWALL wurden veröffentlicht. KESSELKRAWALL ging am 16.10.2026 unter dem Titel „Cauldron Rumble Merge-Autobattler“ live. Diese realen Ergebnisse sind aussagekräftiger als eine abgeleitete Schwelle. Towers & Tantrums wurde am 28.10.2026 zur Prüfung eingereicht. Für HEXFRONT wurde am 04.11.2026 ein voraussichtlich bereits live geschaltetes Update mit Spielverbesserungen gemeldet; der genaue Live-Build ist noch nicht bestätigt.",
       "fits": {
         "hexfront": "very_good",
         "galalaxy": "very_good",
@@ -583,7 +599,7 @@
       "qualityRange": "Große Bandbreite veröffentlichter Spiele; keine verlässliche Annahmeschwelle ermittelt",
       "qualityRangeConfidence": "niedrig",
       "reach": "Großes direktes Publikum; der Betreiber wirbt derzeit mit mehr als 30 Mio. monatlichen Spielern",
-      "researchNote": "HEXFRONT, GALALAXY und ROOSTER RAGE sind auf Y8 veröffentlicht. Am 28.10.2026 wurde der GALALAXY-Werbe-Patch als live bestätigt. Bei HEXFRONT wartet die korrigierte mobile Gerätefreigabe noch auf Prüfung. KESSELKRAWALL wurde nach Umsetzung der von Y8 geforderten Fixes am 02.11.2026 erneut hochgeladen und befindet sich wieder in Prüfung.",
+      "researchNote": "HEXFRONT, GALALAXY und ROOSTER RAGE sind auf Y8 veröffentlicht. Am 28.10.2026 wurde der GALALAXY-Werbe-Patch als live bestätigt. Bei HEXFRONT bemängelt Y8 die Querformat-Skalierung; der Entwickler hat eine Portrait-Umstellung beim Support angefragt und am 04.11.2026 ein neues Update zur Prüfung hochgeladen. KESSELKRAWALL wurde nach Umsetzung der von Y8 geforderten Fixes am 02.11.2026 erneut hochgeladen und befindet sich wieder in Prüfung.",
       "fits": {
         "hexfront": "very_good",
         "galalaxy": "very_good",
