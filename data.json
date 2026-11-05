@@ -2,7 +2,7 @@
   "meta": {
     "title": "emfau Game Ops",
     "version": "0.13.0",
-    "updated": "2026-11-04",
+    "updated": "2026-11-05",
     "currency": "EUR",
     "notes": "Die Recherche-Spannen sind interne Vergleichswerte aus der Portal-Analyse vom September 2026 und keine offiziellen Annahmeschwellen der Plattformen."
   },
@@ -270,10 +270,9 @@
         "developmentBranch": "master",
         "pagesUrl": "https://emfau88.github.io/RoosterRage/"
       },
-      "nextAction": "Y8-Prüfung des neuen Updates abwarten und den Live-Stand des neuen Kongregate-Uploads prüfen",
+      "nextAction": "Live-Stand des Kongregate-Uploads prüfen und die Resonanz auf das neue Y8-Update beobachten.",
       "issues": [
         "Kongregate-Update am 04.11.2026 hochgeladen; Freigabe beziehungsweise Live-Schaltung noch nicht bestätigt",
-        "Y8-Update am 04.11.2026 eingereicht; erneut in Prüfung",
         "Buildnummern und Commits der neuen Updates noch zuordnen; Resonanz und Werbung weiter beobachten"
       ],
       "platforms": {
@@ -316,21 +315,24 @@
           "deployedCommit": "328843a042f19f551f53e9ea17e9922a7100417e",
           "submittedNote": "Aktuellen master-Build bei Y8 zur Prüfung eingereicht.",
           "publishedNote": "ROOSTER RAGE wurde öffentlich auf Y8 veröffentlicht.",
-          "publicUrl": "https://de.y8.com/games/rooster_rage",
+          "publicUrl": "https://y8.com/games/rooster_rage",
           "liveBuild": {
-            "version": "002",
-            "uploaded": "2026-10-16",
-            "published": "2026-10-19",
-            "uploadedNote": "Build 002 mit ergänzter Werbung beziehungsweise Monetarisierung hochgeladen; Y8 zeigte anschließend „In review“. Es wurden keine Patch Notes hinterlegt.",
-            "publishedNote": "Der Werbe-Build 002 ist auf Y8 live und ersetzt dort den zuvor veröffentlichten Build."
-          },
-          "pendingBuild": {
-            "label": "Update",
-            "status": "review",
+            "label": "November-Update",
             "uploaded": "2026-11-04",
-            "note": "Das zuvor angekündigte Update wurde am 04.11.2026 auch bei Y8 eingereicht und ist in Prüfung. Die Freigabe des neuen Builds steht aus; das bereits veröffentlichte Spiel bleibt live. Buildnummer und Commit sind noch nicht sicher zugeordnet."
+            "confirmedOn": "2026-11-05",
+            "uploadedNote": "Der Entwickler hat das Update am 04.11.2026 bei Y8 zur Prüfung eingereicht.",
+            "publishedNote": "Y8 bestätigt am 05.11.2026, dass das Update live ist. Das Portal hat außerdem zehn neue Mediendateien freigegeben."
           },
-          "notes": "Am 15.10.2026 erstmals öffentlich auf Y8 veröffentlicht. Der am 16.10.2026 hochgeladene Werbe-Build 002 ist seit dem 19.10.2026 live. Ein neuer öffentlicher GitHub-Commit ist diesem Portal-Build noch nicht sicher zugeordnet. Am 04.11.2026 wurde ein weiteres Update bei Y8 eingereicht und ist in Prüfung; dessen Freigabe steht noch aus."
+          "notes": "ROOSTER RAGE ist seit dem 15.10.2026 auf Y8 spielbar. Auf den Werbe-Build 002 vom 19.10.2026 folgt das am 05.11.2026 als live bestätigte November-Update.",
+          "previousBuilds": [
+            {
+              "version": "002",
+              "uploaded": "2026-10-16",
+              "published": "2026-10-19",
+              "uploadedNote": "Build 002 mit ergänzter Werbung beziehungsweise Monetarisierung hochgeladen; Y8 zeigte anschließend „In review“. Es wurden keine Patch Notes hinterlegt.",
+              "publishedNote": "Der Werbe-Build 002 ist auf Y8 live und ersetzt dort den zuvor veröffentlichten Build."
+            }
+          ]
         },
         "gamemonetize": {
           "status": "planned"
@@ -369,10 +371,8 @@
         "developmentBranch": "main",
         "pagesUrl": "https://emfau88.github.io/KesselKrawall/"
       },
-      "nextAction": "Y8-Prüfung des am 04.11.2026 nachgereichten Fixes abwarten und Kongregate-Resonanz beobachten",
+      "nextAction": "Plays und Bewertungen auf Y8 und Kongregate vergleichen.",
       "issues": [
-        "Von Y8 geforderten Fix umgesetzt und am 04.11.2026 erneut zur Prüfung hochgeladen",
-        "Kongregate-Resonanz beobachten",
         "CrazyGames lehnte die Gesamtqualität ab"
       ],
       "platforms": {
@@ -391,7 +391,7 @@
           "notes": "Schon vor dem 16.10.2026 zur Veröffentlichung freigegeben; das genaue Annahmedatum ist nicht erfasst. Seit dem 16.10.2026 öffentlich auf Kongregate spielbar."
         },
         "y8": {
-          "status": "review",
+          "status": "live",
           "portalTitle": "Cauldron Rumble: Merge & Battle",
           "submitted": "2026-10-07",
           "revisionSubmitted": "2026-11-04",
@@ -399,7 +399,7 @@
           "sourceBranch": "main",
           "submittedNote": "Unter dem Portalnamen „Cauldron Rumble: Merge & Battle“ bei Y8 zur Prüfung eingereicht. Ursprünglicher Einreichungs-Commit: 83d17ab14ff265559b58652e9040eecef7d7ad51 (main-Stand vom 05.10.2026).",
           "feedbackNote": "Y8 hatte Fixes verlangt, bestätigt am 28.10.2026. Eine Überarbeitung wurde am 02.11.2026 nachgereicht. Am 04.11.2026 meldet der Entwickler einen weiteren umgesetzten, von Y8 geforderten Fix samt erneutem Upload zur Prüfung. Konkrete Anforderungen und genaue Rückmeldedaten sind nicht erfasst.",
-          "revisionSubmittedNote": "Der von Y8 geforderte Fix wurde umgesetzt und die korrigierte Version am 04.11.2026 erneut zur Prüfung hochgeladen. Die Prüfung läuft; Buildnummer und Commit dieses Uploads sind noch nicht sicher zugeordnet.",
+          "revisionSubmittedNote": "Der Entwickler hat den von Y8 geforderten Fix am 04.11.2026 zur Prüfung hochgeladen.",
           "previousEvents": [
             {
               "date": "2026-11-02",
@@ -408,7 +408,11 @@
             }
           ],
           "statusUpdates": [{"date": "2026-10-28", "status": "changes_requested", "note": "Zwischenstand bestätigt: Y8 verlangt Fixes. Vor einer erneuten Prüfung müssen die beanstandeten Punkte überarbeitet werden; Details noch offen."}],
-          "notes": "Nach der Überarbeitung vom 02.11.2026 wurde am 04.11.2026 ein weiterer von Y8 geforderter Fix umgesetzt und erneut hochgeladen. Die aktuelle Version ist in Prüfung; eine Freigabe oder Veröffentlichung auf Y8 ist noch nicht bestätigt."
+          "notes": "Nach den Überarbeitungen vom 02.11. und 04.11.2026 ist das Spiel seit dem 05.11.2026 auf Y8 öffentlich spielbar.",
+          "published": "2026-11-05",
+          "acceptanceConfirmed": true,
+          "publicUrl": "https://y8.com/games/cauldron_rumble_merge_battle",
+          "publishedNote": "Y8 hat „Cauldron Rumble: Merge & Battle“ veröffentlicht. Die öffentliche Spielseite nennt den 05.11.2026 als Veröffentlichungsdatum."
         },
         "gamemonetize": {
           "status": "not_submitted"
@@ -542,25 +546,27 @@
       "name": "TOWERS & TANTRUMS",
       "subtitle": "Fantasy-Tower-Defense mit Gefährten und Ausbau",
       "image": "assets/games/towers-and-tantrums.png",
-      "status": "review",
+      "status": "approved",
       "qualityScore": null,
       "repo": "https://github.com/emfau88/TD",
       "github": {
         "repo": "emfau88/TD",
         "developmentBranch": "main"
       },
-      "nextAction": "Kongregate-Prüfung abwarten und Rückmeldungen zur Einreichung prüfen",
+      "nextAction": "Towers & Tantrums am 06.11.2026 auf der Kongregate-Spielseite veröffentlichen.",
       "issues": [
-        "Kongregate-Prüfung läuft"
+        "Veröffentlichung durch den Entwickler für den 06.11.2026 geplant."
       ],
       "platforms": {
         "kongregate": {
-          "status": "review",
+          "status": "approved",
           "submitted": "2026-10-28",
           "sourceBranch": "main",
           "submittedCommit": "d73ed50fdf99a2715e9a759703f9040e0d2399d2",
           "submittedNote": "Bei Kongregate zur Prüfung eingereicht. Release-Build d73ed50; Zuordnung durch das Build-Manifest bestätigt.",
-          "notes": "Release-Paket Towers-and-Tantrums-Kongregate-2026-10-28-Hearts-d73ed50."
+          "notes": "Release-Paket Towers-and-Tantrums-Kongregate-2026-10-28-Hearts-d73ed50.",
+          "accepted": "2026-11-05",
+          "acceptedNote": "Kongregate hat das Spiel zur Veröffentlichung freigegeben. Der Entwickler plant die Freischaltung am 06.11.2026."
         },
         "y8": {
           "status": "not_submitted"
@@ -599,7 +605,7 @@
       "qualityRange": "~61–65 typisch in der Recherche-Stichprobe",
       "qualityRangeConfidence": "mittel",
       "reach": "Etablierte direkte Plattform; Platzierungen auf der Startseite oder unter New & Updated können deutliche Besucherspitzen erzeugen",
-      "researchNote": "HEXFRONT, GALALAXY, ROOSTER RAGE und KESSELKRAWALL wurden veröffentlicht. KESSELKRAWALL ging am 16.10.2026 unter dem Titel „Cauldron Rumble Merge-Autobattler“ live. Diese realen Ergebnisse sind aussagekräftiger als eine abgeleitete Schwelle. Towers & Tantrums wurde am 28.10.2026 zur Prüfung eingereicht. Für HEXFRONT wurde am 04.11.2026 ein voraussichtlich bereits live geschaltetes Update mit Spielverbesserungen gemeldet; der genaue Live-Build ist noch nicht bestätigt. Für ROOSTER RAGE wurde am 04.11.2026 ein neues Update hochgeladen; dessen Freigabe beziehungsweise Live-Schaltung ist noch offen.",
+      "researchNote": "HEXFRONT, GALALAXY, ROOSTER RAGE und KESSELKRAWALL wurden veröffentlicht. KESSELKRAWALL ging am 16.10.2026 unter dem Titel „Cauldron Rumble Merge-Autobattler“ live. Diese realen Ergebnisse sind aussagekräftiger als eine abgeleitete Schwelle. Kongregate hat Towers & Tantrums am 05.11.2026 freigegeben. Der Entwickler plant die Veröffentlichung am 06.11.2026. Für HEXFRONT wurde am 04.11.2026 ein voraussichtlich bereits live geschaltetes Update mit Spielverbesserungen gemeldet; der genaue Live-Build ist noch nicht bestätigt. Für ROOSTER RAGE wurde am 04.11.2026 ein neues Update hochgeladen; dessen Freigabe beziehungsweise Live-Schaltung ist noch offen.",
       "fits": {
         "hexfront": "very_good",
         "galalaxy": "very_good",
@@ -618,7 +624,7 @@
       "qualityRange": "Große Bandbreite veröffentlichter Spiele; keine verlässliche Annahmeschwelle ermittelt",
       "qualityRangeConfidence": "niedrig",
       "reach": "Großes direktes Publikum; der Betreiber wirbt derzeit mit mehr als 30 Mio. monatlichen Spielern",
-      "researchNote": "HEXFRONT, GALALAXY und ROOSTER RAGE sind auf Y8 veröffentlicht. Am 28.10.2026 wurde der GALALAXY-Werbe-Patch als live bestätigt. Bei HEXFRONT bemängelt Y8 die Querformat-Skalierung; der Entwickler hat eine Portrait-Umstellung beim Support angefragt und am 04.11.2026 ein neues Update zur Prüfung hochgeladen. Für KESSELKRAWALL wurde nach der Überarbeitung vom 02.11.2026 am 04.11.2026 ein weiterer von Y8 geforderter Fix umgesetzt und zur Prüfung hochgeladen. Für ROOSTER RAGE wurde am 04.11.2026 ein weiteres Update eingereicht und befindet sich in Prüfung; das bisherige Spiel bleibt live.",
+      "researchNote": "HEXFRONT, GALALAXY, ROOSTER RAGE und KESSELKRAWALL sind auf Y8 veröffentlicht. Der GALALAXY-Werbe-Patch ist seit dem 28.10.2026 als live bestätigt. Für HEXFRONT läuft seit dem 04.11.2026 die Prüfung des Mobile-Updates. Eine Umstellung auf Portrait ist beim Support angefragt. Am 05.11.2026 bestätigte Y8 das November-Update von ROOSTER RAGE und gab zehn neue Mediendateien frei. Am selben Tag erschien KESSELKRAWALL unter dem Titel „Cauldron Rumble: Merge & Battle“.",
       "fits": {
         "hexfront": "very_good",
         "galalaxy": "very_good",

@@ -60,11 +60,28 @@ class Y8SyncTests(unittest.TestCase):
                 self.assertEqual(y8.parse_metrics(sample_html(plays=display))["plays"], 1234)
         self.assertEqual(y8.parse_metrics(sample_html(plays="12345"))["plays"], 12345)
 
+    def test_cauldron_rumble_current_plays_label(self):
+        title = "Cauldron Rumble: Merge & Battle"
+        page = sample_html(plays="204", rating="8.1", likes="1", title=title, duplicate=True)
+        self.assertEqual(y8.parse_metrics(page.replace("204 play times", "204 Plays"), title),
+                         {"plays": 204, "rating": 8.1, "likes": 1})
+
     def test_rounded_number_is_not_invented(self):
         with self.assertRaises(y8.MetricsError):
             y8.parse_metrics(sample_html(plays="1.2K"))
         with self.assertRaises(y8.MetricsError):
             y8.parse_metrics(sample_html(plays="1.2"))
+
+    def test_rounded_display_uses_only_the_matching_games_exact_play_count(self):
+        page = sample_html(plays="2.2K").replace("play times", "Plays")
+        game = {"@type": "VideoGame", "name": "Galalaxy", "interactionStatistic": {
+            "interactionType": {"@type": "PlayAction"}, "userInteractionCount": 2195}}
+        def with_schema():
+            return page + '<script type="application/ld+json">' + json.dumps({"@graph": [game]}) + '</script>'
+        self.assertEqual(y8.parse_metrics(with_schema())["plays"], 2195)
+        game["name"] = "Different Game"
+        with self.assertRaises(y8.MetricsError):
+            y8.parse_metrics(with_schema())
 
     def test_rating_uses_ten_point_y8_scale(self):
         with self.assertRaises(y8.MetricsError):

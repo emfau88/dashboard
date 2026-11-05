@@ -75,8 +75,10 @@ for(const game of data.games){
       if(pending.uploaded&&data.meta?.updated&&pending.uploaded>data.meta.updated)error(`${game.id}/${portalId}: pendingBuild.uploaded liegt nach meta.updated.`);
       if(pending.note!=null&&(typeof pending.note!=='string'||!pending.note.trim()))error(`${game.id}/${portalId}: pendingBuild.note muss eine nicht leere Zeichenkette sein.`);
     }
-    if(placement.liveBuild){
-      const liveBuild=placement.liveBuild;
+    const builds=Array.isArray(placement.previousBuilds)?[...placement.previousBuilds]:[];
+    if(placement.previousBuilds!=null&&!Array.isArray(placement.previousBuilds))error(`${game.id}/${portalId}: previousBuilds muss eine Liste sein.`);
+    if(placement.liveBuild)builds.push(placement.liveBuild);
+    for(const liveBuild of builds){
       const hasVersion=typeof liveBuild.version==='string'&&liveBuild.version.trim();
       const hasLabel=typeof liveBuild.label==='string'&&liveBuild.label.trim();
       if(!hasVersion&&!hasLabel)error(`${game.id}/${portalId}: liveBuild benötigt version oder label.`);

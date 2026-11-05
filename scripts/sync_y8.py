@@ -24,6 +24,7 @@ GAMES = {
     "hexfront": {"slug": "hexfront", "title": "Hexfront"},
     "galalaxy": {"slug": "galalaxy", "title": "Galalaxy"},
     "rooster-rage": {"slug": "rooster_rage", "title": "Rooster Rage"},
+    "kesselkrawall": {"slug": "cauldron_rumble_merge_battle", "title": "Cauldron Rumble: Merge & Battle"},
 }
 SITE = "https://www.y8.com/games/"
 MAX_RESPONSE_BYTES = 2_000_000
@@ -40,7 +41,7 @@ class Y8PageParser(HTMLParser):
     def __init__(self) -> None:
         super().__init__(convert_charrefs=True)
         self.elements = []
-        self.found = {"title": [], "heading": [], "plays": [], "rating": [], "likes": []}
+        self.found = {"title": [], "heading": [], "plays": [], "rating": [], "likes": [], "schema": []}
 
     def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
         attrs_map = dict(attrs)
@@ -51,6 +52,8 @@ class Y8PageParser(HTMLParser):
         kind = None
         if tag == "title":
             kind = "title"
+        elif tag == "script" and attrs_map.get("type") == "application/ld+json":
+            kind = "schema"
         elif tag == "h1" and "block-title" in classes:
             kind = "heading"
         elif tag == "span" and "sub-infos" in classes:
@@ -85,7 +88,7 @@ class Y8PageParser(HTMLParser):
 
 
 COUNT_PATTERN = re.compile(r"(?:[0-9]+|[1-9][0-9]{0,2}(?:[., \u00a0\u202f][0-9]{3})+)\Z")
-PLAY_TEXT = re.compile(r"\s*(.*?)\s+play\s+times\s*", re.IGNORECASE)
+PLAY_TEXT = re.compile(r"\s*(.*?)\s+(?:plays?|play\s+times)\s*", re.IGNORECASE)
 
 
 def parse_count(value: str) -> int:
@@ -106,6 +109,28 @@ def single_value(values: list, name: str):
     return values[0]
 
 
+def structured_plays(blocks: list[str], expected_title: str) -> int:
+    """Read the exact PlayAction count when Y8 abbreviates the visible counter."""
+    counts = []
+    for block in blocks:
+        try:
+            document = json.loads(block)
+        except json.JSONDecodeError:
+            continue
+        if not isinstance(document, dict):
+            continue
+        for game in document.get("@graph", [document]):
+            if not isinstance(game, dict) or game.get("@type") != "VideoGame" or game.get("name") != expected_title:
+                continue
+            stat = game.get("interactionStatistic")
+            if not isinstance(stat, dict) or stat.get("interactionType") != {"@type": "PlayAction"}:
+                continue
+            count = stat.get("userInteractionCount")
+            if type(count) is int and count >= 0:
+                counts.append(count)
+    return single_value(counts, "exact PlayAction count")
+
+
 def parse_metrics(html: str, expected_title: str = "Galalaxy") -> dict:
     parser = Y8PageParser()
     parser.feed(html)
@@ -117,7 +142,11 @@ def parse_metrics(html: str, expected_title: str = "Galalaxy") -> dict:
     for text in parser.found["plays"]:
         match = PLAY_TEXT.fullmatch(text)
         if match:
-            play_values.append(parse_count(match.group(1)))
+            display = match.group(1)
+            if re.fullmatch(r"[0-9]+(?:\.[0-9]+)?[KM]", display, re.IGNORECASE):
+                play_values.append(structured_plays(parser.found["schema"], expected_title))
+            else:
+                play_values.append(parse_count(display))
     plays = single_value(play_values, "play times")
 
     ratings = []

@@ -270,12 +270,11 @@ function renderY8Metrics(data, archive){
   const updatedAt=archive.updatedAt
     ? new Date(archive.updatedAt).toLocaleString('de-DE',{dateStyle:'short',timeStyle:'short',timeZone:'Europe/Berlin'})
     : 'Erster automatischer Abruf ausstehend';
-  const monitored=['hexfront','galalaxy','rooster-rage'];
-  const cards=monitored.map(gameId=>{
-    const game=data.games.find(g=>g.id===gameId);
-    const series=Array.isArray(archive.games[gameId])?archive.games[gameId]:[];
+  const monitored=data.games.filter(game=>game.platforms.y8?.status==='live');
+  const cards=monitored.map(game=>{
+    const series=Array.isArray(archive.games[game.id])?archive.games[game.id]:[];
     const latest=series[series.length-1];
-    const title=game?.name||gameId;
+    const title=game.name;
     if(!latest||!Number.isSafeInteger(latest.plays)||latest.plays<0){
       return '<article class="perf-card"><div class="perf-title">'+esc(title)+'</div>'+
         '<p class="perf-error">Erster gültiger Messpunkt steht noch aus.</p></article>';
@@ -284,7 +283,7 @@ function renderY8Metrics(data, archive){
     const change=before?latest.plays-before.plays:null;
     const changeLabel=change===null?'Erster erfasster Stand':
       (change>0?'+':'')+change.toLocaleString('de-DE')+' Plays seit '+fmtCompactDate(before.date);
-    const likes=Number.isSafeInteger(latest.likes)?latest.likes.toLocaleString('de-DE')+' Likes':'Likes nicht verfügbar';
+    const likes=Number.isSafeInteger(latest.likes)?latest.likes.toLocaleString('de-DE')+(latest.likes===1?' Like':' Likes'):'Likes nicht verfügbar';
     const rating=typeof latest.rating==='number'?
       'Bewertung '+latest.rating.toLocaleString('de-DE',{maximumFractionDigits:2})+'/10':'Bewertung nicht verfügbar';
     const availabilityIssue=game?.platforms.y8?.availabilityIssue;
@@ -313,7 +312,7 @@ function renderY8Metrics(data, archive){
     '<p>Öffentlich sichtbare Gesamtaufrufe, Likes und Bewertung auf der Y8-Skala von 0 bis 10</p></div>'+
     '<span class="perf-update">Letzter Abruf: '+esc(updatedAt)+'</span></div>'+
     cards+
-    '<p class="perf-note">Die öffentlichen Y8-Seiten von HEXFRONT, GALALAXY und ROOSTER RAGE werden einmal täglich abgerufen. Fehlt ein Tageswert oder verändert Y8 das HTML, wird kein Wert erfunden; der letzte erfolgreiche Snapshot bleibt sichtbar. Veränderungen gelten jeweils seit dem letzten tatsächlich erfassten Messpunkt, nicht notwendigerweise innerhalb eines Tages. Die öffentlichen Gesamtaufrufe können von den zeitlich begrenzten Plays im Y8-Entwicklerportal abweichen.</p>';
+    '<p class="perf-note">Die Zahlen stammen aus dem täglichen Abruf der öffentlichen Y8-Spielseiten. Änderungen beziehen sich auf den vorherigen verfügbaren Messtag. Y8 zeigt hier die Gesamtaufrufe über die gesamte Laufzeit des Spiels.</p>';
 }
 
 function renderGames(d){
@@ -426,11 +425,13 @@ function renderTimeline(d){
       const pendingName=p.pendingBuild.label||`Build ${p.pendingBuild.version}`;
       events.push({date:p.pendingBuild.uploaded||p.pendingBuild.reported,type:'Build-Update',kind:'status_update',title:`${placementName} bei ${portal}: ${pendingName} ${labels[p.pendingBuild.status]||p.pendingBuild.status}`,text:p.pendingBuild.note||'Ein neuer Portal-Build wurde hochgeladen.',order:3,game:g,portal:portalData});
     }
-    if(p.liveBuild){
-      const liveBuildName=p.liveBuild.label||`Build ${p.liveBuild.version}`;
-      if(p.liveBuild.uploaded)events.push({date:p.liveBuild.uploaded,type:'Build-Update',kind:'status_update',title:`${placementName} bei ${portal}: ${liveBuildName} zur Prüfung hochgeladen`,text:p.liveBuild.uploadedNote||'Ein neuer Portal-Build wurde zur Prüfung hochgeladen.',order:3,game:g,portal:portalData});
-      if(p.liveBuild.confirmedOn&&!p.liveBuild.published)events.push({date:p.liveBuild.confirmedOn,type:'Live bestätigt',kind:'publication',title:`${placementName} bei ${portal}: ${liveBuildName} live bestätigt`,text:p.liveBuild.publishedNote,order:3,game:g,portal:portalData});
-      if(p.liveBuild.published&&p.liveBuild.published!==p.published)events.push({date:p.liveBuild.published,type:'Build-Update',kind:'publication',title:`${placementName} bei ${portal}: ${liveBuildName} live`,text:p.liveBuild.publishedNote||'Der neue Portal-Build ist live.',order:3,game:g,portal:portalData});
+    const builds=[...(p.previousBuilds||[])];
+    if(p.liveBuild)builds.push(p.liveBuild);
+    for(const build of builds){
+      const liveBuildName=build.label||`Build ${build.version}`;
+      if(build.uploaded)events.push({date:build.uploaded,type:'Build-Update',kind:'status_update',title:`${placementName} bei ${portal}: ${liveBuildName} zur Prüfung hochgeladen`,text:build.uploadedNote||'Ein neuer Portal-Build wurde zur Prüfung hochgeladen.',order:3,game:g,portal:portalData});
+      if(build.confirmedOn&&!build.published)events.push({date:build.confirmedOn,type:'Live bestätigt',kind:'publication',title:`${placementName} bei ${portal}: ${liveBuildName} live bestätigt`,text:build.publishedNote,order:3,game:g,portal:portalData});
+      if(build.published&&build.published!==p.published)events.push({date:build.published,type:'Build-Update',kind:'publication',title:`${placementName} bei ${portal}: ${liveBuildName} live`,text:build.publishedNote||'Der neue Portal-Build ist live.',order:3,game:g,portal:portalData});
     }
     if(p.changeRequested)events.push({date:p.changeRequested,type:'Änderungsanforderung',kind:'change_request',title:`${portal} verlangt eine Änderung an ${placementName}`,text:p.feedbackNote||p.notes||'Das Portal verlangt eine Änderung.',order:1,game:g,portal:portalData});
     if(p.revisionSubmitted)events.push({date:p.revisionSubmitted,type:'Überarbeitung',kind:'resubmission',title:`Überarbeitung von ${placementName} bei ${portal} nachgereicht`,text:p.revisionSubmittedNote||'Die angeforderte Überarbeitung wurde nachgereicht.',order:1,game:g,portal:portalData});
