@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-11-06T14:21:25Z",
+  "updatedAt": "2026-11-06T14:25:51Z",
   "games": {
     "hexfront": [
       {
@@ -879,11 +879,11 @@
       },
       {
         "date": "2026-11-06",
-        "plays": 234,
+        "plays": 235,
         "favorites": 0,
         "rating": 2.0,
         "source": "kongregate_metrics",
-        "fetchedAt": "2026-11-06T14:21:25Z"
+        "fetchedAt": "2026-11-06T14:25:51Z"
       }
     ]
   }
