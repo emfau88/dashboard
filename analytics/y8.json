@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-11-05T20:44:13Z",
+  "updatedAt": "2026-11-06T14:16:31Z",
   "games": {
     "kesselkrawall": [
       {
@@ -10,6 +10,14 @@
         "likes": 1,
         "source": "y8_public_page",
         "fetchedAt": "2026-11-05T20:42:56Z"
+      },
+      {
+        "date": "2026-11-06",
+        "plays": 267,
+        "rating": 8.2,
+        "likes": 2,
+        "source": "y8_public_page",
+        "fetchedAt": "2026-11-06T14:16:31Z"
       }
     ],
     "hexfront": [
@@ -148,6 +156,14 @@
         "likes": 3,
         "source": "y8_public_page",
         "fetchedAt": "2026-11-05T20:42:56Z"
+      },
+      {
+        "date": "2026-11-06",
+        "plays": 572,
+        "rating": 8.9,
+        "likes": 4,
+        "source": "y8_public_page",
+        "fetchedAt": "2026-11-06T14:16:31Z"
       }
     ],
     "galalaxy": [
@@ -358,6 +374,14 @@
         "likes": 16,
         "source": "y8_public_page",
         "fetchedAt": "2026-11-05T20:44:13Z"
+      },
+      {
+        "date": "2026-11-06",
+        "plays": 2197,
+        "rating": 9.4,
+        "likes": 17,
+        "source": "y8_public_page",
+        "fetchedAt": "2026-11-06T14:16:31Z"
       }
     ],
     "rooster-rage": [
@@ -528,6 +552,14 @@
         "likes": 11,
         "source": "y8_public_page",
         "fetchedAt": "2026-11-05T20:42:56Z"
+      },
+      {
+        "date": "2026-11-06",
+        "plays": 526,
+        "rating": 9.2,
+        "likes": 12,
+        "source": "y8_public_page",
+        "fetchedAt": "2026-11-06T14:16:31Z"
       }
     ]
   }
