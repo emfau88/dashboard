@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-11-13T15:22:07Z",
+  "updatedAt": "2026-11-13T21:39:04Z",
   "games": {
     "kesselkrawall": [
       {
@@ -271,11 +271,11 @@
       },
       {
         "date": "2026-11-13",
-        "plays": 609,
+        "plays": 610,
         "rating": 8.9,
         "likes": 4,
         "source": "y8_public_page",
-        "fetchedAt": "2026-11-13T15:22:07Z"
+        "fetchedAt": "2026-11-13T21:39:04Z"
       }
     ],
     "galalaxy": [
@@ -779,11 +779,11 @@
       },
       {
         "date": "2026-11-13",
-        "plays": 554,
+        "plays": 556,
         "rating": 9.3,
         "likes": 13,
         "source": "y8_public_page",
-        "fetchedAt": "2026-11-13T15:22:07Z"
+        "fetchedAt": "2026-11-13T21:39:04Z"
       }
     ]
   }

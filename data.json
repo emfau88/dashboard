@@ -1,8 +1,8 @@
 {
   "meta": {
     "title": "emfau Game Ops",
-    "version": "0.13.0",
-    "updated": "2026-11-09",
+    "version": "0.14.0",
+    "updated": "2026-11-13",
     "currency": "EUR",
     "notes": "Die Recherche-Spannen sind interne Vergleichswerte aus der Portal-Analyse vom September 2026 und keine offiziellen Annahmeschwellen der Plattformen."
   },
@@ -546,27 +546,35 @@
       "name": "TOWERS & TANTRUMS",
       "subtitle": "Fantasy-Tower-Defense mit Gefährten und Ausbau",
       "image": "assets/games/towers-and-tantrums.png",
-      "status": "approved",
+      "status": "live",
       "qualityScore": null,
       "repo": "https://github.com/emfau88/TD",
       "github": {
         "repo": "emfau88/TD",
         "developmentBranch": "main"
       },
-      "nextAction": "Towers & Tantrums am 06.11.2026 auf der Kongregate-Spielseite veröffentlichen.",
-      "issues": [
-        "Veröffentlichung durch den Entwickler für den 06.11.2026 geplant."
-      ],
+      "nextAction": "Plays und Bewertungen auf Kongregate nach der Veröffentlichung beobachten.",
+      "issues": [],
       "platforms": {
         "kongregate": {
-          "status": "approved",
+          "status": "live",
           "submitted": "2026-10-28",
           "sourceBranch": "main",
           "submittedCommit": "d73ed50fdf99a2715e9a759703f9040e0d2399d2",
           "submittedNote": "Bei Kongregate zur Prüfung eingereicht. Release-Build d73ed50; Zuordnung durch das Build-Manifest bestätigt.",
-          "notes": "Release-Paket Towers-and-Tantrums-Kongregate-2026-10-28-Hearts-d73ed50.",
+          "notes": "Ursprünglich eingereichtes Release-Paket: Towers-and-Tantrums-Kongregate-2026-10-28-Hearts-d73ed50. Der für den 06.11.2026 geplante Release fand noch nicht statt. Am 13.11.2026 erneut aktualisiert und anschließend erstmals veröffentlicht. Der Commit des veröffentlichten Builds ist noch nicht zugeordnet; d73ed50 bezeichnet ausschließlich die ursprüngliche Einreichung.",
           "accepted": "2026-11-05",
-          "acceptedNote": "Kongregate hat das Spiel zur Veröffentlichung freigegeben. Der Entwickler plant die Freischaltung am 06.11.2026."
+          "acceptedNote": "Kongregate hat das Spiel zur Veröffentlichung freigegeben.",
+          "published": "2026-11-13",
+          "publishedNote": "Am 13.11.2026 nach einem erneuten Update durch den Entwickler erstmals öffentlich auf Kongregate veröffentlicht.",
+          "publicUrl": "https://www.kongregate.com/en/games/emfau/towers-tantrums",
+          "liveBuild": {
+            "label": "Release-Update vom 13.11.2026",
+            "uploaded": "2026-11-13",
+            "published": "2026-11-13",
+            "uploadedNote": "Das noch unveröffentlichte Spiel wurde am 13.11.2026 erneut bei Kongregate aktualisiert. Buildnummer und Commit wurden nicht genannt.",
+            "publishedNote": "Anschließend am selben Tag erstmals öffentlich veröffentlicht; Upload und Veröffentlichung durch den Entwickler bestätigt."
+          }
         },
         "y8": {
           "status": "not_submitted"
@@ -605,7 +613,7 @@
       "qualityRange": "~61–65 typisch in der Recherche-Stichprobe",
       "qualityRangeConfidence": "mittel",
       "reach": "Etablierte direkte Plattform; Platzierungen auf der Startseite oder unter New & Updated können deutliche Besucherspitzen erzeugen",
-      "researchNote": "HEXFRONT, GALALAXY, ROOSTER RAGE und KESSELKRAWALL wurden veröffentlicht. KESSELKRAWALL ging am 16.10.2026 unter dem Titel „Cauldron Rumble Merge-Autobattler“ live. Diese realen Ergebnisse sind aussagekräftiger als eine abgeleitete Schwelle. Kongregate hat Towers & Tantrums am 05.11.2026 freigegeben. Der Entwickler plant die Veröffentlichung am 06.11.2026. Für HEXFRONT wurde am 04.11.2026 ein voraussichtlich bereits live geschaltetes Update mit Spielverbesserungen gemeldet; der genaue Live-Build ist noch nicht bestätigt. Für ROOSTER RAGE wurde am 04.11.2026 ein neues Update hochgeladen; dessen Freigabe beziehungsweise Live-Schaltung ist noch offen.",
+      "researchNote": "HEXFRONT, GALALAXY, ROOSTER RAGE, KESSELKRAWALL und TOWERS & TANTRUMS wurden veröffentlicht. KESSELKRAWALL ging am 16.10.2026 unter dem Titel „Cauldron Rumble Merge-Autobattler“ live. Diese realen Ergebnisse sind aussagekräftiger als eine abgeleitete Schwelle. Kongregate hat Towers & Tantrums am 05.11.2026 freigegeben. Nach einem erneuten Update wurde das Spiel am 13.11.2026 erstmals veröffentlicht; der ursprüngliche Plan für den 06.11.2026 wurde damit abgelöst. Plays und Bewertungen werden täglich erfasst. Für HEXFRONT wurde am 04.11.2026 ein voraussichtlich bereits live geschaltetes Update mit Spielverbesserungen gemeldet; der genaue Live-Build ist noch nicht bestätigt. Für ROOSTER RAGE wurde am 04.11.2026 ein neues Update hochgeladen; dessen Freigabe beziehungsweise Live-Schaltung ist noch offen.",
       "fits": {
         "hexfront": "very_good",
         "galalaxy": "very_good",
@@ -770,4 +778,3 @@
     }
   ]
 }
-

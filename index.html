@@ -224,7 +224,7 @@ function renderKongregateMetrics(data, archive){
     return;
   }
   const lastSync=archive.updatedAt?new Date(archive.updatedAt).toLocaleString('de-DE',{dateStyle:'short',timeStyle:'short',timeZone:'Europe/Berlin'}):'Erster automatischer Abruf ausstehend';
-  const order=['hexfront','galalaxy','rooster-rage','kesselkrawall'];
+  const order=data.games.filter(game=>game.platforms.kongregate?.status==='live').map(game=>game.id);
   const cards=order.map(id=>{
     const game=data.games.find(g=>g.id===id);
     const history=Array.isArray(archive.games[id])?archive.games[id]:[];
@@ -429,7 +429,7 @@ function renderTimeline(d){
     if(p.liveBuild)builds.push(p.liveBuild);
     for(const build of builds){
       const liveBuildName=build.label||`Build ${build.version}`;
-      if(build.uploaded)events.push({date:build.uploaded,type:'Build-Update',kind:'status_update',title:`${placementName} bei ${portal}: ${liveBuildName} zur Prüfung hochgeladen`,text:build.uploadedNote||'Ein neuer Portal-Build wurde zur Prüfung hochgeladen.',order:3,game:g,portal:portalData});
+      if(build.uploaded)events.push({date:build.uploaded,type:'Build-Update',kind:'status_update',title:`${placementName} bei ${portal}: ${liveBuildName} hochgeladen`,text:build.uploadedNote||'Ein neuer Portal-Build wurde zur Prüfung hochgeladen.',order:3,game:g,portal:portalData});
       if(build.confirmedOn&&!build.published)events.push({date:build.confirmedOn,type:'Live bestätigt',kind:'publication',title:`${placementName} bei ${portal}: ${liveBuildName} live bestätigt`,text:build.publishedNote,order:3,game:g,portal:portalData});
       if(build.published&&build.published!==p.published)events.push({date:build.published,type:'Build-Update',kind:'publication',title:`${placementName} bei ${portal}: ${liveBuildName} live`,text:build.publishedNote||'Der neue Portal-Build ist live.',order:3,game:g,portal:portalData});
     }

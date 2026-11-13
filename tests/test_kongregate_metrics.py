@@ -15,6 +15,13 @@ class KongregateMetricsTests(unittest.TestCase):
     def now(self):
         return datetime(2026, 10, 11, 6, 35, tzinfo=timezone.utc)
 
+    def test_all_live_games_are_monitored_and_archived(self):
+        dashboard = json.loads((sync.ROOT / "data.json").read_text(encoding="utf-8"))
+        live = {game["id"] for game in dashboard["games"]
+                if game["platforms"]["kongregate"]["status"] == "live"}
+        self.assertEqual(set(sync.GAMES), live)
+        self.assertTrue(live.issubset(sync.load_archive(sync.ARCHIVE)["games"]))
+
     def test_parse_real_feed_shape(self):
         payload = {"gameplays_count": 1604, "favorites_count": 6, "rating": "2.77",
                    "game_statistics": "<li>...</li>"}
@@ -44,9 +51,9 @@ class KongregateMetricsTests(unittest.TestCase):
     def test_daily_idempotency(self):
         data = self.fresh()
         reader = lambda slug: {"plays": 150, "favorites": 3, "rating": 2.75}
-        self.assertEqual(sync.collect(data, self.now(), reader), (4, 0, True))
+        self.assertEqual(sync.collect(data, self.now(), reader), (len(sync.GAMES), 0, True))
         before = json.dumps(data, sort_keys=True)
-        self.assertEqual(sync.collect(data, self.now(), reader), (4, 0, False))
+        self.assertEqual(sync.collect(data, self.now(), reader), (len(sync.GAMES), 0, False))
         self.assertEqual(before, json.dumps(data, sort_keys=True))
         self.assertEqual(len(data["games"]["hexfront"]), 1)
 
@@ -54,7 +61,7 @@ class KongregateMetricsTests(unittest.TestCase):
         data = self.fresh()
         sync.collect(data, self.now(), lambda _: {"plays": 150, "favorites": 3, "rating": 2.75})
         result = sync.collect(data, self.now(), lambda _: {"plays": 152, "favorites": 4, "rating": 2.75})
-        self.assertEqual(result, (4, 0, True))
+        self.assertEqual(result, (len(sync.GAMES), 0, True))
         history = data["games"]["hexfront"]
         self.assertEqual(len(history), 1)
         self.assertEqual(history[0]["plays"], 152)
@@ -63,7 +70,7 @@ class KongregateMetricsTests(unittest.TestCase):
         data = self.fresh()
         data["games"]["hexfront"].append({"date": "2026-10-10", "plays": 200, "source": "user_reported"})
         result = sync.collect(data, self.now(), lambda _: {"plays": 100, "favorites": 1, "rating": None})
-        self.assertEqual(result, (3, 1, True))
+        self.assertEqual(result, (len(sync.GAMES) - 1, 1, True))
         self.assertEqual(len(data["games"]["hexfront"]), 1)
         self.assertEqual(data["games"]["hexfront"][0]["plays"], 200)
 
@@ -73,7 +80,7 @@ class KongregateMetricsTests(unittest.TestCase):
             if slug == "galalaxy":
                 raise sync.MetricsError("Feed down")
             return {"plays": 40, "favorites": 1, "rating": None}
-        self.assertEqual(sync.collect(data, self.now(), reader), (3, 1, True))
+        self.assertEqual(sync.collect(data, self.now(), reader), (len(sync.GAMES) - 1, 1, True))
         self.assertEqual(data["games"]["galalaxy"], [])
 
     def test_archive_rejects_duplicate_dates(self):

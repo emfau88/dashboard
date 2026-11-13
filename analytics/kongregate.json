@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-11-13T15:22:07Z",
+  "updatedAt": "2026-11-13T21:39:03Z",
   "games": {
     "hexfront": [
       {
@@ -290,11 +290,11 @@
       },
       {
         "date": "2026-11-13",
-        "plays": 1819,
+        "plays": 1820,
         "favorites": 8,
         "rating": 2.73,
         "source": "kongregate_metrics",
-        "fetchedAt": "2026-11-13T15:22:07Z"
+        "fetchedAt": "2026-11-13T21:39:03Z"
       }
     ],
     "galalaxy": [
@@ -1108,6 +1108,16 @@
         "rating": 2.0,
         "source": "kongregate_metrics",
         "fetchedAt": "2026-11-13T15:22:07Z"
+      }
+    ],
+    "towers-and-tantrums": [
+      {
+        "date": "2026-11-13",
+        "plays": 6,
+        "favorites": 0,
+        "rating": null,
+        "source": "kongregate_metrics",
+        "fetchedAt": "2026-11-13T21:39:03Z"
       }
     ]
   }

@@ -23,6 +23,7 @@ GAMES = {
     "galalaxy": "galalaxy",
     "rooster-rage": "roosterrage-survivor",
     "kesselkrawall": "cauldron-rumble-merge-autobattler",
+    "towers-and-tantrums": "towers-tantrums",
 }
 BASE_URL = "https://www.kongregate.com/games/emfau/"
 MAX_RESPONSE_BYTES = 100_000
