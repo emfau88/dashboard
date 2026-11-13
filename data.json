@@ -8,6 +8,68 @@
   },
   "games": [
     {
+      "id": "towers-and-tantrums",
+      "name": "TOWERS & TANTRUMS",
+      "subtitle": "Fantasy-Tower-Defense mit Gefährten und Ausbau",
+      "image": "assets/games/towers-and-tantrums.png",
+      "status": "live",
+      "qualityScore": null,
+      "repo": "https://github.com/emfau88/TD",
+      "github": {
+        "repo": "emfau88/TD",
+        "developmentBranch": "main"
+      },
+      "nextAction": "Plays und Bewertungen auf Kongregate nach der Veröffentlichung beobachten.",
+      "issues": [],
+      "platforms": {
+        "kongregate": {
+          "status": "live",
+          "submitted": "2026-10-28",
+          "sourceBranch": "main",
+          "submittedCommit": "d73ed50fdf99a2715e9a759703f9040e0d2399d2",
+          "submittedNote": "Bei Kongregate zur Prüfung eingereicht. Release-Build d73ed50; Zuordnung durch das Build-Manifest bestätigt.",
+          "notes": "Ursprünglich eingereichtes Release-Paket: Towers-and-Tantrums-Kongregate-2026-10-28-Hearts-d73ed50. Der für den 06.11.2026 geplante Release fand noch nicht statt. Am 13.11.2026 erneut aktualisiert und anschließend erstmals veröffentlicht. Der Commit des veröffentlichten Builds ist noch nicht zugeordnet; d73ed50 bezeichnet ausschließlich die ursprüngliche Einreichung.",
+          "accepted": "2026-11-05",
+          "acceptedNote": "Kongregate hat das Spiel zur Veröffentlichung freigegeben.",
+          "published": "2026-11-13",
+          "publishedNote": "Am 13.11.2026 nach einem erneuten Update durch den Entwickler erstmals öffentlich auf Kongregate veröffentlicht.",
+          "publicUrl": "https://www.kongregate.com/en/games/emfau/towers-tantrums",
+          "liveBuild": {
+            "label": "Release-Update vom 13.11.2026",
+            "uploaded": "2026-11-13",
+            "published": "2026-11-13",
+            "uploadedNote": "Das noch unveröffentlichte Spiel wurde am 13.11.2026 erneut bei Kongregate aktualisiert. Buildnummer und Commit wurden nicht genannt.",
+            "publishedNote": "Anschließend am selben Tag erstmals öffentlich veröffentlicht; Upload und Veröffentlichung durch den Entwickler bestätigt."
+          }
+        },
+        "y8": {
+          "status": "not_submitted"
+        },
+        "gamemonetize": {
+          "status": "not_submitted"
+        },
+        "gamepix": {
+          "status": "not_submitted"
+        },
+        "gamedistribution": {
+          "status": "not_submitted"
+        },
+        "crazygames": {
+          "status": "not_submitted"
+        },
+        "coolmath": {
+          "status": "not_submitted"
+        },
+        "newgrounds": {
+          "status": "not_submitted"
+        },
+        "poki": {
+          "status": "not_submitted"
+        }
+      },
+      "metricsHistory": []
+    },
+    {
       "id": "hexfront",
       "name": "HEXFRONT",
       "subtitle": "Numerisches Echtzeit-Strategiespiel auf Hexfeldern",
@@ -536,68 +598,6 @@
           "status": "not_submitted"
         },
         "coolmath": {
-          "status": "not_submitted"
-        }
-      },
-      "metricsHistory": []
-    },
-    {
-      "id": "towers-and-tantrums",
-      "name": "TOWERS & TANTRUMS",
-      "subtitle": "Fantasy-Tower-Defense mit Gefährten und Ausbau",
-      "image": "assets/games/towers-and-tantrums.png",
-      "status": "live",
-      "qualityScore": null,
-      "repo": "https://github.com/emfau88/TD",
-      "github": {
-        "repo": "emfau88/TD",
-        "developmentBranch": "main"
-      },
-      "nextAction": "Plays und Bewertungen auf Kongregate nach der Veröffentlichung beobachten.",
-      "issues": [],
-      "platforms": {
-        "kongregate": {
-          "status": "live",
-          "submitted": "2026-10-28",
-          "sourceBranch": "main",
-          "submittedCommit": "d73ed50fdf99a2715e9a759703f9040e0d2399d2",
-          "submittedNote": "Bei Kongregate zur Prüfung eingereicht. Release-Build d73ed50; Zuordnung durch das Build-Manifest bestätigt.",
-          "notes": "Ursprünglich eingereichtes Release-Paket: Towers-and-Tantrums-Kongregate-2026-10-28-Hearts-d73ed50. Der für den 06.11.2026 geplante Release fand noch nicht statt. Am 13.11.2026 erneut aktualisiert und anschließend erstmals veröffentlicht. Der Commit des veröffentlichten Builds ist noch nicht zugeordnet; d73ed50 bezeichnet ausschließlich die ursprüngliche Einreichung.",
-          "accepted": "2026-11-05",
-          "acceptedNote": "Kongregate hat das Spiel zur Veröffentlichung freigegeben.",
-          "published": "2026-11-13",
-          "publishedNote": "Am 13.11.2026 nach einem erneuten Update durch den Entwickler erstmals öffentlich auf Kongregate veröffentlicht.",
-          "publicUrl": "https://www.kongregate.com/en/games/emfau/towers-tantrums",
-          "liveBuild": {
-            "label": "Release-Update vom 13.11.2026",
-            "uploaded": "2026-11-13",
-            "published": "2026-11-13",
-            "uploadedNote": "Das noch unveröffentlichte Spiel wurde am 13.11.2026 erneut bei Kongregate aktualisiert. Buildnummer und Commit wurden nicht genannt.",
-            "publishedNote": "Anschließend am selben Tag erstmals öffentlich veröffentlicht; Upload und Veröffentlichung durch den Entwickler bestätigt."
-          }
-        },
-        "y8": {
-          "status": "not_submitted"
-        },
-        "gamemonetize": {
-          "status": "not_submitted"
-        },
-        "gamepix": {
-          "status": "not_submitted"
-        },
-        "gamedistribution": {
-          "status": "not_submitted"
-        },
-        "crazygames": {
-          "status": "not_submitted"
-        },
-        "coolmath": {
-          "status": "not_submitted"
-        },
-        "newgrounds": {
-          "status": "not_submitted"
-        },
-        "poki": {
           "status": "not_submitted"
         }
       },
