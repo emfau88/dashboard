@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-11-23T19:13:23Z",
+  "updatedAt": "2026-11-24T18:52:05Z",
   "games": {
     "hexfront": [
       {
@@ -375,6 +375,14 @@
         "rating": 2.73,
         "source": "kongregate_metrics",
         "fetchedAt": "2026-11-23T19:13:23Z"
+      },
+      {
+        "date": "2026-11-24",
+        "plays": 1826,
+        "favorites": 8,
+        "rating": 2.73,
+        "source": "kongregate_metrics",
+        "fetchedAt": "2026-11-24T18:52:05Z"
       }
     ],
     "galalaxy": [
@@ -750,6 +758,14 @@
         "rating": 3.09,
         "source": "kongregate_metrics",
         "fetchedAt": "2026-11-23T19:13:23Z"
+      },
+      {
+        "date": "2026-11-24",
+        "plays": 104,
+        "favorites": 3,
+        "rating": 3.09,
+        "source": "kongregate_metrics",
+        "fetchedAt": "2026-11-24T18:52:05Z"
       }
     ],
     "rooster-rage": [
@@ -1114,6 +1130,14 @@
         "rating": 3.29,
         "source": "kongregate_metrics",
         "fetchedAt": "2026-11-23T19:13:23Z"
+      },
+      {
+        "date": "2026-11-24",
+        "plays": 1143,
+        "favorites": 15,
+        "rating": 3.29,
+        "source": "kongregate_metrics",
+        "fetchedAt": "2026-11-24T18:52:05Z"
       }
     ],
     "kesselkrawall": [
@@ -1428,6 +1452,14 @@
         "rating": 2.0,
         "source": "kongregate_metrics",
         "fetchedAt": "2026-11-23T19:13:23Z"
+      },
+      {
+        "date": "2026-11-24",
+        "plays": 279,
+        "favorites": 0,
+        "rating": 2.0,
+        "source": "kongregate_metrics",
+        "fetchedAt": "2026-11-24T18:52:05Z"
       }
     ],
     "towers-and-tantrums": [
@@ -1518,6 +1550,14 @@
         "rating": 1.9,
         "source": "kongregate_metrics",
         "fetchedAt": "2026-11-23T19:13:23Z"
+      },
+      {
+        "date": "2026-11-24",
+        "plays": 205,
+        "favorites": 1,
+        "rating": 1.9,
+        "source": "kongregate_metrics",
+        "fetchedAt": "2026-11-24T18:52:05Z"
       }
     ]
   }
